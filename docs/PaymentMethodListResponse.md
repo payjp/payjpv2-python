@@ -1,0 +1,32 @@
+# PaymentMethodListResponse
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**object** | **str** |  | [optional] [default to 'list']
+**url** | **str** | リスト取得URL | 
+**has_more** | **bool** | 次のページがあるかどうか | 
+**data** | [**List[PaymentMethodResponse]**](PaymentMethodResponse.md) |  | 
+
+## Example
+
+```python
+from payjpv2.models.payment_method_list_response import PaymentMethodListResponse
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of PaymentMethodListResponse from a JSON string
+payment_method_list_response_instance = PaymentMethodListResponse.from_json(json)
+# print the JSON string representation of the object
+print(PaymentMethodListResponse.to_json())
+
+# convert the object into a dict
+payment_method_list_response_dict = payment_method_list_response_instance.to_dict()
+# create an instance of PaymentMethodListResponse from a dict
+payment_method_list_response_from_dict = PaymentMethodListResponse.from_dict(payment_method_list_response_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

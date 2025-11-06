@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.metadata_value import MetadataValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +28,7 @@ class CheckoutSessionUpdateRequest(BaseModel):
     """
     CheckoutSessionUpdateRequest
     """ # noqa: E501
-    metadata: Optional[Dict[str, Any]] = None
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     __properties: ClassVar[List[str]] = ["metadata"]
 
     model_config = ConfigDict(
@@ -69,6 +70,13 @@ class CheckoutSessionUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key_metadata in self.metadata:
+                if self.metadata[_key_metadata]:
+                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
+            _dict['metadata'] = _field_dict
         return _dict
 
     @classmethod
@@ -81,7 +89,12 @@ class CheckoutSessionUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "metadata": obj.get("metadata")
+            "metadata": dict(
+                (_k, MetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None
         })
         return _obj
 

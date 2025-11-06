@@ -18,13 +18,14 @@ import json
 import pprint
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Any, List, Optional
+from payjpv2.models.payment_method_apple_pay_create_request import PaymentMethodApplePayCreateRequest
 from payjpv2.models.payment_method_card_create_request import PaymentMethodCardCreateRequest
 from payjpv2.models.payment_method_pay_pay_create_request import PaymentMethodPayPayCreateRequest
 from pydantic import StrictStr, Field
 from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
-PAYMENTMETHODCREATEREQUEST_ONE_OF_SCHEMAS = ["PaymentMethodCardCreateRequest", "PaymentMethodPayPayCreateRequest"]
+PAYMENTMETHODCREATEREQUEST_ONE_OF_SCHEMAS = ["PaymentMethodApplePayCreateRequest", "PaymentMethodCardCreateRequest", "PaymentMethodPayPayCreateRequest"]
 
 class PaymentMethodCreateRequest(BaseModel):
     """
@@ -34,8 +35,10 @@ class PaymentMethodCreateRequest(BaseModel):
     oneof_schema_1_validator: Optional[PaymentMethodCardCreateRequest] = None
     # data type: PaymentMethodPayPayCreateRequest
     oneof_schema_2_validator: Optional[PaymentMethodPayPayCreateRequest] = None
-    actual_instance: Optional[Union[PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest]] = None
-    one_of_schemas: Set[str] = { "PaymentMethodCardCreateRequest", "PaymentMethodPayPayCreateRequest" }
+    # data type: PaymentMethodApplePayCreateRequest
+    oneof_schema_3_validator: Optional[PaymentMethodApplePayCreateRequest] = None
+    actual_instance: Optional[Union[PaymentMethodApplePayCreateRequest, PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest]] = None
+    one_of_schemas: Set[str] = { "PaymentMethodApplePayCreateRequest", "PaymentMethodCardCreateRequest", "PaymentMethodPayPayCreateRequest" }
 
     model_config = ConfigDict(
         validate_assignment=True,
@@ -71,12 +74,17 @@ class PaymentMethodCreateRequest(BaseModel):
             error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentMethodPayPayCreateRequest`")
         else:
             match += 1
+        # validate data type: PaymentMethodApplePayCreateRequest
+        if not isinstance(v, PaymentMethodApplePayCreateRequest):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentMethodApplePayCreateRequest`")
+        else:
+            match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in PaymentMethodCreateRequest with oneOf schemas: PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when setting `actual_instance` in PaymentMethodCreateRequest with oneOf schemas: PaymentMethodApplePayCreateRequest, PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in PaymentMethodCreateRequest with oneOf schemas: PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting `actual_instance` in PaymentMethodCreateRequest with oneOf schemas: PaymentMethodApplePayCreateRequest, PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -103,13 +111,19 @@ class PaymentMethodCreateRequest(BaseModel):
             match += 1
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
+        # deserialize data into PaymentMethodApplePayCreateRequest
+        try:
+            instance.actual_instance = PaymentMethodApplePayCreateRequest.from_json(json_str)
+            match += 1
+        except (ValidationError, ValueError) as e:
+            error_messages.append(str(e))
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into PaymentMethodCreateRequest with oneOf schemas: PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("Multiple matches found when deserializing the JSON string into PaymentMethodCreateRequest with oneOf schemas: PaymentMethodApplePayCreateRequest, PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PaymentMethodCreateRequest with oneOf schemas: PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into PaymentMethodCreateRequest with oneOf schemas: PaymentMethodApplePayCreateRequest, PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -123,7 +137,7 @@ class PaymentMethodCreateRequest(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], PaymentMethodApplePayCreateRequest, PaymentMethodCardCreateRequest, PaymentMethodPayPayCreateRequest]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

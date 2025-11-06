@@ -17,7 +17,8 @@ Create Checkout Session
 
 ### Example
 
-* Api Key Authentication (APIKeyHeader):
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import payjpv2
@@ -37,11 +38,16 @@ configuration = payjpv2.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with payjpv2.ApiClient(configuration) as api_client:
@@ -73,7 +79,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKeyHeader](../README.md#APIKeyHeader)
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -91,13 +97,14 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_checkout_sessions**
-> CheckoutSessionListResponse get_all_checkout_sessions(limit=limit, offset=offset)
+> CheckoutSessionListResponse get_all_checkout_sessions(limit=limit, starting_after=starting_after, ending_before=ending_before)
 
 Get All Checkout Sessions
 
 ### Example
 
-* Api Key Authentication (APIKeyHeader):
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import payjpv2
@@ -116,22 +123,28 @@ configuration = payjpv2.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with payjpv2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payjpv2.CheckoutSessionsApi(api_client)
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
-    offset = 0 # int | データ取得を行う開始位置 (optional) (default to 0)
+    starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
+    ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
 
     try:
         # Get All Checkout Sessions
-        api_response = api_instance.get_all_checkout_sessions(limit=limit, offset=offset)
+        api_response = api_instance.get_all_checkout_sessions(limit=limit, starting_after=starting_after, ending_before=ending_before)
         print("The response of CheckoutSessionsApi->get_all_checkout_sessions:\n")
         pprint(api_response)
     except Exception as e:
@@ -146,7 +159,8 @@ with payjpv2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
- **offset** | **int**| データ取得を行う開始位置 | [optional] [default to 0]
+ **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
+ **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
 
 ### Return type
 
@@ -154,7 +168,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKeyHeader](../README.md#APIKeyHeader)
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -167,6 +181,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**400** | Resource Missing |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -177,7 +192,8 @@ Get Checkout Session
 
 ### Example
 
-* Api Key Authentication (APIKeyHeader):
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import payjpv2
@@ -196,11 +212,16 @@ configuration = payjpv2.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with payjpv2.ApiClient(configuration) as api_client:
@@ -234,7 +255,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKeyHeader](../README.md#APIKeyHeader)
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -258,7 +279,8 @@ Update Checkout Session
 
 ### Example
 
-* Api Key Authentication (APIKeyHeader):
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import payjpv2
@@ -278,11 +300,16 @@ configuration = payjpv2.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with payjpv2.ApiClient(configuration) as api_client:
@@ -316,7 +343,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKeyHeader](../README.md#APIKeyHeader)
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

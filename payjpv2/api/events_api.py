@@ -17,7 +17,6 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from datetime import datetime
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
@@ -45,12 +44,11 @@ class EventsApi:
     @validate_call
     def get_all_events(
         self,
-        since: Annotated[Optional[datetime], Field(description="指定した日付以降のデータを取得")] = None,
-        until: Annotated[Optional[datetime], Field(description="指定した日付以前のデータを取得")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
-        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent)")] = None,
+        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
         _request_timeout: Union[
             None,
@@ -68,17 +66,15 @@ class EventsApi:
         """Get All Events
 
 
-        :param since: 指定した日付以降のデータを取得
-        :type since: datetime
-        :param until: 指定した日付以前のデータを取得
-        :type until: datetime
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param resource_id: 取得するeventに紐づくAPIリソースのID (e.g. customer.id)
         :type resource_id: str
-        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent)
+        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)
         :type object: str
         :param type: 取得するeventのtype
         :type type: str
@@ -105,10 +101,9 @@ class EventsApi:
         """ # noqa: E501
 
         _param = self._get_all_events_serialize(
-            since=since,
-            until=until,
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             resource_id=resource_id,
             object=object,
             type=type,
@@ -136,12 +131,11 @@ class EventsApi:
     @validate_call
     def get_all_events_with_http_info(
         self,
-        since: Annotated[Optional[datetime], Field(description="指定した日付以降のデータを取得")] = None,
-        until: Annotated[Optional[datetime], Field(description="指定した日付以前のデータを取得")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
-        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent)")] = None,
+        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
         _request_timeout: Union[
             None,
@@ -159,17 +153,15 @@ class EventsApi:
         """Get All Events
 
 
-        :param since: 指定した日付以降のデータを取得
-        :type since: datetime
-        :param until: 指定した日付以前のデータを取得
-        :type until: datetime
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param resource_id: 取得するeventに紐づくAPIリソースのID (e.g. customer.id)
         :type resource_id: str
-        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent)
+        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)
         :type object: str
         :param type: 取得するeventのtype
         :type type: str
@@ -196,10 +188,9 @@ class EventsApi:
         """ # noqa: E501
 
         _param = self._get_all_events_serialize(
-            since=since,
-            until=until,
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             resource_id=resource_id,
             object=object,
             type=type,
@@ -227,12 +218,11 @@ class EventsApi:
     @validate_call
     def get_all_events_without_preload_content(
         self,
-        since: Annotated[Optional[datetime], Field(description="指定した日付以降のデータを取得")] = None,
-        until: Annotated[Optional[datetime], Field(description="指定した日付以前のデータを取得")] = None,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
-        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent)")] = None,
+        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
         _request_timeout: Union[
             None,
@@ -250,17 +240,15 @@ class EventsApi:
         """Get All Events
 
 
-        :param since: 指定した日付以降のデータを取得
-        :type since: datetime
-        :param until: 指定した日付以前のデータを取得
-        :type until: datetime
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param resource_id: 取得するeventに紐づくAPIリソースのID (e.g. customer.id)
         :type resource_id: str
-        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent)
+        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)
         :type object: str
         :param type: 取得するeventのtype
         :type type: str
@@ -287,10 +275,9 @@ class EventsApi:
         """ # noqa: E501
 
         _param = self._get_all_events_serialize(
-            since=since,
-            until=until,
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             resource_id=resource_id,
             object=object,
             type=type,
@@ -313,10 +300,9 @@ class EventsApi:
 
     def _get_all_events_serialize(
         self,
-        since,
-        until,
         limit,
-        offset,
+        starting_after,
+        ending_before,
         resource_id,
         object,
         type,
@@ -342,39 +328,17 @@ class EventsApi:
 
         # process the path parameters
         # process the query parameters
-        if since is not None:
-            if isinstance(since, datetime):
-                _query_params.append(
-                    (
-                        'since',
-                        since.strftime(
-                            self.api_client.configuration.datetime_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('since', since))
-            
-        if until is not None:
-            if isinstance(until, datetime):
-                _query_params.append(
-                    (
-                        'until',
-                        until.strftime(
-                            self.api_client.configuration.datetime_format
-                        )
-                    )
-                )
-            else:
-                _query_params.append(('until', until))
-            
         if limit is not None:
             
             _query_params.append(('limit', limit))
             
-        if offset is not None:
+        if starting_after is not None:
             
-            _query_params.append(('offset', offset))
+            _query_params.append(('starting_after', starting_after))
+            
+        if ending_before is not None:
+            
+            _query_params.append(('ending_before', ending_before))
             
         if resource_id is not None:
             
@@ -405,7 +369,8 @@ class EventsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
+            'HTTPBasic', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -670,7 +635,8 @@ class EventsApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
+            'HTTPBasic', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

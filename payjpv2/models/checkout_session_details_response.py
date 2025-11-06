@@ -24,13 +24,15 @@ from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.billing_address_collection import BillingAddressCollection
 from payjpv2.models.checkout_session_line_items_response import CheckoutSessionLineItemsResponse
 from payjpv2.models.checkout_session_mode import CheckoutSessionMode
+from payjpv2.models.checkout_session_status import CheckoutSessionStatus
 from payjpv2.models.checkout_session_submit_type import CheckoutSessionSubmitType
 from payjpv2.models.checkout_session_ui_mode import CheckoutSessionUIMode
 from payjpv2.models.currency import Currency
 from payjpv2.models.customer import Customer
 from payjpv2.models.locale import Locale
-from payjpv2.models.payment_intent import PaymentIntent
-from payjpv2.models.payment_intent_data_request import PaymentIntentDataRequest
+from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.payment_flow import PaymentFlow
+from payjpv2.models.payment_flow_data_request_output import PaymentFlowDataRequestOutput
 from payjpv2.models.payment_method_types import PaymentMethodTypes
 from typing import Optional, Set
 from typing_extensions import Self
@@ -52,19 +54,21 @@ class CheckoutSessionDetailsResponse(BaseModel):
     expires_at: Optional[datetime] = None
     currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
     locale: Optional[Locale] = None
-    payment_intent: Optional[PaymentIntent] = None
+    payment_flow: Optional[PaymentFlow] = None
     payment_method_types: Optional[List[PaymentMethodTypes]] = None
     payment_method_options: Optional[Dict[str, Any]] = None
-    setup_intent: Optional[PaymentIntentDataRequest] = None
+    setup_flow: Optional[PaymentFlowDataRequestOutput] = None
     submit_type: Optional[CheckoutSessionSubmitType] = None
     mode: Optional[CheckoutSessionMode] = Field(default=None, description="Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
     ui_mode: Optional[CheckoutSessionUIMode] = Field(default=None, description="Checkout Session の UI モード。デフォルトは `hosted` です。<br>  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
     created_at: Optional[datetime] = Field(default=None, description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: Optional[datetime] = Field(default=None, description="更新日時 (UTC, ISO 8601 形式)")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    status: Optional[CheckoutSessionStatus] = Field(default=None, description="チェックアウトセッションのステータス")
     line_items: Optional[CheckoutSessionLineItemsResponse] = None
     success_url: Optional[StrictStr] = None
     url: Optional[StrictStr] = Field(default=None, description="URL")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "amount_subtotal", "amount_total", "billing_address_collection", "cancel_url", "customer", "customer_email", "customer_details", "expires_at", "currency", "locale", "payment_intent", "payment_method_types", "payment_method_options", "setup_intent", "submit_type", "mode", "ui_mode", "created_at", "updated_at", "line_items", "success_url", "url"]
+    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "amount_subtotal", "amount_total", "billing_address_collection", "cancel_url", "customer", "customer_email", "customer_details", "expires_at", "currency", "locale", "payment_flow", "payment_method_types", "payment_method_options", "setup_flow", "submit_type", "mode", "ui_mode", "created_at", "updated_at", "metadata", "status", "line_items", "success_url", "url"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -118,12 +122,19 @@ class CheckoutSessionDetailsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of customer
         if self.customer:
             _dict['customer'] = self.customer.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of payment_intent
-        if self.payment_intent:
-            _dict['payment_intent'] = self.payment_intent.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of setup_intent
-        if self.setup_intent:
-            _dict['setup_intent'] = self.setup_intent.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of payment_flow
+        if self.payment_flow:
+            _dict['payment_flow'] = self.payment_flow.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of setup_flow
+        if self.setup_flow:
+            _dict['setup_flow'] = self.setup_flow.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key_metadata in self.metadata:
+                if self.metadata[_key_metadata]:
+                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
+            _dict['metadata'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of line_items
         if self.line_items:
             _dict['line_items'] = self.line_items.to_dict()
@@ -167,10 +178,10 @@ class CheckoutSessionDetailsResponse(BaseModel):
         if self.locale is None and "locale" in self.model_fields_set:
             _dict['locale'] = None
 
-        # set to None if payment_intent (nullable) is None
+        # set to None if payment_flow (nullable) is None
         # and model_fields_set contains the field
-        if self.payment_intent is None and "payment_intent" in self.model_fields_set:
-            _dict['payment_intent'] = None
+        if self.payment_flow is None and "payment_flow" in self.model_fields_set:
+            _dict['payment_flow'] = None
 
         # set to None if payment_method_types (nullable) is None
         # and model_fields_set contains the field
@@ -182,10 +193,10 @@ class CheckoutSessionDetailsResponse(BaseModel):
         if self.payment_method_options is None and "payment_method_options" in self.model_fields_set:
             _dict['payment_method_options'] = None
 
-        # set to None if setup_intent (nullable) is None
+        # set to None if setup_flow (nullable) is None
         # and model_fields_set contains the field
-        if self.setup_intent is None and "setup_intent" in self.model_fields_set:
-            _dict['setup_intent'] = None
+        if self.setup_flow is None and "setup_flow" in self.model_fields_set:
+            _dict['setup_flow'] = None
 
         # set to None if submit_type (nullable) is None
         # and model_fields_set contains the field
@@ -227,15 +238,22 @@ class CheckoutSessionDetailsResponse(BaseModel):
             "expires_at": obj.get("expires_at"),
             "currency": obj.get("currency"),
             "locale": obj.get("locale"),
-            "payment_intent": PaymentIntent.from_dict(obj["payment_intent"]) if obj.get("payment_intent") is not None else None,
+            "payment_flow": PaymentFlow.from_dict(obj["payment_flow"]) if obj.get("payment_flow") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
             "payment_method_options": obj.get("payment_method_options"),
-            "setup_intent": PaymentIntentDataRequest.from_dict(obj["setup_intent"]) if obj.get("setup_intent") is not None else None,
+            "setup_flow": PaymentFlowDataRequestOutput.from_dict(obj["setup_flow"]) if obj.get("setup_flow") is not None else None,
             "submit_type": obj.get("submit_type"),
             "mode": obj.get("mode"),
             "ui_mode": obj.get("ui_mode"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
+            "metadata": dict(
+                (_k, MetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None,
+            "status": obj.get("status"),
             "line_items": CheckoutSessionLineItemsResponse.from_dict(obj["line_items"]) if obj.get("line_items") is not None else None,
             "success_url": obj.get("success_url"),
             "url": obj.get("url")

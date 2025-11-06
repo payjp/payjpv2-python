@@ -19,7 +19,7 @@ import re  # noqa: F401
 import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +32,7 @@ class PaymentMethodCardDetailsResponse(BaseModel):
     exp_month: StrictInt = Field(description="カードの有効期限（月）")
     exp_year: StrictInt = Field(description="カードの有効期限（年）")
     fingerprint: StrictStr = Field(description="fingerprint")
-    country: StrictStr = Field(description="カードの発行国")
+    country: Optional[StrictStr]
     __properties: ClassVar[List[str]] = ["last4", "brand", "exp_month", "exp_year", "fingerprint", "country"]
 
     model_config = ConfigDict(
@@ -74,6 +74,11 @@ class PaymentMethodCardDetailsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # set to None if country (nullable) is None
+        # and model_fields_set contains the field
+        if self.country is None and "country" in self.model_fields_set:
+            _dict['country'] = None
+
         return _dict
 
     @classmethod

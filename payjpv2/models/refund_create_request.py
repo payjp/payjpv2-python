@@ -30,11 +30,11 @@ class RefundCreateRequest(BaseModel):
     """
     RefundCreateRequest
     """ # noqa: E501
-    payment_intent: StrictStr = Field(description="返金対象となる PaymentIntent の ID")
+    payment_flow: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
     amount: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="返金金額")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     reason: Optional[PaymentRefundReason] = Field(default=None, description="返金理由  | 指定できる値 | |:---| | **duplicate**: 重複した支払い | | **fraudulent**: 不正な支払い | | **requested_by_customer**: 顧客の要求 |")
-    __properties: ClassVar[List[str]] = ["payment_intent", "amount", "metadata", "reason"]
+    __properties: ClassVar[List[str]] = ["payment_flow", "amount", "metadata", "reason"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -94,7 +94,7 @@ class RefundCreateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "payment_intent": obj.get("payment_intent"),
+            "payment_flow": obj.get("payment_flow"),
             "amount": obj.get("amount"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))

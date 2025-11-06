@@ -9,10 +9,10 @@ Name | Type | Description | Notes
 **lookup_key** | **str** | この価格を検索するためのキー。 | [optional] 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | キーバリューの任意のデータを格納できます。&lt;a href&#x3D;\&quot;https://docs.pay.jp/v2/metadata\&quot;&gt;詳細はメタデータのドキュメントを参照してください。&lt;/a&gt; | [optional] 
 **id** | **str** | 料金ID | [optional] 
-**currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | [optional] 
+**currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
 **active** | **bool** | 価格が有効かどうか。デフォルトは &#x60;true&#x60;。 | [optional] [default to True]
-**product** | **str** | この価格が紐付く商品のID。 | [optional] 
-**unit_amount** | **int** | 価格の単価。0以上の整数となります。 | [optional] 
+**product** | **str** | この価格が紐付く商品のID。 | 
+**unit_amount** | **int** | 価格の単価。0以上の整数となります。 | 
 
 ## Example
 

@@ -22,7 +22,6 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_method_billing_details_request import PaymentMethodBillingDetailsRequest
-from payjpv2.models.payment_method_update_card_details_request import PaymentMethodUpdateCardDetailsRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -34,8 +33,7 @@ class PaymentMethodCardUpdateRequest(BaseModel):
     billing_details: Optional[PaymentMethodBillingDetailsRequest] = Field(default=None, description="請求先情報")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     type: StrictStr
-    card: PaymentMethodUpdateCardDetailsRequest = Field(description="カード情報")
-    __properties: ClassVar[List[str]] = ["customer", "billing_details", "metadata", "type", "card"]
+    __properties: ClassVar[List[str]] = ["customer", "billing_details", "metadata", "type"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -93,9 +91,6 @@ class PaymentMethodCardUpdateRequest(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of card
-        if self.card:
-            _dict['card'] = self.card.to_dict()
         return _dict
 
     @classmethod
@@ -116,8 +111,7 @@ class PaymentMethodCardUpdateRequest(BaseModel):
             )
             if obj.get("metadata") is not None
             else None,
-            "type": obj.get("type"),
-            "card": PaymentMethodUpdateCardDetailsRequest.from_dict(obj["card"]) if obj.get("card") is not None else None
+            "type": obj.get("type")
         })
         return _obj
 

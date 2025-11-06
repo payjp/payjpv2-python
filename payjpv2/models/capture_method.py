@@ -28,7 +28,6 @@ class CaptureMethod(str, Enum):
     allowed enum values
     """
     AUTOMATIC = 'automatic'
-    AUTOMATIC_ASYNC = 'automatic_async'
     MANUAL = 'manual'
 
     @classmethod

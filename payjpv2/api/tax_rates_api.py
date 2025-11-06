@@ -297,7 +297,8 @@ class TaxRatesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
+            'HTTPBasic', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -322,7 +323,8 @@ class TaxRatesApi:
     def get_all_tax_rates(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -341,8 +343,10 @@ class TaxRatesApi:
 
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -367,7 +371,8 @@ class TaxRatesApi:
 
         _param = self._get_all_tax_rates_serialize(
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -377,6 +382,7 @@ class TaxRatesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaxRateListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -393,7 +399,8 @@ class TaxRatesApi:
     def get_all_tax_rates_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -412,8 +419,10 @@ class TaxRatesApi:
 
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -438,7 +447,8 @@ class TaxRatesApi:
 
         _param = self._get_all_tax_rates_serialize(
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -448,6 +458,7 @@ class TaxRatesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaxRateListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -464,7 +475,8 @@ class TaxRatesApi:
     def get_all_tax_rates_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -483,8 +495,10 @@ class TaxRatesApi:
 
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -509,7 +523,8 @@ class TaxRatesApi:
 
         _param = self._get_all_tax_rates_serialize(
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -519,6 +534,7 @@ class TaxRatesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaxRateListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -530,7 +546,8 @@ class TaxRatesApi:
     def _get_all_tax_rates_serialize(
         self,
         limit,
-        offset,
+        starting_after,
+        ending_before,
         _request_auth,
         _content_type,
         _headers,
@@ -557,9 +574,13 @@ class TaxRatesApi:
             
             _query_params.append(('limit', limit))
             
-        if offset is not None:
+        if starting_after is not None:
             
-            _query_params.append(('offset', offset))
+            _query_params.append(('starting_after', starting_after))
+            
+        if ending_before is not None:
+            
+            _query_params.append(('ending_before', ending_before))
             
         # process the header parameters
         # process the form parameters
@@ -578,7 +599,8 @@ class TaxRatesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
+            'HTTPBasic', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -840,7 +862,8 @@ class TaxRatesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
+            'HTTPBasic', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(
@@ -1130,7 +1153,8 @@ class TaxRatesApi:
 
         # authentication setting
         _auth_settings: List[str] = [
-            'APIKeyHeader'
+            'HTTPBasic', 
+            'HTTPBearer'
         ]
 
         return self.api_client.param_serialize(

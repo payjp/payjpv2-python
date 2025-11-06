@@ -20,8 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.checkout_session_line_item_price_response import CheckoutSessionLineItemPriceResponse
 from payjpv2.models.currency import Currency
+from payjpv2.models.price_details_response import PriceDetailsResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,7 +36,7 @@ class CheckoutSessionLineItemDataResponse(BaseModel):
     amount_total: Optional[StrictInt] = Field(default=None, description="割引と税金が適用された後のすべての商品の合計金額")
     currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
     description: Optional[StrictStr] = Field(default=None, description="説明")
-    price: Optional[CheckoutSessionLineItemPriceResponse] = Field(default=None, description="料金情報")
+    price: Optional[PriceDetailsResponse] = Field(default=None, description="料金情報")
     quantity: Optional[StrictInt] = Field(default=None, description="数量")
     __properties: ClassVar[List[str]] = ["object", "id", "amount_subtotal", "amount_tax", "amount_total", "currency", "description", "price", "quantity"]
 
@@ -111,7 +111,7 @@ class CheckoutSessionLineItemDataResponse(BaseModel):
             "amount_total": obj.get("amount_total"),
             "currency": obj.get("currency"),
             "description": obj.get("description"),
-            "price": CheckoutSessionLineItemPriceResponse.from_dict(obj["price"]) if obj.get("price") is not None else None,
+            "price": PriceDetailsResponse.from_dict(obj["price"]) if obj.get("price") is not None else None,
             "quantity": obj.get("quantity")
         })
         return _obj

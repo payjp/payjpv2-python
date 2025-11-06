@@ -33,7 +33,7 @@ class PaymentMethodCardResponse(BaseModel):
     """ # noqa: E501
     object: Optional[StrictStr] = 'payment_method'
     id: StrictStr = Field(description="ID")
-    type: StrictStr
+    type: Optional[StrictStr] = 'card'
     customer: Optional[StrictStr] = None
     livemode: StrictBool = Field(description="本番環境かどうか")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
@@ -56,8 +56,11 @@ class PaymentMethodCardResponse(BaseModel):
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['card']):
-            raise ValueError("must be one of enum values ('card')")
+        if value is None:
+            return value
+
+        if value not in set(['card', 'apple_pay']):
+            raise ValueError("must be one of enum values ('card', 'apple_pay')")
         return value
 
     model_config = ConfigDict(
@@ -131,7 +134,7 @@ class PaymentMethodCardResponse(BaseModel):
         _obj = cls.model_validate({
             "object": obj.get("object") if obj.get("object") is not None else 'payment_method',
             "id": obj.get("id"),
-            "type": obj.get("type"),
+            "type": obj.get("type") if obj.get("type") is not None else 'card',
             "customer": obj.get("customer"),
             "livemode": obj.get("livemode"),
             "created_at": obj.get("created_at"),

@@ -9,13 +9,14 @@ Method | HTTP request | Description
 
 
 # **get_all_events**
-> EventListResponse get_all_events(since=since, until=until, limit=limit, offset=offset, resource_id=resource_id, object=object, type=type)
+> EventListResponse get_all_events(limit=limit, starting_after=starting_after, ending_before=ending_before, resource_id=resource_id, object=object, type=type)
 
 Get All Events
 
 ### Example
 
-* Api Key Authentication (APIKeyHeader):
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import payjpv2
@@ -34,27 +35,31 @@ configuration = payjpv2.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with payjpv2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payjpv2.EventsApi(api_client)
-    since = '2013-10-20T19:20:30+01:00' # datetime | 指定した日付以降のデータを取得 (optional)
-    until = '2013-10-20T19:20:30+01:00' # datetime | 指定した日付以前のデータを取得 (optional)
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
-    offset = 0 # int | データ取得を行う開始位置 (optional) (default to 0)
+    starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
+    ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
     resource_id = 'resource_id_example' # str | 取得するeventに紐づくAPIリソースのID (e.g. customer.id) (optional)
-    object = 'object_example' # str | 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent) (optional)
+    object = 'object_example' # str | 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow) (optional)
     type = 'type_example' # str | 取得するeventのtype (optional)
 
     try:
         # Get All Events
-        api_response = api_instance.get_all_events(since=since, until=until, limit=limit, offset=offset, resource_id=resource_id, object=object, type=type)
+        api_response = api_instance.get_all_events(limit=limit, starting_after=starting_after, ending_before=ending_before, resource_id=resource_id, object=object, type=type)
         print("The response of EventsApi->get_all_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -68,12 +73,11 @@ with payjpv2.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **since** | **datetime**| 指定した日付以降のデータを取得 | [optional] 
- **until** | **datetime**| 指定した日付以前のデータを取得 | [optional] 
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
- **offset** | **int**| データ取得を行う開始位置 | [optional] [default to 0]
+ **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
+ **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
  **resource_id** | **str**| 取得するeventに紐づくAPIリソースのID (e.g. customer.id) | [optional] 
- **object** | **str**| 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_intent) | [optional] 
+ **object** | **str**| 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow) | [optional] 
  **type** | **str**| 取得するeventのtype | [optional] 
 
 ### Return type
@@ -82,7 +86,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKeyHeader](../README.md#APIKeyHeader)
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 
@@ -105,7 +109,8 @@ Get Event
 
 ### Example
 
-* Api Key Authentication (APIKeyHeader):
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
 
 ```python
 import payjpv2
@@ -124,11 +129,16 @@ configuration = payjpv2.Configuration(
 # Examples for each auth method are provided below, use the example that
 # satisfies your auth use case.
 
-# Configure API key authorization: APIKeyHeader
-configuration.api_key['APIKeyHeader'] = os.environ["API_KEY"]
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
 
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['APIKeyHeader'] = 'Bearer'
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
 
 # Enter a context with an instance of the API client
 with payjpv2.ApiClient(configuration) as api_client:
@@ -160,7 +170,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[APIKeyHeader](../README.md#APIKeyHeader)
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
 
 ### HTTP request headers
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **exp_month** | **int** | カードの有効期限（月） | 
 **exp_year** | **int** | カードの有効期限（年） | 
 **fingerprint** | **str** | fingerprint | 
-**country** | **str** | カードの発行国 | 
+**country** | **str** |  | 
 
 ## Example
 

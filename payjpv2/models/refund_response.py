@@ -31,17 +31,17 @@ class RefundResponse(BaseModel):
     """
     RefundResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="返金対象となる PaymentIntent の ID")
+    id: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
     object: Optional[StrictStr] = 'refund'
     created_at: datetime = Field(description="作成時の日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
     livemode: StrictBool = Field(description="本番環境かどうか")
     amount: StrictInt = Field(description="返金金額")
     status: PaymentRefundStatus = Field(description="返金ステータス  <a href=\"https://docs.pay.jp/v2/refunds#refund_status\" target=\"_blank\">返金ステータスの詳細についてはこちらを参照してください。</a>  | 指定できる値 | |:---| | **succeeded**: 成功 | | **failed**: 失敗 | | **pending**: 保留中 | | **canceled**: キャンセル |")
-    payment_intent: StrictStr = Field(description="返金対象となる PaymentIntent の ID")
+    payment_flow: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
     reason: Optional[PaymentRefundReason]
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "status", "payment_intent", "reason", "metadata"]
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "status", "payment_flow", "reason", "metadata"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -123,7 +123,7 @@ class RefundResponse(BaseModel):
             "livemode": obj.get("livemode"),
             "amount": obj.get("amount"),
             "status": obj.get("status"),
-            "payment_intent": obj.get("payment_intent"),
+            "payment_flow": obj.get("payment_flow"),
             "reason": obj.get("reason"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))

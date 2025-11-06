@@ -21,7 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
-from payjpv2.models.payment_method_billing_details_request import PaymentMethodBillingDetailsRequest
+from payjpv2.models.payment_method_card_billing_details_request import PaymentMethodCardBillingDetailsRequest
 from payjpv2.models.payment_method_create_card_details_request import PaymentMethodCreateCardDetailsRequest
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +31,7 @@ class PaymentMethodCardCreateRequest(BaseModel):
     PaymentMethodCardCreateRequest
     """ # noqa: E501
     customer: Optional[StrictStr] = Field(default=None, description="顧客ID")
-    billing_details: PaymentMethodBillingDetailsRequest = Field(description="請求先情報")
+    billing_details: PaymentMethodCardBillingDetailsRequest = Field(description="請求先情報")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     type: StrictStr = Field(description="クレジットカード決済の場合は `card` を指定します。")
     card: PaymentMethodCreateCardDetailsRequest = Field(description="カード情報")
@@ -109,7 +109,7 @@ class PaymentMethodCardCreateRequest(BaseModel):
 
         _obj = cls.model_validate({
             "customer": obj.get("customer"),
-            "billing_details": PaymentMethodBillingDetailsRequest.from_dict(obj["billing_details"]) if obj.get("billing_details") is not None else None,
+            "billing_details": PaymentMethodCardBillingDetailsRequest.from_dict(obj["billing_details"]) if obj.get("billing_details") is not None else None,
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()

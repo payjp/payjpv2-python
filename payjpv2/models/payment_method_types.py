@@ -29,8 +29,7 @@ class PaymentMethodTypes(str, Enum):
     """
     CARD = 'card'
     PAYPAY = 'paypay'
-    PAYID = 'payid'
-    BANK_TRANSFER = 'bank_transfer'
+    APPLE_PAY = 'apple_pay'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:

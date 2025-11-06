@@ -34,10 +34,10 @@ class PriceCreateRequest(BaseModel):
     lookup_key: Optional[StrictStr] = Field(default=None, description="この価格を検索するためのキー。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     id: Optional[StrictStr] = Field(default=None, description="料金ID")
-    currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
+    currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
     active: Optional[StrictBool] = Field(default=True, description="価格が有効かどうか。デフォルトは `true`。")
-    product: Optional[StrictStr] = Field(default=None, description="この価格が紐付く商品のID。")
-    unit_amount: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="価格の単価。0以上の整数となります。")
+    product: StrictStr = Field(description="この価格が紐付く商品のID。")
+    unit_amount: Annotated[int, Field(strict=True, ge=0)] = Field(description="価格の単価。0以上の整数となります。")
     __properties: ClassVar[List[str]] = ["nickname", "lookup_key", "metadata", "id", "currency", "active", "product", "unit_amount"]
 
     model_config = ConfigDict(

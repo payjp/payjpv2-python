@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **livemode** | **bool** | 本番環境かどうか | 
 **type** | **str** | イベントの種類 | 
 **pending_webhooks** | **int** | 設定されたURLへの通知が完了していない(2xxのレスポンスが得られていない)webhookの数 | 
-**data** | **object** | このイベントに関連したリソースオブジェクト | 
+**data** | **Dict[str, object]** | このイベントに関連したリソースオブジェクト | 
 
 ## Example
 

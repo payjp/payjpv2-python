@@ -20,27 +20,27 @@ import pprint
 import re  # noqa: F401
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
 from typing import Optional
-from payjpv2.models.payment_flow_response import PaymentFlowResponse
+from payjpv2.models.setup_flow_response import SetupFlowResponse
 from typing import Union, Any, List, Set, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal, Self
 from pydantic import Field
 
-PAYMENTFLOW_ANY_OF_SCHEMAS = ["PaymentFlowResponse", "str"]
+SETUPFLOW_ANY_OF_SCHEMAS = ["SetupFlowResponse", "str"]
 
-class PaymentFlow(BaseModel):
+class SetupFlow(BaseModel):
     """
-    `payment` モードの Checkout Session の PaymentFlow の ID。PaymentFlow を確定 (confirm)、またはキャンセルすることはできません。キャンセルするには、代わりに Checkout Session を期限切れにしてください。
+    `setup` モードの Checkout Session の SetupFlow の ID。Checkout Session の SetupFlow を確定 (confirm)、またはキャンセルすることはできません。キャンセルするには、代わりに Checkout Session を期限切れにしてください。
     """
 
     # data type: str
     anyof_schema_1_validator: Optional[StrictStr] = None
-    # data type: PaymentFlowResponse
-    anyof_schema_2_validator: Optional[PaymentFlowResponse] = None
+    # data type: SetupFlowResponse
+    anyof_schema_2_validator: Optional[SetupFlowResponse] = None
     if TYPE_CHECKING:
-        actual_instance: Optional[Union[PaymentFlowResponse, str]] = None
+        actual_instance: Optional[Union[SetupFlowResponse, str]] = None
     else:
         actual_instance: Any = None
-    any_of_schemas: Set[str] = { "PaymentFlowResponse", "str" }
+    any_of_schemas: Set[str] = { "SetupFlowResponse", "str" }
 
     model_config = {
         "validate_assignment": True,
@@ -62,7 +62,7 @@ class PaymentFlow(BaseModel):
         if v is None:
             return v
 
-        instance = PaymentFlow.model_construct()
+        instance = SetupFlow.model_construct()
         error_messages = []
         # validate data type: str
         try:
@@ -70,15 +70,15 @@ class PaymentFlow(BaseModel):
             return v
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # validate data type: PaymentFlowResponse
-        if not isinstance(v, PaymentFlowResponse):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `PaymentFlowResponse`")
+        # validate data type: SetupFlowResponse
+        if not isinstance(v, SetupFlowResponse):
+            error_messages.append(f"Error! Input type `{type(v)}` is not `SetupFlowResponse`")
         else:
             return v
 
         if error_messages:
             # no match
-            raise ValueError("No match found when setting the actual_instance in PaymentFlow with anyOf schemas: PaymentFlowResponse, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when setting the actual_instance in SetupFlow with anyOf schemas: SetupFlowResponse, str. Details: " + ", ".join(error_messages))
         else:
             return v
 
@@ -103,16 +103,16 @@ class PaymentFlow(BaseModel):
             return instance
         except (ValidationError, ValueError) as e:
             error_messages.append(str(e))
-        # anyof_schema_2_validator: Optional[PaymentFlowResponse] = None
+        # anyof_schema_2_validator: Optional[SetupFlowResponse] = None
         try:
-            instance.actual_instance = PaymentFlowResponse.from_json(json_str)
+            instance.actual_instance = SetupFlowResponse.from_json(json_str)
             return instance
         except (ValidationError, ValueError) as e:
              error_messages.append(str(e))
 
         if error_messages:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into PaymentFlow with anyOf schemas: PaymentFlowResponse, str. Details: " + ", ".join(error_messages))
+            raise ValueError("No match found when deserializing the JSON string into SetupFlow with anyOf schemas: SetupFlowResponse, str. Details: " + ", ".join(error_messages))
         else:
             return instance
 
@@ -126,7 +126,7 @@ class PaymentFlow(BaseModel):
         else:
             return json.dumps(self.actual_instance)
 
-    def to_dict(self) -> Optional[Union[Dict[str, Any], PaymentFlowResponse, str]]:
+    def to_dict(self) -> Optional[Union[Dict[str, Any], SetupFlowResponse, str]]:
         """Returns the dict representation of the actual instance"""
         if self.actual_instance is None:
             return None

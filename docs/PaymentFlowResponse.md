@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **next_action** | **Dict[str, object]** |  | [optional] 
 **return_url** | **str** |  | [optional] 
 **capture_method** | [**CaptureMethod**](CaptureMethod.md) | 支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 | | 
+**setup_future_usage** | [**Usage**](Usage.md) |  | [optional] 
 **last_payment_error** | **Dict[str, object]** |  | 
 
 ## Example

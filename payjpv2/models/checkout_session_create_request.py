@@ -30,7 +30,7 @@ from payjpv2.models.customer_creation import CustomerCreation
 from payjpv2.models.line_item_request import LineItemRequest
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
-from payjpv2.models.payment_flow_data_request_input import PaymentFlowDataRequestInput
+from payjpv2.models.payment_flow_data_request import PaymentFlowDataRequest
 from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
 from payjpv2.models.payment_method_types import PaymentMethodTypes
 from payjpv2.models.setup_flow_data_request import SetupFlowDataRequest
@@ -55,7 +55,7 @@ class CheckoutSessionCreateRequest(BaseModel):
     currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
     expires_at: Optional[datetime] = Field(default=None, description="Checkout Session の有効期限が失効する日時。")
     locale: Optional[Locale] = Field(default=None, description="Checkout 画面の表示言語を指定します。  | 指定できる値 | |:---| | **ja**: 日本語で表示します。 | ")
-    payment_flow_data: Optional[PaymentFlowDataRequestInput] = Field(default=None, description="`payment` モード指定時に PaymentFlow 作成に使用するパラメーター。")
+    payment_flow_data: Optional[PaymentFlowDataRequest] = Field(default=None, description="`payment` モード指定時に PaymentFlow 作成に使用するパラメーター。")
     payment_method_options: Optional[PaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow の支払い方法の個別設定。")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="この PaymentFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法を自動的に表示します。")
     setup_flow_data: Optional[SetupFlowDataRequest] = Field(default=None, description="`setup` モードの Checkout Session を作成する際、SetupFlow の作成に渡されるパラメーター")
@@ -156,7 +156,7 @@ class CheckoutSessionCreateRequest(BaseModel):
             "currency": obj.get("currency"),
             "expires_at": obj.get("expires_at"),
             "locale": obj.get("locale"),
-            "payment_flow_data": PaymentFlowDataRequestInput.from_dict(obj["payment_flow_data"]) if obj.get("payment_flow_data") is not None else None,
+            "payment_flow_data": PaymentFlowDataRequest.from_dict(obj["payment_flow_data"]) if obj.get("payment_flow_data") is not None else None,
             "payment_method_options": PaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
             "setup_flow_data": SetupFlowDataRequest.from_dict(obj["setup_flow_data"]) if obj.get("setup_flow_data") is not None else None,

@@ -1,4 +1,4 @@
-# PaymentMethodCardUpdateRequest
+# PaymentMethodUpdateRequest
 
 
 ## Properties
@@ -12,19 +12,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from payjpv2.models.payment_method_card_update_request import PaymentMethodCardUpdateRequest
+from payjpv2.models.payment_method_update_request import PaymentMethodUpdateRequest
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of PaymentMethodCardUpdateRequest from a JSON string
-payment_method_card_update_request_instance = PaymentMethodCardUpdateRequest.from_json(json)
+# create an instance of PaymentMethodUpdateRequest from a JSON string
+payment_method_update_request_instance = PaymentMethodUpdateRequest.from_json(json)
 # print the JSON string representation of the object
-print(PaymentMethodCardUpdateRequest.to_json())
+print(PaymentMethodUpdateRequest.to_json())
 
 # convert the object into a dict
-payment_method_card_update_request_dict = payment_method_card_update_request_instance.to_dict()
-# create an instance of PaymentMethodCardUpdateRequest from a dict
-payment_method_card_update_request_from_dict = PaymentMethodCardUpdateRequest.from_dict(payment_method_card_update_request_dict)
+payment_method_update_request_dict = payment_method_update_request_instance.to_dict()
+# create an instance of PaymentMethodUpdateRequest from a dict
+payment_method_update_request_from_dict = PaymentMethodUpdateRequest.from_dict(payment_method_update_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,27 +18,39 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
-from payjpv2.models.payment_method_billing_details_request import PaymentMethodBillingDetailsRequest
+from payjpv2.models.payment_refund_reason import PaymentRefundReason
+from payjpv2.models.payment_refund_status import PaymentRefundStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentMethodCardUpdateRequest(BaseModel):
+class PaymentRefundResponse(BaseModel):
     """
-    PaymentMethodCardUpdateRequest
+    PaymentRefundResponse
     """ # noqa: E501
-    billing_details: Optional[PaymentMethodBillingDetailsRequest] = Field(default=None, description="請求先情報")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    type: StrictStr = Field(description="クレジットカード決済の場合は `card` を指定します。")
-    __properties: ClassVar[List[str]] = ["billing_details", "metadata", "type"]
+    id: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
+    object: Optional[StrictStr] = 'refund'
+    created_at: datetime = Field(description="作成時の日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
+    livemode: StrictBool = Field(description="本番環境かどうか")
+    amount: StrictInt = Field(description="返金金額")
+    status: PaymentRefundStatus = Field(description="返金ステータス  <a href=\"https://docs.pay.jp/v2/payment_refunds#refund_status\" target=\"_blank\">返金ステータスの詳細についてはこちらを参照してください。</a>  | 指定できる値 | |:---| | **succeeded**: 成功 | | **failed**: 失敗 | | **pending**: 保留中 | | **canceled**: キャンセル |")
+    payment_flow: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
+    reason: Optional[PaymentRefundReason]
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "status", "payment_flow", "reason", "metadata"]
 
-    @field_validator('type')
-    def type_validate_enum(cls, value):
+    @field_validator('object')
+    def object_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['card']):
-            raise ValueError("must be one of enum values ('card')")
+        if value is None:
+            return value
+
+        if value not in set(['refund']):
+            raise ValueError("must be one of enum values ('refund')")
         return value
 
     model_config = ConfigDict(
@@ -59,7 +71,7 @@ class PaymentMethodCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentMethodCardUpdateRequest from a JSON string"""
+        """Create an instance of PaymentRefundResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,9 +92,6 @@ class PaymentMethodCardUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of billing_details
-        if self.billing_details:
-            _dict['billing_details'] = self.billing_details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -90,11 +99,16 @@ class PaymentMethodCardUpdateRequest(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
+        # set to None if reason (nullable) is None
+        # and model_fields_set contains the field
+        if self.reason is None and "reason" in self.model_fields_set:
+            _dict['reason'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentMethodCardUpdateRequest from a dict"""
+        """Create an instance of PaymentRefundResponse from a dict"""
         if obj is None:
             return None
 
@@ -102,14 +116,21 @@ class PaymentMethodCardUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "billing_details": PaymentMethodBillingDetailsRequest.from_dict(obj["billing_details"]) if obj.get("billing_details") is not None else None,
+            "id": obj.get("id"),
+            "object": obj.get("object") if obj.get("object") is not None else 'refund',
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at"),
+            "livemode": obj.get("livemode"),
+            "amount": obj.get("amount"),
+            "status": obj.get("status"),
+            "payment_flow": obj.get("payment_flow"),
+            "reason": obj.get("reason"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "type": obj.get("type")
+            else None
         })
         return _obj
 

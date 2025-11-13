@@ -24,6 +24,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.capture_method import CaptureMethod
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_flow_status import PaymentFlowStatus
+from payjpv2.models.usage import Usage
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -52,8 +53,9 @@ class PaymentFlowResponse(BaseModel):
     next_action: Optional[Dict[str, Any]] = None
     return_url: Optional[StrictStr] = None
     capture_method: CaptureMethod = Field(description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
+    setup_future_usage: Optional[Usage] = None
     last_payment_error: Optional[Dict[str, Any]]
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "amount_capturable", "amount_received", "client_secret", "confirmation_method", "customer", "description", "metadata", "payment_method", "payment_method_options", "payment_method_types", "receipt_email", "status", "next_action", "return_url", "capture_method", "last_payment_error"]
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "amount_capturable", "amount_received", "client_secret", "confirmation_method", "customer", "description", "metadata", "payment_method", "payment_method_options", "payment_method_types", "receipt_email", "status", "next_action", "return_url", "capture_method", "setup_future_usage", "last_payment_error"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -161,6 +163,11 @@ class PaymentFlowResponse(BaseModel):
         if self.return_url is None and "return_url" in self.model_fields_set:
             _dict['return_url'] = None
 
+        # set to None if setup_future_usage (nullable) is None
+        # and model_fields_set contains the field
+        if self.setup_future_usage is None and "setup_future_usage" in self.model_fields_set:
+            _dict['setup_future_usage'] = None
+
         # set to None if last_payment_error (nullable) is None
         # and model_fields_set contains the field
         if self.last_payment_error is None and "last_payment_error" in self.model_fields_set:
@@ -204,6 +211,7 @@ class PaymentFlowResponse(BaseModel):
             "next_action": obj.get("next_action"),
             "return_url": obj.get("return_url"),
             "capture_method": obj.get("capture_method"),
+            "setup_future_usage": obj.get("setup_future_usage"),
             "last_payment_error": obj.get("last_payment_error")
         })
         return _obj

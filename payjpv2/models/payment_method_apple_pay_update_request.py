@@ -25,20 +25,20 @@ from payjpv2.models.payment_method_billing_details_request import PaymentMethodB
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentMethodCardUpdateRequest(BaseModel):
+class PaymentMethodApplePayUpdateRequest(BaseModel):
     """
-    PaymentMethodCardUpdateRequest
+    PaymentMethodApplePayUpdateRequest
     """ # noqa: E501
     billing_details: Optional[PaymentMethodBillingDetailsRequest] = Field(default=None, description="請求先情報")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    type: StrictStr = Field(description="クレジットカード決済の場合は `card` を指定します。")
+    type: StrictStr = Field(description="Apple Pay決済の場合は `apple_pay` を指定します。")
     __properties: ClassVar[List[str]] = ["billing_details", "metadata", "type"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['card']):
-            raise ValueError("must be one of enum values ('card')")
+        if value not in set(['apple_pay']):
+            raise ValueError("must be one of enum values ('apple_pay')")
         return value
 
     model_config = ConfigDict(
@@ -59,7 +59,7 @@ class PaymentMethodCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentMethodCardUpdateRequest from a JSON string"""
+        """Create an instance of PaymentMethodApplePayUpdateRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -94,7 +94,7 @@ class PaymentMethodCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentMethodCardUpdateRequest from a dict"""
+        """Create an instance of PaymentMethodApplePayUpdateRequest from a dict"""
         if obj is None:
             return None
 

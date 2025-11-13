@@ -22,25 +22,19 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from payjpv2.models.metadata_value import MetadataValue
-from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
-from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.payment_refund_reason import PaymentRefundReason
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentFlowUpdateRequest(BaseModel):
+class PaymentRefundCreateRequest(BaseModel):
     """
-    PaymentFlowUpdateRequest
+    PaymentRefundCreateRequest
     """ # noqa: E501
-    payment_method: Optional[StrictStr] = Field(default=None, description="支払い方法ID")
-    payment_method_options: Optional[PaymentMethodOptionsRequest] = Field(default=None, description="このPaymentFlowに固有の支払い方法の設定")
-    payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。")
-    receipt_email: Optional[StrictStr] = Field(default=None, description="請求書の送信先メールアドレス。ライブモードで支払いに対して `receipt_email` を指定すると、メール設定に関係なく領収書が送信されます。")
-    return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。confirm=trueの場合のみ指定できます。")
-    description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。ユーザーには表示されません。")
-    amount: Optional[Annotated[int, Field(le=9999999, strict=True, ge=50)]] = Field(default=None, description="支払い予定の金額。50円以上9,999,999円以下である必要があります。支払い手段によって上限金額は異なります。")
-    customer: Optional[StrictStr] = Field(default=None, description="このPaymentFlowに属する顧客のID（存在する場合）。この顧客以外にすでに紐づけられている支払い方法はこのPaymentFlowでは使用できません。")
+    payment_flow: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
+    amount: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="返金金額")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_options", "payment_method_types", "receipt_email", "return_url", "description", "amount", "customer", "metadata"]
+    reason: Optional[PaymentRefundReason] = Field(default=None, description="返金理由  | 指定できる値 | |:---| | **duplicate**: 重複した支払い | | **fraudulent**: 不正な支払い | | **requested_by_customer**: 顧客の要求 |")
+    __properties: ClassVar[List[str]] = ["payment_flow", "amount", "metadata", "reason"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -60,7 +54,7 @@ class PaymentFlowUpdateRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentFlowUpdateRequest from a JSON string"""
+        """Create an instance of PaymentRefundCreateRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -81,9 +75,6 @@ class PaymentFlowUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of payment_method_options
-        if self.payment_method_options:
-            _dict['payment_method_options'] = self.payment_method_options.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -95,7 +86,7 @@ class PaymentFlowUpdateRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentFlowUpdateRequest from a dict"""
+        """Create an instance of PaymentRefundCreateRequest from a dict"""
         if obj is None:
             return None
 
@@ -103,20 +94,15 @@ class PaymentFlowUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "payment_method": obj.get("payment_method"),
-            "payment_method_options": PaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
-            "payment_method_types": obj.get("payment_method_types"),
-            "receipt_email": obj.get("receipt_email"),
-            "return_url": obj.get("return_url"),
-            "description": obj.get("description"),
+            "payment_flow": obj.get("payment_flow"),
             "amount": obj.get("amount"),
-            "customer": obj.get("customer"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None
+            else None,
+            "reason": obj.get("reason")
         })
         return _obj
 

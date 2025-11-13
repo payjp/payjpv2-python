@@ -20,25 +20,28 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.capture_method import CaptureMethod
 from payjpv2.models.metadata_value import MetadataValue
-from payjpv2.models.payment_method_billing_details_request import PaymentMethodBillingDetailsRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentMethodCardUpdateRequest(BaseModel):
+class PaymentFlowDataRequest(BaseModel):
     """
-    PaymentMethodCardUpdateRequest
+    PaymentFlowDataRequest
     """ # noqa: E501
-    billing_details: Optional[PaymentMethodBillingDetailsRequest] = Field(default=None, description="請求先情報")
+    capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると自動的に確定します。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    type: StrictStr = Field(description="クレジットカード決済の場合は `card` を指定します。")
-    __properties: ClassVar[List[str]] = ["billing_details", "metadata", "type"]
+    setup_future_usage: Optional[StrictStr] = Field(default=None, description="この PaymentFlow に設定されている支払い方法で今後決済を行うかの設定です。<br><br> PaymentFlow に Customer を指定した場合、このパラメータを使って PaymentFlow を確定できます。 その後、顧客が必要な操作を完了すると、支払い方法を Customer に紐付けることが可能です。また、Customer を指定しない場合でも、取引が完了した後に支払い方法を Customer に紐付けることはできます。")
+    __properties: ClassVar[List[str]] = ["capture_method", "metadata", "setup_future_usage"]
 
-    @field_validator('type')
-    def type_validate_enum(cls, value):
+    @field_validator('setup_future_usage')
+    def setup_future_usage_validate_enum(cls, value):
         """Validates the enum"""
-        if value not in set(['card']):
-            raise ValueError("must be one of enum values ('card')")
+        if value is None:
+            return value
+
+        if value not in set(['off_session', 'on_session']):
+            raise ValueError("must be one of enum values ('off_session', 'on_session')")
         return value
 
     model_config = ConfigDict(
@@ -59,7 +62,7 @@ class PaymentMethodCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentMethodCardUpdateRequest from a JSON string"""
+        """Create an instance of PaymentFlowDataRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -80,9 +83,6 @@ class PaymentMethodCardUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of billing_details
-        if self.billing_details:
-            _dict['billing_details'] = self.billing_details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -94,7 +94,7 @@ class PaymentMethodCardUpdateRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentMethodCardUpdateRequest from a dict"""
+        """Create an instance of PaymentFlowDataRequest from a dict"""
         if obj is None:
             return None
 
@@ -102,14 +102,14 @@ class PaymentMethodCardUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "billing_details": PaymentMethodBillingDetailsRequest.from_dict(obj["billing_details"]) if obj.get("billing_details") is not None else None,
+            "capture_method": obj.get("capture_method"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
             else None,
-            "type": obj.get("type")
+            "setup_future_usage": obj.get("setup_future_usage")
         })
         return _obj
 

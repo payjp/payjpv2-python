@@ -32,8 +32,8 @@ from payjpv2.models.customer import Customer
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_flow import PaymentFlow
-from payjpv2.models.payment_flow_data_request_output import PaymentFlowDataRequestOutput
 from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.setup_flow import SetupFlow
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -57,7 +57,7 @@ class CheckoutSessionDetailsResponse(BaseModel):
     payment_flow: Optional[PaymentFlow] = None
     payment_method_types: Optional[List[PaymentMethodTypes]] = None
     payment_method_options: Optional[Dict[str, Any]] = None
-    setup_flow: Optional[PaymentFlowDataRequestOutput] = None
+    setup_flow: Optional[SetupFlow] = None
     submit_type: Optional[CheckoutSessionSubmitType] = None
     mode: Optional[CheckoutSessionMode] = Field(default=None, description="Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
     ui_mode: Optional[CheckoutSessionUIMode] = Field(default=None, description="Checkout Session の UI モード。デフォルトは `hosted` です。<br>  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
@@ -241,7 +241,7 @@ class CheckoutSessionDetailsResponse(BaseModel):
             "payment_flow": PaymentFlow.from_dict(obj["payment_flow"]) if obj.get("payment_flow") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
             "payment_method_options": obj.get("payment_method_options"),
-            "setup_flow": PaymentFlowDataRequestOutput.from_dict(obj["setup_flow"]) if obj.get("setup_flow") is not None else None,
+            "setup_flow": SetupFlow.from_dict(obj["setup_flow"]) if obj.get("setup_flow") is not None else None,
             "submit_type": obj.get("submit_type"),
             "mode": obj.get("mode"),
             "ui_mode": obj.get("ui_mode"),

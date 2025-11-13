@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 **payment_flow** | [**PaymentFlow**](PaymentFlow.md) |  | [optional] 
 **payment_method_types** | [**List[PaymentMethodTypes]**](PaymentMethodTypes.md) |  | [optional] 
 **payment_method_options** | **Dict[str, object]** |  | [optional] 
-**setup_flow** | [**PaymentFlowDataRequestOutput**](PaymentFlowDataRequestOutput.md) |  | [optional] 
+**setup_flow** | [**SetupFlow**](SetupFlow.md) |  | [optional] 
 **submit_type** | [**CheckoutSessionSubmitType**](CheckoutSessionSubmitType.md) |  | [optional] 
 **mode** | [**CheckoutSessionMode**](CheckoutSessionMode.md) | Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 |  | [optional] 
 **ui_mode** | [**CheckoutSessionUIMode**](CheckoutSessionUIMode.md) | Checkout Session の UI モード。デフォルトは &#x60;hosted&#x60; です。&lt;br&gt;  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 |  | [optional] 

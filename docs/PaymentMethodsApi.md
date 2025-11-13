@@ -97,7 +97,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
-**400** | Payment Method Already Attached |  -  |
+**400** | Payment Method Already Attached&lt;br&gt;Unsupported Payment Method Type |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -446,7 +446,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_payment_method**
-> PaymentMethodResponse update_payment_method(payment_method_id, payment_method_card_update_request)
+> PaymentMethodResponse update_payment_method(payment_method_id, payment_method_update_request)
 
 Update Payment Method
 
@@ -457,8 +457,8 @@ Update Payment Method
 
 ```python
 import payjpv2
-from payjpv2.models.payment_method_card_update_request import PaymentMethodCardUpdateRequest
 from payjpv2.models.payment_method_response import PaymentMethodResponse
+from payjpv2.models.payment_method_update_request import PaymentMethodUpdateRequest
 from payjpv2.rest import ApiException
 from pprint import pprint
 
@@ -489,11 +489,11 @@ with payjpv2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payjpv2.PaymentMethodsApi(api_client)
     payment_method_id = 'payment_method_id_example' # str | 
-    payment_method_card_update_request = payjpv2.PaymentMethodCardUpdateRequest() # PaymentMethodCardUpdateRequest | 
+    payment_method_update_request = payjpv2.PaymentMethodUpdateRequest() # PaymentMethodUpdateRequest | 
 
     try:
         # Update Payment Method
-        api_response = api_instance.update_payment_method(payment_method_id, payment_method_card_update_request)
+        api_response = api_instance.update_payment_method(payment_method_id, payment_method_update_request)
         print("The response of PaymentMethodsApi->update_payment_method:\n")
         pprint(api_response)
     except Exception as e:
@@ -508,7 +508,7 @@ with payjpv2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **payment_method_id** | **str**|  | 
- **payment_method_card_update_request** | [**PaymentMethodCardUpdateRequest**](PaymentMethodCardUpdateRequest.md)|  | 
+ **payment_method_update_request** | [**PaymentMethodUpdateRequest**](PaymentMethodUpdateRequest.md)|  | 
 
 ### Return type
 

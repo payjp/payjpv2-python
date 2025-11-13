@@ -5,8 +5,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_method** | **str** | この SetupFlow に紐付ける決済方法のID | [optional] 
-**payment_method_data** | [**PaymentMethodCreateRequest**](PaymentMethodCreateRequest.md) | 支払い方法データ | [optional] 
 **payment_method_options** | **Dict[str, object]** | この SetupFlow の支払い方法の個別設定。 | [optional] 
 **return_url** | **str** | 顧客が支払いを完了後、あるいはキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。&#x60;confirm&#x3D;true&#x60; の場合のみ指定できます。 | [optional] 
 **use_payjp_sdk** | **bool** | PAY.JP SDK を使用するかどうか | [optional] 

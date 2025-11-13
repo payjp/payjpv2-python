@@ -21,7 +21,6 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.capture_method import CaptureMethod
-from payjpv2.models.payment_method_create_request import PaymentMethodCreateRequest
 from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
 from payjpv2.models.payment_method_types import PaymentMethodTypes
 from typing import Optional, Set
@@ -32,14 +31,13 @@ class PaymentFlowConfirmRequest(BaseModel):
     PaymentFlowConfirmRequest
     """ # noqa: E501
     payment_method: Optional[StrictStr] = Field(default=None, description="支払い方法ID")
-    payment_method_data: Optional[PaymentMethodCreateRequest] = Field(default=None, description="指定した場合、PaymentMethodの作成に使用されます。新しいPaymentMethodは、PaymentFlowのpayment_methodプロパティに表示されます。")
     payment_method_options: Optional[PaymentMethodOptionsRequest] = Field(default=None, description="このPaymentFlowに固有の支払い方法の設定")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。")
     receipt_email: Optional[StrictStr] = Field(default=None, description="請求書の送信先メールアドレス。ライブモードで支払いに対して `receipt_email` を指定すると、メール設定に関係なく領収書が送信されます。")
     return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。confirm=trueの場合のみ指定できます。")
     description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。ユーザーには表示されません。")
     capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
-    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_data", "payment_method_options", "payment_method_types", "receipt_email", "return_url", "description", "capture_method"]
+    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_options", "payment_method_types", "receipt_email", "return_url", "description", "capture_method"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,9 +78,6 @@ class PaymentFlowConfirmRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of payment_method_data
-        if self.payment_method_data:
-            _dict['payment_method_data'] = self.payment_method_data.to_dict()
         # override the default output from pydantic by calling `to_dict()` of payment_method_options
         if self.payment_method_options:
             _dict['payment_method_options'] = self.payment_method_options.to_dict()
@@ -99,7 +94,6 @@ class PaymentFlowConfirmRequest(BaseModel):
 
         _obj = cls.model_validate({
             "payment_method": obj.get("payment_method"),
-            "payment_method_data": PaymentMethodCreateRequest.from_dict(obj["payment_method_data"]) if obj.get("payment_method_data") is not None else None,
             "payment_method_options": PaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
             "receipt_email": obj.get("receipt_email"),

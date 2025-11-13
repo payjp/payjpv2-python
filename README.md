@@ -115,12 +115,15 @@ Class | Method | HTTP request | Description
 *CustomersApi* | [**update_customer**](docs/CustomersApi.md#update_customer) | **POST** /v2/customers/{customer_id} | Update Customer
 *EventsApi* | [**get_all_events**](docs/EventsApi.md#get_all_events) | **GET** /v2/events | Get All Events
 *EventsApi* | [**get_event**](docs/EventsApi.md#get_event) | **GET** /v2/events/{event_id} | Get Event
+*PaymentRefundsApi* | [**create_payment_refund**](docs/PaymentRefundsApi.md#create_payment_refund) | **POST** /v2/payment_refunds | Create Payment Refund
+*PaymentRefundsApi* | [**get_all_payment_refunds**](docs/PaymentRefundsApi.md#get_all_payment_refunds) | **GET** /v2/payment_refunds | Get All Payment Refunds
+*PaymentRefundsApi* | [**retrieve_payment_refund**](docs/PaymentRefundsApi.md#retrieve_payment_refund) | **GET** /v2/payment_refunds/{payment_refund_id} | Retrieve Payment Refund
+*PaymentRefundsApi* | [**update_payment_refund**](docs/PaymentRefundsApi.md#update_payment_refund) | **POST** /v2/payment_refunds/{payment_refund_id} | Update Payment Refund
 *PaymentFlowsApi* | [**cancel_payment_flow**](docs/PaymentFlowsApi.md#cancel_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id}/cancel | Cancel Payment Flow
 *PaymentFlowsApi* | [**capture_payment_flow**](docs/PaymentFlowsApi.md#capture_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id}/capture | Capture Payment Flow
 *PaymentFlowsApi* | [**confirm_payment_flow**](docs/PaymentFlowsApi.md#confirm_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id}/confirm | Confirm Payment Flow
 *PaymentFlowsApi* | [**create_payment_flow**](docs/PaymentFlowsApi.md#create_payment_flow) | **POST** /v2/payment_flows | Create Payment Flow
 *PaymentFlowsApi* | [**get_all_payment_flow**](docs/PaymentFlowsApi.md#get_all_payment_flow) | **GET** /v2/payment_flows | Get All Payment Flow
-*PaymentFlowsApi* | [**increment_authorization_payment_flow**](docs/PaymentFlowsApi.md#increment_authorization_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id}/increment_authorization | Increment Authorization Payment Flow
 *PaymentFlowsApi* | [**retrieve_payment_flow**](docs/PaymentFlowsApi.md#retrieve_payment_flow) | **GET** /v2/payment_flows/{payment_flow_id} | Retrieve Payment Flow
 *PaymentFlowsApi* | [**update_payment_flow**](docs/PaymentFlowsApi.md#update_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id} | Update Payment Flow
 *PaymentMethodConfigurationsApi* | [**get_all_payment_method_configurations**](docs/PaymentMethodConfigurationsApi.md#get_all_payment_method_configurations) | **GET** /v2/payment_method_configurations | Get All Payment Method Configurations
@@ -143,11 +146,6 @@ Class | Method | HTTP request | Description
 *ProductsApi* | [**get_all_products**](docs/ProductsApi.md#get_all_products) | **GET** /v2/products | Get All Products
 *ProductsApi* | [**get_product**](docs/ProductsApi.md#get_product) | **GET** /v2/products/{product_id} | Get Product
 *ProductsApi* | [**update_product**](docs/ProductsApi.md#update_product) | **POST** /v2/products/{product_id} | Update Product
-*RefundsApi* | [**cancel_refund**](docs/RefundsApi.md#cancel_refund) | **POST** /v2/refunds/{refund_id}/cancel | Cancel Refund
-*RefundsApi* | [**create_refund**](docs/RefundsApi.md#create_refund) | **POST** /v2/refunds | Create Refund
-*RefundsApi* | [**get_all_refunds**](docs/RefundsApi.md#get_all_refunds) | **GET** /v2/refunds | Get All Refunds
-*RefundsApi* | [**retrieve_refund**](docs/RefundsApi.md#retrieve_refund) | **GET** /v2/refunds/{refund_id} | Retrieve Refund
-*RefundsApi* | [**update_refund**](docs/RefundsApi.md#update_refund) | **POST** /v2/refunds/{refund_id} | Update Refund
 *SetupFlowsApi* | [**cancel_setup_flow**](docs/SetupFlowsApi.md#cancel_setup_flow) | **POST** /v2/setup_flows/{setup_flow_id}/cancel | Cancel Setup Flow
 *SetupFlowsApi* | [**confirm_setup_flow**](docs/SetupFlowsApi.md#confirm_setup_flow) | **POST** /v2/setup_flows/{setup_flow_id}/confirm | Confirm Setup Flow
 *SetupFlowsApi* | [**create_setup_flow**](docs/SetupFlowsApi.md#create_setup_flow) | **POST** /v2/setup_flows | Create Setup Flow
@@ -207,14 +205,13 @@ Class | Method | HTTP request | Description
  - [PaymentFlowCaptureRequest](docs/PaymentFlowCaptureRequest.md)
  - [PaymentFlowConfirmRequest](docs/PaymentFlowConfirmRequest.md)
  - [PaymentFlowCreateRequest](docs/PaymentFlowCreateRequest.md)
- - [PaymentFlowDataRequestInput](docs/PaymentFlowDataRequestInput.md)
- - [PaymentFlowDataRequestOutput](docs/PaymentFlowDataRequestOutput.md)
- - [PaymentFlowIncrementAuthorizationRequest](docs/PaymentFlowIncrementAuthorizationRequest.md)
+ - [PaymentFlowDataRequest](docs/PaymentFlowDataRequest.md)
  - [PaymentFlowListResponse](docs/PaymentFlowListResponse.md)
  - [PaymentFlowResponse](docs/PaymentFlowResponse.md)
  - [PaymentFlowStatus](docs/PaymentFlowStatus.md)
  - [PaymentFlowUpdateRequest](docs/PaymentFlowUpdateRequest.md)
  - [PaymentMethodApplePayCreateRequest](docs/PaymentMethodApplePayCreateRequest.md)
+ - [PaymentMethodApplePayUpdateRequest](docs/PaymentMethodApplePayUpdateRequest.md)
  - [PaymentMethodAttachRequest](docs/PaymentMethodAttachRequest.md)
  - [PaymentMethodBillingAddressRequest](docs/PaymentMethodBillingAddressRequest.md)
  - [PaymentMethodBillingAddressResponse](docs/PaymentMethodBillingAddressResponse.md)
@@ -237,9 +234,14 @@ Class | Method | HTTP request | Description
  - [PaymentMethodOptionsRequest](docs/PaymentMethodOptionsRequest.md)
  - [PaymentMethodPayPayCreateRequest](docs/PaymentMethodPayPayCreateRequest.md)
  - [PaymentMethodPayPayResponse](docs/PaymentMethodPayPayResponse.md)
+ - [PaymentMethodPayPayUpdateRequest](docs/PaymentMethodPayPayUpdateRequest.md)
  - [PaymentMethodResponse](docs/PaymentMethodResponse.md)
  - [PaymentMethodTypes](docs/PaymentMethodTypes.md)
+ - [PaymentMethodUpdateRequest](docs/PaymentMethodUpdateRequest.md)
+ - [PaymentRefundCreateRequest](docs/PaymentRefundCreateRequest.md)
+ - [PaymentRefundListResponse](docs/PaymentRefundListResponse.md)
  - [PaymentRefundReason](docs/PaymentRefundReason.md)
+ - [PaymentRefundResponse](docs/PaymentRefundResponse.md)
  - [PaymentRefundStatus](docs/PaymentRefundStatus.md)
  - [PaymentRefundUpdateRequest](docs/PaymentRefundUpdateRequest.md)
  - [PaymentTransactionListResponse](docs/PaymentTransactionListResponse.md)
@@ -255,9 +257,7 @@ Class | Method | HTTP request | Description
  - [ProductDetailsResponse](docs/ProductDetailsResponse.md)
  - [ProductListResponse](docs/ProductListResponse.md)
  - [ProductUpdateRequest](docs/ProductUpdateRequest.md)
- - [RefundCreateRequest](docs/RefundCreateRequest.md)
- - [RefundListResponse](docs/RefundListResponse.md)
- - [RefundResponse](docs/RefundResponse.md)
+ - [SetupFlow](docs/SetupFlow.md)
  - [SetupFlowCancelRequest](docs/SetupFlowCancelRequest.md)
  - [SetupFlowCancellationReason](docs/SetupFlowCancellationReason.md)
  - [SetupFlowConfirmRequest](docs/SetupFlowConfirmRequest.md)

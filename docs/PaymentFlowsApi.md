@@ -9,7 +9,6 @@ Method | HTTP request | Description
 [**confirm_payment_flow**](PaymentFlowsApi.md#confirm_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id}/confirm | Confirm Payment Flow
 [**create_payment_flow**](PaymentFlowsApi.md#create_payment_flow) | **POST** /v2/payment_flows | Create Payment Flow
 [**get_all_payment_flow**](PaymentFlowsApi.md#get_all_payment_flow) | **GET** /v2/payment_flows | Get All Payment Flow
-[**increment_authorization_payment_flow**](PaymentFlowsApi.md#increment_authorization_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id}/increment_authorization | Increment Authorization Payment Flow
 [**retrieve_payment_flow**](PaymentFlowsApi.md#retrieve_payment_flow) | **GET** /v2/payment_flows/{payment_flow_id} | Retrieve Payment Flow
 [**update_payment_flow**](PaymentFlowsApi.md#update_payment_flow) | **POST** /v2/payment_flows/{payment_flow_id} | Update Payment Flow
 
@@ -277,7 +276,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
-**400** | Invalid Status&lt;br&gt;Missing Payment Method |  -  |
+**400** | Invalid Status&lt;br&gt;Missing Payment Method&lt;br&gt;Detached Payment Method Not Usable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -364,6 +363,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
+**400** | Detached Payment Method Not Usable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -455,94 +455,6 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **400** | Resource Missing |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **increment_authorization_payment_flow**
-> PaymentFlowResponse increment_authorization_payment_flow(payment_flow_id, payment_flow_increment_authorization_request)
-
-Increment Authorization Payment Flow
-
-### Example
-
-* Basic Authentication (HTTPBasic):
-* Bearer Authentication (HTTPBearer):
-
-```python
-import payjpv2
-from payjpv2.models.payment_flow_increment_authorization_request import PaymentFlowIncrementAuthorizationRequest
-from payjpv2.models.payment_flow_response import PaymentFlowResponse
-from payjpv2.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.pay.jp
-# See configuration.py for a list of all supported configuration parameters.
-configuration = payjpv2.Configuration(
-    host = "https://api.pay.jp"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: HTTPBasic
-configuration = payjpv2.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-# Configure Bearer authorization: HTTPBearer
-configuration = payjpv2.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with payjpv2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = payjpv2.PaymentFlowsApi(api_client)
-    payment_flow_id = 'payment_flow_id_example' # str | 
-    payment_flow_increment_authorization_request = payjpv2.PaymentFlowIncrementAuthorizationRequest() # PaymentFlowIncrementAuthorizationRequest | 
-
-    try:
-        # Increment Authorization Payment Flow
-        api_response = api_instance.increment_authorization_payment_flow(payment_flow_id, payment_flow_increment_authorization_request)
-        print("The response of PaymentFlowsApi->increment_authorization_payment_flow:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PaymentFlowsApi->increment_authorization_payment_flow: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **payment_flow_id** | **str**|  | 
- **payment_flow_increment_authorization_request** | [**PaymentFlowIncrementAuthorizationRequest**](PaymentFlowIncrementAuthorizationRequest.md)|  | 
-
-### Return type
-
-[**PaymentFlowResponse**](PaymentFlowResponse.md)
-
-### Authorization
-
-[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json, application/problem+json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -716,7 +628,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
-**400** | Invalid Status |  -  |
+**400** | Invalid Status&lt;br&gt;Detached Payment Method Not Usable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

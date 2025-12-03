@@ -39,10 +39,10 @@ class BalanceResponse(BaseModel):
     state: BalanceState = Field(description="Balanceの状態  | 指定できる値 | |:---| | **collecting**: 集計中 | | **transfer**: 入金 | | **claim**: 請求 |")
     statements: List[StatementResponse] = Field(description="関連付けられているStatementオブジェクトのリスト")
     closed: StrictBool = Field(description="このBalanceの清算が終了していればtrue  state=transferであれば加盟店口座への入金作業完了、state=claimであればPAY.JPで請求額の振込が確認できたことを表します。")
-    closed_date: Optional[datetime] = None
+    closed_date: Optional[datetime]
     due_date: Optional[datetime]
     net: StrictInt = Field(description="関連付けられているStatementの総額")
-    bank_info: Optional[BankInfoResponse] = None
+    bank_info: Optional[BankInfoResponse]
     __properties: ClassVar[List[str]] = ["object", "id", "livemode", "created_at", "updated_at", "state", "statements", "closed", "closed_date", "due_date", "net", "bank_info"]
 
     @field_validator('object')
@@ -68,8 +68,7 @@ class BalanceResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

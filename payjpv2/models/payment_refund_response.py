@@ -32,7 +32,7 @@ class PaymentRefundResponse(BaseModel):
     PaymentRefundResponse
     """ # noqa: E501
     id: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
-    object: Optional[StrictStr] = 'refund'
+    object: Optional[StrictStr] = 'payment_refund'
     created_at: datetime = Field(description="作成時の日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
     livemode: StrictBool = Field(description="本番環境かどうか")
@@ -40,7 +40,7 @@ class PaymentRefundResponse(BaseModel):
     status: PaymentRefundStatus = Field(description="返金ステータス  <a href=\"https://docs.pay.jp/v2/payment_refunds#refund_status\" target=\"_blank\">返金ステータスの詳細についてはこちらを参照してください。</a>  | 指定できる値 | |:---| | **succeeded**: 成功 | | **failed**: 失敗 | | **pending**: 保留中 | | **canceled**: キャンセル |")
     payment_flow: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
     reason: Optional[PaymentRefundReason]
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "status", "payment_flow", "reason", "metadata"]
 
     @field_validator('object')
@@ -49,8 +49,8 @@ class PaymentRefundResponse(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['refund']):
-            raise ValueError("must be one of enum values ('refund')")
+        if value not in set(['payment_refund']):
+            raise ValueError("must be one of enum values ('payment_refund')")
         return value
 
     model_config = ConfigDict(
@@ -66,8 +66,7 @@ class PaymentRefundResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -117,7 +116,7 @@ class PaymentRefundResponse(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "object": obj.get("object") if obj.get("object") is not None else 'refund',
+            "object": obj.get("object") if obj.get("object") is not None else 'payment_refund',
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
             "livemode": obj.get("livemode"),

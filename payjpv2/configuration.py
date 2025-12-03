@@ -355,21 +355,11 @@ conf = payjpv2.Configuration(
         """Set default instance of configuration.
 
         It stores default configuration, which can be
-        returned by get_default_copy method.
+        returned by get_default method.
 
         :param default: object of Configuration
         """
         cls._default = default
-
-    @classmethod
-    def get_default_copy(cls) -> Self:
-        """Deprecated. Please use `get_default` instead.
-
-        Deprecated. Please use `get_default` instead.
-
-        :return: The configuration object.
-        """
-        return cls.get_default()
 
     @classmethod
     def get_default(cls) -> Self:
@@ -535,7 +525,7 @@ conf = payjpv2.Configuration(
                "OS: {env}\n"\
                "Python Version: {pyversion}\n"\
                "Version of the API: 2.0.0\n"\
-               "SDK Package Version: 2.0.0".\
+               "SDK Package Version: 0.0.1".\
                format(env=sys.platform, pyversion=sys.version)
 
     def get_host_settings(self) -> List[HostSetting]:

@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_balance_url**](BalancesApi.md#create_balance_url) | **POST** /v2/balances/{balance_id}/balance_urls | Create Balance Url
 [**get_all_balances**](BalancesApi.md#get_all_balances) | **GET** /v2/balances | Get All Balances
-[**retrieve_balance**](BalancesApi.md#retrieve_balance) | **GET** /v2/balances/{balance_id} | Retrieve Balance
+[**get_balance**](BalancesApi.md#get_balance) | **GET** /v2/balances/{balance_id} | Get Balance
 
 
 # **create_balance_url**
@@ -196,10 +196,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **retrieve_balance**
-> BalanceResponse retrieve_balance(balance_id)
+# **get_balance**
+> BalanceResponse get_balance(balance_id)
 
-Retrieve Balance
+Get Balance
 
 ### Example
 
@@ -241,12 +241,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     balance_id = 'balance_id_example' # str | 
 
     try:
-        # Retrieve Balance
-        api_response = api_instance.retrieve_balance(balance_id)
-        print("The response of BalancesApi->retrieve_balance:\n")
+        # Get Balance
+        api_response = api_instance.get_balance(balance_id)
+        print("The response of BalancesApi->get_balance:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling BalancesApi->retrieve_balance: %s\n" % e)
+        print("Exception when calling BalancesApi->get_balance: %s\n" % e)
 ```
 
 

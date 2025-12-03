@@ -24,7 +24,6 @@ from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.capture_method import CaptureMethod
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_flow_status import PaymentFlowStatus
-from payjpv2.models.usage import Usage
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -32,7 +31,7 @@ class PaymentFlowResponse(BaseModel):
     """
     PaymentFlowResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="支払いインテントID")
+    id: StrictStr = Field(description="支払いフローID")
     object: Optional[StrictStr] = 'payment_flow'
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
@@ -41,21 +40,18 @@ class PaymentFlowResponse(BaseModel):
     amount_capturable: Optional[StrictInt]
     amount_received: Optional[StrictInt]
     client_secret: StrictStr = Field(description="このPaymentFlowのクライアントシークレットです。フロントエンドで公開APIキーと合わせて使用しPaymentFlowの情報を取得や支払い処理を行います。**この値はこのPaymentFlowの支払いを行う顧客以外へ公開しないでください。**また保存やログへの記録なども行わないでください。")
-    confirmation_method: Optional[StrictStr]
-    customer: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
-    payment_method: Optional[StrictStr] = None
-    payment_method_options: Optional[Dict[str, Any]] = None
+    customer: Optional[StrictStr]
+    description: Optional[StrictStr]
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
+    payment_method: Optional[StrictStr]
+    payment_method_options: Optional[Dict[str, Any]]
     payment_method_types: List[StrictStr] = Field(description="このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。")
-    receipt_email: Optional[StrictStr] = None
     status: PaymentFlowStatus = Field(description="このPaymentFlowのステータスです。<a href=\"https://docs.pay.jp/v2/payment_flows#status\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 |")
-    next_action: Optional[Dict[str, Any]] = None
-    return_url: Optional[StrictStr] = None
+    next_action: Optional[Dict[str, Any]]
+    return_url: Optional[StrictStr]
     capture_method: CaptureMethod = Field(description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
-    setup_future_usage: Optional[Usage] = None
     last_payment_error: Optional[Dict[str, Any]]
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "amount_capturable", "amount_received", "client_secret", "confirmation_method", "customer", "description", "metadata", "payment_method", "payment_method_options", "payment_method_types", "receipt_email", "status", "next_action", "return_url", "capture_method", "setup_future_usage", "last_payment_error"]
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "amount_capturable", "amount_received", "client_secret", "customer", "description", "metadata", "payment_method", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "capture_method", "last_payment_error"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -80,8 +76,7 @@ class PaymentFlowResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -123,11 +118,6 @@ class PaymentFlowResponse(BaseModel):
         if self.amount_received is None and "amount_received" in self.model_fields_set:
             _dict['amount_received'] = None
 
-        # set to None if confirmation_method (nullable) is None
-        # and model_fields_set contains the field
-        if self.confirmation_method is None and "confirmation_method" in self.model_fields_set:
-            _dict['confirmation_method'] = None
-
         # set to None if customer (nullable) is None
         # and model_fields_set contains the field
         if self.customer is None and "customer" in self.model_fields_set:
@@ -148,11 +138,6 @@ class PaymentFlowResponse(BaseModel):
         if self.payment_method_options is None and "payment_method_options" in self.model_fields_set:
             _dict['payment_method_options'] = None
 
-        # set to None if receipt_email (nullable) is None
-        # and model_fields_set contains the field
-        if self.receipt_email is None and "receipt_email" in self.model_fields_set:
-            _dict['receipt_email'] = None
-
         # set to None if next_action (nullable) is None
         # and model_fields_set contains the field
         if self.next_action is None and "next_action" in self.model_fields_set:
@@ -162,11 +147,6 @@ class PaymentFlowResponse(BaseModel):
         # and model_fields_set contains the field
         if self.return_url is None and "return_url" in self.model_fields_set:
             _dict['return_url'] = None
-
-        # set to None if setup_future_usage (nullable) is None
-        # and model_fields_set contains the field
-        if self.setup_future_usage is None and "setup_future_usage" in self.model_fields_set:
-            _dict['setup_future_usage'] = None
 
         # set to None if last_payment_error (nullable) is None
         # and model_fields_set contains the field
@@ -194,7 +174,6 @@ class PaymentFlowResponse(BaseModel):
             "amount_capturable": obj.get("amount_capturable"),
             "amount_received": obj.get("amount_received"),
             "client_secret": obj.get("client_secret"),
-            "confirmation_method": obj.get("confirmation_method"),
             "customer": obj.get("customer"),
             "description": obj.get("description"),
             "metadata": dict(
@@ -206,12 +185,10 @@ class PaymentFlowResponse(BaseModel):
             "payment_method": obj.get("payment_method"),
             "payment_method_options": obj.get("payment_method_options"),
             "payment_method_types": obj.get("payment_method_types"),
-            "receipt_email": obj.get("receipt_email"),
             "status": obj.get("status"),
             "next_action": obj.get("next_action"),
             "return_url": obj.get("return_url"),
             "capture_method": obj.get("capture_method"),
-            "setup_future_usage": obj.get("setup_future_usage"),
             "last_payment_error": obj.get("last_payment_error")
         })
         return _obj

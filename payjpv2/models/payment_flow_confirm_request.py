@@ -33,11 +33,10 @@ class PaymentFlowConfirmRequest(BaseModel):
     payment_method: Optional[StrictStr] = Field(default=None, description="支払い方法ID")
     payment_method_options: Optional[PaymentMethodOptionsRequest] = Field(default=None, description="このPaymentFlowに固有の支払い方法の設定")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。")
-    receipt_email: Optional[StrictStr] = Field(default=None, description="請求書の送信先メールアドレス。ライブモードで支払いに対して `receipt_email` を指定すると、メール設定に関係なく領収書が送信されます。")
     return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。confirm=trueの場合のみ指定できます。")
     description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。ユーザーには表示されません。")
     capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
-    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_options", "payment_method_types", "receipt_email", "return_url", "description", "capture_method"]
+    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_options", "payment_method_types", "return_url", "description", "capture_method"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,8 +51,7 @@ class PaymentFlowConfirmRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -96,7 +94,6 @@ class PaymentFlowConfirmRequest(BaseModel):
             "payment_method": obj.get("payment_method"),
             "payment_method_options": PaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
-            "receipt_email": obj.get("receipt_email"),
             "return_url": obj.get("return_url"),
             "description": obj.get("description"),
             "capture_method": obj.get("capture_method")

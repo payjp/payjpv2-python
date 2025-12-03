@@ -7,8 +7,8 @@ Method | HTTP request | Description
 [**cancel_setup_flow**](SetupFlowsApi.md#cancel_setup_flow) | **POST** /v2/setup_flows/{setup_flow_id}/cancel | Cancel Setup Flow
 [**confirm_setup_flow**](SetupFlowsApi.md#confirm_setup_flow) | **POST** /v2/setup_flows/{setup_flow_id}/confirm | Confirm Setup Flow
 [**create_setup_flow**](SetupFlowsApi.md#create_setup_flow) | **POST** /v2/setup_flows | Create Setup Flow
-[**get_all_setup_flow**](SetupFlowsApi.md#get_all_setup_flow) | **GET** /v2/setup_flows | Get All Setup Flow
-[**retrieve_setup_flow**](SetupFlowsApi.md#retrieve_setup_flow) | **GET** /v2/setup_flows/{setup_flow_id} | Retrieve Setup Flow
+[**get_all_setup_flows**](SetupFlowsApi.md#get_all_setup_flows) | **GET** /v2/setup_flows | Get All Setup Flows
+[**get_setup_flow**](SetupFlowsApi.md#get_setup_flow) | **GET** /v2/setup_flows/{setup_flow_id} | Get Setup Flow
 [**update_setup_flow**](SetupFlowsApi.md#update_setup_flow) | **POST** /v2/setup_flows/{setup_flow_id} | Update Setup Flow
 
 
@@ -277,10 +277,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_all_setup_flow**
-> SetupFlowListResponse get_all_setup_flow(limit=limit, starting_after=starting_after, ending_before=ending_before)
+# **get_all_setup_flows**
+> SetupFlowListResponse get_all_setup_flows(limit=limit, starting_after=starting_after, ending_before=ending_before)
 
-Get All Setup Flow
+Get All Setup Flows
 
 ### Example
 
@@ -324,12 +324,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
 
     try:
-        # Get All Setup Flow
-        api_response = api_instance.get_all_setup_flow(limit=limit, starting_after=starting_after, ending_before=ending_before)
-        print("The response of SetupFlowsApi->get_all_setup_flow:\n")
+        # Get All Setup Flows
+        api_response = api_instance.get_all_setup_flows(limit=limit, starting_after=starting_after, ending_before=ending_before)
+        print("The response of SetupFlowsApi->get_all_setup_flows:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SetupFlowsApi->get_all_setup_flow: %s\n" % e)
+        print("Exception when calling SetupFlowsApi->get_all_setup_flows: %s\n" % e)
 ```
 
 
@@ -365,10 +365,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **retrieve_setup_flow**
-> SetupFlowResponse retrieve_setup_flow(setup_flow_id)
+# **get_setup_flow**
+> SetupFlowResponse get_setup_flow(setup_flow_id)
 
-Retrieve Setup Flow
+Get Setup Flow
 
 ### Example
 
@@ -410,12 +410,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     setup_flow_id = 'setup_flow_id_example' # str | 
 
     try:
-        # Retrieve Setup Flow
-        api_response = api_instance.retrieve_setup_flow(setup_flow_id)
-        print("The response of SetupFlowsApi->retrieve_setup_flow:\n")
+        # Get Setup Flow
+        api_response = api_instance.get_setup_flow(setup_flow_id)
+        print("The response of SetupFlowsApi->get_setup_flow:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling SetupFlowsApi->retrieve_setup_flow: %s\n" % e)
+        print("Exception when calling SetupFlowsApi->get_setup_flow: %s\n" % e)
 ```
 
 

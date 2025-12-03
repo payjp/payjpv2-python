@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_statement_url**](StatementsApi.md#create_statement_url) | **POST** /v2/statements/{statement_id}/statement_urls | Create Statement Url
 [**get_all_statements**](StatementsApi.md#get_all_statements) | **GET** /v2/statements | Get All Statements
-[**retrieve_statement**](StatementsApi.md#retrieve_statement) | **GET** /v2/statements/{statement_id} | Retrieve Statement
+[**get_statement**](StatementsApi.md#get_statement) | **GET** /v2/statements/{statement_id} | Get Statement
 
 
 # **create_statement_url**
@@ -198,10 +198,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **retrieve_statement**
-> StatementResponse retrieve_statement(statement_id)
+# **get_statement**
+> StatementResponse get_statement(statement_id)
 
-Retrieve Statement
+Get Statement
 
 ### Example
 
@@ -243,12 +243,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     statement_id = 'statement_id_example' # str | 
 
     try:
-        # Retrieve Statement
-        api_response = api_instance.retrieve_statement(statement_id)
-        print("The response of StatementsApi->retrieve_statement:\n")
+        # Get Statement
+        api_response = api_instance.get_statement(statement_id)
+        print("The response of StatementsApi->get_statement:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling StatementsApi->retrieve_statement: %s\n" % e)
+        print("Exception when calling StatementsApi->get_statement: %s\n" % e)
 ```
 
 

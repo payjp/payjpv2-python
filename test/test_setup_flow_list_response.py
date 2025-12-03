@@ -60,7 +60,7 @@ class TestSetupFlowListResponse(unittest.TestCase):
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
-                        last_setup_error = , )
+                        last_setup_error = { }, )
                     ]
             )
         else:
@@ -88,7 +88,7 @@ class TestSetupFlowListResponse(unittest.TestCase):
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
-                        last_setup_error = , )
+                        last_setup_error = { }, )
                     ],
         )
         """

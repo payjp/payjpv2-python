@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.currency import Currency
+from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.price_type import PriceType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,19 +31,19 @@ class PriceDetailsResponse(BaseModel):
     """
     PriceDetailsResponse
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="料金ID")
+    id: StrictStr = Field(description="料金ID")
     object: Optional[StrictStr] = 'price'
-    livemode: Optional[StrictBool] = Field(default=None, description="本番環境かどうか")
-    active: Optional[StrictBool] = Field(default=None, description="価格が有効かどうか。デフォルトは `true`。")
-    metadata: Optional[Dict[str, Any]] = Field(default=None, description="メタデータ")
-    nickname: Optional[StrictStr] = None
-    type: Optional[PriceType] = Field(default=None, description="価格が一度限りの購入か、継続的な（サブスクリプション）購入かに応じて、`one_time` または `recurring` のいずれかとなります。  | 指定できる値 | |:---| | **one_time**: 1回限りの価格。 | | **recurring**: 継続的な価格。 |")
-    lookup_key: Optional[StrictStr] = None
-    currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
-    product: Optional[StrictStr] = Field(default=None, description="この価格が紐付く商品のID。")
-    unit_amount: Optional[StrictInt] = Field(default=None, description="価格の単価。0以上の整数となります。")
-    created_at: Optional[datetime] = Field(default=None, description="支払い方法作成時の日時 (UTC, ISO 8601 形式)")
-    updated_at: Optional[datetime] = Field(default=None, description="支払い方法更新時の日時 (UTC, ISO 8601 形式)")
+    livemode: StrictBool = Field(description="本番環境かどうか")
+    active: StrictBool = Field(description="価格が有効かどうか。デフォルトは `true`。")
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
+    nickname: Optional[StrictStr]
+    type: PriceType = Field(description="価格が一度限りの購入か、継続的な（サブスクリプション）購入かに応じて、`one_time` または `recurring` のいずれかとなります。  | 指定できる値 | |:---| | **one_time**: 1回限りの価格。 | | **recurring**: 継続的な価格。 |")
+    lookup_key: Optional[StrictStr]
+    currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
+    product: StrictStr = Field(description="この価格が紐付く商品のID。")
+    unit_amount: StrictInt = Field(description="価格の単価。0以上の整数となります。")
+    created_at: datetime = Field(description="支払い方法作成時の日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="支払い方法更新時の日時 (UTC, ISO 8601 形式)")
     __properties: ClassVar[List[str]] = ["id", "object", "livemode", "active", "metadata", "nickname", "type", "lookup_key", "currency", "product", "unit_amount", "created_at", "updated_at"]
 
     @field_validator('object')
@@ -68,8 +69,7 @@ class PriceDetailsResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -94,6 +94,13 @@ class PriceDetailsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
+        _field_dict = {}
+        if self.metadata:
+            for _key_metadata in self.metadata:
+                if self.metadata[_key_metadata]:
+                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
+            _dict['metadata'] = _field_dict
         # set to None if nickname (nullable) is None
         # and model_fields_set contains the field
         if self.nickname is None and "nickname" in self.model_fields_set:
@@ -120,7 +127,12 @@ class PriceDetailsResponse(BaseModel):
             "object": obj.get("object") if obj.get("object") is not None else 'price',
             "livemode": obj.get("livemode"),
             "active": obj.get("active"),
-            "metadata": obj.get("metadata"),
+            "metadata": dict(
+                (_k, MetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None,
             "nickname": obj.get("nickname"),
             "type": obj.get("type"),
             "lookup_key": obj.get("lookup_key"),

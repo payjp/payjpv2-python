@@ -20,7 +20,9 @@ import decimal
 import json
 import mimetypes
 import os
+import platform
 import re
+import sys
 import tempfile
 
 from urllib.parse import quote
@@ -62,7 +64,6 @@ class ApiClient:
     PRIMITIVE_TYPES = (float, bool, bytes, str, int)
     NATIVE_TYPES_MAPPING = {
         'int': int,
-        'long': int, # TODO remove as only py3 is supported?
         'float': float,
         'str': str,
         'bool': bool,
@@ -91,7 +92,9 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'OpenAPI-Generator/2.0.0/python'
+        self.user_agent = 'payjp/payjpv2 PythonBindings/0.0.1'
+        # Set X-Payjp-Client-User-Agent header.
+        self.default_headers['X-Payjp-Client-User-Agent'] = self._build_client_user_agent()
         self.client_side_validation = configuration.client_side_validation
 
     def __enter__(self):
@@ -108,6 +111,17 @@ class ApiClient:
     @user_agent.setter
     def user_agent(self, value):
         self.default_headers['User-Agent'] = value
+
+    def _build_client_user_agent(self):
+        """Build X-Payjp-Client-User-Agent header value."""
+        ua_info = {
+            'bindings_version': '0.0.1',
+            'lang': 'python',
+            'lang_version': sys.version.split()[0],
+            'publisher': 'payjp',
+            'uname': f"{platform.system()} {platform.release()} {platform.machine()}"
+        }
+        return json.dumps(ua_info)
 
     def set_default_header(self, header_name, header_value):
         self.default_headers[header_name] = header_value

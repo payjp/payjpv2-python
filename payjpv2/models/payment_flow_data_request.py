@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.capture_method import CaptureMethod
 from payjpv2.models.metadata_value import MetadataValue
@@ -31,18 +31,7 @@ class PaymentFlowDataRequest(BaseModel):
     """ # noqa: E501
     capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると自動的に確定します。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    setup_future_usage: Optional[StrictStr] = Field(default=None, description="この PaymentFlow に設定されている支払い方法で今後決済を行うかの設定です。<br><br> PaymentFlow に Customer を指定した場合、このパラメータを使って PaymentFlow を確定できます。 その後、顧客が必要な操作を完了すると、支払い方法を Customer に紐付けることが可能です。また、Customer を指定しない場合でも、取引が完了した後に支払い方法を Customer に紐付けることはできます。")
-    __properties: ClassVar[List[str]] = ["capture_method", "metadata", "setup_future_usage"]
-
-    @field_validator('setup_future_usage')
-    def setup_future_usage_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['off_session', 'on_session']):
-            raise ValueError("must be one of enum values ('off_session', 'on_session')")
-        return value
+    __properties: ClassVar[List[str]] = ["capture_method", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -57,8 +46,7 @@ class PaymentFlowDataRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -108,8 +96,7 @@ class PaymentFlowDataRequest(BaseModel):
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "setup_future_usage": obj.get("setup_future_usage")
+            else None
         })
         return _obj
 

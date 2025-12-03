@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**card** | [**PaymentMethodOptionsCardRequest**](PaymentMethodOptionsCardRequest.md) | カード支払い方法に関するオプション | 
+**card** | [**PaymentMethodOptionsCardRequest**](PaymentMethodOptionsCardRequest.md) | カード支払い方法に関するオプション | [optional] 
 
 ## Example
 

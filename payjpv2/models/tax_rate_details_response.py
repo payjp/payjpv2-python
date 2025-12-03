@@ -31,15 +31,15 @@ class TaxRateDetailsResponse(BaseModel):
     TaxRateDetailsResponse
     """ # noqa: E501
     object: Optional[StrictStr] = 'tax_rate'
-    id: Optional[StrictStr] = Field(default=None, description="ID")
-    display_name: Optional[StrictStr] = Field(default=None, description="表示名。顧客に表示されます。")
-    inclusive: Optional[StrictBool] = Field(default=None, description="税込みかどうか。税込 = `true` 税抜 = `false`")
-    percentage: Optional[Union[StrictFloat, StrictInt]] = Field(default=None, description="税率を % 単位で指定します（例： 10%の場合は「10」と入力）")
-    active: Optional[StrictBool] = Field(default=None, description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")
-    country: Optional[Country] = None
-    description: Optional[StrictStr] = None
-    tax_type: Optional[TaxType] = None
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    id: StrictStr = Field(description="ID")
+    display_name: StrictStr = Field(description="表示名。顧客に表示されます。")
+    inclusive: StrictBool = Field(description="税込みかどうか。税込 = `true` 税抜 = `false`")
+    percentage: Union[StrictFloat, StrictInt] = Field(description="税率を % 単位で指定します（例： 10%の場合は「10」と入力）")
+    active: StrictBool = Field(description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")
+    country: Optional[Country]
+    description: Optional[StrictStr]
+    tax_type: Optional[TaxType]
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     __properties: ClassVar[List[str]] = ["object", "id", "display_name", "inclusive", "percentage", "active", "country", "description", "tax_type", "metadata"]
 
     @field_validator('object')
@@ -65,8 +65,7 @@ class TaxRateDetailsResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

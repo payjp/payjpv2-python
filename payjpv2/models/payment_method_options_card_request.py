@@ -28,9 +28,8 @@ class PaymentMethodOptionsCardRequest(BaseModel):
     PaymentMethodOptionsCardRequest
     """ # noqa: E501
     request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求。  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 |")
-    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 基本的に3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 | <!-- | **challenge**: 3Dセキュア認証を手動で要求します。 | --> ")
-    setup_future_usage: Optional[StrictStr] = Field(default=None, description="セットアップ後の使用方法。  | 指定できる値 | |:---| | **off_session**: 顧客がその場にいない状態（例：定期課金や後日請求など）でも決済したい場合に使用します。事前の同意に基づいて自動的に課金されます。 | | **on_session**: 顧客が支払い操作中（例：Web画面で「支払う」ボタンを押す）でのみ決済できればいい場合に指定します。リアルタイムに同意が得られている状態です。 |")
-    __properties: ClassVar[List[str]] = ["request_extended_authorization", "request_three_d_secure", "setup_future_usage"]
+    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 | ")
+    __properties: ClassVar[List[str]] = ["request_extended_authorization", "request_three_d_secure"]
 
     @field_validator('request_extended_authorization')
     def request_extended_authorization_validate_enum(cls, value):
@@ -48,18 +47,8 @@ class PaymentMethodOptionsCardRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['any', 'automatic', 'challenge']):
-            raise ValueError("must be one of enum values ('any', 'automatic', 'challenge')")
-        return value
-
-    @field_validator('setup_future_usage')
-    def setup_future_usage_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['off_session', 'on_session']):
-            raise ValueError("must be one of enum values ('off_session', 'on_session')")
+        if value not in set(['any', 'automatic']):
+            raise ValueError("must be one of enum values ('any', 'automatic')")
         return value
 
     model_config = ConfigDict(
@@ -75,8 +64,7 @@ class PaymentMethodOptionsCardRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -114,8 +102,7 @@ class PaymentMethodOptionsCardRequest(BaseModel):
 
         _obj = cls.model_validate({
             "request_extended_authorization": obj.get("request_extended_authorization"),
-            "request_three_d_secure": obj.get("request_three_d_secure"),
-            "setup_future_usage": obj.get("setup_future_usage")
+            "request_three_d_secure": obj.get("request_three_d_secure")
         })
         return _obj
 

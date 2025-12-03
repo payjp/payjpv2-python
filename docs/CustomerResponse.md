@@ -5,12 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | 顧客ID | [optional] 
+**id** | **str** | 顧客ID | 
 **object** | **str** |  | [optional] [default to 'customer']
 **livemode** | **bool** | 本番環境かどうか | 
 **email** | **str** |  | 
 **description** | **str** |  | 
-**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | [optional] 
+**default_payment_method** | **str** |  | 
+**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 

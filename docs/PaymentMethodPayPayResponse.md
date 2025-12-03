@@ -8,11 +8,12 @@ Name | Type | Description | Notes
 **object** | **str** |  | [optional] [default to 'payment_method']
 **id** | **str** | ID | 
 **type** | **str** |  | 
-**customer** | **str** |  | [optional] 
+**customer** | **str** |  | 
+**detached_at** | **datetime** |  | 
 **livemode** | **bool** | 本番環境かどうか | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
-**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | [optional] 
+**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 **billing_details** | [**PaymentMethodBillingDetailsResponse**](PaymentMethodBillingDetailsResponse.md) | 請求先情報 | 
 
 ## Example

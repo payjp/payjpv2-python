@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import Field, StrictStr
-from typing import Optional
+from typing import List, Optional
 from typing_extensions import Annotated
 from payjpv2.models.price_create_request import PriceCreateRequest
 from payjpv2.models.price_details_response import PriceDetailsResponse
@@ -47,7 +47,8 @@ class PricesApi:
     def create_price(
         self,
         price_create_request: PriceCreateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -55,44 +56,46 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PriceDetailsResponse:
         """Create Price
 
 
         :param price_create_request: (required)
         :type price_create_request: PriceCreateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._create_price_serialize(
             price_create_request=price_create_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -101,7 +104,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -114,7 +117,8 @@ class PricesApi:
     def create_price_with_http_info(
         self,
         price_create_request: PriceCreateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -122,44 +126,46 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PriceDetailsResponse]:
         """Create Price
 
 
         :param price_create_request: (required)
         :type price_create_request: PriceCreateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._create_price_serialize(
             price_create_request=price_create_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -168,7 +174,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -181,7 +187,8 @@ class PricesApi:
     def create_price_without_preload_content(
         self,
         price_create_request: PriceCreateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -189,44 +196,46 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Create Price
 
 
         :param price_create_request: (required)
         :type price_create_request: PriceCreateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._create_price_serialize(
             price_create_request=price_create_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -235,7 +244,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -246,6 +255,7 @@ class PricesApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -257,6 +267,8 @@ class PricesApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -325,7 +337,9 @@ class PricesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        _request_timeout: Union[
+        lookup_keys: Annotated[Optional[List[Optional[StrictStr]]], Field(description="価格を動的に取得するために使用される検索キー。")] = None,
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -333,10 +347,10 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PriceListResponse:
         """Get All Prices
 
@@ -347,25 +361,28 @@ class PricesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param lookup_keys: 価格を動的に取得するために使用される検索キー。
+        :type lookup_keys: List[Optional[str]]
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -373,10 +390,12 @@ class PricesApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            lookup_keys=lookup_keys,
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -386,7 +405,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -401,7 +420,9 @@ class PricesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        _request_timeout: Union[
+        lookup_keys: Annotated[Optional[List[Optional[StrictStr]]], Field(description="価格を動的に取得するために使用される検索キー。")] = None,
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -409,10 +430,10 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PriceListResponse]:
         """Get All Prices
 
@@ -423,25 +444,28 @@ class PricesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param lookup_keys: 価格を動的に取得するために使用される検索キー。
+        :type lookup_keys: List[Optional[str]]
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -449,10 +473,12 @@ class PricesApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            lookup_keys=lookup_keys,
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -462,7 +488,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -477,7 +503,9 @@ class PricesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        _request_timeout: Union[
+        lookup_keys: Annotated[Optional[List[Optional[StrictStr]]], Field(description="価格を動的に取得するために使用される検索キー。")] = None,
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -485,10 +513,10 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Get All Prices
 
@@ -499,25 +527,28 @@ class PricesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param lookup_keys: 価格を動的に取得するために使用される検索キー。
+        :type lookup_keys: List[Optional[str]]
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -525,10 +556,12 @@ class PricesApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            lookup_keys=lookup_keys,
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -538,7 +571,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -548,20 +581,25 @@ class PricesApi:
         limit,
         starting_after,
         ending_before,
+        lookup_keys,
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
         _host = None
 
         _collection_formats: Dict[str, str] = {
+            'lookup_keys': 'multi',
         }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -581,6 +619,10 @@ class PricesApi:
         if ending_before is not None:
             
             _query_params.append(('ending_before', ending_before))
+            
+        if lookup_keys is not None:
+            
+            _query_params.append(('lookup_keys', lookup_keys))
             
         # process the header parameters
         # process the form parameters
@@ -625,7 +667,8 @@ class PricesApi:
     def get_price(
         self,
         price_id: StrictStr,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -633,44 +676,46 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PriceDetailsResponse:
         """Get Price
 
 
         :param price_id: (required)
         :type price_id: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_price_serialize(
             price_id=price_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -679,7 +724,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -692,7 +737,8 @@ class PricesApi:
     def get_price_with_http_info(
         self,
         price_id: StrictStr,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -700,44 +746,46 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PriceDetailsResponse]:
         """Get Price
 
 
         :param price_id: (required)
         :type price_id: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_price_serialize(
             price_id=price_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -746,7 +794,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -759,7 +807,8 @@ class PricesApi:
     def get_price_without_preload_content(
         self,
         price_id: StrictStr,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -767,44 +816,46 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Get Price
 
 
         :param price_id: (required)
         :type price_id: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_price_serialize(
             price_id=price_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -813,7 +864,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -824,6 +875,7 @@ class PricesApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -835,6 +887,8 @@ class PricesApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -889,7 +943,8 @@ class PricesApi:
         self,
         price_id: StrictStr,
         price_update_request: PriceUpdateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -897,10 +952,10 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> PriceDetailsResponse:
         """Update Price
 
@@ -909,35 +964,37 @@ class PricesApi:
         :type price_id: str
         :param price_update_request: (required)
         :type price_update_request: PriceUpdateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._update_price_serialize(
             price_id=price_id,
             price_update_request=price_update_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -946,7 +1003,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -960,7 +1017,8 @@ class PricesApi:
         self,
         price_id: StrictStr,
         price_update_request: PriceUpdateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -968,10 +1026,10 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[PriceDetailsResponse]:
         """Update Price
 
@@ -980,35 +1038,37 @@ class PricesApi:
         :type price_id: str
         :param price_update_request: (required)
         :type price_update_request: PriceUpdateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._update_price_serialize(
             price_id=price_id,
             price_update_request=price_update_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -1017,7 +1077,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1031,7 +1091,8 @@ class PricesApi:
         self,
         price_id: StrictStr,
         price_update_request: PriceUpdateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -1039,10 +1100,10 @@ class PricesApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Update Price
 
@@ -1051,35 +1112,37 @@ class PricesApi:
         :type price_id: str
         :param price_update_request: (required)
         :type price_update_request: PriceUpdateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._update_price_serialize(
             price_id=price_id,
             price_update_request=price_update_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -1088,7 +1151,7 @@ class PricesApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -1100,6 +1163,7 @@ class PricesApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -1111,6 +1175,8 @@ class PricesApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]

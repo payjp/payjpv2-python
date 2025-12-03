@@ -34,16 +34,15 @@ class StatementResponse(BaseModel):
     object: Optional[StrictStr] = 'statement'
     id: StrictStr = Field(description="明細ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
-    title: Optional[StrictStr] = None
+    title: Optional[StrictStr]
     type: StatementType = Field(description="取引明細の区分  | 名 | 区分 | 詳細 | |---| --- | --- | | **sales** | 売上 | 決済による売上、決済手数料等 | | **service_fee** | サービス利用料 | 有料プランの月額費用など、salesに含まれないサービス利用料 | | **forfeit** | 残高失効 | - | | **transfer_fee** | 振込手数料 | - | | **misc** | その他 | 調整金など |")
     created_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
-    tenant: Optional[StrictStr] = None
-    term: Optional[TermResponse] = None
-    balance: Optional[StrictStr] = None
+    term: Optional[TermResponse]
+    balance: Optional[StrictStr]
     items: List[StatementItemResponse] = Field(description="明細項目のリスト")
     net: StrictInt = Field(description="含まれるstatement_itemの金額合計")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "title", "type", "created_at", "updated_at", "tenant", "term", "balance", "items", "net"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "title", "type", "created_at", "updated_at", "term", "balance", "items", "net"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -68,8 +67,7 @@ class StatementResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -109,11 +107,6 @@ class StatementResponse(BaseModel):
         if self.title is None and "title" in self.model_fields_set:
             _dict['title'] = None
 
-        # set to None if tenant (nullable) is None
-        # and model_fields_set contains the field
-        if self.tenant is None and "tenant" in self.model_fields_set:
-            _dict['tenant'] = None
-
         # set to None if term (nullable) is None
         # and model_fields_set contains the field
         if self.term is None and "term" in self.model_fields_set:
@@ -143,7 +136,6 @@ class StatementResponse(BaseModel):
             "type": obj.get("type"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
-            "tenant": obj.get("tenant"),
             "term": TermResponse.from_dict(obj["term"]) if obj.get("term") is not None else None,
             "balance": obj.get("balance"),
             "items": [StatementItemResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,

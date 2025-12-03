@@ -36,8 +36,6 @@ class TestSetupFlowConfirmRequest(unittest.TestCase):
         model = SetupFlowConfirmRequest()
         if include_optional:
             return SetupFlowConfirmRequest(
-                payment_method = '',
-                payment_method_data = None,
                 payment_method_options = { },
                 return_url = '',
                 use_payjp_sdk = True

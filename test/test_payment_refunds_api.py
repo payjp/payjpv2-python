@@ -41,10 +41,10 @@ class TestPaymentRefundsApi(unittest.TestCase):
         """
         pass
 
-    def test_retrieve_payment_refund(self) -> None:
-        """Test case for retrieve_payment_refund
+    def test_get_payment_refund(self) -> None:
+        """Test case for get_payment_refund
 
-        Retrieve Payment Refund
+        Get Payment Refund
         """
         pass
 

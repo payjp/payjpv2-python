@@ -48,17 +48,17 @@ class TestSetupFlowsApi(unittest.TestCase):
         """
         pass
 
-    def test_get_all_setup_flow(self) -> None:
-        """Test case for get_all_setup_flow
+    def test_get_all_setup_flows(self) -> None:
+        """Test case for get_all_setup_flows
 
-        Get All Setup Flow
+        Get All Setup Flows
         """
         pass
 
-    def test_retrieve_setup_flow(self) -> None:
-        """Test case for retrieve_setup_flow
+    def test_get_setup_flow(self) -> None:
+        """Test case for get_setup_flow
 
-        Retrieve Setup Flow
+        Get Setup Flow
         """
         pass
 

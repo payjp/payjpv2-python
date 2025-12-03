@@ -50,7 +50,8 @@ class EventsApi:
         resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
         object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -58,10 +59,10 @@ class EventsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventListResponse:
         """Get All Events
 
@@ -78,25 +79,26 @@ class EventsApi:
         :type object: str
         :param type: 取得するeventのtype
         :type type: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -107,10 +109,11 @@ class EventsApi:
             resource_id=resource_id,
             object=object,
             type=type,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -119,7 +122,7 @@ class EventsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -137,7 +140,8 @@ class EventsApi:
         resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
         object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -145,10 +149,10 @@ class EventsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EventListResponse]:
         """Get All Events
 
@@ -165,25 +169,26 @@ class EventsApi:
         :type object: str
         :param type: 取得するeventのtype
         :type type: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -194,10 +199,11 @@ class EventsApi:
             resource_id=resource_id,
             object=object,
             type=type,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -206,7 +212,7 @@ class EventsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -224,7 +230,8 @@ class EventsApi:
         resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
         object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -232,10 +239,10 @@ class EventsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Get All Events
 
@@ -252,25 +259,26 @@ class EventsApi:
         :type object: str
         :param type: 取得するeventのtype
         :type type: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -281,10 +289,11 @@ class EventsApi:
             resource_id=resource_id,
             object=object,
             type=type,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -293,7 +302,7 @@ class EventsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -309,6 +318,7 @@ class EventsApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -320,6 +330,8 @@ class EventsApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -395,7 +407,8 @@ class EventsApi:
     def get_event(
         self,
         event_id: StrictStr,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -403,44 +416,46 @@ class EventsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> EventResponse:
         """Get Event
 
 
         :param event_id: (required)
         :type event_id: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_event_serialize(
             event_id=event_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -450,7 +465,7 @@ class EventsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -463,7 +478,8 @@ class EventsApi:
     def get_event_with_http_info(
         self,
         event_id: StrictStr,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -471,44 +487,46 @@ class EventsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[EventResponse]:
         """Get Event
 
 
         :param event_id: (required)
         :type event_id: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_event_serialize(
             event_id=event_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -518,7 +536,7 @@ class EventsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -531,7 +549,8 @@ class EventsApi:
     def get_event_without_preload_content(
         self,
         event_id: StrictStr,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -539,44 +558,46 @@ class EventsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Get Event
 
 
         :param event_id: (required)
         :type event_id: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_event_serialize(
             event_id=event_id,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -586,7 +607,7 @@ class EventsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -597,6 +618,7 @@ class EventsApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -608,6 +630,8 @@ class EventsApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]

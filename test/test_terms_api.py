@@ -27,17 +27,17 @@ class TestTermsApi(unittest.TestCase):
     def tearDown(self) -> None:
         pass
 
-    def test_get_all_term(self) -> None:
-        """Test case for get_all_term
+    def test_get_all_terms(self) -> None:
+        """Test case for get_all_terms
 
-        Get All Term
+        Get All Terms
         """
         pass
 
-    def test_retrieve_term(self) -> None:
-        """Test case for retrieve_term
+    def test_get_term(self) -> None:
+        """Test case for get_term
 
-        Retrieve Term
+        Get Term
         """
         pass
 

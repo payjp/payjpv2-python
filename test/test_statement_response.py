@@ -43,7 +43,6 @@ class TestStatementResponse(unittest.TestCase):
                 type = 'sales',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                tenant = '',
                 term = payjpv2.models.term_response.TermResponse(
                     id = '', 
                     object = 'term', 
@@ -65,9 +64,18 @@ class TestStatementResponse(unittest.TestCase):
             return StatementResponse(
                 id = '',
                 livemode = True,
+                title = '',
                 type = 'sales',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                term = payjpv2.models.term_response.TermResponse(
+                    id = '', 
+                    object = 'term', 
+                    livemode = True, 
+                    start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    closed = True, ),
+                balance = '',
                 items = [
                     payjpv2.models.statement_item_response.StatementItemResponse(
                         subject = '売上', 

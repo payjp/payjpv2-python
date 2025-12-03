@@ -6,15 +6,15 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **object** | **str** |  | [optional] [default to 'tax_rate']
-**id** | **str** | ID | [optional] 
-**display_name** | **str** | 表示名。顧客に表示されます。 | [optional] 
-**inclusive** | **bool** | 税込みかどうか。税込 &#x3D; &#x60;true&#x60; 税抜 &#x3D; &#x60;false&#x60; | [optional] 
-**percentage** | **float** | 税率を % 単位で指定します（例： 10%の場合は「10」と入力） | [optional] 
-**active** | **bool** | この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。 | [optional] 
-**country** | [**Country**](Country.md) |  | [optional] 
-**description** | **str** |  | [optional] 
-**tax_type** | [**TaxType**](TaxType.md) |  | [optional] 
-**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | [optional] 
+**id** | **str** | ID | 
+**display_name** | **str** | 表示名。顧客に表示されます。 | 
+**inclusive** | **bool** | 税込みかどうか。税込 &#x3D; &#x60;true&#x60; 税抜 &#x3D; &#x60;false&#x60; | 
+**percentage** | **float** | 税率を % 単位で指定します（例： 10%の場合は「10」と入力） | 
+**active** | **bool** | この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。 | 
+**country** | [**Country**](Country.md) |  | 
+**description** | **str** |  | 
+**tax_type** | [**TaxType**](TaxType.md) |  | 
+**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 
 ## Example
 

@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from payjpv2.models.metadata_value import MetadataValue
@@ -32,7 +32,8 @@ class CustomerUpdateRequest(BaseModel):
     email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客のメールアドレス。メールアドレスの形式が正しいかどうかは検証されます。")
     description: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客オブジェクトに付加できる任意の文字列です。これは、ダッシュボードで顧客と一緒に表示されます。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["email", "description", "metadata"]
+    default_payment_method: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["email", "description", "metadata", "default_payment_method"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -47,8 +48,7 @@ class CustomerUpdateRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -80,6 +80,11 @@ class CustomerUpdateRequest(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
+        # set to None if default_payment_method (nullable) is None
+        # and model_fields_set contains the field
+        if self.default_payment_method is None and "default_payment_method" in self.model_fields_set:
+            _dict['default_payment_method'] = None
+
         return _dict
 
     @classmethod
@@ -99,7 +104,8 @@ class CustomerUpdateRequest(BaseModel):
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None
+            else None,
+            "default_payment_method": obj.get("default_payment_method")
         })
         return _obj
 

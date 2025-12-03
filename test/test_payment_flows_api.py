@@ -55,24 +55,24 @@ class TestPaymentFlowsApi(unittest.TestCase):
         """
         pass
 
-    def test_get_all_payment_flow(self) -> None:
-        """Test case for get_all_payment_flow
+    def test_get_all_payment_flows(self) -> None:
+        """Test case for get_all_payment_flows
 
-        Get All Payment Flow
+        Get All Payment Flows
         """
         pass
 
-    def test_increment_authorization_payment_flow(self) -> None:
-        """Test case for increment_authorization_payment_flow
+    def test_get_payment_flow(self) -> None:
+        """Test case for get_payment_flow
 
-        Increment Authorization Payment Flow
+        Get Payment Flow
         """
         pass
 
-    def test_retrieve_payment_flow(self) -> None:
-        """Test case for retrieve_payment_flow
+    def test_get_payment_flow_refunds(self) -> None:
+        """Test case for get_payment_flow_refunds
 
-        Retrieve Payment Flow
+        Get Payment Flow Refunds
         """
         pass
 

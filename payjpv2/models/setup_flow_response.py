@@ -36,15 +36,15 @@ class SetupFlowResponse(BaseModel):
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
     livemode: StrictBool = Field(description="本番環境かどうか")
     client_secret: StrictStr = Field(description="この SetupFlow のクライアントシークレットです。フロントエンドで公開鍵と合わせて使用し、SetupFlow の取得や支払い処理を行います。**この値はこの SetupFlow の支払いを行う顧客以外へ公開しないでください。")
-    customer: Optional[StrictStr] = None
-    description: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
-    payment_method: Optional[StrictStr] = None
-    payment_method_options: Optional[Dict[str, Any]] = None
+    customer: Optional[StrictStr]
+    description: Optional[StrictStr]
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
+    payment_method: Optional[StrictStr]
+    payment_method_options: Optional[Dict[str, Any]]
     payment_method_types: List[StrictStr] = Field(description="この SetupFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法が自動的に設定されます。")
     status: SetupFlowStatus = Field(description="この SetupFlow のステータスです。<a href=\"https://docs.pay.jp/v2/setup_flows#status\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **succeeded**: 成功しました。 | | **canceled**: キャンセルされました。 |")
-    next_action: Optional[Dict[str, Any]] = None
-    return_url: Optional[StrictStr] = None
+    next_action: Optional[Dict[str, Any]]
+    return_url: Optional[StrictStr]
     last_setup_error: Optional[Dict[str, Any]]
     __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "client_secret", "customer", "description", "metadata", "payment_method", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "last_setup_error"]
 
@@ -71,8 +71,7 @@ class SetupFlowResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

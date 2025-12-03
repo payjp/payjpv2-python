@@ -18,7 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from payjpv2.models.metadata_value import MetadataValue
@@ -33,7 +33,8 @@ class CustomerCreateRequest(BaseModel):
     description: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客オブジェクトに付加できる任意の文字列です。これは、ダッシュボードで顧客と一緒に表示されます。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     id: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="顧客ID。100桁までの一意な文字列を指定できます。使える文字は半角英数字、ハイフン(-)、アンダースコア(_)です。未指定時は `cus_` で始まる32桁までの一意な文字列が自動生成されます。")
-    __properties: ClassVar[List[str]] = ["email", "description", "metadata", "id"]
+    payment_method: Optional[StrictStr] = Field(default=None, description="顧客に紐づける支払い方法ID")
+    __properties: ClassVar[List[str]] = ["email", "description", "metadata", "id", "payment_method"]
 
     @field_validator('id')
     def id_validate_regular_expression(cls, value):
@@ -58,8 +59,7 @@ class CustomerCreateRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -111,7 +111,8 @@ class CustomerCreateRequest(BaseModel):
             )
             if obj.get("metadata") is not None
             else None,
-            "id": obj.get("id")
+            "id": obj.get("id"),
+            "payment_method": obj.get("payment_method")
         })
         return _obj
 

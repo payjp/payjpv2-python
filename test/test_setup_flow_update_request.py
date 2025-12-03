@@ -37,7 +37,6 @@ class TestSetupFlowUpdateRequest(unittest.TestCase):
         if include_optional:
             return SetupFlowUpdateRequest(
                 customer = '',
-                payment_method = '',
                 payment_method_options = { },
                 payment_method_types = [
                     'card'

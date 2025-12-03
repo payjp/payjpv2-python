@@ -46,6 +46,7 @@ class TestStatementItemResponse(unittest.TestCase):
                 subject = '売上',
                 name = '',
                 amount = 56,
+                tax_rate = '',
         )
         """
 

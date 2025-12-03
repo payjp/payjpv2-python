@@ -37,7 +37,7 @@ class TestPaymentRefundResponse(unittest.TestCase):
         if include_optional:
             return PaymentRefundResponse(
                 id = '',
-                object = 'refund',
+                object = 'payment_refund',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
@@ -59,6 +59,9 @@ class TestPaymentRefundResponse(unittest.TestCase):
                 status = 'succeeded',
                 payment_flow = '',
                 reason = 'duplicate',
+                metadata = {
+                    'key' : null
+                    },
         )
         """
 

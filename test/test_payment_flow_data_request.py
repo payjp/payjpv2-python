@@ -39,8 +39,7 @@ class TestPaymentFlowDataRequest(unittest.TestCase):
                 capture_method = 'automatic',
                 metadata = {
                     'key' : null
-                    },
-                setup_future_usage = 'off_session'
+                    }
             )
         else:
             return PaymentFlowDataRequest(

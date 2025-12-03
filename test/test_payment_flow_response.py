@@ -45,7 +45,6 @@ class TestPaymentFlowResponse(unittest.TestCase):
                 amount_capturable = 56,
                 amount_received = 56,
                 client_secret = '',
-                confirmation_method = '',
                 customer = '',
                 description = '',
                 metadata = {
@@ -56,7 +55,6 @@ class TestPaymentFlowResponse(unittest.TestCase):
                 payment_method_types = [
                     ''
                     ],
-                receipt_email = '',
                 status = 'canceled',
                 next_action = { },
                 return_url = '',
@@ -73,11 +71,19 @@ class TestPaymentFlowResponse(unittest.TestCase):
                 amount_capturable = 56,
                 amount_received = 56,
                 client_secret = '',
-                confirmation_method = '',
+                customer = '',
+                description = '',
+                metadata = {
+                    'key' : null
+                    },
+                payment_method = '',
+                payment_method_options = { },
                 payment_method_types = [
                     ''
                     ],
                 status = 'canceled',
+                next_action = { },
+                return_url = '',
                 capture_method = 'automatic',
                 last_payment_error = { },
         )

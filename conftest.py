@@ -2,11 +2,13 @@
 Pytest configuration and fixtures for PAY.JP Python SDK tests.
 """
 import os
-import pytest
 from unittest.mock import Mock, patch
+
+import pytest
+
 import payjpv2
-from payjpv2.configuration import Configuration
 from payjpv2.api_client import ApiClient
+from payjpv2.configuration import Configuration
 
 
 @pytest.fixture
@@ -57,11 +59,11 @@ def sample_customer_data():
 
 
 @pytest.fixture
-def sample_payment_intent_data():
-    """Sample payment intent data for testing."""
+def sample_payment_flow_data():
+    """Sample payment flow data for testing."""
     return {
-        "id": "pi_test123",
-        "object": "payment_intent",
+        "id": "pfw_test123",
+        "object": "payment_flow",
         "amount": 1000,
         "currency": "jpy",
         "status": "requires_payment_method",

@@ -3,7 +3,7 @@ Tests for PAY.JP SDK model validation and serialization.
 """
 import pytest
 from payjpv2.models.customer_create_request import CustomerCreateRequest
-from payjpv2.models.payment_intent_create_request import PaymentIntentCreateRequest
+from payjpv2.models.payment_flow_create_request import PaymentFlowCreateRequest
 
 
 class TestCustomerModels:
@@ -34,50 +34,50 @@ class TestCustomerModels:
         assert request is not None
 
 
-class TestPaymentIntentModels:
-    """Test payment intent-related models."""
+class TestPaymentFlowModels:
+    """Test payment flow-related models."""
 
-    def test_payment_intent_create_request_basic(self):
-        """Test basic payment intent creation request."""
-        request = PaymentIntentCreateRequest(amount=1000)
+    def test_payment_flow_create_request_basic(self):
+        """Test basic payment flow creation request."""
+        request = PaymentFlowCreateRequest(amount=1000)
         assert request.amount == 1000
 
-    def test_payment_intent_create_request_with_customer(self):
-        """Test payment intent creation with customer."""
-        request = PaymentIntentCreateRequest(
+    def test_payment_flow_create_request_with_customer(self):
+        """Test payment flow creation with customer."""
+        request = PaymentFlowCreateRequest(
             amount=1000,
             customer="cus_test123"
         )
         assert request.amount == 1000
         assert request.customer == "cus_test123"
 
-    def test_payment_intent_create_request_with_description(self):
-        """Test payment intent creation with description."""
-        request = PaymentIntentCreateRequest(
+    def test_payment_flow_create_request_with_description(self):
+        """Test payment flow creation with description."""
+        request = PaymentFlowCreateRequest(
             amount=1500,
             description="Test payment for SDK"
         )
         assert request.amount == 1500
         assert request.description == "Test payment for SDK"
 
-    def test_payment_intent_amount_types(self):
+    def test_payment_flow_amount_types(self):
         """Test different amount values."""
-        # Positive amount
-        request1 = PaymentIntentCreateRequest(amount=1000)
-        assert request1.amount == 1000
-        
-        # Zero amount (may be valid for some use cases)
-        request2 = PaymentIntentCreateRequest(amount=0)
-        assert request2.amount == 0
-        
-        # Large amount
-        request3 = PaymentIntentCreateRequest(amount=999999999)
-        assert request3.amount == 999999999
+        # Minimum valid amount (50)
+        request1 = PaymentFlowCreateRequest(amount=50)
+        assert request1.amount == 50
 
-    def test_payment_intent_capture_method(self):
+        # Normal amount
+        request2 = PaymentFlowCreateRequest(amount=1000)
+        assert request2.amount == 1000
+
+        # Maximum valid amount (9999999)
+        request3 = PaymentFlowCreateRequest(amount=9999999)
+        assert request3.amount == 9999999
+
+    def test_payment_flow_capture_method(self):
         """Test capture method settings if available."""
         # Test that capture_method field exists and can be set
-        request = PaymentIntentCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000)
         if hasattr(request, 'capture_method'):
             # Only test if the field exists in this implementation
             assert request.capture_method is None  # Default value
@@ -92,34 +92,34 @@ class TestModelSerialization:
             email="test@example.com",
             description="Test customer"
         )
-        
+
         # Test string representation
         str_repr = request.to_str()
         assert "test@example.com" in str_repr
         assert "Test customer" in str_repr
-        
+
         # Test JSON serialization
         json_str = request.to_json()
         assert '"email": "test@example.com"' in json_str
 
-    def test_payment_intent_request_serialization(self):
-        """Test payment intent request serialization."""
-        request = PaymentIntentCreateRequest(
+    def test_payment_flow_request_serialization(self):
+        """Test payment flow request serialization."""
+        request = PaymentFlowCreateRequest(
             amount=1000,
             description="Test payment"
         )
-        
+
         str_repr = request.to_str()
         assert "1000" in str_repr
         assert "Test payment" in str_repr
-        
+
         json_str = request.to_json()
         assert '"amount": 1000' in json_str
 
     def test_model_dict_conversion(self):
         """Test model to dict conversion."""
         request = CustomerCreateRequest(email="test@example.com")
-        
+
         # Test dict conversion using model_dump if available
         if hasattr(request, 'model_dump'):
             data = request.model_dump()
@@ -134,22 +134,23 @@ class TestModelValidation:
         # These should all be accepted at model level
         emails = [
             "test@example.com",
-            "test+tag@example.com", 
+            "test+tag@example.com",
             "test.user@example.co.jp",
             "invalid-email",  # Let server validate
             ""
         ]
-        
+
         for email in emails:
             request = CustomerCreateRequest(email=email)
             assert request.email == email
 
     def test_amount_flexibility(self):
-        """Test that amount validation is flexible."""
-        amounts = [1, 100, 1000, 999999999, 0]
-        
+        """Test that amount validation works for valid values."""
+        # PaymentFlowCreateRequest requires amount >= 50 and <= 9999999
+        amounts = [50, 100, 1000, 9999999]
+
         for amount in amounts:
-            request = PaymentIntentCreateRequest(amount=amount)
+            request = PaymentFlowCreateRequest(amount=amount)
             assert request.amount == amount
 
     def test_model_optional_fields(self):
@@ -158,8 +159,8 @@ class TestModelValidation:
         customer_request = CustomerCreateRequest(email="test@example.com")
         assert customer_request.email == "test@example.com"
         assert customer_request.description is None
-        
-        # Test payment intent with just amount
-        payment_request = PaymentIntentCreateRequest(amount=1000)
+
+        # Test payment flow with just amount
+        payment_request = PaymentFlowCreateRequest(amount=1000)
         assert payment_request.amount == 1000
         assert payment_request.customer is None

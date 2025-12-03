@@ -37,16 +37,13 @@ class TestPaymentFlowUpdateRequest(unittest.TestCase):
         if include_optional:
             return PaymentFlowUpdateRequest(
                 payment_method = '',
-                payment_method_data = None,
                 payment_method_options = payjpv2.models.payment_method_options_request.PaymentMethodOptionsRequest(
                     card = payjpv2.models.payment_method_options_card_request.PaymentMethodOptionsCardRequest(
                         request_extended_authorization = 'if_available', 
-                        request_three_d_secure = 'any', 
-                        setup_future_usage = 'off_session', ), ),
+                        request_three_d_secure = 'any', ), ),
                 payment_method_types = [
                     'card'
                     ],
-                receipt_email = '',
                 return_url = '',
                 description = '',
                 amount = 50.0,

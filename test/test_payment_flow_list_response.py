@@ -50,7 +50,6 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         amount_capturable = 56, 
                         amount_received = 56, 
                         client_secret = '', 
-                        confirmation_method = '', 
                         customer = '', 
                         description = '', 
                         metadata = {
@@ -61,12 +60,11 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         payment_method_types = [
                             ''
                             ], 
-                        receipt_email = '', 
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
                         capture_method = 'automatic', 
-                        last_payment_error = , )
+                        last_payment_error = { }, )
                     ]
             )
         else:
@@ -84,7 +82,6 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         amount_capturable = 56, 
                         amount_received = 56, 
                         client_secret = '', 
-                        confirmation_method = '', 
                         customer = '', 
                         description = '', 
                         metadata = {
@@ -95,12 +92,11 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         payment_method_types = [
                             ''
                             ], 
-                        receipt_email = '', 
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
                         capture_method = 'automatic', 
-                        last_payment_error = , )
+                        last_payment_error = { }, )
                     ],
         )
         """

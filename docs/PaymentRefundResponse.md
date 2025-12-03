@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | 返金対象となる PaymentFlow の ID | 
-**object** | **str** |  | [optional] [default to 'refund']
+**object** | **str** |  | [optional] [default to 'payment_refund']
 **created_at** | **datetime** | 作成時の日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新時の日時 (UTC, ISO 8601 形式) | 
 **livemode** | **bool** | 本番環境かどうか | 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **status** | [**PaymentRefundStatus**](PaymentRefundStatus.md) | 返金ステータス  &lt;a href&#x3D;\&quot;https://docs.pay.jp/v2/payment_refunds#refund_status\&quot; target&#x3D;\&quot;_blank\&quot;&gt;返金ステータスの詳細についてはこちらを参照してください。&lt;/a&gt;  | 指定できる値 | |:---| | **succeeded**: 成功 | | **failed**: 失敗 | | **pending**: 保留中 | | **canceled**: キャンセル | | 
 **payment_flow** | **str** | 返金対象となる PaymentFlow の ID | 
 **reason** | [**PaymentRefundReason**](PaymentRefundReason.md) |  | 
-**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | [optional] 
+**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 
 ## Example
 

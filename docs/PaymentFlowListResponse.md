@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **object** | **str** |  | [optional] [default to 'list']
 **url** | **str** | リスト取得URL | 
 **has_more** | **bool** | 次のページがあるかどうか | 
-**data** | [**List[PaymentFlowResponse]**](PaymentFlowResponse.md) | 支払いインテントリスト | 
+**data** | [**List[PaymentFlowResponse]**](PaymentFlowResponse.md) | 支払いフローリスト | 
 
 ## Example
 

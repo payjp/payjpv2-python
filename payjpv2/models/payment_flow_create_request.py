@@ -25,7 +25,6 @@ from payjpv2.models.capture_method import CaptureMethod
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
 from payjpv2.models.payment_method_types import PaymentMethodTypes
-from payjpv2.models.usage import Usage
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,7 +35,6 @@ class PaymentFlowCreateRequest(BaseModel):
     payment_method: Optional[StrictStr] = Field(default=None, description="支払い方法ID")
     payment_method_options: Optional[PaymentMethodOptionsRequest] = Field(default=None, description="このPaymentFlowに固有の支払い方法の設定")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。")
-    receipt_email: Optional[StrictStr] = Field(default=None, description="請求書の送信先メールアドレス。ライブモードで支払いに対して `receipt_email` を指定すると、メール設定に関係なく領収書が送信されます。")
     return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。confirm=trueの場合のみ指定できます。")
     description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。ユーザーには表示されません。")
     amount: Annotated[int, Field(le=9999999, strict=True, ge=50)] = Field(description="支払い予定の金額。50円以上9,999,999円以下である必要があります。支払い手段によって上限金額は異なります。")
@@ -44,8 +42,7 @@ class PaymentFlowCreateRequest(BaseModel):
     confirm: Optional[StrictBool] = Field(default=False, description="「true」に設定すると、このPaymentFlowを直ちに確定しようと試みます。このパラメーターのデフォルトは「false」です。")
     capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    setup_future_usage: Optional[Usage] = Field(default=None, description="このPaymentFlowの支払い方法で将来の支払いを行う意図があることを示します。<br><br>PaymentFlow に Customer を指定した場合、このパラメータを使って PaymentFlow を確定できます。その後、顧客が必要な操作を完了すると、支払い方法を Customer に紐付けることが可能です。また、Customer を指定しない場合でも、取引が完了した後に支払い方法を Customer に紐付けることはできます。")
-    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_options", "payment_method_types", "receipt_email", "return_url", "description", "amount", "customer", "confirm", "capture_method", "metadata", "setup_future_usage"]
+    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_options", "payment_method_types", "return_url", "description", "amount", "customer", "confirm", "capture_method", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -60,8 +57,7 @@ class PaymentFlowCreateRequest(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -111,7 +107,6 @@ class PaymentFlowCreateRequest(BaseModel):
             "payment_method": obj.get("payment_method"),
             "payment_method_options": PaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
-            "receipt_email": obj.get("receipt_email"),
             "return_url": obj.get("return_url"),
             "description": obj.get("description"),
             "amount": obj.get("amount"),
@@ -123,8 +118,7 @@ class PaymentFlowCreateRequest(BaseModel):
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "setup_future_usage": obj.get("setup_future_usage")
+            else None
         })
         return _obj
 

@@ -28,13 +28,13 @@ class PaymentMethodConfigurationDetailsResponse(BaseModel):
     """
     PaymentMethodConfigurationDetailsResponse
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="ID")
+    id: StrictStr = Field(description="ID")
     object: Optional[StrictStr] = 'payment_method_configuration'
-    active: Optional[StrictBool] = Field(default=None, description="設定が有効かどうか。")
-    livemode: Optional[StrictBool] = Field(default=None, description="本番環境かどうか")
-    name: Optional[StrictStr] = None
-    paypay: Optional[PaymentMethodConfigurationSettingResponse] = Field(default=None, description="PayPayの設定")
-    card: Optional[PaymentMethodConfigurationSettingResponse] = Field(default=None, description="カードの設定")
+    active: StrictBool = Field(description="設定が有効かどうか。")
+    livemode: StrictBool = Field(description="本番環境かどうか")
+    name: Optional[StrictStr]
+    paypay: PaymentMethodConfigurationSettingResponse = Field(description="PayPayの設定")
+    card: PaymentMethodConfigurationSettingResponse = Field(description="カードの設定")
     __properties: ClassVar[List[str]] = ["id", "object", "active", "livemode", "name", "paypay", "card"]
 
     @field_validator('object')
@@ -60,8 +60,7 @@ class PaymentMethodConfigurationDetailsResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

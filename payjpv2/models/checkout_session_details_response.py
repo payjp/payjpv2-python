@@ -41,33 +41,33 @@ class CheckoutSessionDetailsResponse(BaseModel):
     """
     CheckoutSessionDetailsResponse
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="ID")
+    id: StrictStr = Field(description="ID")
     object: Optional[StrictStr] = 'checkout.session'
-    livemode: Optional[StrictBool] = Field(default=None, description="本番環境かどうか")
-    amount_subtotal: Optional[StrictInt] = None
-    amount_total: Optional[StrictInt] = None
-    billing_address_collection: Optional[BillingAddressCollection] = None
-    cancel_url: Optional[StrictStr] = None
-    customer: Optional[Customer] = None
-    customer_email: Optional[StrictStr] = None
+    livemode: StrictBool = Field(description="本番環境かどうか")
+    amount_subtotal: Optional[StrictInt]
+    amount_total: Optional[StrictInt]
+    billing_address_collection: Optional[BillingAddressCollection]
+    cancel_url: Optional[StrictStr]
+    customer: Optional[Customer]
+    customer_email: Optional[StrictStr]
     customer_details: Optional[Dict[str, Any]] = Field(default=None, description="`expand` パラメーターを指定した場合、顧客の詳細情報を含んだオブジェクトが返却されます。  | 説明 | |:---| | **email**: 顧客のメールアドレス | ")
-    expires_at: Optional[datetime] = None
-    currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
-    locale: Optional[Locale] = None
-    payment_flow: Optional[PaymentFlow] = None
-    payment_method_types: Optional[List[PaymentMethodTypes]] = None
-    payment_method_options: Optional[Dict[str, Any]] = None
-    setup_flow: Optional[SetupFlow] = None
-    submit_type: Optional[CheckoutSessionSubmitType] = None
-    mode: Optional[CheckoutSessionMode] = Field(default=None, description="Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
+    expires_at: Optional[datetime]
+    currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
+    locale: Optional[Locale]
+    payment_flow: Optional[PaymentFlow]
+    payment_method_types: Optional[List[PaymentMethodTypes]]
+    payment_method_options: Optional[Dict[str, Any]]
+    setup_flow: Optional[SetupFlow]
+    submit_type: Optional[CheckoutSessionSubmitType]
+    mode: CheckoutSessionMode = Field(description="Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
     ui_mode: Optional[CheckoutSessionUIMode] = Field(default=None, description="Checkout Session の UI モード。デフォルトは `hosted` です。<br>  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
-    created_at: Optional[datetime] = Field(default=None, description="作成日時 (UTC, ISO 8601 形式)")
-    updated_at: Optional[datetime] = Field(default=None, description="更新日時 (UTC, ISO 8601 形式)")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     status: Optional[CheckoutSessionStatus] = Field(default=None, description="チェックアウトセッションのステータス")
     line_items: Optional[CheckoutSessionLineItemsResponse] = None
-    success_url: Optional[StrictStr] = None
-    url: Optional[StrictStr] = Field(default=None, description="URL")
+    success_url: Optional[StrictStr]
+    url: StrictStr = Field(description="URL")
     __properties: ClassVar[List[str]] = ["id", "object", "livemode", "amount_subtotal", "amount_total", "billing_address_collection", "cancel_url", "customer", "customer_email", "customer_details", "expires_at", "currency", "locale", "payment_flow", "payment_method_types", "payment_method_options", "setup_flow", "submit_type", "mode", "ui_mode", "created_at", "updated_at", "metadata", "status", "line_items", "success_url", "url"]
 
     @field_validator('object')
@@ -93,8 +93,7 @@ class CheckoutSessionDetailsResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

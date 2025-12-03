@@ -41,10 +41,10 @@ class TestStatementsApi(unittest.TestCase):
         """
         pass
 
-    def test_retrieve_statement(self) -> None:
-        """Test case for retrieve_statement
+    def test_get_statement(self) -> None:
+        """Test case for get_statement
 
-        Retrieve Statement
+        Get Statement
         """
         pass
 

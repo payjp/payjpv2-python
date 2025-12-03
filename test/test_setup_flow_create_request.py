@@ -42,8 +42,6 @@ class TestSetupFlowCreateRequest(unittest.TestCase):
                 metadata = {
                     'key' : null
                     },
-                payment_method = '',
-                payment_method_data = None,
                 payment_method_options = { },
                 payment_method_types = [
                     'card'

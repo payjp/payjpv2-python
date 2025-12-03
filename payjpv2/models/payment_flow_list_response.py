@@ -31,7 +31,7 @@ class PaymentFlowListResponse(BaseModel):
     object: Optional[StrictStr] = 'list'
     url: StrictStr = Field(description="リスト取得URL")
     has_more: StrictBool = Field(description="次のページがあるかどうか")
-    data: List[PaymentFlowResponse] = Field(description="支払いインテントリスト")
+    data: List[PaymentFlowResponse] = Field(description="支払いフローリスト")
     __properties: ClassVar[List[str]] = ["object", "url", "has_more", "data"]
 
     @field_validator('object')
@@ -57,8 +57,7 @@ class PaymentFlowListResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

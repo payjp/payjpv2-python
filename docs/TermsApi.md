@@ -4,14 +4,14 @@ All URIs are relative to *https://api.pay.jp*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_all_term**](TermsApi.md#get_all_term) | **GET** /v2/terms | Get All Term
-[**retrieve_term**](TermsApi.md#retrieve_term) | **GET** /v2/terms/{term_id} | Retrieve Term
+[**get_all_terms**](TermsApi.md#get_all_terms) | **GET** /v2/terms | Get All Terms
+[**get_term**](TermsApi.md#get_term) | **GET** /v2/terms/{term_id} | Get Term
 
 
-# **get_all_term**
-> TermListResponse get_all_term(limit=limit, offset=offset, since_start_at=since_start_at, until_start_at=until_start_at)
+# **get_all_terms**
+> TermListResponse get_all_terms(limit=limit, offset=offset, since_start_at=since_start_at, until_start_at=until_start_at)
 
-Get All Term
+Get All Terms
 
 ### Example
 
@@ -56,12 +56,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     until_start_at = '2013-10-20T19:20:30+01:00' # datetime | start_atが指定した日付以前のデータを取得 (optional)
 
     try:
-        # Get All Term
-        api_response = api_instance.get_all_term(limit=limit, offset=offset, since_start_at=since_start_at, until_start_at=until_start_at)
-        print("The response of TermsApi->get_all_term:\n")
+        # Get All Terms
+        api_response = api_instance.get_all_terms(limit=limit, offset=offset, since_start_at=since_start_at, until_start_at=until_start_at)
+        print("The response of TermsApi->get_all_terms:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TermsApi->get_all_term: %s\n" % e)
+        print("Exception when calling TermsApi->get_all_terms: %s\n" % e)
 ```
 
 
@@ -98,10 +98,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **retrieve_term**
-> TermResponse retrieve_term(term_id)
+# **get_term**
+> TermResponse get_term(term_id)
 
-Retrieve Term
+Get Term
 
 ### Example
 
@@ -143,12 +143,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     term_id = 'term_id_example' # str | 
 
     try:
-        # Retrieve Term
-        api_response = api_instance.retrieve_term(term_id)
-        print("The response of TermsApi->retrieve_term:\n")
+        # Get Term
+        api_response = api_instance.get_term(term_id)
+        print("The response of TermsApi->get_term:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling TermsApi->retrieve_term: %s\n" % e)
+        print("Exception when calling TermsApi->get_term: %s\n" % e)
 ```
 
 

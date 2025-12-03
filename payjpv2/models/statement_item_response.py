@@ -31,7 +31,7 @@ class StatementItemResponse(BaseModel):
     subject: StatementSubject = Field(description="明細項目の種別")
     name: Optional[StrictStr]
     amount: StrictInt = Field(description="明細項目の金額")
-    tax_rate: Optional[StrictStr] = None
+    tax_rate: Optional[StrictStr]
     __properties: ClassVar[List[str]] = ["subject", "name", "amount", "tax_rate"]
 
     model_config = ConfigDict(
@@ -47,8 +47,7 @@ class StatementItemResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:

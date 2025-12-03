@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **subject** | [**StatementSubject**](StatementSubject.md) | 明細項目の種別 | 
 **name** | **str** |  | 
 **amount** | **int** | 明細項目の金額 | 
-**tax_rate** | **str** |  | [optional] 
+**tax_rate** | **str** |  | 
 
 ## Example
 

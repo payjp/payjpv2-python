@@ -42,7 +42,7 @@ class TestPaymentRefundListResponse(unittest.TestCase):
                 data = [
                     payjpv2.models.payment_refund_response.PaymentRefundResponse(
                         id = '', 
-                        object = 'refund', 
+                        object = 'payment_refund', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         livemode = True, 
@@ -62,7 +62,7 @@ class TestPaymentRefundListResponse(unittest.TestCase):
                 data = [
                     payjpv2.models.payment_refund_response.PaymentRefundResponse(
                         id = '', 
-                        object = 'refund', 
+                        object = 'payment_refund', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         livemode = True, 

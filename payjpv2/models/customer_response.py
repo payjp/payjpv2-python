@@ -29,15 +29,16 @@ class CustomerResponse(BaseModel):
     """
     CustomerResponse
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="顧客ID")
+    id: StrictStr = Field(description="顧客ID")
     object: Optional[StrictStr] = 'customer'
     livemode: StrictBool = Field(description="本番環境かどうか")
     email: Optional[StrictStr]
     description: Optional[StrictStr]
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    default_payment_method: Optional[StrictStr]
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "email", "description", "metadata", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "email", "description", "default_payment_method", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -62,8 +63,7 @@ class CustomerResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -105,6 +105,11 @@ class CustomerResponse(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
+        # set to None if default_payment_method (nullable) is None
+        # and model_fields_set contains the field
+        if self.default_payment_method is None and "default_payment_method" in self.model_fields_set:
+            _dict['default_payment_method'] = None
+
         return _dict
 
     @classmethod
@@ -122,6 +127,7 @@ class CustomerResponse(BaseModel):
             "livemode": obj.get("livemode"),
             "email": obj.get("email"),
             "description": obj.get("description"),
+            "default_payment_method": obj.get("default_payment_method"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()

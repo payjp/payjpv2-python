@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_prices**
-> PriceListResponse get_all_prices(limit=limit, starting_after=starting_after, ending_before=ending_before)
+> PriceListResponse get_all_prices(limit=limit, starting_after=starting_after, ending_before=ending_before, lookup_keys=lookup_keys)
 
 Get All Prices
 
@@ -140,10 +140,11 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
+    lookup_keys = ['lookup_keys_example'] # List[Optional[str]] | 価格を動的に取得するために使用される検索キー。 (optional)
 
     try:
         # Get All Prices
-        api_response = api_instance.get_all_prices(limit=limit, starting_after=starting_after, ending_before=ending_before)
+        api_response = api_instance.get_all_prices(limit=limit, starting_after=starting_after, ending_before=ending_before, lookup_keys=lookup_keys)
         print("The response of PricesApi->get_all_prices:\n")
         pprint(api_response)
     except Exception as e:
@@ -160,6 +161,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
+ **lookup_keys** | [**List[Optional[str]]**](str.md)| 価格を動的に取得するために使用される検索キー。 | [optional] 
 
 ### Return type
 

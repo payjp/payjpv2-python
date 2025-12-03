@@ -6,7 +6,7 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_payment_refund**](PaymentRefundsApi.md#create_payment_refund) | **POST** /v2/payment_refunds | Create Payment Refund
 [**get_all_payment_refunds**](PaymentRefundsApi.md#get_all_payment_refunds) | **GET** /v2/payment_refunds | Get All Payment Refunds
-[**retrieve_payment_refund**](PaymentRefundsApi.md#retrieve_payment_refund) | **GET** /v2/payment_refunds/{payment_refund_id} | Retrieve Payment Refund
+[**get_payment_refund**](PaymentRefundsApi.md#get_payment_refund) | **GET** /v2/payment_refunds/{payment_refund_id} | Get Payment Refund
 [**update_payment_refund**](PaymentRefundsApi.md#update_payment_refund) | **POST** /v2/payment_refunds/{payment_refund_id} | Update Payment Refund
 
 
@@ -185,10 +185,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **retrieve_payment_refund**
-> PaymentRefundResponse retrieve_payment_refund(payment_refund_id)
+# **get_payment_refund**
+> PaymentRefundResponse get_payment_refund(payment_refund_id)
 
-Retrieve Payment Refund
+Get Payment Refund
 
 ### Example
 
@@ -230,12 +230,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     payment_refund_id = 'payment_refund_id_example' # str | 
 
     try:
-        # Retrieve Payment Refund
-        api_response = api_instance.retrieve_payment_refund(payment_refund_id)
-        print("The response of PaymentRefundsApi->retrieve_payment_refund:\n")
+        # Get Payment Refund
+        api_response = api_instance.get_payment_refund(payment_refund_id)
+        print("The response of PaymentRefundsApi->get_payment_refund:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PaymentRefundsApi->retrieve_payment_refund: %s\n" % e)
+        print("Exception when calling PaymentRefundsApi->get_payment_refund: %s\n" % e)
 ```
 
 

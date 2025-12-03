@@ -51,7 +51,6 @@ class TestBalanceResponse(unittest.TestCase):
                         type = 'sales', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        tenant = '', 
                         term = payjpv2.models.term_response.TermResponse(
                             id = '', 
                             object = 'term', 
@@ -97,7 +96,6 @@ class TestBalanceResponse(unittest.TestCase):
                         type = 'sales', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        tenant = '', 
                         term = payjpv2.models.term_response.TermResponse(
                             id = '', 
                             object = 'term', 
@@ -116,8 +114,16 @@ class TestBalanceResponse(unittest.TestCase):
                         net = 56, )
                     ],
                 closed = True,
+                closed_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 net = 56,
+                bank_info = payjpv2.models.bank_info_response.BankInfoResponse(
+                    bank_code = '', 
+                    bank_branch_code = '', 
+                    bank_account_type = '', 
+                    bank_account_number = '', 
+                    bank_account_holder_name = '', 
+                    bank_account_status = '', ),
         )
         """
 

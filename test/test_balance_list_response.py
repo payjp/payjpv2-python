@@ -56,7 +56,6 @@ class TestBalanceListResponse(unittest.TestCase):
                                 type = 'sales', 
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                tenant = '', 
                                 term = payjpv2.models.term_response.TermResponse(
                                     id = '', 
                                     object = 'term', 
@@ -108,7 +107,6 @@ class TestBalanceListResponse(unittest.TestCase):
                                 type = 'sales', 
                                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                tenant = '', 
                                 term = payjpv2.models.term_response.TermResponse(
                                     id = '', 
                                     object = 'term', 

@@ -33,15 +33,16 @@ class PaymentMethodCardResponse(BaseModel):
     """ # noqa: E501
     object: Optional[StrictStr] = 'payment_method'
     id: StrictStr = Field(description="ID")
-    type: Optional[StrictStr] = 'card'
-    customer: Optional[StrictStr] = None
+    type: StrictStr
+    customer: Optional[StrictStr]
+    detached_at: Optional[datetime]
     livemode: StrictBool = Field(description="本番環境かどうか")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     billing_details: PaymentMethodBillingDetailsResponse = Field(description="請求先情報")
     card: PaymentMethodCardDetailsResponse = Field(description="カード情報")
-    __properties: ClassVar[List[str]] = ["object", "id", "type", "customer", "livemode", "created_at", "updated_at", "metadata", "billing_details", "card"]
+    __properties: ClassVar[List[str]] = ["object", "id", "type", "customer", "detached_at", "livemode", "created_at", "updated_at", "metadata", "billing_details", "card"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -56,9 +57,6 @@ class PaymentMethodCardResponse(BaseModel):
     @field_validator('type')
     def type_validate_enum(cls, value):
         """Validates the enum"""
-        if value is None:
-            return value
-
         if value not in set(['card', 'apple_pay']):
             raise ValueError("must be one of enum values ('card', 'apple_pay')")
         return value
@@ -76,8 +74,7 @@ class PaymentMethodCardResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -120,6 +117,11 @@ class PaymentMethodCardResponse(BaseModel):
         if self.customer is None and "customer" in self.model_fields_set:
             _dict['customer'] = None
 
+        # set to None if detached_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.detached_at is None and "detached_at" in self.model_fields_set:
+            _dict['detached_at'] = None
+
         return _dict
 
     @classmethod
@@ -134,8 +136,9 @@ class PaymentMethodCardResponse(BaseModel):
         _obj = cls.model_validate({
             "object": obj.get("object") if obj.get("object") is not None else 'payment_method',
             "id": obj.get("id"),
-            "type": obj.get("type") if obj.get("type") is not None else 'card',
+            "type": obj.get("type"),
             "customer": obj.get("customer"),
+            "detached_at": obj.get("detached_at"),
             "livemode": obj.get("livemode"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),

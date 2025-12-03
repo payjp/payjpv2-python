@@ -43,7 +43,7 @@ class TestEventResponse(unittest.TestCase):
                 livemode = True,
                 type = '',
                 pending_webhooks = 56,
-                data = payjpv2.models.data.Data()
+                data = { }
             )
         else:
             return EventResponse(
@@ -53,7 +53,7 @@ class TestEventResponse(unittest.TestCase):
                 livemode = True,
                 type = '',
                 pending_webhooks = 56,
-                data = payjpv2.models.data.Data(),
+                data = { },
         )
         """
 

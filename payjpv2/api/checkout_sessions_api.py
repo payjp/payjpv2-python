@@ -47,7 +47,8 @@ class CheckoutSessionsApi:
     def create_checkout_session(
         self,
         checkout_session_create_request: CheckoutSessionCreateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -55,44 +56,46 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CheckoutSessionDetailsResponse:
         """Create Checkout Session
 
 
         :param checkout_session_create_request: (required)
         :type checkout_session_create_request: CheckoutSessionCreateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._create_checkout_session_serialize(
             checkout_session_create_request=checkout_session_create_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -102,7 +105,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -115,7 +118,8 @@ class CheckoutSessionsApi:
     def create_checkout_session_with_http_info(
         self,
         checkout_session_create_request: CheckoutSessionCreateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -123,44 +127,46 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CheckoutSessionDetailsResponse]:
         """Create Checkout Session
 
 
         :param checkout_session_create_request: (required)
         :type checkout_session_create_request: CheckoutSessionCreateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._create_checkout_session_serialize(
             checkout_session_create_request=checkout_session_create_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -170,7 +176,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -183,7 +189,8 @@ class CheckoutSessionsApi:
     def create_checkout_session_without_preload_content(
         self,
         checkout_session_create_request: CheckoutSessionCreateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -191,44 +198,46 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Create Checkout Session
 
 
         :param checkout_session_create_request: (required)
         :type checkout_session_create_request: CheckoutSessionCreateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._create_checkout_session_serialize(
             checkout_session_create_request=checkout_session_create_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -238,7 +247,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -249,6 +258,7 @@ class CheckoutSessionsApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -260,6 +270,8 @@ class CheckoutSessionsApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -328,7 +340,8 @@ class CheckoutSessionsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -336,10 +349,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CheckoutSessionListResponse:
         """Get All Checkout Sessions
 
@@ -350,25 +363,26 @@ class CheckoutSessionsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -376,10 +390,11 @@ class CheckoutSessionsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -389,7 +404,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -404,7 +419,8 @@ class CheckoutSessionsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -412,10 +428,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CheckoutSessionListResponse]:
         """Get All Checkout Sessions
 
@@ -426,25 +442,26 @@ class CheckoutSessionsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -452,10 +469,11 @@ class CheckoutSessionsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -465,7 +483,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -480,7 +498,8 @@ class CheckoutSessionsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -488,10 +507,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Get All Checkout Sessions
 
@@ -502,25 +521,26 @@ class CheckoutSessionsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
@@ -528,10 +548,11 @@ class CheckoutSessionsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -541,7 +562,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -554,6 +575,7 @@ class CheckoutSessionsApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -565,6 +587,8 @@ class CheckoutSessionsApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -629,7 +653,8 @@ class CheckoutSessionsApi:
         self,
         checkout_session_id: StrictStr,
         expand: Annotated[Optional[List[StrictStr]], Field(description="レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -637,10 +662,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CheckoutSessionDetailsResponse:
         """Get Checkout Session
 
@@ -649,35 +674,37 @@ class CheckoutSessionsApi:
         :type checkout_session_id: str
         :param expand: レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。
         :type expand: List[str]
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_checkout_session_serialize(
             checkout_session_id=checkout_session_id,
             expand=expand,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -687,7 +714,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -701,7 +728,8 @@ class CheckoutSessionsApi:
         self,
         checkout_session_id: StrictStr,
         expand: Annotated[Optional[List[StrictStr]], Field(description="レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -709,10 +737,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CheckoutSessionDetailsResponse]:
         """Get Checkout Session
 
@@ -721,35 +749,37 @@ class CheckoutSessionsApi:
         :type checkout_session_id: str
         :param expand: レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。
         :type expand: List[str]
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_checkout_session_serialize(
             checkout_session_id=checkout_session_id,
             expand=expand,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -759,7 +789,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -773,7 +803,8 @@ class CheckoutSessionsApi:
         self,
         checkout_session_id: StrictStr,
         expand: Annotated[Optional[List[StrictStr]], Field(description="レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。")] = None,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -781,10 +812,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Get Checkout Session
 
@@ -793,35 +824,37 @@ class CheckoutSessionsApi:
         :type checkout_session_id: str
         :param expand: レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。
         :type expand: List[str]
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._get_checkout_session_serialize(
             checkout_session_id=checkout_session_id,
             expand=expand,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -831,7 +864,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -843,6 +876,7 @@ class CheckoutSessionsApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -855,6 +889,8 @@ class CheckoutSessionsApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
@@ -913,7 +949,8 @@ class CheckoutSessionsApi:
         self,
         checkout_session_id: StrictStr,
         checkout_session_update_request: CheckoutSessionUpdateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -921,10 +958,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> CheckoutSessionDetailsResponse:
         """Update Checkout Session
 
@@ -933,35 +970,37 @@ class CheckoutSessionsApi:
         :type checkout_session_id: str
         :param checkout_session_update_request: (required)
         :type checkout_session_update_request: CheckoutSessionUpdateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._update_checkout_session_serialize(
             checkout_session_id=checkout_session_id,
             checkout_session_update_request=checkout_session_update_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -971,7 +1010,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -985,7 +1024,8 @@ class CheckoutSessionsApi:
         self,
         checkout_session_id: StrictStr,
         checkout_session_update_request: CheckoutSessionUpdateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -993,10 +1033,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[CheckoutSessionDetailsResponse]:
         """Update Checkout Session
 
@@ -1005,35 +1045,37 @@ class CheckoutSessionsApi:
         :type checkout_session_id: str
         :param checkout_session_update_request: (required)
         :type checkout_session_update_request: CheckoutSessionUpdateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._update_checkout_session_serialize(
             checkout_session_id=checkout_session_id,
             checkout_session_update_request=checkout_session_update_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -1043,7 +1085,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1057,7 +1099,8 @@ class CheckoutSessionsApi:
         self,
         checkout_session_id: StrictStr,
         checkout_session_update_request: CheckoutSessionUpdateRequest,
-        _request_timeout: Union[
+        *,
+        request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
@@ -1065,10 +1108,10 @@ class CheckoutSessionsApi:
                 Annotated[StrictFloat, Field(gt=0)]
             ]
         ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+        request_auth: Optional[Dict[StrictStr, Any]] = None,
+        headers: Optional[Dict[StrictStr, Any]] = None,
+        idempotency_key: Optional[StrictStr] = None,
+        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
         """Update Checkout Session
 
@@ -1077,35 +1120,37 @@ class CheckoutSessionsApi:
         :type checkout_session_id: str
         :param checkout_session_update_request: (required)
         :type checkout_session_update_request: CheckoutSessionUpdateRequest
-        :param _request_timeout: timeout setting for this request. If one
+        :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
                                  (connection, read) timeouts.
-        :type _request_timeout: int, tuple(int, int), optional
-        :param _request_auth: set to override the auth_settings for an a single
+        :type request_timeout: int, tuple(int, int), optional
+        :param request_auth: set to override the auth_settings for an a single
                               request; this effectively ignores the
                               authentication in the spec for a single request.
-        :type _request_auth: dict, optional
-        :param _content_type: force content-type for the request.
-        :type _content_type: str, Optional
-        :param _headers: set to override the headers for a single
+        :type request_auth: dict, optional
+        :param headers: set to override the headers for a single
                          request; this effectively ignores the headers
                          in the spec for a single request.
-        :type _headers: dict, optional
-        :param _host_index: set to override the host_index for a single
+        :type headers: dict, optional
+        :param idempotency_key: an idempotency key for the request.
+                                 used to ensure the request is only processed once.
+        :type idempotency_key: str, optional
+        :param host_index: set to override the host_index for a single
                             request; this effectively ignores the host_index
                             in the spec for a single request.
-        :type _host_index: int, optional
+        :type host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
 
         _param = self._update_checkout_session_serialize(
             checkout_session_id=checkout_session_id,
             checkout_session_update_request=checkout_session_update_request,
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
+            _request_auth=request_auth,
+            _content_type='application/json',
+            _headers=headers,
+            _idempotency_key=idempotency_key,
+            _host_index=host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
@@ -1115,7 +1160,7 @@ class CheckoutSessionsApi:
         }
         response_data = self.api_client.call_api(
             *_param,
-            _request_timeout=_request_timeout
+            _request_timeout=request_timeout
         )
         return response_data.response
 
@@ -1127,6 +1172,7 @@ class CheckoutSessionsApi:
         _request_auth,
         _content_type,
         _headers,
+        _idempotency_key,
         _host_index,
     ) -> RequestSerialized:
 
@@ -1138,6 +1184,8 @@ class CheckoutSessionsApi:
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
+        if _idempotency_key is not None:
+            _header_params['Idempotency-Key'] = _idempotency_key
         _form_params: List[Tuple[str, str]] = []
         _files: Dict[
             str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]

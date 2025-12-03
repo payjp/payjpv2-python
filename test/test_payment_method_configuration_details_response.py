@@ -54,6 +54,20 @@ class TestPaymentMethodConfigurationDetailsResponse(unittest.TestCase):
             )
         else:
             return PaymentMethodConfigurationDetailsResponse(
+                id = '',
+                active = True,
+                livemode = True,
+                name = '',
+                paypay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
+                    available = True, 
+                    display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
+                        preference = 'none', 
+                        value = 'off', ), ),
+                card = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
+                    available = True, 
+                    display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
+                        preference = 'none', 
+                        value = 'off', ), ),
         )
         """
 

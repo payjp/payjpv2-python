@@ -41,10 +41,10 @@ class TestBalancesApi(unittest.TestCase):
         """
         pass
 
-    def test_retrieve_balance(self) -> None:
-        """Test case for retrieve_balance
+    def test_get_balance(self) -> None:
+        """Test case for get_balance
 
-        Retrieve Balance
+        Get Balance
         """
         pass
 

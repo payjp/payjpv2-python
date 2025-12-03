@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **state** | [**BalanceState**](BalanceState.md) | Balanceの状態  | 指定できる値 | |:---| | **collecting**: 集計中 | | **transfer**: 入金 | | **claim**: 請求 | | 
 **statements** | [**List[StatementResponse]**](StatementResponse.md) | 関連付けられているStatementオブジェクトのリスト | 
 **closed** | **bool** | このBalanceの清算が終了していればtrue  state&#x3D;transferであれば加盟店口座への入金作業完了、state&#x3D;claimであればPAY.JPで請求額の振込が確認できたことを表します。 | 
-**closed_date** | **datetime** |  | [optional] 
+**closed_date** | **datetime** |  | 
 **due_date** | **datetime** |  | 
 **net** | **int** | 関連付けられているStatementの総額 | 
-**bank_info** | [**BankInfoResponse**](BankInfoResponse.md) |  | [optional] 
+**bank_info** | [**BankInfoResponse**](BankInfoResponse.md) |  | 
 
 ## Example
 

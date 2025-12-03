@@ -36,9 +36,56 @@ class TestPaymentFlow(unittest.TestCase):
         model = PaymentFlow()
         if include_optional:
             return PaymentFlow(
+                id = '',
+                object = 'payment_flow',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                livemode = True,
+                amount = 56,
+                amount_capturable = 56,
+                amount_received = 56,
+                client_secret = '',
+                customer = '',
+                description = '',
+                metadata = {
+                    'key' : null
+                    },
+                payment_method = '',
+                payment_method_options = { },
+                payment_method_types = [
+                    ''
+                    ],
+                status = 'canceled',
+                next_action = { },
+                return_url = '',
+                capture_method = 'automatic',
+                last_payment_error = { }
             )
         else:
             return PaymentFlow(
+                id = '',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                livemode = True,
+                amount = 56,
+                amount_capturable = 56,
+                amount_received = 56,
+                client_secret = '',
+                customer = '',
+                description = '',
+                metadata = {
+                    'key' : null
+                    },
+                payment_method = '',
+                payment_method_options = { },
+                payment_method_types = [
+                    ''
+                    ],
+                status = 'canceled',
+                next_action = { },
+                return_url = '',
+                capture_method = 'automatic',
+                last_payment_error = { },
         )
         """
 

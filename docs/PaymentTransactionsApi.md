@@ -4,14 +4,14 @@ All URIs are relative to *https://api.pay.jp*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_all_payment_transaction**](PaymentTransactionsApi.md#get_all_payment_transaction) | **GET** /v2/payment_transactions | Get All Payment Transaction
-[**retrieve_payment_transaction**](PaymentTransactionsApi.md#retrieve_payment_transaction) | **GET** /v2/payment_transactions/{payment_transaction_id} | Retrieve Payment Transaction
+[**get_all_payment_transactions**](PaymentTransactionsApi.md#get_all_payment_transactions) | **GET** /v2/payment_transactions | Get All Payment Transactions
+[**get_payment_transaction**](PaymentTransactionsApi.md#get_payment_transaction) | **GET** /v2/payment_transactions/{payment_transaction_id} | Get Payment Transaction
 
 
-# **get_all_payment_transaction**
-> PaymentTransactionListResponse get_all_payment_transaction(limit=limit, starting_after=starting_after, ending_before=ending_before, term_id=term_id, type=type, payment_method_type=payment_method_type)
+# **get_all_payment_transactions**
+> PaymentTransactionListResponse get_all_payment_transactions(limit=limit, starting_after=starting_after, ending_before=ending_before, term_id=term_id, type=type, payment_method_type=payment_method_type)
 
-Get All Payment Transaction
+Get All Payment Transactions
 
 ### Example
 
@@ -58,12 +58,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     payment_method_type = 'payment_method_type_example' # str | 支払い方法タイプ (optional)
 
     try:
-        # Get All Payment Transaction
-        api_response = api_instance.get_all_payment_transaction(limit=limit, starting_after=starting_after, ending_before=ending_before, term_id=term_id, type=type, payment_method_type=payment_method_type)
-        print("The response of PaymentTransactionsApi->get_all_payment_transaction:\n")
+        # Get All Payment Transactions
+        api_response = api_instance.get_all_payment_transactions(limit=limit, starting_after=starting_after, ending_before=ending_before, term_id=term_id, type=type, payment_method_type=payment_method_type)
+        print("The response of PaymentTransactionsApi->get_all_payment_transactions:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PaymentTransactionsApi->get_all_payment_transaction: %s\n" % e)
+        print("Exception when calling PaymentTransactionsApi->get_all_payment_transactions: %s\n" % e)
 ```
 
 
@@ -102,10 +102,10 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **retrieve_payment_transaction**
-> PaymentTransactionResponse retrieve_payment_transaction(payment_transaction_id)
+# **get_payment_transaction**
+> PaymentTransactionResponse get_payment_transaction(payment_transaction_id)
 
-Retrieve Payment Transaction
+Get Payment Transaction
 
 ### Example
 
@@ -147,12 +147,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     payment_transaction_id = 'payment_transaction_id_example' # str | 
 
     try:
-        # Retrieve Payment Transaction
-        api_response = api_instance.retrieve_payment_transaction(payment_transaction_id)
-        print("The response of PaymentTransactionsApi->retrieve_payment_transaction:\n")
+        # Get Payment Transaction
+        api_response = api_instance.get_payment_transaction(payment_transaction_id)
+        print("The response of PaymentTransactionsApi->get_payment_transaction:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling PaymentTransactionsApi->retrieve_payment_transaction: %s\n" % e)
+        print("Exception when calling PaymentTransactionsApi->get_payment_transaction: %s\n" % e)
 ```
 
 

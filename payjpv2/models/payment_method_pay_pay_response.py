@@ -33,13 +33,14 @@ class PaymentMethodPayPayResponse(BaseModel):
     object: Optional[StrictStr] = 'payment_method'
     id: StrictStr = Field(description="ID")
     type: StrictStr
-    customer: Optional[StrictStr] = None
+    customer: Optional[StrictStr]
+    detached_at: Optional[datetime]
     livemode: StrictBool = Field(description="本番環境かどうか")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="メタデータ")
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     billing_details: PaymentMethodBillingDetailsResponse = Field(description="請求先情報")
-    __properties: ClassVar[List[str]] = ["object", "id", "type", "customer", "livemode", "created_at", "updated_at", "metadata", "billing_details"]
+    __properties: ClassVar[List[str]] = ["object", "id", "type", "customer", "detached_at", "livemode", "created_at", "updated_at", "metadata", "billing_details"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -71,8 +72,7 @@ class PaymentMethodPayPayResponse(BaseModel):
 
     def to_json(self) -> str:
         """Returns the JSON representation of the model using alias"""
-        # TODO: pydantic v2: use .model_dump_json(by_alias=True, exclude_unset=True) instead
-        return json.dumps(self.to_dict())
+        return json.dumps(self.model_dump(by_alias=True, exclude_unset=True))
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
@@ -112,6 +112,11 @@ class PaymentMethodPayPayResponse(BaseModel):
         if self.customer is None and "customer" in self.model_fields_set:
             _dict['customer'] = None
 
+        # set to None if detached_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.detached_at is None and "detached_at" in self.model_fields_set:
+            _dict['detached_at'] = None
+
         return _dict
 
     @classmethod
@@ -128,6 +133,7 @@ class PaymentMethodPayPayResponse(BaseModel):
             "id": obj.get("id"),
             "type": obj.get("type"),
             "customer": obj.get("customer"),
+            "detached_at": obj.get("detached_at"),
             "livemode": obj.get("livemode"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),

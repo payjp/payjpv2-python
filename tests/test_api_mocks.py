@@ -288,12 +288,12 @@ class TestModelIntegration:
         """Test payment flow model creation."""
         request = PaymentFlowCreateRequest(
             amount=1000,
-            customer="cus_test123",
+            customer_id="cus_test123",
             description="Test payment flow"
         )
 
         assert request.amount == 1000
-        assert request.customer == "cus_test123"
+        assert request.customer_id == "cus_test123"
         assert request.description == "Test payment flow"
 
     def test_model_serialization_integration(self):

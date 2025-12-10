@@ -97,10 +97,10 @@ class TestPaymentFlowOperations:
         """Test payment flow creation with customer."""
         request = PaymentFlowCreateRequest(
             amount=1000,
-            customer="cus_test123"
+            customer_id="cus_test123"
         )
         assert request.amount == 1000
-        assert request.customer == "cus_test123"
+        assert request.customer_id == "cus_test123"
 
     def test_payment_flow_create_request_with_description(self):
         """Test payment flow creation with description."""
@@ -250,12 +250,12 @@ class TestWorkflowIntegration:
         # Test creating request objects for workflow
         create_request = PaymentFlowCreateRequest(
             amount=2500,
-            customer="cus_workflow_test",
+            customer_id="cus_workflow_test",
             description="Workflow test payment"
         )
 
         assert create_request.amount == 2500
-        assert create_request.customer == "cus_workflow_test"
+        assert create_request.customer_id == "cus_workflow_test"
         assert create_request.description == "Workflow test payment"
 
         # Verify API object can handle the request structure
@@ -274,11 +274,11 @@ class TestWorkflowIntegration:
         customer_request = CustomerCreateRequest(email="coordination@example.com")
         payment_request = PaymentFlowCreateRequest(
             amount=1500,
-            customer="cus_coordination_test"
+            customer_id="cus_coordination_test"
         )
 
         assert customer_request.email == "coordination@example.com"
-        assert payment_request.customer == "cus_coordination_test"
+        assert payment_request.customer_id == "cus_coordination_test"
 
 
 class TestSDKStructure:

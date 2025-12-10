@@ -46,10 +46,10 @@ class TestPaymentFlowModels:
         """Test payment flow creation with customer."""
         request = PaymentFlowCreateRequest(
             amount=1000,
-            customer="cus_test123"
+            customer_id="cus_test123"
         )
         assert request.amount == 1000
-        assert request.customer == "cus_test123"
+        assert request.customer_id == "cus_test123"
 
     def test_payment_flow_create_request_with_description(self):
         """Test payment flow creation with description."""
@@ -163,4 +163,4 @@ class TestModelValidation:
         # Test payment flow with just amount
         payment_request = PaymentFlowCreateRequest(amount=1000)
         assert payment_request.amount == 1000
-        assert payment_request.customer is None
+        assert payment_request.customer_id is None

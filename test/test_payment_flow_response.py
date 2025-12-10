@@ -45,15 +45,15 @@ class TestPaymentFlowResponse(unittest.TestCase):
                 amount_capturable = 56,
                 amount_received = 56,
                 client_secret = '',
-                customer = '',
+                customer_id = '',
                 description = '',
                 metadata = {
                     'key' : null
                     },
-                payment_method = '',
+                payment_method_id = '',
                 payment_method_options = { },
                 payment_method_types = [
-                    ''
+                    'card'
                     ],
                 status = 'canceled',
                 next_action = { },
@@ -71,15 +71,15 @@ class TestPaymentFlowResponse(unittest.TestCase):
                 amount_capturable = 56,
                 amount_received = 56,
                 client_secret = '',
-                customer = '',
+                customer_id = '',
                 description = '',
                 metadata = {
                     'key' : null
                     },
-                payment_method = '',
+                payment_method_id = '',
                 payment_method_options = { },
                 payment_method_types = [
-                    ''
+                    'card'
                     ],
                 status = 'canceled',
                 next_action = { },

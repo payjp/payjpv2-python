@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **fee** | **int** | 手数料 | 
 **type** | [**PaymentTransactionType**](PaymentTransactionType.md) | PaymentTransactionの種類 | 
 **payment_method_type** | [**PaymentMethodTypes**](PaymentMethodTypes.md) | 支払い方法の種類 | 
-**term** | **str** | 期間ID | 
+**term_id** | **str** | 期間ID | 
 
 ## Example
 

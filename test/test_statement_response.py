@@ -50,7 +50,7 @@ class TestStatementResponse(unittest.TestCase):
                     start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     closed = True, ),
-                balance = '',
+                balance_id = '',
                 items = [
                     payjpv2.models.statement_item_response.StatementItemResponse(
                         subject = '売上', 
@@ -75,7 +75,7 @@ class TestStatementResponse(unittest.TestCase):
                     start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     closed = True, ),
-                balance = '',
+                balance_id = '',
                 items = [
                     payjpv2.models.statement_item_response.StatementItemResponse(
                         subject = '売上', 

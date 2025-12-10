@@ -18,18 +18,31 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.payment_method_options_card_request import PaymentMethodOptionsCardRequest
+from payjpv2.models.checkout_session_line_item_data_response import CheckoutSessionLineItemDataResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentMethodOptionsRequest(BaseModel):
+class CheckoutSessionLineItemListResponse(BaseModel):
     """
-    PaymentMethodOptionsRequest
+    CheckoutSessionLineItemListResponse
     """ # noqa: E501
-    card: Optional[PaymentMethodOptionsCardRequest] = Field(default=None, description="カード支払い方法に関するオプション")
-    __properties: ClassVar[List[str]] = ["card"]
+    object: Optional[StrictStr] = 'list'
+    url: StrictStr = Field(description="リスト取得URL")
+    has_more: StrictBool = Field(description="次のページがあるかどうか")
+    data: List[CheckoutSessionLineItemDataResponse]
+    __properties: ClassVar[List[str]] = ["object", "url", "has_more", "data"]
+
+    @field_validator('object')
+    def object_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['list']):
+            raise ValueError("must be one of enum values ('list')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -48,7 +61,7 @@ class PaymentMethodOptionsRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentMethodOptionsRequest from a JSON string"""
+        """Create an instance of CheckoutSessionLineItemListResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -69,14 +82,18 @@ class PaymentMethodOptionsRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of card
-        if self.card:
-            _dict['card'] = self.card.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        _items = []
+        if self.data:
+            for _item_data in self.data:
+                if _item_data:
+                    _items.append(_item_data.to_dict())
+            _dict['data'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentMethodOptionsRequest from a dict"""
+        """Create an instance of CheckoutSessionLineItemListResponse from a dict"""
         if obj is None:
             return None
 
@@ -84,7 +101,10 @@ class PaymentMethodOptionsRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "card": PaymentMethodOptionsCardRequest.from_dict(obj["card"]) if obj.get("card") is not None else None
+            "object": obj.get("object") if obj.get("object") is not None else 'list',
+            "url": obj.get("url"),
+            "has_more": obj.get("has_more"),
+            "data": [CheckoutSessionLineItemDataResponse.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
         })
         return _obj
 

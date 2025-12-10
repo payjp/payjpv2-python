@@ -18,19 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.setup_flow_payment_method_options_card_request import SetupFlowPaymentMethodOptionsCardRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SetupFlowConfirmRequest(BaseModel):
+class SetupFlowPaymentMethodOptionsRequest(BaseModel):
     """
-    SetupFlowConfirmRequest
+    SetupFlowPaymentMethodOptionsRequest
     """ # noqa: E501
-    payment_method_options: Optional[Dict[str, Any]] = Field(default=None, description="この SetupFlow の支払い方法の個別設定。")
-    return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後、あるいはキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。`confirm=true` の場合のみ指定できます。")
-    use_payjp_sdk: Optional[StrictBool] = Field(default=None, description="PAY.JP SDK を使用するかどうか")
-    __properties: ClassVar[List[str]] = ["payment_method_options", "return_url", "use_payjp_sdk"]
+    card: Optional[SetupFlowPaymentMethodOptionsCardRequest] = Field(default=None, description="カード支払い方法に関するオプション")
+    __properties: ClassVar[List[str]] = ["card"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +48,7 @@ class SetupFlowConfirmRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SetupFlowConfirmRequest from a JSON string"""
+        """Create an instance of SetupFlowPaymentMethodOptionsRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,11 +69,14 @@ class SetupFlowConfirmRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of card
+        if self.card:
+            _dict['card'] = self.card.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SetupFlowConfirmRequest from a dict"""
+        """Create an instance of SetupFlowPaymentMethodOptionsRequest from a dict"""
         if obj is None:
             return None
 
@@ -82,9 +84,7 @@ class SetupFlowConfirmRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "payment_method_options": obj.get("payment_method_options"),
-            "return_url": obj.get("return_url"),
-            "use_payjp_sdk": obj.get("use_payjp_sdk")
+            "card": SetupFlowPaymentMethodOptionsCardRequest.from_dict(obj["card"]) if obj.get("card") is not None else None
         })
         return _obj
 

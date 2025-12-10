@@ -6,14 +6,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **object** | **str** |  | [optional] [default to 'line_item']
-**id** | **str** | ID | [optional] 
-**amount_subtotal** | **int** | 割引や税金が適用される前のすべての商品の合計金額 | [optional] 
-**amount_tax** | **int** | 税額 | [optional] 
-**amount_total** | **int** | 割引と税金が適用された後のすべての商品の合計金額 | [optional] 
-**currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | [optional] 
-**description** | **str** | 説明 | [optional] 
-**price** | [**PriceDetailsResponse**](PriceDetailsResponse.md) | 料金情報 | [optional] 
-**quantity** | **int** | 数量 | [optional] 
+**id** | **str** | ID | 
+**amount_subtotal** | **int** | 割引や税金が適用される前のすべての商品の合計金額 | 
+**amount_tax** | **int** | 税額 | 
+**amount_total** | **int** | 割引と税金が適用された後のすべての商品の合計金額 | 
+**currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
+**description** | **str** | 説明 | 
+**price** | [**PriceDetailsResponse**](PriceDetailsResponse.md) | 料金情報 | 
+**quantity** | **int** | 数量 | 
 
 ## Example
 

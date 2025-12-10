@@ -31,11 +31,11 @@ class ProductDetailsResponse(BaseModel):
     object: Optional[StrictStr] = 'product'
     name: StrictStr = Field(description="Checkoutなどで顧客に表示される商品名。")
     active: StrictBool = Field(description="商品が購入可能かどうか。デフォルトは `true`。")
-    default_price: Optional[StrictStr]
+    default_price_id: Optional[StrictStr]
     description: Optional[StrictStr]
     unit_label: Optional[StrictStr]
     url: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["id", "object", "name", "active", "default_price", "description", "unit_label", "url"]
+    __properties: ClassVar[List[str]] = ["id", "object", "name", "active", "default_price_id", "description", "unit_label", "url"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -85,10 +85,10 @@ class ProductDetailsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # set to None if default_price (nullable) is None
+        # set to None if default_price_id (nullable) is None
         # and model_fields_set contains the field
-        if self.default_price is None and "default_price" in self.model_fields_set:
-            _dict['default_price'] = None
+        if self.default_price_id is None and "default_price_id" in self.model_fields_set:
+            _dict['default_price_id'] = None
 
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
@@ -121,7 +121,7 @@ class ProductDetailsResponse(BaseModel):
             "object": obj.get("object") if obj.get("object") is not None else 'product',
             "name": obj.get("name"),
             "active": obj.get("active"),
-            "default_price": obj.get("default_price"),
+            "default_price_id": obj.get("default_price_id"),
             "description": obj.get("description"),
             "unit_label": obj.get("unit_label"),
             "url": obj.get("url")

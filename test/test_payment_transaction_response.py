@@ -48,7 +48,7 @@ class TestPaymentTransactionResponse(unittest.TestCase):
                 fee = 56,
                 type = 'payment',
                 payment_method_type = 'card',
-                term = ''
+                term_id = ''
             )
         else:
             return PaymentTransactionResponse(
@@ -63,7 +63,7 @@ class TestPaymentTransactionResponse(unittest.TestCase):
                 fee = 56,
                 type = 'payment',
                 payment_method_type = 'card',
-                term = '',
+                term_id = '',
         )
         """
 

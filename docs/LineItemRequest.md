@@ -5,8 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**adjustable_quantity** | [**LineItemAdjustableQuantityRequest**](LineItemAdjustableQuantityRequest.md) | Checkout 画面で顧客がこの商品の購入数量を変更できるようにする。 | [optional] 
-**price** | **str** | 料金ID | [optional] 
+**price_id** | **str** | 料金ID | 
 **quantity** | **int** | 購入する商品の数量 | 
 **tax_rates** | **List[str]** | 税率ID | [optional] [default to []]
 

@@ -36,7 +36,7 @@ class TestPaymentMethodCreateRequest(unittest.TestCase):
         model = PaymentMethodCreateRequest()
         if include_optional:
             return PaymentMethodCreateRequest(
-                customer = '',
+                customer_id = '',
                 billing_details = payjpv2.models.payment_method_billing_details_request.PaymentMethodBillingDetailsRequest(
                     name = '', 
                     phone = '', 

@@ -9,7 +9,7 @@ Method | HTTP request | Description
 
 
 # **get_all_terms**
-> TermListResponse get_all_terms(limit=limit, offset=offset, since_start_at=since_start_at, until_start_at=until_start_at)
+> TermListResponse get_all_terms(limit=limit, starting_after=starting_after, ending_before=ending_before, since_start_at=since_start_at, until_start_at=until_start_at)
 
 Get All Terms
 
@@ -51,13 +51,14 @@ with payjpv2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payjpv2.TermsApi(api_client)
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
-    offset = 0 # int | データ取得を行う開始位置 (optional) (default to 0)
+    starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
+    ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
     since_start_at = '2013-10-20T19:20:30+01:00' # datetime | start_atが指定した日付以降のデータを取得 (optional)
     until_start_at = '2013-10-20T19:20:30+01:00' # datetime | start_atが指定した日付以前のデータを取得 (optional)
 
     try:
         # Get All Terms
-        api_response = api_instance.get_all_terms(limit=limit, offset=offset, since_start_at=since_start_at, until_start_at=until_start_at)
+        api_response = api_instance.get_all_terms(limit=limit, starting_after=starting_after, ending_before=ending_before, since_start_at=since_start_at, until_start_at=until_start_at)
         print("The response of TermsApi->get_all_terms:\n")
         pprint(api_response)
     except Exception as e:
@@ -72,7 +73,8 @@ with payjpv2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
- **offset** | **int**| データ取得を行う開始位置 | [optional] [default to 0]
+ **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
+ **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
  **since_start_at** | **datetime**| start_atが指定した日付以降のデータを取得 | [optional] 
  **until_start_at** | **datetime**| start_atが指定した日付以前のデータを取得 | [optional] 
 
@@ -95,6 +97,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**400** | Resource Missing |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -1,4 +1,4 @@
-# PaymentMethodOptionsCardRequest
+# CheckoutSessionPaymentMethodOptionsCardRequest
 
 
 ## Properties
@@ -11,19 +11,19 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from payjpv2.models.payment_method_options_card_request import PaymentMethodOptionsCardRequest
+from payjpv2.models.checkout_session_payment_method_options_card_request import CheckoutSessionPaymentMethodOptionsCardRequest
 
 # TODO update the JSON string below
 json = "{}"
-# create an instance of PaymentMethodOptionsCardRequest from a JSON string
-payment_method_options_card_request_instance = PaymentMethodOptionsCardRequest.from_json(json)
+# create an instance of CheckoutSessionPaymentMethodOptionsCardRequest from a JSON string
+checkout_session_payment_method_options_card_request_instance = CheckoutSessionPaymentMethodOptionsCardRequest.from_json(json)
 # print the JSON string representation of the object
-print(PaymentMethodOptionsCardRequest.to_json())
+print(CheckoutSessionPaymentMethodOptionsCardRequest.to_json())
 
 # convert the object into a dict
-payment_method_options_card_request_dict = payment_method_options_card_request_instance.to_dict()
-# create an instance of PaymentMethodOptionsCardRequest from a dict
-payment_method_options_card_request_from_dict = PaymentMethodOptionsCardRequest.from_dict(payment_method_options_card_request_dict)
+checkout_session_payment_method_options_card_request_dict = checkout_session_payment_method_options_card_request_instance.to_dict()
+# create an instance of CheckoutSessionPaymentMethodOptionsCardRequest from a dict
+checkout_session_payment_method_options_card_request_from_dict = CheckoutSessionPaymentMethodOptionsCardRequest.from_dict(checkout_session_payment_method_options_card_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

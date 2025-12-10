@@ -27,13 +27,13 @@ class ProductUpdateRequest(BaseModel):
     """
     ProductUpdateRequest
     """ # noqa: E501
-    default_price: Optional[StrictStr] = Field(default=None, description="この商品のデフォルト価格である価格オブジェクトのID。")
+    default_price_id: Optional[StrictStr] = Field(default=None, description="この商品のデフォルト価格である価格オブジェクトのID。")
     description: Optional[StrictStr] = Field(default=None, description="Checkoutなどで顧客に表示される商品説明。")
     unit_label: Optional[StrictStr] = Field(default=None, description="この製品の単位を表すラベル。設定すると、Checkoutや請求書などに表示されます。（例：「個」、「ライセンス」、「時間」、「回」など）")
     url: Optional[StrictStr] = Field(default=None, description="この製品の公開されているウェブページのURL。")
     name: Optional[StrictStr] = Field(default=None, description="Checkoutなどで顧客に表示される商品名。")
     active: Optional[StrictBool] = Field(default=None, description="商品が購入可能かどうか。デフォルトは `true`。")
-    __properties: ClassVar[List[str]] = ["default_price", "description", "unit_label", "url", "name", "active"]
+    __properties: ClassVar[List[str]] = ["default_price_id", "description", "unit_label", "url", "name", "active"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -85,7 +85,7 @@ class ProductUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "default_price": obj.get("default_price"),
+            "default_price_id": obj.get("default_price_id"),
             "description": obj.get("description"),
             "unit_label": obj.get("unit_label"),
             "url": obj.get("url"),

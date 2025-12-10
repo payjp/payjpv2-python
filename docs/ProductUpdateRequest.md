@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**default_price** | **str** | この商品のデフォルト価格である価格オブジェクトのID。 | [optional] 
+**default_price_id** | **str** | この商品のデフォルト価格である価格オブジェクトのID。 | [optional] 
 **description** | **str** | Checkoutなどで顧客に表示される商品説明。 | [optional] 
 **unit_label** | **str** | この製品の単位を表すラベル。設定すると、Checkoutや請求書などに表示されます。（例：「個」、「ライセンス」、「時間」、「回」など） | [optional] 
 **url** | **str** | この製品の公開されているウェブページのURL。 | [optional] 

@@ -43,8 +43,8 @@ class PaymentTransactionResponse(BaseModel):
     fee: StrictInt = Field(description="手数料")
     type: PaymentTransactionType = Field(description="PaymentTransactionの種類")
     payment_method_type: PaymentMethodTypes = Field(description="支払い方法の種類")
-    term: StrictStr = Field(description="期間ID")
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "resource_id", "amount", "currency", "fee_rate", "fee", "type", "payment_method_type", "term"]
+    term_id: StrictStr = Field(description="期間ID")
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "resource_id", "amount", "currency", "fee_rate", "fee", "type", "payment_method_type", "term_id"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -118,7 +118,7 @@ class PaymentTransactionResponse(BaseModel):
             "fee": obj.get("fee"),
             "type": obj.get("type"),
             "payment_method_type": obj.get("payment_method_type"),
-            "term": obj.get("term")
+            "term_id": obj.get("term_id")
         })
         return _obj
 

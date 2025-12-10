@@ -43,18 +43,17 @@ class TestCheckoutSessionDetailsResponse(unittest.TestCase):
                 amount_total = 56,
                 billing_address_collection = 'auto',
                 cancel_url = '',
-                customer = None,
+                customer_id = '',
                 customer_email = '',
-                customer_details = { },
                 expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 currency = 'jpy',
                 locale = 'auto',
-                payment_flow = None,
+                payment_flow_id = '',
                 payment_method_types = [
                     'card'
                     ],
                 payment_method_options = { },
-                setup_flow = None,
+                setup_flow_id = '',
                 submit_type = 'auto',
                 mode = 'payment',
                 ui_mode = 'hosted',
@@ -64,37 +63,6 @@ class TestCheckoutSessionDetailsResponse(unittest.TestCase):
                     'key' : null
                     },
                 status = 'open',
-                line_items = payjpv2.models.checkout_session_line_items_response.CheckoutSessionLineItemsResponse(
-                    object = 'list', 
-                    data = [
-                        payjpv2.models.checkout_session_line_item_data_response.CheckoutSessionLineItemDataResponse(
-                            object = 'line_item', 
-                            id = '', 
-                            amount_subtotal = 56, 
-                            amount_tax = 56, 
-                            amount_total = 56, 
-                            currency = 'jpy', 
-                            description = '', 
-                            price = payjpv2.models.price_details_response.PriceDetailsResponse(
-                                id = '', 
-                                object = 'price', 
-                                livemode = True, 
-                                active = True, 
-                                metadata = {
-                                    'key' : null
-                                    }, 
-                                nickname = '', 
-                                type = 'one_time', 
-                                lookup_key = '', 
-                                currency = 'jpy', 
-                                product = '', 
-                                unit_amount = 56, 
-                                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
-                            quantity = 56, )
-                        ], 
-                    has_more = True, 
-                    url = '', ),
                 success_url = '',
                 url = ''
             )
@@ -106,24 +74,24 @@ class TestCheckoutSessionDetailsResponse(unittest.TestCase):
                 amount_total = 56,
                 billing_address_collection = 'auto',
                 cancel_url = '',
-                customer = None,
+                customer_id = '',
                 customer_email = '',
                 expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 currency = 'jpy',
                 locale = 'auto',
-                payment_flow = None,
                 payment_method_types = [
                     'card'
                     ],
                 payment_method_options = { },
-                setup_flow = None,
                 submit_type = 'auto',
                 mode = 'payment',
+                ui_mode = 'hosted',
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 metadata = {
                     'key' : null
                     },
+                status = 'open',
                 success_url = '',
                 url = '',
         )

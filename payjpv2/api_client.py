@@ -92,7 +92,7 @@ class ApiClient:
             self.default_headers[header_name] = header_value
         self.cookie = cookie
         # Set default User-Agent.
-        self.user_agent = 'payjp/payjpv2 PythonBindings/0.0.2'
+        self.user_agent = 'payjp/payjpv2 PythonBindings/0.0.3'
         # Set X-Payjp-Client-User-Agent header.
         self.default_headers['X-Payjp-Client-User-Agent'] = self._build_client_user_agent()
         self.client_side_validation = configuration.client_side_validation
@@ -115,7 +115,7 @@ class ApiClient:
     def _build_client_user_agent(self):
         """Build X-Payjp-Client-User-Agent header value."""
         ua_info = {
-            'bindings_version': '0.0.2',
+            'bindings_version': '0.0.3',
             'lang': 'python',
             'lang_version': sys.version.split()[0],
             'publisher': 'payjp',

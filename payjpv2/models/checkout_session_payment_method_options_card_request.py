@@ -18,30 +18,37 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.checkout_session_line_item_data_response import CheckoutSessionLineItemDataResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CheckoutSessionLineItemsResponse(BaseModel):
+class CheckoutSessionPaymentMethodOptionsCardRequest(BaseModel):
     """
-    CheckoutSessionLineItemsResponse
+    CheckoutSessionPaymentMethodOptionsCardRequest
     """ # noqa: E501
-    object: Optional[StrictStr] = 'list'
-    data: Optional[List[CheckoutSessionLineItemDataResponse]] = Field(default=None, description="データ")
-    has_more: Optional[StrictBool] = Field(default=False, description="次のページがあるかどうか")
-    url: Optional[StrictStr] = Field(default=None, description="URL")
-    __properties: ClassVar[List[str]] = ["object", "data", "has_more", "url"]
+    request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求。  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 |")
+    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 | ")
+    __properties: ClassVar[List[str]] = ["request_extended_authorization", "request_three_d_secure"]
 
-    @field_validator('object')
-    def object_validate_enum(cls, value):
+    @field_validator('request_extended_authorization')
+    def request_extended_authorization_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in set(['list']):
-            raise ValueError("must be one of enum values ('list')")
+        if value not in set(['if_available', 'never']):
+            raise ValueError("must be one of enum values ('if_available', 'never')")
+        return value
+
+    @field_validator('request_three_d_secure')
+    def request_three_d_secure_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['any', 'automatic']):
+            raise ValueError("must be one of enum values ('any', 'automatic')")
         return value
 
     model_config = ConfigDict(
@@ -61,7 +68,7 @@ class CheckoutSessionLineItemsResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CheckoutSessionLineItemsResponse from a JSON string"""
+        """Create an instance of CheckoutSessionPaymentMethodOptionsCardRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -82,18 +89,11 @@ class CheckoutSessionLineItemsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
-        _items = []
-        if self.data:
-            for _item_data in self.data:
-                if _item_data:
-                    _items.append(_item_data.to_dict())
-            _dict['data'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CheckoutSessionLineItemsResponse from a dict"""
+        """Create an instance of CheckoutSessionPaymentMethodOptionsCardRequest from a dict"""
         if obj is None:
             return None
 
@@ -101,10 +101,8 @@ class CheckoutSessionLineItemsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "object": obj.get("object") if obj.get("object") is not None else 'list',
-            "data": [CheckoutSessionLineItemDataResponse.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None,
-            "has_more": obj.get("has_more") if obj.get("has_more") is not None else False,
-            "url": obj.get("url")
+            "request_extended_authorization": obj.get("request_extended_authorization"),
+            "request_three_d_secure": obj.get("request_three_d_secure")
         })
         return _obj
 

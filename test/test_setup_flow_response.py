@@ -42,15 +42,15 @@ class TestSetupFlowResponse(unittest.TestCase):
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
                 client_secret = '',
-                customer = '',
+                customer_id = '',
                 description = '',
                 metadata = {
                     'key' : null
                     },
-                payment_method = '',
+                payment_method_id = '',
                 payment_method_options = { },
                 payment_method_types = [
-                    ''
+                    'card'
                     ],
                 status = 'canceled',
                 next_action = { },
@@ -64,15 +64,15 @@ class TestSetupFlowResponse(unittest.TestCase):
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
                 client_secret = '',
-                customer = '',
+                customer_id = '',
                 description = '',
                 metadata = {
                     'key' : null
                     },
-                payment_method = '',
+                payment_method_id = '',
                 payment_method_options = { },
                 payment_method_types = [
-                    ''
+                    'card'
                     ],
                 status = 'canceled',
                 next_action = { },

@@ -27,8 +27,8 @@ class PaymentMethodAttachRequest(BaseModel):
     """
     PaymentMethodAttachRequest
     """ # noqa: E501
-    customer: StrictStr = Field(description="顧客ID")
-    __properties: ClassVar[List[str]] = ["customer"]
+    customer_id: StrictStr = Field(description="顧客ID")
+    __properties: ClassVar[List[str]] = ["customer_id"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -80,7 +80,7 @@ class PaymentMethodAttachRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer": obj.get("customer")
+            "customer_id": obj.get("customer_id")
         })
         return _obj
 

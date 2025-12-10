@@ -18,38 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.payment_flow_payment_method_options_card_request import PaymentFlowPaymentMethodOptionsCardRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentMethodOptionsCardRequest(BaseModel):
+class PaymentFlowPaymentMethodOptionsRequest(BaseModel):
     """
-    PaymentMethodOptionsCardRequest
+    PaymentFlowPaymentMethodOptionsRequest
     """ # noqa: E501
-    request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求。  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 |")
-    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 | ")
-    __properties: ClassVar[List[str]] = ["request_extended_authorization", "request_three_d_secure"]
-
-    @field_validator('request_extended_authorization')
-    def request_extended_authorization_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['if_available', 'never']):
-            raise ValueError("must be one of enum values ('if_available', 'never')")
-        return value
-
-    @field_validator('request_three_d_secure')
-    def request_three_d_secure_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['any', 'automatic']):
-            raise ValueError("must be one of enum values ('any', 'automatic')")
-        return value
+    card: Optional[PaymentFlowPaymentMethodOptionsCardRequest] = Field(default=None, description="カード支払い方法に関するオプション")
+    __properties: ClassVar[List[str]] = ["card"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -68,7 +48,7 @@ class PaymentMethodOptionsCardRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentMethodOptionsCardRequest from a JSON string"""
+        """Create an instance of PaymentFlowPaymentMethodOptionsRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -89,11 +69,14 @@ class PaymentMethodOptionsCardRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of card
+        if self.card:
+            _dict['card'] = self.card.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentMethodOptionsCardRequest from a dict"""
+        """Create an instance of PaymentFlowPaymentMethodOptionsRequest from a dict"""
         if obj is None:
             return None
 
@@ -101,8 +84,7 @@ class PaymentMethodOptionsCardRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "request_extended_authorization": obj.get("request_extended_authorization"),
-            "request_three_d_secure": obj.get("request_three_d_secure")
+            "card": PaymentFlowPaymentMethodOptionsCardRequest.from_dict(obj["card"]) if obj.get("card") is not None else None
         })
         return _obj
 

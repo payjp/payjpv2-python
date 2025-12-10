@@ -20,7 +20,6 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.line_item_adjustable_quantity_request import LineItemAdjustableQuantityRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,11 +27,10 @@ class LineItemRequest(BaseModel):
     """
     LineItemRequest
     """ # noqa: E501
-    adjustable_quantity: Optional[LineItemAdjustableQuantityRequest] = Field(default=None, description="Checkout 画面で顧客がこの商品の購入数量を変更できるようにする。")
-    price: Optional[StrictStr] = Field(default=None, description="料金ID")
+    price_id: StrictStr = Field(description="料金ID")
     quantity: StrictInt = Field(description="購入する商品の数量")
     tax_rates: Optional[List[StrictStr]] = Field(default=None, description="税率ID")
-    __properties: ClassVar[List[str]] = ["adjustable_quantity", "price", "quantity", "tax_rates"]
+    __properties: ClassVar[List[str]] = ["price_id", "quantity", "tax_rates"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -72,9 +70,6 @@ class LineItemRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of adjustable_quantity
-        if self.adjustable_quantity:
-            _dict['adjustable_quantity'] = self.adjustable_quantity.to_dict()
         return _dict
 
     @classmethod
@@ -87,8 +82,7 @@ class LineItemRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "adjustable_quantity": LineItemAdjustableQuantityRequest.from_dict(obj["adjustable_quantity"]) if obj.get("adjustable_quantity") is not None else None,
-            "price": obj.get("price"),
+            "price_id": obj.get("price_id"),
             "quantity": obj.get("quantity"),
             "tax_rates": obj.get("tax_rates")
         })

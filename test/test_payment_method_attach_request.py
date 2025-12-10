@@ -36,11 +36,11 @@ class TestPaymentMethodAttachRequest(unittest.TestCase):
         model = PaymentMethodAttachRequest()
         if include_optional:
             return PaymentMethodAttachRequest(
-                customer = ''
+                customer_id = ''
             )
         else:
             return PaymentMethodAttachRequest(
-                customer = '',
+                customer_id = '',
         )
         """
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**customer** | **str** | 顧客ID | 
+**customer_id** | **str** | 顧客ID | 
 
 ## Example
 

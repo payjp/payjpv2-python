@@ -36,11 +36,7 @@ class TestLineItemRequest(unittest.TestCase):
         model = LineItemRequest()
         if include_optional:
             return LineItemRequest(
-                adjustable_quantity = payjpv2.models.line_item_adjustable_quantity_request.LineItemAdjustableQuantityRequest(
-                    enabled = True, 
-                    maximum = 56, 
-                    minimum = 56, ),
-                price = '',
+                price_id = '',
                 quantity = 56,
                 tax_rates = [
                     ''
@@ -48,6 +44,7 @@ class TestLineItemRequest(unittest.TestCase):
             )
         else:
             return LineItemRequest(
+                price_id = '',
                 quantity = 56,
         )
         """

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **id** | **str** | 料金ID | [optional] 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
 **active** | **bool** | 価格が有効かどうか。デフォルトは &#x60;true&#x60;。 | [optional] [default to True]
-**product** | **str** | この価格が紐付く商品のID。 | 
+**product_id** | **str** | この価格が紐付く商品のID。 | 
 **unit_amount** | **int** | 価格の単価。0以上の整数となります。 | 
 
 ## Example

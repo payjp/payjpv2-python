@@ -40,11 +40,11 @@ class PriceDetailsResponse(BaseModel):
     type: PriceType = Field(description="価格が一度限りの購入か、継続的な（サブスクリプション）購入かに応じて、`one_time` または `recurring` のいずれかとなります。  | 指定できる値 | |:---| | **one_time**: 1回限りの価格。 | | **recurring**: 継続的な価格。 |")
     lookup_key: Optional[StrictStr]
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
-    product: StrictStr = Field(description="この価格が紐付く商品のID。")
+    product_id: StrictStr = Field(description="この価格が紐付く商品のID。")
     unit_amount: StrictInt = Field(description="価格の単価。0以上の整数となります。")
     created_at: datetime = Field(description="支払い方法作成時の日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="支払い方法更新時の日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "active", "metadata", "nickname", "type", "lookup_key", "currency", "product", "unit_amount", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "active", "metadata", "nickname", "type", "lookup_key", "currency", "product_id", "unit_amount", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -137,7 +137,7 @@ class PriceDetailsResponse(BaseModel):
             "type": obj.get("type"),
             "lookup_key": obj.get("lookup_key"),
             "currency": obj.get("currency"),
-            "product": obj.get("product"),
+            "product_id": obj.get("product_id"),
             "unit_amount": obj.get("unit_amount"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at")

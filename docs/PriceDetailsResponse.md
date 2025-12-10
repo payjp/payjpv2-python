@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **type** | [**PriceType**](PriceType.md) | 価格が一度限りの購入か、継続的な（サブスクリプション）購入かに応じて、&#x60;one_time&#x60; または &#x60;recurring&#x60; のいずれかとなります。  | 指定できる値 | |:---| | **one_time**: 1回限りの価格。 | | **recurring**: 継続的な価格。 | | 
 **lookup_key** | **str** |  | 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
-**product** | **str** | この価格が紐付く商品のID。 | 
+**product_id** | **str** | この価格が紐付く商品のID。 | 
 **unit_amount** | **int** | 価格の単価。0以上の整数となります。 | 
 **created_at** | **datetime** | 支払い方法作成時の日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 支払い方法更新時の日時 (UTC, ISO 8601 形式) | 

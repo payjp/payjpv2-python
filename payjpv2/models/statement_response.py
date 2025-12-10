@@ -39,10 +39,10 @@ class StatementResponse(BaseModel):
     created_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
     term: Optional[TermResponse]
-    balance: Optional[StrictStr]
+    balance_id: Optional[StrictStr]
     items: List[StatementItemResponse] = Field(description="明細項目のリスト")
     net: StrictInt = Field(description="含まれるstatement_itemの金額合計")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "title", "type", "created_at", "updated_at", "term", "balance", "items", "net"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "title", "type", "created_at", "updated_at", "term", "balance_id", "items", "net"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -112,10 +112,10 @@ class StatementResponse(BaseModel):
         if self.term is None and "term" in self.model_fields_set:
             _dict['term'] = None
 
-        # set to None if balance (nullable) is None
+        # set to None if balance_id (nullable) is None
         # and model_fields_set contains the field
-        if self.balance is None and "balance" in self.model_fields_set:
-            _dict['balance'] = None
+        if self.balance_id is None and "balance_id" in self.model_fields_set:
+            _dict['balance_id'] = None
 
         return _dict
 
@@ -137,7 +137,7 @@ class StatementResponse(BaseModel):
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
             "term": TermResponse.from_dict(obj["term"]) if obj.get("term") is not None else None,
-            "balance": obj.get("balance"),
+            "balance_id": obj.get("balance_id"),
             "items": [StatementItemResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
             "net": obj.get("net")
         })

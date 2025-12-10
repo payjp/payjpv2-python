@@ -36,7 +36,7 @@ class TestProductUpdateRequest(unittest.TestCase):
         model = ProductUpdateRequest()
         if include_optional:
             return ProductUpdateRequest(
-                default_price = '',
+                default_price_id = '',
                 description = '',
                 unit_label = '',
                 url = '',

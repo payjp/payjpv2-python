@@ -5,7 +5,6 @@ All URIs are relative to *https://api.pay.jp*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**cancel_setup_flow**](SetupFlowsApi.md#cancel_setup_flow) | **POST** /v2/setup_flows/{setup_flow_id}/cancel | Cancel Setup Flow
-[**confirm_setup_flow**](SetupFlowsApi.md#confirm_setup_flow) | **POST** /v2/setup_flows/{setup_flow_id}/confirm | Confirm Setup Flow
 [**create_setup_flow**](SetupFlowsApi.md#create_setup_flow) | **POST** /v2/setup_flows | Create Setup Flow
 [**get_all_setup_flows**](SetupFlowsApi.md#get_all_setup_flows) | **GET** /v2/setup_flows | Get All Setup Flows
 [**get_setup_flow**](SetupFlowsApi.md#get_setup_flow) | **GET** /v2/setup_flows/{setup_flow_id} | Get Setup Flow
@@ -98,95 +97,6 @@ Name | Type | Description  | Notes
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **confirm_setup_flow**
-> SetupFlowResponse confirm_setup_flow(setup_flow_id, setup_flow_confirm_request=setup_flow_confirm_request)
-
-Confirm Setup Flow
-
-### Example
-
-* Basic Authentication (HTTPBasic):
-* Bearer Authentication (HTTPBearer):
-
-```python
-import payjpv2
-from payjpv2.models.setup_flow_confirm_request import SetupFlowConfirmRequest
-from payjpv2.models.setup_flow_response import SetupFlowResponse
-from payjpv2.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.pay.jp
-# See configuration.py for a list of all supported configuration parameters.
-configuration = payjpv2.Configuration(
-    host = "https://api.pay.jp"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure HTTP basic authorization: HTTPBasic
-configuration = payjpv2.Configuration(
-    username = os.environ["USERNAME"],
-    password = os.environ["PASSWORD"]
-)
-
-# Configure Bearer authorization: HTTPBearer
-configuration = payjpv2.Configuration(
-    access_token = os.environ["BEARER_TOKEN"]
-)
-
-# Enter a context with an instance of the API client
-with payjpv2.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = payjpv2.SetupFlowsApi(api_client)
-    setup_flow_id = 'setup_flow_id_example' # str | 
-    setup_flow_confirm_request = payjpv2.SetupFlowConfirmRequest() # SetupFlowConfirmRequest |  (optional)
-
-    try:
-        # Confirm Setup Flow
-        api_response = api_instance.confirm_setup_flow(setup_flow_id, setup_flow_confirm_request=setup_flow_confirm_request)
-        print("The response of SetupFlowsApi->confirm_setup_flow:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling SetupFlowsApi->confirm_setup_flow: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **setup_flow_id** | **str**|  | 
- **setup_flow_confirm_request** | [**SetupFlowConfirmRequest**](SetupFlowConfirmRequest.md)|  | [optional] 
-
-### Return type
-
-[**SetupFlowResponse**](SetupFlowResponse.md)
-
-### Authorization
-
-[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json, application/problem+json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Successful Response |  -  |
-**422** | Validation Error |  -  |
-**404** | Not Found |  -  |
-**400** | Invalid Status&lt;br&gt;Missing Payment Method&lt;br&gt;Detached Payment Method Not Usable&lt;br&gt;Unsupported Payment Method Type |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -362,6 +272,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**400** | Resource Missing |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -36,8 +36,10 @@ class TestSetupFlowUpdateRequest(unittest.TestCase):
         model = SetupFlowUpdateRequest()
         if include_optional:
             return SetupFlowUpdateRequest(
-                customer = '',
-                payment_method_options = { },
+                customer_id = '',
+                payment_method_options = payjpv2.models.setup_flow_payment_method_options_request.SetupFlowPaymentMethodOptionsRequest(
+                    card = payjpv2.models.setup_flow_payment_method_options_card_request.SetupFlowPaymentMethodOptionsCardRequest(
+                        request_three_d_secure = 'automatic', ), ),
                 payment_method_types = [
                     'card'
                     ],

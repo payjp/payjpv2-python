@@ -21,8 +21,10 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from payjpv2.models.billing_address_collection import BillingAddressCollection
 from payjpv2.models.checkout_session_mode import CheckoutSessionMode
+from payjpv2.models.checkout_session_payment_method_options_request import CheckoutSessionPaymentMethodOptionsRequest
 from payjpv2.models.checkout_session_submit_type import CheckoutSessionSubmitType
 from payjpv2.models.checkout_session_ui_mode import CheckoutSessionUIMode
 from payjpv2.models.currency import Currency
@@ -31,7 +33,6 @@ from payjpv2.models.line_item_request import LineItemRequest
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_flow_data_request import PaymentFlowDataRequest
-from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
 from payjpv2.models.payment_method_types import PaymentMethodTypes
 from payjpv2.models.setup_flow_data_request import SetupFlowDataRequest
 from typing import Optional, Set
@@ -42,13 +43,12 @@ class CheckoutSessionCreateRequest(BaseModel):
     CheckoutSessionCreateRequest
     """ # noqa: E501
     client_reference_id: Optional[StrictStr] = Field(default=None, description="ID")
-    customer: Optional[StrictStr] = Field(default=None, description="顧客ID")
+    customer_id: Optional[StrictStr] = Field(default=None, description="顧客ID")
     customer_email: Optional[StrictStr] = Field(default=None, description="顧客オブジェクトを作成する時に使われます。指定されていない場合、顧客にメールアドレスの入力を求めます。すでに顧客のメールアドレスを持っている場合は、このパラメータを使ってあらかじめ情報を入力しておくことが可能です。支払いが完了した後に顧客情報を取得したい場合は、customer属性を使用します。")
     customer_creation: Optional[CustomerCreation] = Field(default=None, description="Checkout Session の確定時に Customer を作成するかどうかを指定します。<br> Customer が作成されない場合でも `customer_details` で Checkout に入力されたメールアドレス、住所、その他の顧客データを取得できます。<br> Customer を作成しない Session は、ダッシュボードでゲスト顧客としてグループ化されます。<br> `payment` および `setup` モードでのみ設定可能です。")
-    line_items: Optional[List[LineItemRequest]] = Field(default=None, description="顧客が購入する商品のリストです。このパラメータを使用して、1回限りまたは定期的な料金を渡します。  `payment` モードの場合、最大100個のラインアイテムを使用できます。 <!-- `subscription` モードの場合、定期的な料金のラインアイテムは最大20個、1回限りの料金のラインアイテムは最大20個です。1回限りの料金のラインアイテムは、最初の請求書にのみ記載されます。 --> ")
-    mode: CheckoutSessionMode = Field(description="Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
+    line_items: Optional[Annotated[List[LineItemRequest], Field(max_length=100)]] = Field(default=None, description="顧客が購入する商品のリストです。このパラメーターを使用して、1回限りまたは定期的な料金を渡します。  `payment` モードの場合、最大100個のラインアイテムを使用できます。 <!-- `subscription` モードの場合、定期的な料金のラインアイテムは最大20個、1回限りの料金のラインアイテムは最大20個です。1回限りの料金のラインアイテムは、最初の請求書にのみ記載されます。 --> ")
+    mode: CheckoutSessionMode = Field(description="Checkout Session のモード  | 指定できる値 | |:---| | **payment**: 支払いモードでCheckout Sessionを作成します。 | | **setup**: セットアップモードでCheckout Sessionを作成します。 | ")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを行うか、支払いをキャンセルした後にリダイレクトする URL です。")
     success_url: Optional[StrictStr] = Field(default=None, description="支払いや設定が完了した際に、PAY.JP が顧客をリダイレクトするURL。成功したCheckout Sessionからの情報をページで使用したい場合は、成功ページのカスタマイズに関するガイドをお読みください。")
     cancel_url: Optional[StrictStr] = Field(default=None, description="キャンセル時のリダイレクトURL")
     billing_address_collection: Optional[BillingAddressCollection] = Field(default=None, description="Checkout で顧客の請求先住所を収集するかどうかを指定します。デフォルトは `auto` です。  | 指定できる値 | |:---| | **auto**: 請求先住所が必要と判断した場合に入力欄が表示されます。 | | **required**: 常に請求先住所の入力欄が表示されまうs。 | ")
@@ -56,12 +56,12 @@ class CheckoutSessionCreateRequest(BaseModel):
     expires_at: Optional[datetime] = Field(default=None, description="Checkout Session の有効期限が失効する日時。")
     locale: Optional[Locale] = Field(default=None, description="Checkout 画面の表示言語を指定します。  | 指定できる値 | |:---| | **ja**: 日本語で表示します。 | ")
     payment_flow_data: Optional[PaymentFlowDataRequest] = Field(default=None, description="`payment` モード指定時に PaymentFlow 作成に使用するパラメーター。")
-    payment_method_options: Optional[PaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow の支払い方法の個別設定。")
+    payment_method_options: Optional[CheckoutSessionPaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow の支払い方法の個別設定。")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="この PaymentFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法を自動的に表示します。")
     setup_flow_data: Optional[SetupFlowDataRequest] = Field(default=None, description="`setup` モードの Checkout Session を作成する際、SetupFlow の作成に渡されるパラメーター")
     submit_type: Optional[CheckoutSessionSubmitType] = Field(default=None, description="Checkout の画面上に表示される送信ボタンなど、ページ上の関連テキストをカスタマイズするために使用されます。<br> `submit_type` は、`payment` モードの Checkout Session でのみ指定できます。未指定時、あるいは `auto` の場合、`pay` が使用されます。  | 指定できる値 | |:---| | **auto**: `pay` が使用されます。 | | **pay**: 「支払う」（デフォルト） | | **book**: 「予約する」 | | **donate**: 「寄付する」 | ")
     ui_mode: Optional[CheckoutSessionUIMode] = Field(default=None, description="Checkout Session の UI モード。デフォルトは `hosted` です。<br>  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
-    __properties: ClassVar[List[str]] = ["client_reference_id", "customer", "customer_email", "customer_creation", "line_items", "mode", "metadata", "return_url", "success_url", "cancel_url", "billing_address_collection", "currency", "expires_at", "locale", "payment_flow_data", "payment_method_options", "payment_method_types", "setup_flow_data", "submit_type", "ui_mode"]
+    __properties: ClassVar[List[str]] = ["client_reference_id", "customer_id", "customer_email", "customer_creation", "line_items", "mode", "metadata", "success_url", "cancel_url", "billing_address_collection", "currency", "expires_at", "locale", "payment_flow_data", "payment_method_options", "payment_method_types", "setup_flow_data", "submit_type", "ui_mode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -137,7 +137,7 @@ class CheckoutSessionCreateRequest(BaseModel):
 
         _obj = cls.model_validate({
             "client_reference_id": obj.get("client_reference_id"),
-            "customer": obj.get("customer"),
+            "customer_id": obj.get("customer_id"),
             "customer_email": obj.get("customer_email"),
             "customer_creation": obj.get("customer_creation"),
             "line_items": [LineItemRequest.from_dict(_item) for _item in obj["line_items"]] if obj.get("line_items") is not None else None,
@@ -148,7 +148,6 @@ class CheckoutSessionCreateRequest(BaseModel):
             )
             if obj.get("metadata") is not None
             else None,
-            "return_url": obj.get("return_url"),
             "success_url": obj.get("success_url"),
             "cancel_url": obj.get("cancel_url"),
             "billing_address_collection": obj.get("billing_address_collection"),
@@ -156,7 +155,7 @@ class CheckoutSessionCreateRequest(BaseModel):
             "expires_at": obj.get("expires_at"),
             "locale": obj.get("locale"),
             "payment_flow_data": PaymentFlowDataRequest.from_dict(obj["payment_flow_data"]) if obj.get("payment_flow_data") is not None else None,
-            "payment_method_options": PaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
+            "payment_method_options": CheckoutSessionPaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
             "setup_flow_data": SetupFlowDataRequest.from_dict(obj["setup_flow_data"]) if obj.get("setup_flow_data") is not None else None,
             "submit_type": obj.get("submit_type"),

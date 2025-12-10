@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **livemode** | **bool** | 本番環境かどうか | 
 **email** | **str** |  | 
 **description** | **str** |  | 
-**default_payment_method** | **str** |  | 
+**default_payment_method_id** | **str** |  | 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 

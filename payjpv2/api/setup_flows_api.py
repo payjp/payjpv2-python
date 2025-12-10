@@ -21,7 +21,6 @@ from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from payjpv2.models.setup_flow_cancel_request import SetupFlowCancelRequest
-from payjpv2.models.setup_flow_confirm_request import SetupFlowConfirmRequest
 from payjpv2.models.setup_flow_create_request import SetupFlowCreateRequest
 from payjpv2.models.setup_flow_list_response import SetupFlowListResponse
 from payjpv2.models.setup_flow_response import SetupFlowResponse
@@ -339,315 +338,6 @@ class SetupFlowsApi:
         return self.api_client.param_serialize(
             method='POST',
             resource_path='/v2/setup_flows/{setup_flow_id}/cancel',
-            path_params=_path_params,
-            query_params=_query_params,
-            header_params=_header_params,
-            body=_body_params,
-            post_params=_form_params,
-            files=_files,
-            auth_settings=_auth_settings,
-            collection_formats=_collection_formats,
-            _host=_host,
-            _request_auth=_request_auth
-        )
-
-
-
-
-    @validate_call
-    def confirm_setup_flow(
-        self,
-        setup_flow_id: StrictStr,
-        setup_flow_confirm_request: Optional[SetupFlowConfirmRequest] = None,
-        *,
-        request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        request_auth: Optional[Dict[StrictStr, Any]] = None,
-        headers: Optional[Dict[StrictStr, Any]] = None,
-        idempotency_key: Optional[StrictStr] = None,
-        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> SetupFlowResponse:
-        """Confirm Setup Flow
-
-
-        :param setup_flow_id: (required)
-        :type setup_flow_id: str
-        :param setup_flow_confirm_request:
-        :type setup_flow_confirm_request: SetupFlowConfirmRequest
-        :param request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type request_timeout: int, tuple(int, int), optional
-        :param request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type request_auth: dict, optional
-        :param headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type headers: dict, optional
-        :param idempotency_key: an idempotency key for the request.
-                                 used to ensure the request is only processed once.
-        :type idempotency_key: str, optional
-        :param host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._confirm_setup_flow_serialize(
-            setup_flow_id=setup_flow_id,
-            setup_flow_confirm_request=setup_flow_confirm_request,
-            _request_auth=request_auth,
-            _content_type='application/json',
-            _headers=headers,
-            _idempotency_key=idempotency_key,
-            _host_index=host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupFlowResponse",
-            '422': "ErrorResponse",
-            '404': "ErrorResponse",
-            '400': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        ).data
-
-
-    @validate_call
-    def confirm_setup_flow_with_http_info(
-        self,
-        setup_flow_id: StrictStr,
-        setup_flow_confirm_request: Optional[SetupFlowConfirmRequest] = None,
-        *,
-        request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        request_auth: Optional[Dict[StrictStr, Any]] = None,
-        headers: Optional[Dict[StrictStr, Any]] = None,
-        idempotency_key: Optional[StrictStr] = None,
-        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> ApiResponse[SetupFlowResponse]:
-        """Confirm Setup Flow
-
-
-        :param setup_flow_id: (required)
-        :type setup_flow_id: str
-        :param setup_flow_confirm_request:
-        :type setup_flow_confirm_request: SetupFlowConfirmRequest
-        :param request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type request_timeout: int, tuple(int, int), optional
-        :param request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type request_auth: dict, optional
-        :param headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type headers: dict, optional
-        :param idempotency_key: an idempotency key for the request.
-                                 used to ensure the request is only processed once.
-        :type idempotency_key: str, optional
-        :param host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._confirm_setup_flow_serialize(
-            setup_flow_id=setup_flow_id,
-            setup_flow_confirm_request=setup_flow_confirm_request,
-            _request_auth=request_auth,
-            _content_type='application/json',
-            _headers=headers,
-            _idempotency_key=idempotency_key,
-            _host_index=host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupFlowResponse",
-            '422': "ErrorResponse",
-            '404': "ErrorResponse",
-            '400': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=request_timeout
-        )
-        response_data.read()
-        return self.api_client.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-
-
-    @validate_call
-    def confirm_setup_flow_without_preload_content(
-        self,
-        setup_flow_id: StrictStr,
-        setup_flow_confirm_request: Optional[SetupFlowConfirmRequest] = None,
-        *,
-        request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        request_auth: Optional[Dict[StrictStr, Any]] = None,
-        headers: Optional[Dict[StrictStr, Any]] = None,
-        idempotency_key: Optional[StrictStr] = None,
-        host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    ) -> RESTResponseType:
-        """Confirm Setup Flow
-
-
-        :param setup_flow_id: (required)
-        :type setup_flow_id: str
-        :param setup_flow_confirm_request:
-        :type setup_flow_confirm_request: SetupFlowConfirmRequest
-        :param request_timeout: timeout setting for this request. If one
-                                 number provided, it will be total request
-                                 timeout. It can also be a pair (tuple) of
-                                 (connection, read) timeouts.
-        :type request_timeout: int, tuple(int, int), optional
-        :param request_auth: set to override the auth_settings for an a single
-                              request; this effectively ignores the
-                              authentication in the spec for a single request.
-        :type request_auth: dict, optional
-        :param headers: set to override the headers for a single
-                         request; this effectively ignores the headers
-                         in the spec for a single request.
-        :type headers: dict, optional
-        :param idempotency_key: an idempotency key for the request.
-                                 used to ensure the request is only processed once.
-        :type idempotency_key: str, optional
-        :param host_index: set to override the host_index for a single
-                            request; this effectively ignores the host_index
-                            in the spec for a single request.
-        :type host_index: int, optional
-        :return: Returns the result object.
-        """ # noqa: E501
-
-        _param = self._confirm_setup_flow_serialize(
-            setup_flow_id=setup_flow_id,
-            setup_flow_confirm_request=setup_flow_confirm_request,
-            _request_auth=request_auth,
-            _content_type='application/json',
-            _headers=headers,
-            _idempotency_key=idempotency_key,
-            _host_index=host_index
-        )
-
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "SetupFlowResponse",
-            '422': "ErrorResponse",
-            '404': "ErrorResponse",
-            '400': "ErrorResponse",
-        }
-        response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=request_timeout
-        )
-        return response_data.response
-
-
-    def _confirm_setup_flow_serialize(
-        self,
-        setup_flow_id,
-        setup_flow_confirm_request,
-        _request_auth,
-        _content_type,
-        _headers,
-        _idempotency_key,
-        _host_index,
-    ) -> RequestSerialized:
-
-        _host = None
-
-        _collection_formats: Dict[str, str] = {
-        }
-
-        _path_params: Dict[str, str] = {}
-        _query_params: List[Tuple[str, str]] = []
-        _header_params: Dict[str, Optional[str]] = _headers or {}
-        if _idempotency_key is not None:
-            _header_params['Idempotency-Key'] = _idempotency_key
-        _form_params: List[Tuple[str, str]] = []
-        _files: Dict[
-            str, Union[str, bytes, List[str], List[bytes], List[Tuple[str, bytes]]]
-        ] = {}
-        _body_params: Optional[bytes] = None
-
-        # process the path parameters
-        if setup_flow_id is not None:
-            _path_params['setup_flow_id'] = setup_flow_id
-        # process the query parameters
-        # process the header parameters
-        # process the form parameters
-        # process the body parameter
-        if setup_flow_confirm_request is not None:
-            _body_params = setup_flow_confirm_request
-
-
-        # set the HTTP header `Accept`
-        if 'Accept' not in _header_params:
-            _header_params['Accept'] = self.api_client.select_header_accept(
-                [
-                    'application/json', 
-                    'application/problem+json'
-                ]
-            )
-
-        # set the HTTP header `Content-Type`
-        if _content_type:
-            _header_params['Content-Type'] = _content_type
-        else:
-            _default_content_type = (
-                self.api_client.select_header_content_type(
-                    [
-                        'application/json'
-                    ]
-                )
-            )
-            if _default_content_type is not None:
-                _header_params['Content-Type'] = _default_content_type
-
-        # authentication setting
-        _auth_settings: List[str] = [
-            'HTTPBasic', 
-            'HTTPBearer'
-        ]
-
-        return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/v2/setup_flows/{setup_flow_id}/confirm',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1023,6 +713,7 @@ class SetupFlowsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SetupFlowListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1101,6 +792,7 @@ class SetupFlowsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SetupFlowListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1179,6 +871,7 @@ class SetupFlowsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "SetupFlowListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

@@ -30,12 +30,12 @@ class PaymentMethodCardCreateRequest(BaseModel):
     """
     PaymentMethodCardCreateRequest
     """ # noqa: E501
-    customer: Optional[StrictStr] = Field(default=None, description="顧客ID")
+    customer_id: Optional[StrictStr] = Field(default=None, description="顧客ID")
     billing_details: PaymentMethodCardBillingDetailsRequest = Field(description="請求先情報")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     type: StrictStr = Field(description="クレジットカード決済の場合は `card` を指定します。")
     card: PaymentMethodCreateCardDetailsRequest = Field(description="カード情報")
-    __properties: ClassVar[List[str]] = ["customer", "billing_details", "metadata", "type", "card"]
+    __properties: ClassVar[List[str]] = ["customer_id", "billing_details", "metadata", "type", "card"]
 
     @field_validator('type')
     def type_validate_enum(cls, value):
@@ -107,7 +107,7 @@ class PaymentMethodCardCreateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "customer": obj.get("customer"),
+            "customer_id": obj.get("customer_id"),
             "billing_details": PaymentMethodCardBillingDetailsRequest.from_dict(obj["billing_details"]) if obj.get("billing_details") is not None else None,
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))

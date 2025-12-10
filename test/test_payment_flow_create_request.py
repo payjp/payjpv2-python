@@ -36,9 +36,9 @@ class TestPaymentFlowCreateRequest(unittest.TestCase):
         model = PaymentFlowCreateRequest()
         if include_optional:
             return PaymentFlowCreateRequest(
-                payment_method = '',
-                payment_method_options = payjpv2.models.payment_method_options_request.PaymentMethodOptionsRequest(
-                    card = payjpv2.models.payment_method_options_card_request.PaymentMethodOptionsCardRequest(
+                payment_method_id = '',
+                payment_method_options = payjpv2.models.payment_flow_payment_method_options_request.PaymentFlowPaymentMethodOptionsRequest(
+                    card = payjpv2.models.payment_flow_payment_method_options_card_request.PaymentFlowPaymentMethodOptionsCardRequest(
                         request_extended_authorization = 'if_available', 
                         request_three_d_secure = 'any', ), ),
                 payment_method_types = [
@@ -47,7 +47,7 @@ class TestPaymentFlowCreateRequest(unittest.TestCase):
                 return_url = '',
                 description = '',
                 amount = 50.0,
-                customer = '',
+                customer_id = '',
                 confirm = True,
                 capture_method = 'automatic',
                 metadata = {

@@ -22,7 +22,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
 from payjpv2.models.metadata_value import MetadataValue
-from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
+from payjpv2.models.payment_flow_payment_method_options_request import PaymentFlowPaymentMethodOptionsRequest
 from payjpv2.models.payment_method_types import PaymentMethodTypes
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,15 +31,15 @@ class PaymentFlowUpdateRequest(BaseModel):
     """
     PaymentFlowUpdateRequest
     """ # noqa: E501
-    payment_method: Optional[StrictStr] = Field(default=None, description="支払い方法ID")
-    payment_method_options: Optional[PaymentMethodOptionsRequest] = Field(default=None, description="このPaymentFlowに固有の支払い方法の設定")
+    payment_method_id: Optional[StrictStr] = Field(default=None, description="支払い方法ID")
+    payment_method_options: Optional[PaymentFlowPaymentMethodOptionsRequest] = Field(default=None, description="このPaymentFlowに固有の支払い方法の設定")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。")
     return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。confirm=trueの場合のみ指定できます。")
     description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。ユーザーには表示されません。")
     amount: Optional[Annotated[int, Field(le=9999999, strict=True, ge=50)]] = Field(default=None, description="支払い予定の金額。50円以上9,999,999円以下である必要があります。支払い手段によって上限金額は異なります。")
-    customer: Optional[StrictStr] = Field(default=None, description="このPaymentFlowに属する顧客のID（存在する場合）。この顧客以外にすでに紐づけられている支払い方法はこのPaymentFlowでは使用できません。")
+    customer_id: Optional[StrictStr] = Field(default=None, description="このPaymentFlowに属する顧客のID（存在する場合）。この顧客以外にすでに紐づけられている支払い方法はこのPaymentFlowでは使用できません。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["payment_method", "payment_method_options", "payment_method_types", "return_url", "description", "amount", "customer", "metadata"]
+    __properties: ClassVar[List[str]] = ["payment_method_id", "payment_method_options", "payment_method_types", "return_url", "description", "amount", "customer_id", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -101,13 +101,13 @@ class PaymentFlowUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "payment_method": obj.get("payment_method"),
-            "payment_method_options": PaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
+            "payment_method_id": obj.get("payment_method_id"),
+            "payment_method_options": PaymentFlowPaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
             "return_url": obj.get("return_url"),
             "description": obj.get("description"),
             "amount": obj.get("amount"),
-            "customer": obj.get("customer"),
+            "customer_id": obj.get("customer_id"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()

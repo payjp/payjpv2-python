@@ -330,11 +330,8 @@ class StatementsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        owner: Annotated[Optional[StrictStr], Field(description="オーナータイプでフィルタ (merchant または tenant)")] = None,
-        source_transfer: Annotated[Optional[StrictStr], Field(description="送金元IDでフィルタ")] = None,
-        tenant: Annotated[Optional[StrictStr], Field(description="テナントIDでフィルタ")] = None,
         type: Annotated[Optional[StatementType], Field(description="明細タイプでフィルタ")] = None,
-        term: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -362,16 +359,10 @@ class StatementsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param owner: オーナータイプでフィルタ (merchant または tenant)
-        :type owner: str
-        :param source_transfer: 送金元IDでフィルタ
-        :type source_transfer: str
-        :param tenant: テナントIDでフィルタ
-        :type tenant: str
         :param type: 明細タイプでフィルタ
         :type type: StatementType
-        :param term: 期間IDでフィルタ
-        :type term: str
+        :param term_id: 期間IDでフィルタ
+        :type term_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -401,11 +392,8 @@ class StatementsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            owner=owner,
-            source_transfer=source_transfer,
-            tenant=tenant,
             type=type,
-            term=term,
+            term_id=term_id,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -437,11 +425,8 @@ class StatementsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        owner: Annotated[Optional[StrictStr], Field(description="オーナータイプでフィルタ (merchant または tenant)")] = None,
-        source_transfer: Annotated[Optional[StrictStr], Field(description="送金元IDでフィルタ")] = None,
-        tenant: Annotated[Optional[StrictStr], Field(description="テナントIDでフィルタ")] = None,
         type: Annotated[Optional[StatementType], Field(description="明細タイプでフィルタ")] = None,
-        term: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -469,16 +454,10 @@ class StatementsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param owner: オーナータイプでフィルタ (merchant または tenant)
-        :type owner: str
-        :param source_transfer: 送金元IDでフィルタ
-        :type source_transfer: str
-        :param tenant: テナントIDでフィルタ
-        :type tenant: str
         :param type: 明細タイプでフィルタ
         :type type: StatementType
-        :param term: 期間IDでフィルタ
-        :type term: str
+        :param term_id: 期間IDでフィルタ
+        :type term_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -508,11 +487,8 @@ class StatementsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            owner=owner,
-            source_transfer=source_transfer,
-            tenant=tenant,
             type=type,
-            term=term,
+            term_id=term_id,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -544,11 +520,8 @@ class StatementsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        owner: Annotated[Optional[StrictStr], Field(description="オーナータイプでフィルタ (merchant または tenant)")] = None,
-        source_transfer: Annotated[Optional[StrictStr], Field(description="送金元IDでフィルタ")] = None,
-        tenant: Annotated[Optional[StrictStr], Field(description="テナントIDでフィルタ")] = None,
         type: Annotated[Optional[StatementType], Field(description="明細タイプでフィルタ")] = None,
-        term: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -576,16 +549,10 @@ class StatementsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param owner: オーナータイプでフィルタ (merchant または tenant)
-        :type owner: str
-        :param source_transfer: 送金元IDでフィルタ
-        :type source_transfer: str
-        :param tenant: テナントIDでフィルタ
-        :type tenant: str
         :param type: 明細タイプでフィルタ
         :type type: StatementType
-        :param term: 期間IDでフィルタ
-        :type term: str
+        :param term_id: 期間IDでフィルタ
+        :type term_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -615,11 +582,8 @@ class StatementsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
-            owner=owner,
-            source_transfer=source_transfer,
-            tenant=tenant,
             type=type,
-            term=term,
+            term_id=term_id,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -646,11 +610,8 @@ class StatementsApi:
         limit,
         starting_after,
         ending_before,
-        owner,
-        source_transfer,
-        tenant,
         type,
-        term,
+        term_id,
         _request_auth,
         _content_type,
         _headers,
@@ -714,25 +675,13 @@ class StatementsApi:
             
             _query_params.append(('ending_before', ending_before))
             
-        if owner is not None:
-            
-            _query_params.append(('owner', owner))
-            
-        if source_transfer is not None:
-            
-            _query_params.append(('source_transfer', source_transfer))
-            
-        if tenant is not None:
-            
-            _query_params.append(('tenant', tenant))
-            
         if type is not None:
             
             _query_params.append(('type', type.value))
             
-        if term is not None:
+        if term_id is not None:
             
-            _query_params.append(('term', term))
+            _query_params.append(('term_id', term_id))
             
         # process the header parameters
         # process the form parameters

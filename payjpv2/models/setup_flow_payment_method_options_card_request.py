@@ -18,19 +18,27 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
-class LineItemAdjustableQuantityRequest(BaseModel):
+class SetupFlowPaymentMethodOptionsCardRequest(BaseModel):
     """
-    LineItemAdjustableQuantityRequest
+    SetupFlowPaymentMethodOptionsCardRequest
     """ # noqa: E501
-    enabled: Optional[StrictBool] = Field(default=None, description="数量が任意の 0 以上の整数に調整可能であれば、`true` を指定します。")
-    maximum: Optional[StrictInt] = Field(default=None, description="顧客が Checkout Session で購入できる最大数量です。デフォルトではこの値は 99 です。999,999 までの値を指定できます。")
-    minimum: Optional[StrictInt] = Field(default=None, description="顧客が Checkout Session で購入できる最小数量です。この値はデフォルトで 0 です。")
-    __properties: ClassVar[List[str]] = ["enabled", "maximum", "minimum"]
+    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 | ")
+    __properties: ClassVar[List[str]] = ["request_three_d_secure"]
+
+    @field_validator('request_three_d_secure')
+    def request_three_d_secure_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['automatic', 'any']):
+            raise ValueError("must be one of enum values ('automatic', 'any')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +57,7 @@ class LineItemAdjustableQuantityRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of LineItemAdjustableQuantityRequest from a JSON string"""
+        """Create an instance of SetupFlowPaymentMethodOptionsCardRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -74,7 +82,7 @@ class LineItemAdjustableQuantityRequest(BaseModel):
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of LineItemAdjustableQuantityRequest from a dict"""
+        """Create an instance of SetupFlowPaymentMethodOptionsCardRequest from a dict"""
         if obj is None:
             return None
 
@@ -82,9 +90,7 @@ class LineItemAdjustableQuantityRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "enabled": obj.get("enabled"),
-            "maximum": obj.get("maximum"),
-            "minimum": obj.get("minimum")
+            "request_three_d_secure": obj.get("request_three_d_secure")
         })
         return _obj
 

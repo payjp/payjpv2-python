@@ -14,12 +14,12 @@ Name | Type | Description | Notes
 **amount_capturable** | **int** |  | 
 **amount_received** | **int** |  | 
 **client_secret** | **str** | このPaymentFlowのクライアントシークレットです。フロントエンドで公開APIキーと合わせて使用しPaymentFlowの情報を取得や支払い処理を行います。**この値はこのPaymentFlowの支払いを行う顧客以外へ公開しないでください。**また保存やログへの記録なども行わないでください。 | 
-**customer** | **str** |  | 
+**customer_id** | **str** |  | 
 **description** | **str** |  | 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
-**payment_method** | **str** |  | 
+**payment_method_id** | **str** |  | 
 **payment_method_options** | **Dict[str, object]** |  | 
-**payment_method_types** | **List[str]** | このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。 | 
+**payment_method_types** | [**List[PaymentMethodTypes]**](PaymentMethodTypes.md) | このPaymentFlowで使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合は、PAY.JPは支払い方法の設定から利用可能な支払い方法を動的に表示します。 | 
 **status** | [**PaymentFlowStatus**](PaymentFlowStatus.md) | このPaymentFlowのステータスです。&lt;a href&#x3D;\&quot;https://docs.pay.jp/v2/payment_flows#status\&quot; target&#x3D;\&quot;_blank\&quot;&gt;ステータスの詳細についてはこちらをご覧ください。&lt;/a&gt;  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 | | 
 **next_action** | **Dict[str, object]** |  | 
 **return_url** | **str** |  | 

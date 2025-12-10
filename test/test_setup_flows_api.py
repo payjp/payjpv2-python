@@ -34,13 +34,6 @@ class TestSetupFlowsApi(unittest.TestCase):
         """
         pass
 
-    def test_confirm_setup_flow(self) -> None:
-        """Test case for confirm_setup_flow
-
-        Confirm Setup Flow
-        """
-        pass
-
     def test_create_setup_flow(self) -> None:
         """Test case for create_setup_flow
 

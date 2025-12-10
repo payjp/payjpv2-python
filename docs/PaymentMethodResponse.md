@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **object** | **str** |  | [optional] [default to 'payment_method']
 **id** | **str** | ID | 
 **type** | **str** |  | 
-**customer** | **str** |  | 
+**customer_id** | **str** |  | 
 **detached_at** | **datetime** |  | 
 **livemode** | **bool** | 本番環境かどうか | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 

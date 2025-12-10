@@ -12,24 +12,22 @@ Name | Type | Description | Notes
 **amount_total** | **int** |  | 
 **billing_address_collection** | [**BillingAddressCollection**](BillingAddressCollection.md) |  | 
 **cancel_url** | **str** |  | 
-**customer** | [**Customer**](Customer.md) |  | 
+**customer_id** | **str** |  | 
 **customer_email** | **str** |  | 
-**customer_details** | **Dict[str, object]** | &#x60;expand&#x60; パラメーターを指定した場合、顧客の詳細情報を含んだオブジェクトが返却されます。  | 説明 | |:---| | **email**: 顧客のメールアドレス |  | [optional] 
 **expires_at** | **datetime** |  | 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
 **locale** | [**Locale**](Locale.md) |  | 
-**payment_flow** | [**PaymentFlow**](PaymentFlow.md) |  | 
+**payment_flow_id** | **str** |  | [optional] 
 **payment_method_types** | [**List[PaymentMethodTypes]**](PaymentMethodTypes.md) |  | 
 **payment_method_options** | **Dict[str, object]** |  | 
-**setup_flow** | [**SetupFlow**](SetupFlow.md) |  | 
+**setup_flow_id** | **str** |  | [optional] 
 **submit_type** | [**CheckoutSessionSubmitType**](CheckoutSessionSubmitType.md) |  | 
-**mode** | [**CheckoutSessionMode**](CheckoutSessionMode.md) | Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 |  | 
-**ui_mode** | [**CheckoutSessionUIMode**](CheckoutSessionUIMode.md) | Checkout Session の UI モード。デフォルトは &#x60;hosted&#x60; です。&lt;br&gt;  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 |  | [optional] 
+**mode** | [**CheckoutSessionMode**](CheckoutSessionMode.md) | Checkout Session のモード  | 指定できる値 | |:---| | **payment**: 支払いモードでCheckout Sessionを作成します。 | | **setup**: セットアップモードでCheckout Sessionを作成します。 |  | 
+**ui_mode** | [**CheckoutSessionUIMode**](CheckoutSessionUIMode.md) | Checkout Session の UI モード。デフォルトは &#x60;hosted&#x60; です。&lt;br&gt;  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 |  | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
-**status** | [**CheckoutSessionStatus**](CheckoutSessionStatus.md) | チェックアウトセッションのステータス | [optional] 
-**line_items** | [**CheckoutSessionLineItemsResponse**](CheckoutSessionLineItemsResponse.md) |  | [optional] 
+**status** | [**CheckoutSessionStatus**](CheckoutSessionStatus.md) | チェックアウトセッションのステータス | 
 **success_url** | **str** |  | 
 **url** | **str** | URL | 
 

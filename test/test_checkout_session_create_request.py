@@ -37,16 +37,12 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
         if include_optional:
             return CheckoutSessionCreateRequest(
                 client_reference_id = '',
-                customer = '',
+                customer_id = '',
                 customer_email = '',
                 customer_creation = 'always',
                 line_items = [
                     payjpv2.models.line_item_request.LineItemRequest(
-                        adjustable_quantity = payjpv2.models.line_item_adjustable_quantity_request.LineItemAdjustableQuantityRequest(
-                            enabled = True, 
-                            maximum = 56, 
-                            minimum = 56, ), 
-                        price = '', 
+                        price_id = '', 
                         quantity = 56, 
                         tax_rates = [
                             ''
@@ -56,7 +52,6 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
                 metadata = {
                     'key' : null
                     },
-                return_url = '',
                 success_url = '',
                 cancel_url = '',
                 billing_address_collection = 'auto',
@@ -68,8 +63,8 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
                     metadata = {
                         'key' : null
                         }, ),
-                payment_method_options = payjpv2.models.payment_method_options_request.PaymentMethodOptionsRequest(
-                    card = payjpv2.models.payment_method_options_card_request.PaymentMethodOptionsCardRequest(
+                payment_method_options = payjpv2.models.checkout_session_payment_method_options_request.CheckoutSessionPaymentMethodOptionsRequest(
+                    card = payjpv2.models.checkout_session_payment_method_options_card_request.CheckoutSessionPaymentMethodOptionsCardRequest(
                         request_extended_authorization = 'if_available', 
                         request_three_d_secure = 'any', ), ),
                 payment_method_types = [

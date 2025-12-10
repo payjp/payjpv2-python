@@ -44,13 +44,13 @@ class TestPriceCreateRequest(unittest.TestCase):
                 id = '',
                 currency = 'jpy',
                 active = True,
-                product = '',
+                product_id = '',
                 unit_amount = 0.0
             )
         else:
             return PriceCreateRequest(
                 currency = 'jpy',
-                product = '',
+                product_id = '',
                 unit_amount = 0.0,
         )
         """

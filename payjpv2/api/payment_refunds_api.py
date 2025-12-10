@@ -403,6 +403,7 @@ class PaymentRefundsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentRefundListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -481,6 +482,7 @@ class PaymentRefundsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentRefundListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -559,6 +561,7 @@ class PaymentRefundsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentRefundListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

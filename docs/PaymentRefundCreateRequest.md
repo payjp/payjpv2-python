@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**payment_flow** | **str** | 返金対象となる PaymentFlow の ID | 
+**payment_flow_id** | **str** | 返金対象となる PaymentFlow の ID | 
 **amount** | **int** | 返金金額 | [optional] 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | キーバリューの任意のデータを格納できます。&lt;a href&#x3D;\&quot;https://docs.pay.jp/v2/metadata\&quot;&gt;詳細はメタデータのドキュメントを参照してください。&lt;/a&gt; | [optional] 
 **reason** | [**PaymentRefundReason**](PaymentRefundReason.md) | 返金理由  | 指定できる値 | |:---| | **duplicate**: 重複した支払い | | **fraudulent**: 不正な支払い | | **requested_by_customer**: 顧客の要求 | | [optional] 

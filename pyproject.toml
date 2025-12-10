@@ -1,6 +1,6 @@
 [project]
 name = "payjpv2"
-version = "0.0.2"
+version = "0.0.3"
 description = "PAY.JP Python SDK - A Python client library for PAY.JP v2 API"
 authors = [{name = "PAY.JP", email = "support@pay.jp"}]
 license = {text = "MIT"}
@@ -18,10 +18,10 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 dependencies = [
-    "urllib3 >= 1.25.3, < 3.0.0",
-    "python-dateutil >= 2.8.2",
-    "pydantic >= 2",
-    "typing-extensions >= 4.7.1",
+  "urllib3 (>=2.1.0,<3.0.0)",
+  "python-dateutil (>=2.8.2)",
+  "pydantic (>=2)",
+  "typing-extensions (>=4.7.1)",
 ]
 
 [project.optional-dependencies]

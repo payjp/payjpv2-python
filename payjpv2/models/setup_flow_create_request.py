@@ -18,9 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.setup_flow_payment_method_options_request import SetupFlowPaymentMethodOptionsRequest
 from payjpv2.models.usage import Usage
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,15 +30,13 @@ class SetupFlowCreateRequest(BaseModel):
     """
     SetupFlowCreateRequest
     """ # noqa: E501
-    confirm: Optional[StrictBool] = Field(default=False, description="SetupFlow をすぐに確定しようとする場合に `true` を設定します。このパラメーターのデフォルト値は `false` です。カードが登録済みの支払い方法である場合は、追加の認証が必要な場合に備えて `return_url` を指定できます。")
-    customer: Optional[StrictStr] = Field(default=None, description="この SetupFlow が属する顧客の ID。SetupFlow に PaymentMethod が設定されている場合、SetupFlow の設定が成功するとその PaymentMethod は顧客に紐付きます。別の顧客に紐付いている PaymentMethod をこの SetupFlow で使用することはできません。")
+    customer_id: Optional[StrictStr] = Field(default=None, description="この SetupFlow が属する顧客の ID。SetupFlow に PaymentMethod が設定されている場合、SetupFlow の設定が成功するとその PaymentMethod は顧客に紐付きます。別の顧客に紐付いている PaymentMethod をこの SetupFlow で使用することはできません。")
     description: Optional[StrictStr] = Field(default=None, description="説明。顧客に表示されます。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    payment_method_options: Optional[Dict[str, Any]] = Field(default=None, description="この SetupFlow の支払い方法の個別設定。")
-    payment_method_types: Optional[List[StrictStr]] = None
-    return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後、あるいはキャンセルした後にリダイレクトされるURL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。`confirm=true` の場合のみ指定できます。")
+    payment_method_options: Optional[SetupFlowPaymentMethodOptionsRequest] = Field(default=None, description="この SetupFlow の支払い方法の個別設定。")
+    payment_method_types: Optional[List[StrictStr]] = Field(default=None, description="この SetupFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法が自動的に設定されます。")
     usage: Optional[Usage] = Field(default=None, description="支払い方法が今後どのように使用されるかを指定します。指定されていない場合、この値はデフォルトで `off_session` になります。  | 指定できる値 | |:---| | **off_session**: 定期課金など、顧客がカートなどの決済フローにいるかどうか不明な場合は `off_session` を使用してください。 | | **on_session**: 顧客がカートなどの決済フローにいる場合にのみ支払い方法を利用する場合は `on_session` を使用してください。 |")
-    __properties: ClassVar[List[str]] = ["confirm", "customer", "description", "metadata", "payment_method_options", "payment_method_types", "return_url", "usage"]
+    __properties: ClassVar[List[str]] = ["customer_id", "description", "metadata", "payment_method_options", "payment_method_types", "usage"]
 
     @field_validator('payment_method_types')
     def payment_method_types_validate_enum(cls, value):
@@ -95,11 +94,9 @@ class SetupFlowCreateRequest(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
-        # set to None if payment_method_types (nullable) is None
-        # and model_fields_set contains the field
-        if self.payment_method_types is None and "payment_method_types" in self.model_fields_set:
-            _dict['payment_method_types'] = None
-
+        # override the default output from pydantic by calling `to_dict()` of payment_method_options
+        if self.payment_method_options:
+            _dict['payment_method_options'] = self.payment_method_options.to_dict()
         return _dict
 
     @classmethod
@@ -112,8 +109,7 @@ class SetupFlowCreateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "confirm": obj.get("confirm") if obj.get("confirm") is not None else False,
-            "customer": obj.get("customer"),
+            "customer_id": obj.get("customer_id"),
             "description": obj.get("description"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
@@ -121,9 +117,8 @@ class SetupFlowCreateRequest(BaseModel):
             )
             if obj.get("metadata") is not None
             else None,
-            "payment_method_options": obj.get("payment_method_options"),
+            "payment_method_options": SetupFlowPaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
-            "return_url": obj.get("return_url"),
             "usage": obj.get("usage")
         })
         return _obj

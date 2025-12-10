@@ -40,7 +40,7 @@ class TestProductDetailsResponse(unittest.TestCase):
                 object = 'product',
                 name = '',
                 active = True,
-                default_price = '',
+                default_price_id = '',
                 description = '',
                 unit_label = '',
                 url = ''
@@ -50,7 +50,7 @@ class TestProductDetailsResponse(unittest.TestCase):
                 id = '',
                 name = '',
                 active = True,
-                default_price = '',
+                default_price_id = '',
                 description = '',
                 unit_label = '',
                 url = '',

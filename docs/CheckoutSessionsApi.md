@@ -5,6 +5,7 @@ All URIs are relative to *https://api.pay.jp*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_checkout_session**](CheckoutSessionsApi.md#create_checkout_session) | **POST** /v2/checkout/sessions | Create Checkout Session
+[**get_all_checkout_session_line_items**](CheckoutSessionsApi.md#get_all_checkout_session_line_items) | **GET** /v2/checkout/sessions/{checkout_session_id}/line_items | Get All Checkout Session Line Items
 [**get_all_checkout_sessions**](CheckoutSessionsApi.md#get_all_checkout_sessions) | **GET** /v2/checkout/sessions | Get All Checkout Sessions
 [**get_checkout_session**](CheckoutSessionsApi.md#get_checkout_session) | **GET** /v2/checkout/sessions/{checkout_session_id} | Get Checkout Session
 [**update_checkout_session**](CheckoutSessionsApi.md#update_checkout_session) | **POST** /v2/checkout/sessions/{checkout_session_id} | Update Checkout Session
@@ -92,6 +93,98 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**404** | Not Found |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_all_checkout_session_line_items**
+> CheckoutSessionLineItemListResponse get_all_checkout_session_line_items(checkout_session_id, limit=limit, starting_after=starting_after, ending_before=ending_before)
+
+Get All Checkout Session Line Items
+
+### Example
+
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
+
+```python
+import payjpv2
+from payjpv2.models.checkout_session_line_item_list_response import CheckoutSessionLineItemListResponse
+from payjpv2.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.pay.jp
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payjpv2.Configuration(
+    host = "https://api.pay.jp"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payjpv2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payjpv2.CheckoutSessionsApi(api_client)
+    checkout_session_id = 'checkout_session_id_example' # str | 
+    limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
+    starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
+    ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
+
+    try:
+        # Get All Checkout Session Line Items
+        api_response = api_instance.get_all_checkout_session_line_items(checkout_session_id, limit=limit, starting_after=starting_after, ending_before=ending_before)
+        print("The response of CheckoutSessionsApi->get_all_checkout_session_line_items:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CheckoutSessionsApi->get_all_checkout_session_line_items: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **checkout_session_id** | **str**|  | 
+ **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
+ **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
+ **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
+
+### Return type
+
+[**CheckoutSessionLineItemListResponse**](CheckoutSessionLineItemListResponse.md)
+
+### Authorization
+
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**400** | Resource Missing |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -186,7 +279,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_checkout_session**
-> CheckoutSessionDetailsResponse get_checkout_session(checkout_session_id, expand=expand)
+> CheckoutSessionDetailsResponse get_checkout_session(checkout_session_id)
 
 Get Checkout Session
 
@@ -228,11 +321,10 @@ with payjpv2.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = payjpv2.CheckoutSessionsApi(api_client)
     checkout_session_id = 'checkout_session_id_example' # str | 
-    expand = ['expand_example'] # List[str] | レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。 (optional)
 
     try:
         # Get Checkout Session
-        api_response = api_instance.get_checkout_session(checkout_session_id, expand=expand)
+        api_response = api_instance.get_checkout_session(checkout_session_id)
         print("The response of CheckoutSessionsApi->get_checkout_session:\n")
         pprint(api_response)
     except Exception as e:
@@ -247,7 +339,6 @@ with payjpv2.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **checkout_session_id** | **str**|  | 
- **expand** | [**List[str]**](str.md)| レスポンス返却時に展開したいオブジェクト名。指定したオブジェクトを同時に取得し、レスポンスに乗せて返却します。 | [optional] 
 
 ### Return type
 

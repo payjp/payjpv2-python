@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** | 更新時の日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新時の日時 (UTC, ISO 8601 形式) | 
 **term** | [**TermResponse**](TermResponse.md) |  | 
-**balance** | **str** |  | 
+**balance_id** | **str** |  | 
 **items** | [**List[StatementItemResponse]**](StatementItemResponse.md) | 明細項目のリスト | 
 **net** | **int** | 含まれるstatement_itemの金額合計 | 
 

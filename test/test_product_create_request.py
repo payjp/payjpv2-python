@@ -36,7 +36,7 @@ class TestProductCreateRequest(unittest.TestCase):
         model = ProductCreateRequest()
         if include_optional:
             return ProductCreateRequest(
-                default_price = '',
+                default_price_id = '',
                 description = '',
                 unit_label = '',
                 url = '',

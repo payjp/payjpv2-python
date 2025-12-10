@@ -38,10 +38,10 @@ class PaymentRefundResponse(BaseModel):
     livemode: StrictBool = Field(description="本番環境かどうか")
     amount: StrictInt = Field(description="返金金額")
     status: PaymentRefundStatus = Field(description="返金ステータス  <a href=\"https://docs.pay.jp/v2/payment_refunds#refund_status\" target=\"_blank\">返金ステータスの詳細についてはこちらを参照してください。</a>  | 指定できる値 | |:---| | **succeeded**: 成功 | | **failed**: 失敗 | | **pending**: 保留中 | | **canceled**: キャンセル |")
-    payment_flow: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
+    payment_flow_id: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
     reason: Optional[PaymentRefundReason]
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "status", "payment_flow", "reason", "metadata"]
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "status", "payment_flow_id", "reason", "metadata"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -122,7 +122,7 @@ class PaymentRefundResponse(BaseModel):
             "livemode": obj.get("livemode"),
             "amount": obj.get("amount"),
             "status": obj.get("status"),
-            "payment_flow": obj.get("payment_flow"),
+            "payment_flow_id": obj.get("payment_flow_id"),
             "reason": obj.get("reason"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))

@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 # import apis into sdk package
 from payjpv2.api.balances_api import BalancesApi
@@ -57,16 +57,17 @@ from payjpv2.models.card_config_request import CardConfigRequest
 from payjpv2.models.checkout_session_create_request import CheckoutSessionCreateRequest
 from payjpv2.models.checkout_session_details_response import CheckoutSessionDetailsResponse
 from payjpv2.models.checkout_session_line_item_data_response import CheckoutSessionLineItemDataResponse
-from payjpv2.models.checkout_session_line_items_response import CheckoutSessionLineItemsResponse
+from payjpv2.models.checkout_session_line_item_list_response import CheckoutSessionLineItemListResponse
 from payjpv2.models.checkout_session_list_response import CheckoutSessionListResponse
 from payjpv2.models.checkout_session_mode import CheckoutSessionMode
+from payjpv2.models.checkout_session_payment_method_options_card_request import CheckoutSessionPaymentMethodOptionsCardRequest
+from payjpv2.models.checkout_session_payment_method_options_request import CheckoutSessionPaymentMethodOptionsRequest
 from payjpv2.models.checkout_session_status import CheckoutSessionStatus
 from payjpv2.models.checkout_session_submit_type import CheckoutSessionSubmitType
 from payjpv2.models.checkout_session_ui_mode import CheckoutSessionUIMode
 from payjpv2.models.checkout_session_update_request import CheckoutSessionUpdateRequest
 from payjpv2.models.country import Country
 from payjpv2.models.currency import Currency
-from payjpv2.models.customer import Customer
 from payjpv2.models.customer_create_request import CustomerCreateRequest
 from payjpv2.models.customer_creation import CustomerCreation
 from payjpv2.models.customer_list_response import CustomerListResponse
@@ -76,18 +77,18 @@ from payjpv2.models.display_preference_request import DisplayPreferenceRequest
 from payjpv2.models.error_response import ErrorResponse
 from payjpv2.models.event_list_response import EventListResponse
 from payjpv2.models.event_response import EventResponse
-from payjpv2.models.line_item_adjustable_quantity_request import LineItemAdjustableQuantityRequest
 from payjpv2.models.line_item_request import LineItemRequest
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.pay_pay_config_request import PayPayConfigRequest
-from payjpv2.models.payment_flow import PaymentFlow
 from payjpv2.models.payment_flow_cancel_request import PaymentFlowCancelRequest
 from payjpv2.models.payment_flow_capture_request import PaymentFlowCaptureRequest
 from payjpv2.models.payment_flow_confirm_request import PaymentFlowConfirmRequest
 from payjpv2.models.payment_flow_create_request import PaymentFlowCreateRequest
 from payjpv2.models.payment_flow_data_request import PaymentFlowDataRequest
 from payjpv2.models.payment_flow_list_response import PaymentFlowListResponse
+from payjpv2.models.payment_flow_payment_method_options_card_request import PaymentFlowPaymentMethodOptionsCardRequest
+from payjpv2.models.payment_flow_payment_method_options_request import PaymentFlowPaymentMethodOptionsRequest
 from payjpv2.models.payment_flow_response import PaymentFlowResponse
 from payjpv2.models.payment_flow_status import PaymentFlowStatus
 from payjpv2.models.payment_flow_update_request import PaymentFlowUpdateRequest
@@ -111,8 +112,6 @@ from payjpv2.models.payment_method_configuration_update_request import PaymentMe
 from payjpv2.models.payment_method_create_card_details_request import PaymentMethodCreateCardDetailsRequest
 from payjpv2.models.payment_method_create_request import PaymentMethodCreateRequest
 from payjpv2.models.payment_method_list_response import PaymentMethodListResponse
-from payjpv2.models.payment_method_options_card_request import PaymentMethodOptionsCardRequest
-from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
 from payjpv2.models.payment_method_pay_pay_create_request import PaymentMethodPayPayCreateRequest
 from payjpv2.models.payment_method_pay_pay_response import PaymentMethodPayPayResponse
 from payjpv2.models.payment_method_pay_pay_update_request import PaymentMethodPayPayUpdateRequest
@@ -138,13 +137,13 @@ from payjpv2.models.product_deleted_response import ProductDeletedResponse
 from payjpv2.models.product_details_response import ProductDetailsResponse
 from payjpv2.models.product_list_response import ProductListResponse
 from payjpv2.models.product_update_request import ProductUpdateRequest
-from payjpv2.models.setup_flow import SetupFlow
 from payjpv2.models.setup_flow_cancel_request import SetupFlowCancelRequest
 from payjpv2.models.setup_flow_cancellation_reason import SetupFlowCancellationReason
-from payjpv2.models.setup_flow_confirm_request import SetupFlowConfirmRequest
 from payjpv2.models.setup_flow_create_request import SetupFlowCreateRequest
 from payjpv2.models.setup_flow_data_request import SetupFlowDataRequest
 from payjpv2.models.setup_flow_list_response import SetupFlowListResponse
+from payjpv2.models.setup_flow_payment_method_options_card_request import SetupFlowPaymentMethodOptionsCardRequest
+from payjpv2.models.setup_flow_payment_method_options_request import SetupFlowPaymentMethodOptionsRequest
 from payjpv2.models.setup_flow_response import SetupFlowResponse
 from payjpv2.models.setup_flow_status import SetupFlowStatus
 from payjpv2.models.setup_flow_update_request import SetupFlowUpdateRequest

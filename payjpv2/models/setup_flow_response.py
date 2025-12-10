@@ -22,6 +22,7 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.payment_method_types import PaymentMethodTypes
 from payjpv2.models.setup_flow_status import SetupFlowStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -36,17 +37,17 @@ class SetupFlowResponse(BaseModel):
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
     livemode: StrictBool = Field(description="本番環境かどうか")
     client_secret: StrictStr = Field(description="この SetupFlow のクライアントシークレットです。フロントエンドで公開鍵と合わせて使用し、SetupFlow の取得や支払い処理を行います。**この値はこの SetupFlow の支払いを行う顧客以外へ公開しないでください。")
-    customer: Optional[StrictStr]
+    customer_id: Optional[StrictStr]
     description: Optional[StrictStr]
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
-    payment_method: Optional[StrictStr]
+    payment_method_id: Optional[StrictStr]
     payment_method_options: Optional[Dict[str, Any]]
-    payment_method_types: List[StrictStr] = Field(description="この SetupFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法が自動的に設定されます。")
+    payment_method_types: List[PaymentMethodTypes] = Field(description="この SetupFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法が自動的に設定されます。")
     status: SetupFlowStatus = Field(description="この SetupFlow のステータスです。<a href=\"https://docs.pay.jp/v2/setup_flows#status\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **succeeded**: 成功しました。 | | **canceled**: キャンセルされました。 |")
     next_action: Optional[Dict[str, Any]]
     return_url: Optional[StrictStr]
     last_setup_error: Optional[Dict[str, Any]]
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "client_secret", "customer", "description", "metadata", "payment_method", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "last_setup_error"]
+    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "client_secret", "customer_id", "description", "metadata", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "last_setup_error"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -103,20 +104,20 @@ class SetupFlowResponse(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
-        # set to None if customer (nullable) is None
+        # set to None if customer_id (nullable) is None
         # and model_fields_set contains the field
-        if self.customer is None and "customer" in self.model_fields_set:
-            _dict['customer'] = None
+        if self.customer_id is None and "customer_id" in self.model_fields_set:
+            _dict['customer_id'] = None
 
         # set to None if description (nullable) is None
         # and model_fields_set contains the field
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
-        # set to None if payment_method (nullable) is None
+        # set to None if payment_method_id (nullable) is None
         # and model_fields_set contains the field
-        if self.payment_method is None and "payment_method" in self.model_fields_set:
-            _dict['payment_method'] = None
+        if self.payment_method_id is None and "payment_method_id" in self.model_fields_set:
+            _dict['payment_method_id'] = None
 
         # set to None if payment_method_options (nullable) is None
         # and model_fields_set contains the field
@@ -156,7 +157,7 @@ class SetupFlowResponse(BaseModel):
             "updated_at": obj.get("updated_at"),
             "livemode": obj.get("livemode"),
             "client_secret": obj.get("client_secret"),
-            "customer": obj.get("customer"),
+            "customer_id": obj.get("customer_id"),
             "description": obj.get("description"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
@@ -164,7 +165,7 @@ class SetupFlowResponse(BaseModel):
             )
             if obj.get("metadata") is not None
             else None,
-            "payment_method": obj.get("payment_method"),
+            "payment_method_id": obj.get("payment_method_id"),
             "payment_method_options": obj.get("payment_method_options"),
             "payment_method_types": obj.get("payment_method_types"),
             "status": obj.get("status"),

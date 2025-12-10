@@ -34,11 +34,11 @@ class CustomerResponse(BaseModel):
     livemode: StrictBool = Field(description="本番環境かどうか")
     email: Optional[StrictStr]
     description: Optional[StrictStr]
-    default_payment_method: Optional[StrictStr]
+    default_payment_method_id: Optional[StrictStr]
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "email", "description", "default_payment_method", "metadata", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "email", "description", "default_payment_method_id", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -105,10 +105,10 @@ class CustomerResponse(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
-        # set to None if default_payment_method (nullable) is None
+        # set to None if default_payment_method_id (nullable) is None
         # and model_fields_set contains the field
-        if self.default_payment_method is None and "default_payment_method" in self.model_fields_set:
-            _dict['default_payment_method'] = None
+        if self.default_payment_method_id is None and "default_payment_method_id" in self.model_fields_set:
+            _dict['default_payment_method_id'] = None
 
         return _dict
 
@@ -127,7 +127,7 @@ class CustomerResponse(BaseModel):
             "livemode": obj.get("livemode"),
             "email": obj.get("email"),
             "description": obj.get("description"),
-            "default_payment_method": obj.get("default_payment_method"),
+            "default_payment_method_id": obj.get("default_payment_method_id"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()

@@ -42,7 +42,7 @@ class TestCustomerCreateRequest(unittest.TestCase):
                     'key' : null
                     },
                 id = 'z',
-                payment_method = ''
+                payment_method_id = ''
             )
         else:
             return CustomerCreateRequest(

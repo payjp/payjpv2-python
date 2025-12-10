@@ -36,9 +36,9 @@ class PriceCreateRequest(BaseModel):
     id: Optional[StrictStr] = Field(default=None, description="料金ID")
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
     active: Optional[StrictBool] = Field(default=True, description="価格が有効かどうか。デフォルトは `true`。")
-    product: StrictStr = Field(description="この価格が紐付く商品のID。")
+    product_id: StrictStr = Field(description="この価格が紐付く商品のID。")
     unit_amount: Annotated[int, Field(strict=True, ge=0)] = Field(description="価格の単価。0以上の整数となります。")
-    __properties: ClassVar[List[str]] = ["nickname", "lookup_key", "metadata", "id", "currency", "active", "product", "unit_amount"]
+    __properties: ClassVar[List[str]] = ["nickname", "lookup_key", "metadata", "id", "currency", "active", "product_id", "unit_amount"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -108,7 +108,7 @@ class PriceCreateRequest(BaseModel):
             "id": obj.get("id"),
             "currency": obj.get("currency"),
             "active": obj.get("active") if obj.get("active") is not None else True,
-            "product": obj.get("product"),
+            "product_id": obj.get("product_id"),
             "unit_amount": obj.get("unit_amount")
         })
         return _obj

@@ -36,7 +36,7 @@ class TestPaymentRefundCreateRequest(unittest.TestCase):
         model = PaymentRefundCreateRequest()
         if include_optional:
             return PaymentRefundCreateRequest(
-                payment_flow = '',
+                payment_flow_id = '',
                 amount = 0.0,
                 metadata = {
                     'key' : null
@@ -45,7 +45,7 @@ class TestPaymentRefundCreateRequest(unittest.TestCase):
             )
         else:
             return PaymentRefundCreateRequest(
-                payment_flow = '',
+                payment_flow_id = '',
         )
         """
 

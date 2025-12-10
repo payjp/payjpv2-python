@@ -33,14 +33,14 @@ class PaymentMethodPayPayResponse(BaseModel):
     object: Optional[StrictStr] = 'payment_method'
     id: StrictStr = Field(description="ID")
     type: StrictStr
-    customer: Optional[StrictStr]
+    customer_id: Optional[StrictStr]
     detached_at: Optional[datetime]
     livemode: StrictBool = Field(description="本番環境かどうか")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     billing_details: PaymentMethodBillingDetailsResponse = Field(description="請求先情報")
-    __properties: ClassVar[List[str]] = ["object", "id", "type", "customer", "detached_at", "livemode", "created_at", "updated_at", "metadata", "billing_details"]
+    __properties: ClassVar[List[str]] = ["object", "id", "type", "customer_id", "detached_at", "livemode", "created_at", "updated_at", "metadata", "billing_details"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -107,10 +107,10 @@ class PaymentMethodPayPayResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of billing_details
         if self.billing_details:
             _dict['billing_details'] = self.billing_details.to_dict()
-        # set to None if customer (nullable) is None
+        # set to None if customer_id (nullable) is None
         # and model_fields_set contains the field
-        if self.customer is None and "customer" in self.model_fields_set:
-            _dict['customer'] = None
+        if self.customer_id is None and "customer_id" in self.model_fields_set:
+            _dict['customer_id'] = None
 
         # set to None if detached_at (nullable) is None
         # and model_fields_set contains the field
@@ -132,7 +132,7 @@ class PaymentMethodPayPayResponse(BaseModel):
             "object": obj.get("object") if obj.get("object") is not None else 'payment_method',
             "id": obj.get("id"),
             "type": obj.get("type"),
-            "customer": obj.get("customer"),
+            "customer_id": obj.get("customer_id"),
             "detached_at": obj.get("detached_at"),
             "livemode": obj.get("livemode"),
             "created_at": obj.get("created_at"),

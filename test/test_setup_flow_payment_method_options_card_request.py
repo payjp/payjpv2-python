@@ -15,10 +15,10 @@
 
 import unittest
 
-from payjpv2.models.payment_method_options_request import PaymentMethodOptionsRequest
+from payjpv2.models.setup_flow_payment_method_options_card_request import SetupFlowPaymentMethodOptionsCardRequest
 
-class TestPaymentMethodOptionsRequest(unittest.TestCase):
-    """PaymentMethodOptionsRequest unit test stubs"""
+class TestSetupFlowPaymentMethodOptionsCardRequest(unittest.TestCase):
+    """SetupFlowPaymentMethodOptionsCardRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,27 +26,25 @@ class TestPaymentMethodOptionsRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> PaymentMethodOptionsRequest:
-        """Test PaymentMethodOptionsRequest
+    def make_instance(self, include_optional) -> SetupFlowPaymentMethodOptionsCardRequest:
+        """Test SetupFlowPaymentMethodOptionsCardRequest
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `PaymentMethodOptionsRequest`
+        # uncomment below to create an instance of `SetupFlowPaymentMethodOptionsCardRequest`
         """
-        model = PaymentMethodOptionsRequest()
+        model = SetupFlowPaymentMethodOptionsCardRequest()
         if include_optional:
-            return PaymentMethodOptionsRequest(
-                card = payjpv2.models.payment_method_options_card_request.PaymentMethodOptionsCardRequest(
-                    request_extended_authorization = 'if_available', 
-                    request_three_d_secure = 'any', )
+            return SetupFlowPaymentMethodOptionsCardRequest(
+                request_three_d_secure = 'automatic'
             )
         else:
-            return PaymentMethodOptionsRequest(
+            return SetupFlowPaymentMethodOptionsCardRequest(
         )
         """
 
-    def testPaymentMethodOptionsRequest(self):
-        """Test PaymentMethodOptionsRequest"""
+    def testSetupFlowPaymentMethodOptionsCardRequest(self):
+        """Test SetupFlowPaymentMethodOptionsCardRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

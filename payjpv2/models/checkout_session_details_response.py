@@ -22,18 +22,14 @@ from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.billing_address_collection import BillingAddressCollection
-from payjpv2.models.checkout_session_line_items_response import CheckoutSessionLineItemsResponse
 from payjpv2.models.checkout_session_mode import CheckoutSessionMode
 from payjpv2.models.checkout_session_status import CheckoutSessionStatus
 from payjpv2.models.checkout_session_submit_type import CheckoutSessionSubmitType
 from payjpv2.models.checkout_session_ui_mode import CheckoutSessionUIMode
 from payjpv2.models.currency import Currency
-from payjpv2.models.customer import Customer
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
-from payjpv2.models.payment_flow import PaymentFlow
 from payjpv2.models.payment_method_types import PaymentMethodTypes
-from payjpv2.models.setup_flow import SetupFlow
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -48,27 +44,25 @@ class CheckoutSessionDetailsResponse(BaseModel):
     amount_total: Optional[StrictInt]
     billing_address_collection: Optional[BillingAddressCollection]
     cancel_url: Optional[StrictStr]
-    customer: Optional[Customer]
+    customer_id: Optional[StrictStr]
     customer_email: Optional[StrictStr]
-    customer_details: Optional[Dict[str, Any]] = Field(default=None, description="`expand` パラメーターを指定した場合、顧客の詳細情報を含んだオブジェクトが返却されます。  | 説明 | |:---| | **email**: 顧客のメールアドレス | ")
     expires_at: Optional[datetime]
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
     locale: Optional[Locale]
-    payment_flow: Optional[PaymentFlow]
+    payment_flow_id: Optional[StrictStr] = None
     payment_method_types: Optional[List[PaymentMethodTypes]]
     payment_method_options: Optional[Dict[str, Any]]
-    setup_flow: Optional[SetupFlow]
+    setup_flow_id: Optional[StrictStr] = None
     submit_type: Optional[CheckoutSessionSubmitType]
-    mode: CheckoutSessionMode = Field(description="Checkout Session のモード  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
-    ui_mode: Optional[CheckoutSessionUIMode] = Field(default=None, description="Checkout Session の UI モード。デフォルトは `hosted` です。<br>  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
+    mode: CheckoutSessionMode = Field(description="Checkout Session のモード  | 指定できる値 | |:---| | **payment**: 支払いモードでCheckout Sessionを作成します。 | | **setup**: セットアップモードでCheckout Sessionを作成します。 | ")
+    ui_mode: CheckoutSessionUIMode = Field(description="Checkout Session の UI モード。デフォルトは `hosted` です。<br>  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
-    status: Optional[CheckoutSessionStatus] = Field(default=None, description="チェックアウトセッションのステータス")
-    line_items: Optional[CheckoutSessionLineItemsResponse] = None
+    status: CheckoutSessionStatus = Field(description="チェックアウトセッションのステータス")
     success_url: Optional[StrictStr]
     url: StrictStr = Field(description="URL")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "amount_subtotal", "amount_total", "billing_address_collection", "cancel_url", "customer", "customer_email", "customer_details", "expires_at", "currency", "locale", "payment_flow", "payment_method_types", "payment_method_options", "setup_flow", "submit_type", "mode", "ui_mode", "created_at", "updated_at", "metadata", "status", "line_items", "success_url", "url"]
+    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "amount_subtotal", "amount_total", "billing_address_collection", "cancel_url", "customer_id", "customer_email", "expires_at", "currency", "locale", "payment_flow_id", "payment_method_types", "payment_method_options", "setup_flow_id", "submit_type", "mode", "ui_mode", "created_at", "updated_at", "metadata", "status", "success_url", "url"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -118,15 +112,6 @@ class CheckoutSessionDetailsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of customer
-        if self.customer:
-            _dict['customer'] = self.customer.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of payment_flow
-        if self.payment_flow:
-            _dict['payment_flow'] = self.payment_flow.to_dict()
-        # override the default output from pydantic by calling `to_dict()` of setup_flow
-        if self.setup_flow:
-            _dict['setup_flow'] = self.setup_flow.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -134,9 +119,6 @@ class CheckoutSessionDetailsResponse(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
-        # override the default output from pydantic by calling `to_dict()` of line_items
-        if self.line_items:
-            _dict['line_items'] = self.line_items.to_dict()
         # set to None if amount_subtotal (nullable) is None
         # and model_fields_set contains the field
         if self.amount_subtotal is None and "amount_subtotal" in self.model_fields_set:
@@ -157,10 +139,10 @@ class CheckoutSessionDetailsResponse(BaseModel):
         if self.cancel_url is None and "cancel_url" in self.model_fields_set:
             _dict['cancel_url'] = None
 
-        # set to None if customer (nullable) is None
+        # set to None if customer_id (nullable) is None
         # and model_fields_set contains the field
-        if self.customer is None and "customer" in self.model_fields_set:
-            _dict['customer'] = None
+        if self.customer_id is None and "customer_id" in self.model_fields_set:
+            _dict['customer_id'] = None
 
         # set to None if customer_email (nullable) is None
         # and model_fields_set contains the field
@@ -177,10 +159,10 @@ class CheckoutSessionDetailsResponse(BaseModel):
         if self.locale is None and "locale" in self.model_fields_set:
             _dict['locale'] = None
 
-        # set to None if payment_flow (nullable) is None
+        # set to None if payment_flow_id (nullable) is None
         # and model_fields_set contains the field
-        if self.payment_flow is None and "payment_flow" in self.model_fields_set:
-            _dict['payment_flow'] = None
+        if self.payment_flow_id is None and "payment_flow_id" in self.model_fields_set:
+            _dict['payment_flow_id'] = None
 
         # set to None if payment_method_types (nullable) is None
         # and model_fields_set contains the field
@@ -192,20 +174,15 @@ class CheckoutSessionDetailsResponse(BaseModel):
         if self.payment_method_options is None and "payment_method_options" in self.model_fields_set:
             _dict['payment_method_options'] = None
 
-        # set to None if setup_flow (nullable) is None
+        # set to None if setup_flow_id (nullable) is None
         # and model_fields_set contains the field
-        if self.setup_flow is None and "setup_flow" in self.model_fields_set:
-            _dict['setup_flow'] = None
+        if self.setup_flow_id is None and "setup_flow_id" in self.model_fields_set:
+            _dict['setup_flow_id'] = None
 
         # set to None if submit_type (nullable) is None
         # and model_fields_set contains the field
         if self.submit_type is None and "submit_type" in self.model_fields_set:
             _dict['submit_type'] = None
-
-        # set to None if line_items (nullable) is None
-        # and model_fields_set contains the field
-        if self.line_items is None and "line_items" in self.model_fields_set:
-            _dict['line_items'] = None
 
         # set to None if success_url (nullable) is None
         # and model_fields_set contains the field
@@ -231,16 +208,15 @@ class CheckoutSessionDetailsResponse(BaseModel):
             "amount_total": obj.get("amount_total"),
             "billing_address_collection": obj.get("billing_address_collection"),
             "cancel_url": obj.get("cancel_url"),
-            "customer": Customer.from_dict(obj["customer"]) if obj.get("customer") is not None else None,
+            "customer_id": obj.get("customer_id"),
             "customer_email": obj.get("customer_email"),
-            "customer_details": obj.get("customer_details"),
             "expires_at": obj.get("expires_at"),
             "currency": obj.get("currency"),
             "locale": obj.get("locale"),
-            "payment_flow": PaymentFlow.from_dict(obj["payment_flow"]) if obj.get("payment_flow") is not None else None,
+            "payment_flow_id": obj.get("payment_flow_id"),
             "payment_method_types": obj.get("payment_method_types"),
             "payment_method_options": obj.get("payment_method_options"),
-            "setup_flow": SetupFlow.from_dict(obj["setup_flow"]) if obj.get("setup_flow") is not None else None,
+            "setup_flow_id": obj.get("setup_flow_id"),
             "submit_type": obj.get("submit_type"),
             "mode": obj.get("mode"),
             "ui_mode": obj.get("ui_mode"),
@@ -253,7 +229,6 @@ class CheckoutSessionDetailsResponse(BaseModel):
             if obj.get("metadata") is not None
             else None,
             "status": obj.get("status"),
-            "line_items": CheckoutSessionLineItemsResponse.from_dict(obj["line_items"]) if obj.get("line_items") is not None else None,
             "success_url": obj.get("success_url"),
             "url": obj.get("url")
         })

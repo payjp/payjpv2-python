@@ -46,7 +46,7 @@ class TestCustomerListResponse(unittest.TestCase):
                         livemode = True, 
                         email = '', 
                         description = '', 
-                        default_payment_method = '', 
+                        default_payment_method_id = '', 
                         metadata = {
                             'key' : null
                             }, 
@@ -65,7 +65,7 @@ class TestCustomerListResponse(unittest.TestCase):
                         livemode = True, 
                         email = '', 
                         description = '', 
-                        default_payment_method = '', 
+                        default_payment_method_id = '', 
                         metadata = {
                             'key' : null
                             }, 

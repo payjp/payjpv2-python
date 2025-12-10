@@ -95,7 +95,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_statements**
-> StatementListResponse get_all_statements(since=since, until=until, limit=limit, starting_after=starting_after, ending_before=ending_before, owner=owner, source_transfer=source_transfer, tenant=tenant, type=type, term=term)
+> StatementListResponse get_all_statements(since=since, until=until, limit=limit, starting_after=starting_after, ending_before=ending_before, type=type, term_id=term_id)
 
 Get All Statements
 
@@ -142,15 +142,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
-    owner = 'owner_example' # str | オーナータイプでフィルタ (merchant または tenant) (optional)
-    source_transfer = 'source_transfer_example' # str | 送金元IDでフィルタ (optional)
-    tenant = 'tenant_example' # str | テナントIDでフィルタ (optional)
     type = payjpv2.StatementType() # StatementType | 明細タイプでフィルタ (optional)
-    term = 'term_example' # str | 期間IDでフィルタ (optional)
+    term_id = 'term_id_example' # str | 期間IDでフィルタ (optional)
 
     try:
         # Get All Statements
-        api_response = api_instance.get_all_statements(since=since, until=until, limit=limit, starting_after=starting_after, ending_before=ending_before, owner=owner, source_transfer=source_transfer, tenant=tenant, type=type, term=term)
+        api_response = api_instance.get_all_statements(since=since, until=until, limit=limit, starting_after=starting_after, ending_before=ending_before, type=type, term_id=term_id)
         print("The response of StatementsApi->get_all_statements:\n")
         pprint(api_response)
     except Exception as e:
@@ -169,11 +166,8 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
- **owner** | **str**| オーナータイプでフィルタ (merchant または tenant) | [optional] 
- **source_transfer** | **str**| 送金元IDでフィルタ | [optional] 
- **tenant** | **str**| テナントIDでフィルタ | [optional] 
  **type** | [**StatementType**](.md)| 明細タイプでフィルタ | [optional] 
- **term** | **str**| 期間IDでフィルタ | [optional] 
+ **term_id** | **str**| 期間IDでフィルタ | [optional] 
 
 ### Return type
 

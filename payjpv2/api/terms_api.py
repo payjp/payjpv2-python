@@ -46,7 +46,8 @@ class TermsApi:
     def get_all_terms(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         since_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以降のデータを取得")] = None,
         until_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以前のデータを取得")] = None,
         *,
@@ -68,8 +69,10 @@ class TermsApi:
 
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param since_start_at: start_atが指定した日付以降のデータを取得
         :type since_start_at: datetime
         :param until_start_at: start_atが指定した日付以前のデータを取得
@@ -99,7 +102,8 @@ class TermsApi:
 
         _param = self._get_all_terms_serialize(
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             since_start_at=since_start_at,
             until_start_at=until_start_at,
             _request_auth=request_auth,
@@ -112,6 +116,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -128,7 +133,8 @@ class TermsApi:
     def get_all_terms_with_http_info(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         since_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以降のデータを取得")] = None,
         until_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以前のデータを取得")] = None,
         *,
@@ -150,8 +156,10 @@ class TermsApi:
 
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param since_start_at: start_atが指定した日付以降のデータを取得
         :type since_start_at: datetime
         :param until_start_at: start_atが指定した日付以前のデータを取得
@@ -181,7 +189,8 @@ class TermsApi:
 
         _param = self._get_all_terms_serialize(
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             since_start_at=since_start_at,
             until_start_at=until_start_at,
             _request_auth=request_auth,
@@ -194,6 +203,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -210,7 +220,8 @@ class TermsApi:
     def get_all_terms_without_preload_content(
         self,
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
-        offset: Annotated[Optional[Annotated[int, Field(strict=True, ge=0)]], Field(description="データ取得を行う開始位置")] = None,
+        starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
+        ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         since_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以降のデータを取得")] = None,
         until_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以前のデータを取得")] = None,
         *,
@@ -232,8 +243,10 @@ class TermsApi:
 
         :param limit: 取得するデータの最大件数
         :type limit: int
-        :param offset: データ取得を行う開始位置
-        :type offset: int
+        :param starting_after: このIDより後のデータを取得
+        :type starting_after: str
+        :param ending_before: このIDより前のデータを取得
+        :type ending_before: str
         :param since_start_at: start_atが指定した日付以降のデータを取得
         :type since_start_at: datetime
         :param until_start_at: start_atが指定した日付以前のデータを取得
@@ -263,7 +276,8 @@ class TermsApi:
 
         _param = self._get_all_terms_serialize(
             limit=limit,
-            offset=offset,
+            starting_after=starting_after,
+            ending_before=ending_before,
             since_start_at=since_start_at,
             until_start_at=until_start_at,
             _request_auth=request_auth,
@@ -276,6 +290,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermListResponse",
             '422': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -287,7 +302,8 @@ class TermsApi:
     def _get_all_terms_serialize(
         self,
         limit,
-        offset,
+        starting_after,
+        ending_before,
         since_start_at,
         until_start_at,
         _request_auth,
@@ -319,9 +335,13 @@ class TermsApi:
             
             _query_params.append(('limit', limit))
             
-        if offset is not None:
+        if starting_after is not None:
             
-            _query_params.append(('offset', offset))
+            _query_params.append(('starting_after', starting_after))
+            
+        if ending_before is not None:
+            
+            _query_params.append(('ending_before', ending_before))
             
         if since_start_at is not None:
             if isinstance(since_start_at, datetime):

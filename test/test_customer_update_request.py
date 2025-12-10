@@ -41,7 +41,7 @@ class TestCustomerUpdateRequest(unittest.TestCase):
                 metadata = {
                     'key' : null
                     },
-                default_payment_method = ''
+                default_payment_method_id = ''
             )
         else:
             return CustomerUpdateRequest(

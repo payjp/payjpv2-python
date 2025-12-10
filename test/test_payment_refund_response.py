@@ -43,7 +43,7 @@ class TestPaymentRefundResponse(unittest.TestCase):
                 livemode = True,
                 amount = 56,
                 status = 'succeeded',
-                payment_flow = '',
+                payment_flow_id = '',
                 reason = 'duplicate',
                 metadata = {
                     'key' : null
@@ -57,7 +57,7 @@ class TestPaymentRefundResponse(unittest.TestCase):
                 livemode = True,
                 amount = 56,
                 status = 'succeeded',
-                payment_flow = '',
+                payment_flow_id = '',
                 reason = 'duplicate',
                 metadata = {
                     'key' : null

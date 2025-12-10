@@ -30,14 +30,14 @@ class CheckoutSessionLineItemDataResponse(BaseModel):
     CheckoutSessionLineItemDataResponse
     """ # noqa: E501
     object: Optional[StrictStr] = 'line_item'
-    id: Optional[StrictStr] = Field(default=None, description="ID")
-    amount_subtotal: Optional[StrictInt] = Field(default=None, description="割引や税金が適用される前のすべての商品の合計金額")
-    amount_tax: Optional[StrictInt] = Field(default=None, description="税額")
-    amount_total: Optional[StrictInt] = Field(default=None, description="割引と税金が適用された後のすべての商品の合計金額")
-    currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
-    description: Optional[StrictStr] = Field(default=None, description="説明")
-    price: Optional[PriceDetailsResponse] = Field(default=None, description="料金情報")
-    quantity: Optional[StrictInt] = Field(default=None, description="数量")
+    id: StrictStr = Field(description="ID")
+    amount_subtotal: StrictInt = Field(description="割引や税金が適用される前のすべての商品の合計金額")
+    amount_tax: StrictInt = Field(description="税額")
+    amount_total: StrictInt = Field(description="割引と税金が適用された後のすべての商品の合計金額")
+    currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
+    description: StrictStr = Field(description="説明")
+    price: PriceDetailsResponse = Field(description="料金情報")
+    quantity: StrictInt = Field(description="数量")
     __properties: ClassVar[List[str]] = ["object", "id", "amount_subtotal", "amount_tax", "amount_total", "currency", "description", "price", "quantity"]
 
     @field_validator('object')

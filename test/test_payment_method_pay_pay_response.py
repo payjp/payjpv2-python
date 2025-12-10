@@ -39,7 +39,7 @@ class TestPaymentMethodPayPayResponse(unittest.TestCase):
                 object = 'payment_method',
                 id = '',
                 type = 'paypay',
-                customer = '',
+                customer_id = '',
                 detached_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
@@ -63,7 +63,7 @@ class TestPaymentMethodPayPayResponse(unittest.TestCase):
             return PaymentMethodPayPayResponse(
                 id = '',
                 type = 'paypay',
-                customer = '',
+                customer_id = '',
                 detached_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),

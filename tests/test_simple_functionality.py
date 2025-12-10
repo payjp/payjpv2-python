@@ -124,21 +124,21 @@ class TestModelCreation:
         """Test payment flow creation request with customer."""
         request = PaymentFlowCreateRequest(
             amount=1000,
-            customer="cus_test123"
+            customer_id="cus_test123"
         )
         assert request.amount == 1000
-        assert request.customer == "cus_test123"
+        assert request.customer_id == "cus_test123"
 
     def test_payment_flow_create_request_with_options(self):
         """Test payment flow creation request with various options."""
         request = PaymentFlowCreateRequest(
             amount=1500,
-            customer="cus_test123",
+            customer_id="cus_test123",
             description="Test payment for SDK",
             confirm=True
         )
         assert request.amount == 1500
-        assert request.customer == "cus_test123"
+        assert request.customer_id == "cus_test123"
         assert request.description == "Test payment for SDK"
         assert request.confirm is True
 

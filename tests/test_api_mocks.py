@@ -124,7 +124,7 @@ class TestPaymentFlowsApiMock:
         mock_api_response.data = sample_payment_flow_data
         mock_deserialize.return_value = mock_api_response
 
-        request = PaymentFlowCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         response = payment_flows_api.create_payment_flow(request)
 
         # Verify API call
@@ -288,6 +288,7 @@ class TestModelIntegration:
         """Test payment flow model creation."""
         request = PaymentFlowCreateRequest(
             amount=1000,
+            currency="jpy",
             customer_id="cus_test123",
             description="Test payment flow"
         )

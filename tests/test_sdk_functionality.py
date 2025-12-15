@@ -90,13 +90,14 @@ class TestPaymentFlowOperations:
 
     def test_payment_flow_create_request_basic(self):
         """Test basic payment flow creation request."""
-        request = PaymentFlowCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         assert request.amount == 1000
 
     def test_payment_flow_create_request_with_customer(self):
         """Test payment flow creation with customer."""
         request = PaymentFlowCreateRequest(
             amount=1000,
+            currency="jpy",
             customer_id="cus_test123"
         )
         assert request.amount == 1000
@@ -106,6 +107,7 @@ class TestPaymentFlowOperations:
         """Test payment flow creation with description."""
         request = PaymentFlowCreateRequest(
             amount=1500,
+            currency="jpy",
             description="Test payment for SDK"
         )
         assert request.amount == 1500
@@ -145,6 +147,7 @@ class TestModelSerialization:
         """Test payment flow request serialization."""
         request = PaymentFlowCreateRequest(
             amount=1000,
+            currency="jpy",
             description="Test payment"
         )
 
@@ -188,11 +191,11 @@ class TestErrorHandlingFunctionality:
         request1 = CustomerCreateRequest(email="")
         assert request1.email == ""
 
-        request2 = PaymentFlowCreateRequest(amount=50)
+        request2 = PaymentFlowCreateRequest(amount=50, currency="jpy")
         assert request2.amount == 50
 
         # Test with max valid value (PaymentFlowCreateRequest requires <= 9999999)
-        request3 = PaymentFlowCreateRequest(amount=9999999)
+        request3 = PaymentFlowCreateRequest(amount=9999999, currency="jpy")
         assert request3.amount == 9999999
 
 
@@ -250,6 +253,7 @@ class TestWorkflowIntegration:
         # Test creating request objects for workflow
         create_request = PaymentFlowCreateRequest(
             amount=2500,
+            currency="jpy",
             customer_id="cus_workflow_test",
             description="Workflow test payment"
         )
@@ -274,6 +278,7 @@ class TestWorkflowIntegration:
         customer_request = CustomerCreateRequest(email="coordination@example.com")
         payment_request = PaymentFlowCreateRequest(
             amount=1500,
+            currency="jpy",
             customer_id="cus_coordination_test"
         )
 

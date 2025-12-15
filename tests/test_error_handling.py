@@ -210,10 +210,11 @@ class TestValidationErrors:
 
     def test_invalid_currency_validation(self):
         """Test validation of currency codes (if implemented)."""
-        # PaymentFlowCreateRequest doesn't have currency field in this implementation
-        # Test with a different field that exists
+        # PaymentFlowCreateRequest now has currency as a required field
+        # Test with description field
         request = PaymentFlowCreateRequest(
             amount=1000,
+            currency="jpy",
             description="INVALID_DESCRIPTION_TEST"
         )
         assert request.description == "INVALID_DESCRIPTION_TEST"

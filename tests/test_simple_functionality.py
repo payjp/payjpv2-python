@@ -117,13 +117,14 @@ class TestModelCreation:
 
     def test_payment_flow_create_request_basic(self):
         """Test basic payment flow creation request."""
-        request = PaymentFlowCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         assert request.amount == 1000
 
     def test_payment_flow_create_request_with_customer(self):
         """Test payment flow creation request with customer."""
         request = PaymentFlowCreateRequest(
             amount=1000,
+            currency="jpy",
             customer_id="cus_test123"
         )
         assert request.amount == 1000
@@ -133,6 +134,7 @@ class TestModelCreation:
         """Test payment flow creation request with various options."""
         request = PaymentFlowCreateRequest(
             amount=1500,
+            currency="jpy",
             customer_id="cus_test123",
             description="Test payment for SDK",
             confirm=True
@@ -162,14 +164,14 @@ class TestModelSerialization:
 
     def test_payment_flow_request_to_string(self):
         """Test payment flow request string representation."""
-        request = PaymentFlowCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         str_repr = request.to_str()
         assert isinstance(str_repr, str)
         assert "1000" in str_repr
 
     def test_payment_flow_request_to_json(self):
         """Test payment flow request JSON serialization."""
-        request = PaymentFlowCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         json_str = request.to_json()
         assert isinstance(json_str, str)
         assert "1000" in json_str

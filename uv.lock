@@ -448,7 +448,7 @@ wheels = [
 
 [[package]]
 name = "payjpv2"
-version = "0.0.1"
+version = "1.0.0"
 source = { editable = "." }
 dependencies = [
     { name = "pydantic", version = "2.10.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.9'" },
@@ -486,7 +486,7 @@ requires-dist = [
     { name = "tox", marker = "extra == 'dev'", specifier = ">=3.9.0" },
     { name = "types-python-dateutil", marker = "extra == 'dev'", specifier = ">=2.8.19.14" },
     { name = "typing-extensions", specifier = ">=4.7.1" },
-    { name = "urllib3", specifier = ">=1.25.3,<3.0.0" },
+    { name = "urllib3", specifier = ">=2.1.0,<3.0.0" },
 ]
 provides-extras = ["dev"]
 

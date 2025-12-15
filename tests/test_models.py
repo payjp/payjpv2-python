@@ -39,13 +39,14 @@ class TestPaymentFlowModels:
 
     def test_payment_flow_create_request_basic(self):
         """Test basic payment flow creation request."""
-        request = PaymentFlowCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         assert request.amount == 1000
 
     def test_payment_flow_create_request_with_customer(self):
         """Test payment flow creation with customer."""
         request = PaymentFlowCreateRequest(
             amount=1000,
+            currency="jpy",
             customer_id="cus_test123"
         )
         assert request.amount == 1000
@@ -55,6 +56,7 @@ class TestPaymentFlowModels:
         """Test payment flow creation with description."""
         request = PaymentFlowCreateRequest(
             amount=1500,
+            currency="jpy",
             description="Test payment for SDK"
         )
         assert request.amount == 1500
@@ -63,21 +65,21 @@ class TestPaymentFlowModels:
     def test_payment_flow_amount_types(self):
         """Test different amount values."""
         # Minimum valid amount (50)
-        request1 = PaymentFlowCreateRequest(amount=50)
+        request1 = PaymentFlowCreateRequest(amount=50, currency="jpy")
         assert request1.amount == 50
 
         # Normal amount
-        request2 = PaymentFlowCreateRequest(amount=1000)
+        request2 = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         assert request2.amount == 1000
 
         # Maximum valid amount (9999999)
-        request3 = PaymentFlowCreateRequest(amount=9999999)
+        request3 = PaymentFlowCreateRequest(amount=9999999, currency="jpy")
         assert request3.amount == 9999999
 
     def test_payment_flow_capture_method(self):
         """Test capture method settings if available."""
         # Test that capture_method field exists and can be set
-        request = PaymentFlowCreateRequest(amount=1000)
+        request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         if hasattr(request, 'capture_method'):
             # Only test if the field exists in this implementation
             assert request.capture_method is None  # Default value
@@ -106,6 +108,7 @@ class TestModelSerialization:
         """Test payment flow request serialization."""
         request = PaymentFlowCreateRequest(
             amount=1000,
+            currency="jpy",
             description="Test payment"
         )
 
@@ -150,7 +153,7 @@ class TestModelValidation:
         amounts = [50, 100, 1000, 9999999]
 
         for amount in amounts:
-            request = PaymentFlowCreateRequest(amount=amount)
+            request = PaymentFlowCreateRequest(amount=amount, currency="jpy")
             assert request.amount == amount
 
     def test_model_optional_fields(self):
@@ -160,7 +163,7 @@ class TestModelValidation:
         assert customer_request.email == "test@example.com"
         assert customer_request.description is None
 
-        # Test payment flow with just amount
-        payment_request = PaymentFlowCreateRequest(amount=1000)
+        # Test payment flow with just amount and currency (required fields)
+        payment_request = PaymentFlowCreateRequest(amount=1000, currency="jpy")
         assert payment_request.amount == 1000
         assert payment_request.customer_id is None

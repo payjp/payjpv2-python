@@ -14,7 +14,6 @@ Name | Type | Description | Notes
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | キーバリューの任意のデータを格納できます。&lt;a href&#x3D;\&quot;https://docs.pay.jp/v2/metadata\&quot;&gt;詳細はメタデータのドキュメントを参照してください。&lt;/a&gt; | [optional] 
 **success_url** | **str** | 支払いや設定が完了した際に、PAY.JP が顧客をリダイレクトするURL。成功したCheckout Sessionからの情報をページで使用したい場合は、成功ページのカスタマイズに関するガイドをお読みください。 | [optional] 
 **cancel_url** | **str** | キャンセル時のリダイレクトURL | [optional] 
-**billing_address_collection** | [**BillingAddressCollection**](BillingAddressCollection.md) | Checkout で顧客の請求先住所を収集するかどうかを指定します。デフォルトは &#x60;auto&#x60; です。  | 指定できる値 | |:---| | **auto**: 請求先住所が必要と判断した場合に入力欄が表示されます。 | | **required**: 常に請求先住所の入力欄が表示されまうs。 |  | [optional] 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | [optional] 
 **expires_at** | **datetime** | Checkout Session の有効期限が失効する日時。 | [optional] 
 **locale** | [**Locale**](Locale.md) | Checkout 画面の表示言語を指定します。  | 指定できる値 | |:---| | **ja**: 日本語で表示します。 |  | [optional] 

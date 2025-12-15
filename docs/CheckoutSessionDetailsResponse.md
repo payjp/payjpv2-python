@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **livemode** | **bool** | 本番環境かどうか | 
 **amount_subtotal** | **int** |  | 
 **amount_total** | **int** |  | 
-**billing_address_collection** | [**BillingAddressCollection**](BillingAddressCollection.md) |  | 
 **cancel_url** | **str** |  | 
 **customer_id** | **str** |  | 
 **customer_email** | **str** |  | 

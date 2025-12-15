@@ -13,7 +13,6 @@ Name | Type | Description | Notes
 **active** | **bool** | この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。 | 
 **country** | [**Country**](Country.md) |  | 
 **description** | **str** |  | 
-**tax_type** | [**TaxType**](TaxType.md) |  | 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 
 ## Example

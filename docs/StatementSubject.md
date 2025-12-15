@@ -4,39 +4,39 @@ StatementItemの科目  分類の増減は会計・経理の目線で行われ�
 
 ## Enum
 
-* `売上` (value: `'売上'`)
+* `GROSS_SALES` (value: `'gross_sales'`)
 
-* `決済手数料` (value: `'決済手数料'`)
+* `FEE` (value: `'fee'`)
 
-* `プラットフォーム利用料` (value: `'プラットフォーム利用料'`)
+* `PLATFORM_FEE` (value: `'platform_fee'`)
 
-* `返金` (value: `'返金'`)
+* `GROSS_REFUND` (value: `'gross_refund'`)
 
-* `返金による手数料返還` (value: `'返金による手数料返還'`)
+* `REFUND_FEE_OFFSET` (value: `'refund_fee_offset'`)
 
-* `返金によるプラットフォーム利用料返還` (value: `'返金によるプラットフォーム利用料返還'`)
+* `REFUND_PLATFORM_FEE_OFFSET` (value: `'refund_platform_fee_offset'`)
 
-* `チャージバック` (value: `'チャージバック'`)
+* `CHARGEBACK` (value: `'chargeback'`)
 
-* `チャージバックによる手数料返還` (value: `'チャージバックによる手数料返還'`)
+* `CHARGEBACK_FEE_OFFSET` (value: `'chargeback_fee_offset'`)
 
-* `チャージバックによるプラットフォーム利用料返還` (value: `'チャージバックによるプラットフォーム利用料返還'`)
+* `CHARGEBACK_PLATFORM_FEE_OFFSET` (value: `'chargeback_platform_fee_offset'`)
 
-* `プロプラン利用料` (value: `'プロプラン利用料'`)
+* `PROPLAN` (value: `'proplan'`)
 
-* `有料プラン料金` (value: `'有料プラン料金'`)
+* `PLAN_FEE` (value: `'plan_fee'`)
 
-* `残高失効` (value: `'残高失効'`)
+* `FORFEIT` (value: `'forfeit'`)
 
-* `テナント失効金額の割当て` (value: `'テナント失効金額の割当て'`)
+* `REALLOCATION` (value: `'reallocation'`)
 
-* `YELL_BANKお支払い` (value: `'YELL BANKお支払い'`)
+* `YELL_BANK_COLLECTION` (value: `'yell_bank_collection'`)
 
-* `早期入金サービス利用料` (value: `'早期入金サービス利用料'`)
+* `PYB_EARLY_DEPOSIT_SERVICE_FEE` (value: `'pyb_early_deposit_service_fee'`)
 
-* `振込手数料` (value: `'振込手数料'`)
+* `TRANSFER_FEE` (value: `'transfer_fee'`)
 
-* `その他` (value: `'その他'`)
+* `OTHER` (value: `'other'`)
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

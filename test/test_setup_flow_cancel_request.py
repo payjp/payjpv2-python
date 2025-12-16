@@ -36,7 +36,7 @@ class TestSetupFlowCancelRequest(unittest.TestCase):
         model = SetupFlowCancelRequest()
         if include_optional:
             return SetupFlowCancelRequest(
-                cancellation_reason = 'abondoned'
+                cancellation_reason = 'abandoned'
             )
         else:
             return SetupFlowCancelRequest(

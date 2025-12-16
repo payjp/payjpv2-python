@@ -3,7 +3,7 @@
 
 ## Enum
 
-* `ABONDONED` (value: `'abondoned'`)
+* `ABANDONED` (value: `'abandoned'`)
 
 * `DUPLICATE` (value: `'duplicate'`)
 

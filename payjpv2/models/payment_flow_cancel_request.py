@@ -36,8 +36,8 @@ class PaymentFlowCancelRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['duplicate', 'fraudulent', 'requested_by_customer', 'abondoned']):
-            raise ValueError("must be one of enum values ('duplicate', 'fraudulent', 'requested_by_customer', 'abondoned')")
+        if value not in set(['duplicate', 'fraudulent', 'requested_by_customer', 'abandoned']):
+            raise ValueError("must be one of enum values ('duplicate', 'fraudulent', 'requested_by_customer', 'abandoned')")
         return value
 
     model_config = ConfigDict(

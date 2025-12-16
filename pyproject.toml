@@ -1,6 +1,6 @@
 [project]
 name = "payjpv2"
-version = "1.0.0"
+version = "1.0.1"
 description = "PAY.JP Python SDK - A Python client library for PAY.JP v2 API"
 authors = [{name = "PAY.JP", email = "support@pay.jp"}]
 license = {text = "MIT"}

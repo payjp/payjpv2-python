@@ -27,7 +27,7 @@ class SetupFlowCancellationReason(str, Enum):
     """
     allowed enum values
     """
-    ABONDONED = 'abondoned'
+    ABANDONED = 'abandoned'
     DUPLICATE = 'duplicate'
     REQUESTED_BY_CUSTOMER = 'requested_by_customer'
 

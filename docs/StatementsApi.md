@@ -143,7 +143,7 @@ with payjpv2.ApiClient(configuration) as api_client:
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
     type = payjpv2.StatementType() # StatementType | 明細タイプでフィルタ (optional)
-    term_id = 'term_id_example' # str | 期間IDでフィルタ (optional)
+    term_id = 'term_id_example' # str | 集計区間 ID でフィルタ (optional)
 
     try:
         # Get All Statements
@@ -167,7 +167,7 @@ Name | Type | Description  | Notes
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
  **type** | [**StatementType**](.md)| 明細タイプでフィルタ | [optional] 
- **term_id** | **str**| 期間IDでフィルタ | [optional] 
+ **term_id** | **str**| 集計区間 ID でフィルタ | [optional] 
 
 ### Return type
 

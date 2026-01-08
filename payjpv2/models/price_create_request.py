@@ -30,15 +30,15 @@ class PriceCreateRequest(BaseModel):
     """
     PriceCreateRequest
     """ # noqa: E501
-    nickname: Optional[StrictStr] = Field(default=None, description="価格の名称。PAY.JP のダッシュボードで識別するためのもので、顧客には表示されません。")
-    lookup_key: Optional[StrictStr] = Field(default=None, description="この価格を検索するためのキー。")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    id: Optional[StrictStr] = Field(default=None, description="料金ID")
+    product_id: StrictStr = Field(description="この価格が紐付く商品の ID")
+    unit_amount: Annotated[int, Field(strict=True, ge=0)] = Field(description="価格の単価")
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
-    active: Optional[StrictBool] = Field(default=True, description="価格が有効かどうか。デフォルトは `true`。")
-    product_id: StrictStr = Field(description="この価格が紐付く商品のID。")
-    unit_amount: Annotated[int, Field(strict=True, ge=0)] = Field(description="価格の単価。0以上の整数となります。")
-    __properties: ClassVar[List[str]] = ["nickname", "lookup_key", "metadata", "id", "currency", "active", "product_id", "unit_amount"]
+    id: Optional[StrictStr] = Field(default=None, description="料金 ID")
+    active: Optional[StrictBool] = Field(default=True, description="価格が有効かどうか")
+    nickname: Optional[StrictStr] = Field(default=None, description="価格の名称。PAY.JP の管理画面で識別するためのもので、顧客には表示されません。")
+    lookup_key: Optional[StrictStr] = Field(default=None, description="この価格を検索するためのキー")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    __properties: ClassVar[List[str]] = ["product_id", "unit_amount", "currency", "id", "active", "nickname", "lookup_key", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,6 +97,11 @@ class PriceCreateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "product_id": obj.get("product_id"),
+            "unit_amount": obj.get("unit_amount"),
+            "currency": obj.get("currency"),
+            "id": obj.get("id"),
+            "active": obj.get("active") if obj.get("active") is not None else True,
             "nickname": obj.get("nickname"),
             "lookup_key": obj.get("lookup_key"),
             "metadata": dict(
@@ -104,12 +109,7 @@ class PriceCreateRequest(BaseModel):
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "id": obj.get("id"),
-            "currency": obj.get("currency"),
-            "active": obj.get("active") if obj.get("active") is not None else True,
-            "product_id": obj.get("product_id"),
-            "unit_amount": obj.get("unit_amount")
+            else None
         })
         return _obj
 

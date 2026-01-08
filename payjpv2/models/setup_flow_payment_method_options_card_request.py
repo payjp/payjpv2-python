@@ -27,7 +27,7 @@ class SetupFlowPaymentMethodOptionsCardRequest(BaseModel):
     """
     SetupFlowPaymentMethodOptionsCardRequest
     """ # noqa: E501
-    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 | ")
+    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3D セキュア認証の要求方法。  | 値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 | ")
     __properties: ClassVar[List[str]] = ["request_three_d_secure"]
 
     @field_validator('request_three_d_secure')

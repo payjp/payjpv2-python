@@ -41,30 +41,9 @@ class TestStatementResponse(unittest.TestCase):
                 livemode = True,
                 title = '',
                 type = 'sales',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 term = payjpv2.models.term_response.TermResponse(
-                    id = '', 
                     object = 'term', 
-                    livemode = True, 
-                    start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                    end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                    closed = True, ),
-                balance_id = '',
-                items = ERROR_TO_EXAMPLE_VALUE,
-                net = 56
-            )
-        else:
-            return StatementResponse(
-                id = '',
-                livemode = True,
-                title = '',
-                type = 'sales',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                term = payjpv2.models.term_response.TermResponse(
                     id = '', 
-                    object = 'term', 
                     livemode = True, 
                     start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                     end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -72,6 +51,27 @@ class TestStatementResponse(unittest.TestCase):
                 balance_id = '',
                 items = ERROR_TO_EXAMPLE_VALUE,
                 net = 56,
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+            )
+        else:
+            return StatementResponse(
+                id = '',
+                livemode = True,
+                title = '',
+                type = 'sales',
+                term = payjpv2.models.term_response.TermResponse(
+                    object = 'term', 
+                    id = '', 
+                    livemode = True, 
+                    start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                    closed = True, ),
+                balance_id = '',
+                items = ERROR_TO_EXAMPLE_VALUE,
+                net = 56,
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

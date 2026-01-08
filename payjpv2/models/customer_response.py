@@ -29,8 +29,8 @@ class CustomerResponse(BaseModel):
     """
     CustomerResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="顧客ID")
     object: Optional[StrictStr] = 'customer'
+    id: StrictStr = Field(description="顧客 ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
     email: Optional[StrictStr]
     description: Optional[StrictStr]
@@ -38,7 +38,7 @@ class CustomerResponse(BaseModel):
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "email", "description", "default_payment_method_id", "metadata", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "email", "description", "default_payment_method_id", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -122,8 +122,8 @@ class CustomerResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'customer',
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
             "email": obj.get("email"),
             "description": obj.get("description"),

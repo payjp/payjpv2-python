@@ -29,7 +29,7 @@ class PaymentMethodConfigurationSettingResponse(BaseModel):
     PaymentMethodConfigurationSettingResponse
     """ # noqa: E501
     available: Optional[StrictBool] = Field(default=None, description="この支払い方法が決済画面に表示されるかどうか。`display_preference.preference` と `display_preference.value` の両方が `on` の場合に決済画面に表示されます。")
-    display_preference: Optional[PaymentMethodConfigurationDisplayPreference] = Field(default=None, description="支払い方法の表示設定。")
+    display_preference: Optional[PaymentMethodConfigurationDisplayPreference] = Field(default=None, description="支払い方法の表示設定")
     __properties: ClassVar[List[str]] = ["available", "display_preference"]
 
     model_config = ConfigDict(

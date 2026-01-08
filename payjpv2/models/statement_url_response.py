@@ -29,8 +29,8 @@ class StatementURLResponse(BaseModel):
     StatementURLResponse
     """ # noqa: E501
     object: Optional[StrictStr] = 'statement_url'
-    url: StrictStr = Field(description="取引明細書ダウンロードURL")
-    expires: datetime = Field(description="有効期限の日付。  有効期限は発行から1時間です。")
+    url: StrictStr = Field(description="取引明細書ダウンロード URL")
+    expires: datetime = Field(description="有効期限の日付  有効期限は発行から1時間です。")
     __properties: ClassVar[List[str]] = ["object", "url", "expires"]
 
     @field_validator('object')

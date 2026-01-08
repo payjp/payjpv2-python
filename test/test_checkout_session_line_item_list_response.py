@@ -49,19 +49,19 @@ class TestCheckoutSessionLineItemListResponse(unittest.TestCase):
                         currency = 'jpy', 
                         description = '', 
                         price = payjpv2.models.price_details_response.PriceDetailsResponse(
-                            id = '', 
                             object = 'price', 
+                            id = '', 
                             livemode = True, 
+                            product_id = '', 
+                            unit_amount = 56, 
+                            currency = 'jpy', 
                             active = True, 
-                            metadata = {
-                                'key' : null
-                                }, 
                             nickname = '', 
                             type = 'one_time', 
                             lookup_key = '', 
-                            currency = 'jpy', 
-                            product_id = '', 
-                            unit_amount = 56, 
+                            metadata = {
+                                'key' : null
+                                }, 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
                         quantity = 56, )
@@ -81,19 +81,19 @@ class TestCheckoutSessionLineItemListResponse(unittest.TestCase):
                         currency = 'jpy', 
                         description = '', 
                         price = payjpv2.models.price_details_response.PriceDetailsResponse(
-                            id = '', 
                             object = 'price', 
+                            id = '', 
                             livemode = True, 
+                            product_id = '', 
+                            unit_amount = 56, 
+                            currency = 'jpy', 
                             active = True, 
-                            metadata = {
-                                'key' : null
-                                }, 
                             nickname = '', 
                             type = 'one_time', 
                             lookup_key = '', 
-                            currency = 'jpy', 
-                            product_id = '', 
-                            unit_amount = 56, 
+                            metadata = {
+                                'key' : null
+                                }, 
                             created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                             updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), ), 
                         quantity = 56, )

@@ -37,17 +37,17 @@ class TestSetupFlowCreateRequest(unittest.TestCase):
         if include_optional:
             return SetupFlowCreateRequest(
                 customer_id = '',
-                description = '',
-                metadata = {
-                    'key' : null
-                    },
                 payment_method_options = payjpv2.models.setup_flow_payment_method_options_request.SetupFlowPaymentMethodOptionsRequest(
                     card = payjpv2.models.setup_flow_payment_method_options_card_request.SetupFlowPaymentMethodOptionsCardRequest(
                         request_three_d_secure = 'automatic', ), ),
                 payment_method_types = [
                     'card'
                     ],
-                usage = 'on_session'
+                usage = 'on_session',
+                description = '',
+                metadata = {
+                    'key' : null
+                    }
             )
         else:
             return SetupFlowCreateRequest(

@@ -36,25 +36,8 @@ class TestPaymentTransactionResponse(unittest.TestCase):
         model = PaymentTransactionResponse()
         if include_optional:
             return PaymentTransactionResponse(
-                id = '',
                 object = 'payment_transaction',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                livemode = True,
-                resource_id = '',
-                amount = 56,
-                currency = 'jpy',
-                fee_rate = ERROR_TO_EXAMPLE_VALUE,
-                fee = 56,
-                type = 'payment',
-                payment_method_type = 'card',
-                term_id = ''
-            )
-        else:
-            return PaymentTransactionResponse(
                 id = '',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
                 resource_id = '',
                 amount = 56,
@@ -64,6 +47,23 @@ class TestPaymentTransactionResponse(unittest.TestCase):
                 type = 'payment',
                 payment_method_type = 'card',
                 term_id = '',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+            )
+        else:
+            return PaymentTransactionResponse(
+                id = '',
+                livemode = True,
+                resource_id = '',
+                amount = 56,
+                currency = 'jpy',
+                fee_rate = ERROR_TO_EXAMPLE_VALUE,
+                fee = 56,
+                type = 'payment',
+                payment_method_type = 'card',
+                term_id = '',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

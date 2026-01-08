@@ -47,9 +47,9 @@ class EventsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
-        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
+        resource_id: Annotated[Optional[StrictStr], Field(description="取得する event に紐づく API リソースの ID")] = None,
+        object: Annotated[Optional[StrictStr], Field(description="取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow)")] = None,
+        type: Annotated[Optional[StrictStr], Field(description="取得する event の type")] = None,
         *,
         request_timeout: Union[
             None,
@@ -73,11 +73,11 @@ class EventsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param resource_id: 取得するeventに紐づくAPIリソースのID (e.g. customer.id)
+        :param resource_id: 取得する event に紐づく API リソースの ID
         :type resource_id: str
-        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)
+        :param object: 取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow)
         :type object: str
-        :param type: 取得するeventのtype
+        :param type: 取得する event の type
         :type type: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -138,9 +138,9 @@ class EventsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
-        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
+        resource_id: Annotated[Optional[StrictStr], Field(description="取得する event に紐づく API リソースの ID")] = None,
+        object: Annotated[Optional[StrictStr], Field(description="取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow)")] = None,
+        type: Annotated[Optional[StrictStr], Field(description="取得する event の type")] = None,
         *,
         request_timeout: Union[
             None,
@@ -164,11 +164,11 @@ class EventsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param resource_id: 取得するeventに紐づくAPIリソースのID (e.g. customer.id)
+        :param resource_id: 取得する event に紐づく API リソースの ID
         :type resource_id: str
-        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)
+        :param object: 取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow)
         :type object: str
-        :param type: 取得するeventのtype
+        :param type: 取得する event の type
         :type type: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -229,9 +229,9 @@ class EventsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        resource_id: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのID (e.g. customer.id)")] = None,
-        object: Annotated[Optional[StrictStr], Field(description="取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="取得するeventのtype")] = None,
+        resource_id: Annotated[Optional[StrictStr], Field(description="取得する event に紐づく API リソースの ID")] = None,
+        object: Annotated[Optional[StrictStr], Field(description="取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow)")] = None,
+        type: Annotated[Optional[StrictStr], Field(description="取得する event の type")] = None,
         *,
         request_timeout: Union[
             None,
@@ -255,11 +255,11 @@ class EventsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param resource_id: 取得するeventに紐づくAPIリソースのID (e.g. customer.id)
+        :param resource_id: 取得する event に紐づく API リソースの ID
         :type resource_id: str
-        :param object: 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow)
+        :param object: 取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow)
         :type object: str
-        :param type: 取得するeventのtype
+        :param type: 取得する event の type
         :type type: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

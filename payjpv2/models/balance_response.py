@@ -32,18 +32,18 @@ class BalanceResponse(BaseModel):
     BalanceResponse
     """ # noqa: E501
     object: Optional[StrictStr] = 'balance'
-    id: StrictStr = Field(description="残高ID")
+    id: StrictStr = Field(description="残高 ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
-    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
-    state: BalanceState = Field(description="Balanceの状態  | 指定できる値 | |:---| | **collecting**: 集計中 | | **transfer**: 入金 | | **claim**: 請求 |")
-    statements: List[StatementResponse] = Field(description="関連付けられているStatementオブジェクトのリスト")
-    closed: StrictBool = Field(description="このBalanceの清算が終了していればtrue  state=transferであれば加盟店口座への入金作業完了、state=claimであればPAY.JPで請求額の振込が確認できたことを表します。")
+    state: BalanceState = Field(description="Balance の状態  | 値 | |:---| | **collecting**: 集計中 | | **transfer**: 入金 | | **claim**: 請求 |")
+    statements: List[StatementResponse] = Field(description="関連付けられている Statement オブジェクトのリスト")
+    closed: StrictBool = Field(description="この Balance の清算が終了していれば true  state=transfer であれば加盟店口座への入金作業完了、state=claim であれば PAY.JP で請求額の振込が確認できたことを表します。")
     closed_date: Optional[datetime]
     due_date: Optional[datetime]
-    net: StrictInt = Field(description="関連付けられているStatementの総額")
+    net: StrictInt = Field(description="関連付けられている Statement の総額")
     bank_info: Optional[BankInfoResponse]
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "created_at", "updated_at", "state", "statements", "closed", "closed_date", "due_date", "net", "bank_info"]
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "state", "statements", "closed", "closed_date", "due_date", "net", "bank_info", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -133,15 +133,15 @@ class BalanceResponse(BaseModel):
             "object": obj.get("object") if obj.get("object") is not None else 'balance',
             "id": obj.get("id"),
             "livemode": obj.get("livemode"),
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
             "state": obj.get("state"),
             "statements": [StatementResponse.from_dict(_item) for _item in obj["statements"]] if obj.get("statements") is not None else None,
             "closed": obj.get("closed"),
             "closed_date": obj.get("closed_date"),
             "due_date": obj.get("due_date"),
             "net": obj.get("net"),
-            "bank_info": BankInfoResponse.from_dict(obj["bank_info"]) if obj.get("bank_info") is not None else None
+            "bank_info": BankInfoResponse.from_dict(obj["bank_info"]) if obj.get("bank_info") is not None else None,
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

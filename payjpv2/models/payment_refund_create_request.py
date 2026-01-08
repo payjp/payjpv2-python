@@ -31,10 +31,10 @@ class PaymentRefundCreateRequest(BaseModel):
     PaymentRefundCreateRequest
     """ # noqa: E501
     payment_flow_id: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
-    amount: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="返金金額")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    reason: Optional[PaymentRefundReason] = Field(default=None, description="返金理由  | 指定できる値 | |:---| | **duplicate**: 重複した支払い | | **fraudulent**: 不正な支払い | | **requested_by_customer**: 顧客の要求 |")
-    __properties: ClassVar[List[str]] = ["payment_flow_id", "amount", "metadata", "reason"]
+    amount: Optional[Annotated[int, Field(strict=True, ge=0)]] = Field(default=None, description="返金金額。省略すると全額返金となります。")
+    reason: Optional[PaymentRefundReason] = Field(default=None, description="返金理由  | 値 | |:---| | **duplicate**: 重複した支払い | | **fraudulent**: 不正な支払い | | **requested_by_customer**: 顧客の要求 |")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    __properties: ClassVar[List[str]] = ["payment_flow_id", "amount", "reason", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -95,13 +95,13 @@ class PaymentRefundCreateRequest(BaseModel):
         _obj = cls.model_validate({
             "payment_flow_id": obj.get("payment_flow_id"),
             "amount": obj.get("amount"),
+            "reason": obj.get("reason"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "reason": obj.get("reason")
+            else None
         })
         return _obj
 

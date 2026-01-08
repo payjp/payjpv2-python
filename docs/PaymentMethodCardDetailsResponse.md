@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **brand** | **str** | カードのブランド | 
 **exp_month** | **int** | カードの有効期限（月） | 
 **exp_year** | **int** | カードの有効期限（年） | 
-**fingerprint** | **str** | fingerprint | 
+**fingerprint** | **str** | このクレジットカード番号に紐づく値。同一番号のカードからは同一の値が生成されることが保証されています。 | 
 **country** | **str** |  | 
 
 ## Example

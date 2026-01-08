@@ -28,15 +28,15 @@ class EventResponse(BaseModel):
     """
     EventResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="イベントID")
     object: Optional[StrictStr] = 'event'
-    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    id: StrictStr = Field(description="イベント ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
     type: StrictStr = Field(description="イベントの種類")
-    pending_webhooks: StrictInt = Field(description="設定されたURLへの通知が完了していない(2xxのレスポンスが得られていない)webhookの数")
+    pending_webhooks: StrictInt = Field(description="設定された URL への通知が完了していない (2xx のレスポンスが得られていない) webhook の数")
     data: Dict[str, Any] = Field(description="このイベントに関連したリソースオブジェクト")
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "type", "pending_webhooks", "data"]
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "type", "pending_webhooks", "data", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -98,14 +98,14 @@ class EventResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'event',
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
             "type": obj.get("type"),
             "pending_webhooks": obj.get("pending_webhooks"),
-            "data": obj.get("data")
+            "data": obj.get("data"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

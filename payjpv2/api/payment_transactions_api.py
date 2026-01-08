@@ -47,7 +47,7 @@ class PaymentTransactionsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        term_id: Annotated[Optional[StrictStr], Field(description="term ID")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取引タイプ")] = None,
         payment_method_type: Annotated[Optional[StrictStr], Field(description="支払い方法タイプ")] = None,
         *,
@@ -73,7 +73,7 @@ class PaymentTransactionsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param term_id: term ID
+        :param term_id: 集計区間 ID
         :type term_id: str
         :param type: 取引タイプ
         :type type: str
@@ -138,7 +138,7 @@ class PaymentTransactionsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        term_id: Annotated[Optional[StrictStr], Field(description="term ID")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取引タイプ")] = None,
         payment_method_type: Annotated[Optional[StrictStr], Field(description="支払い方法タイプ")] = None,
         *,
@@ -164,7 +164,7 @@ class PaymentTransactionsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param term_id: term ID
+        :param term_id: 集計区間 ID
         :type term_id: str
         :param type: 取引タイプ
         :type type: str
@@ -229,7 +229,7 @@ class PaymentTransactionsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        term_id: Annotated[Optional[StrictStr], Field(description="term ID")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID")] = None,
         type: Annotated[Optional[StrictStr], Field(description="取引タイプ")] = None,
         payment_method_type: Annotated[Optional[StrictStr], Field(description="支払い方法タイプ")] = None,
         *,
@@ -255,7 +255,7 @@ class PaymentTransactionsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param term_id: term ID
+        :param term_id: 集計区間 ID
         :type term_id: str
         :param type: 取引タイプ
         :type type: str

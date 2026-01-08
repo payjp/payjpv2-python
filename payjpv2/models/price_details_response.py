@@ -31,20 +31,20 @@ class PriceDetailsResponse(BaseModel):
     """
     PriceDetailsResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="料金ID")
     object: Optional[StrictStr] = 'price'
+    id: StrictStr = Field(description="料金 ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
-    active: StrictBool = Field(description="価格が有効かどうか。デフォルトは `true`。")
-    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
-    nickname: Optional[StrictStr]
-    type: PriceType = Field(description="価格が一度限りの購入か、継続的な（サブスクリプション）購入かに応じて、`one_time` または `recurring` のいずれかとなります。  | 指定できる値 | |:---| | **one_time**: 1回限りの価格。 | | **recurring**: 継続的な価格。 |")
-    lookup_key: Optional[StrictStr]
+    product_id: StrictStr = Field(description="この価格が紐付く商品の ID")
+    unit_amount: StrictInt = Field(description="価格の単価")
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
-    product_id: StrictStr = Field(description="この価格が紐付く商品のID。")
-    unit_amount: StrictInt = Field(description="価格の単価。0以上の整数となります。")
-    created_at: datetime = Field(description="支払い方法作成時の日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="支払い方法更新時の日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "active", "metadata", "nickname", "type", "lookup_key", "currency", "product_id", "unit_amount", "created_at", "updated_at"]
+    active: StrictBool = Field(description="価格が有効かどうか")
+    nickname: Optional[StrictStr]
+    type: PriceType = Field(description="一度限りの購入を表す `one_time` が入ります。")
+    lookup_key: Optional[StrictStr]
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "product_id", "unit_amount", "currency", "active", "nickname", "type", "lookup_key", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -123,22 +123,22 @@ class PriceDetailsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'price',
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
+            "product_id": obj.get("product_id"),
+            "unit_amount": obj.get("unit_amount"),
+            "currency": obj.get("currency"),
             "active": obj.get("active"),
+            "nickname": obj.get("nickname"),
+            "type": obj.get("type"),
+            "lookup_key": obj.get("lookup_key"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
             else None,
-            "nickname": obj.get("nickname"),
-            "type": obj.get("type"),
-            "lookup_key": obj.get("lookup_key"),
-            "currency": obj.get("currency"),
-            "product_id": obj.get("product_id"),
-            "unit_amount": obj.get("unit_amount"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at")
         })

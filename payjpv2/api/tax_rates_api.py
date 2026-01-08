@@ -982,6 +982,8 @@ class TaxRatesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaxRateDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1056,6 +1058,8 @@ class TaxRatesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaxRateDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1130,6 +1134,8 @@ class TaxRatesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TaxRateDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

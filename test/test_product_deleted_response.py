@@ -36,14 +36,13 @@ class TestProductDeletedResponse(unittest.TestCase):
         model = ProductDeletedResponse()
         if include_optional:
             return ProductDeletedResponse(
-                id = '',
                 object = 'product',
+                id = '',
                 deleted = True
             )
         else:
             return ProductDeletedResponse(
                 id = '',
-                deleted = True,
         )
         """
 

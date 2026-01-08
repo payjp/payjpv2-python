@@ -41,8 +41,8 @@ class TestCustomerListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.customer_response.CustomerResponse(
-                        id = '', 
                         object = 'customer', 
+                        id = '', 
                         livemode = True, 
                         email = '', 
                         description = '', 
@@ -60,8 +60,8 @@ class TestCustomerListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.customer_response.CustomerResponse(
-                        id = '', 
                         object = 'customer', 
+                        id = '', 
                         livemode = True, 
                         email = '', 
                         description = '', 

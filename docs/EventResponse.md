@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | イベントID | 
 **object** | **str** |  | [optional] [default to 'event']
-**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
-**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
+**id** | **str** | イベント ID | 
 **livemode** | **bool** | 本番環境かどうか | 
 **type** | **str** | イベントの種類 | 
-**pending_webhooks** | **int** | 設定されたURLへの通知が完了していない(2xxのレスポンスが得られていない)webhookの数 | 
+**pending_webhooks** | **int** | 設定された URL への通知が完了していない (2xx のレスポンスが得られていない) webhook の数 | 
 **data** | **Dict[str, object]** | このイベントに関連したリソースオブジェクト | 
+**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
+**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 
 ## Example
 

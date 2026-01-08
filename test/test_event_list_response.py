@@ -41,14 +41,14 @@ class TestEventListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.event_response.EventResponse(
-                        id = '', 
                         object = 'event', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
                         type = '', 
                         pending_webhooks = 56, 
-                        data = { }, )
+                        data = { }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
@@ -57,14 +57,14 @@ class TestEventListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.event_response.EventResponse(
-                        id = '', 
                         object = 'event', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
                         type = '', 
                         pending_webhooks = 56, 
-                        data = { }, )
+                        data = { }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

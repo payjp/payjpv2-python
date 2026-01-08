@@ -24,6 +24,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.capture_method import CaptureMethod
 from payjpv2.models.currency import Currency
 from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.payment_flow_cancellation_reason import PaymentFlowCancellationReason
 from payjpv2.models.payment_flow_status import PaymentFlowStatus
 from payjpv2.models.payment_method_types import PaymentMethodTypes
 from typing import Optional, Set
@@ -33,28 +34,30 @@ class PaymentFlowResponse(BaseModel):
     """
     PaymentFlowResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="支払いフローID")
     object: Optional[StrictStr] = 'payment_flow'
-    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    id: StrictStr = Field(description="支払いフロー ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
     amount: StrictInt = Field(description="支払い予定の金額")
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
     amount_capturable: Optional[StrictInt]
     amount_received: Optional[StrictInt]
-    client_secret: StrictStr = Field(description="このPaymentFlowのクライアントシークレットです。フロントエンドで公開APIキーと合わせて使用しPaymentFlowの情報を取得や支払い処理を行います。**この値はこのPaymentFlowの支払いを行う顧客以外へ公開しないでください。**また保存やログへの記録なども行わないでください。")
+    client_secret: StrictStr = Field(description="この PaymentFlow のクライアントシークレットです。フロントエンドで公開 API キーと合わせて使用し PaymentFlow の情報を取得や支払い処理を行います。**この値はこの PaymentFlow の支払いを行う顧客以外へ公開しないでください。**また保存やログへの記録なども行わないでください。")
     customer_id: Optional[StrictStr]
     description: Optional[StrictStr]
-    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     payment_method_id: Optional[StrictStr]
     payment_method_options: Optional[Dict[str, Any]]
-    payment_method_types: List[PaymentMethodTypes] = Field(description="このPaymentFlowで使用できる支払い方法の種類のリスト")
-    status: PaymentFlowStatus = Field(description="このPaymentFlowのステータス。<a href=\"https://docs.pay.jp/v2/payment_flows#status\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 |")
+    payment_method_types: List[PaymentMethodTypes] = Field(description="この PaymentFlow で使用できる支払い方法の種類のリスト")
+    status: PaymentFlowStatus = Field(description="この PaymentFlow のステータス。<a href=\"https://docs.pay.jp/v2/payment_flows#status\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 |")
     next_action: Optional[Dict[str, Any]]
     return_url: Optional[StrictStr]
-    capture_method: CaptureMethod = Field(description="支払いの確定方法  | 指定できる値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
+    capture_method: CaptureMethod = Field(description="支払いの確定方法  | 値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
     last_payment_error: Optional[Dict[str, Any]]
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "currency", "amount_capturable", "amount_received", "client_secret", "customer_id", "description", "metadata", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "capture_method", "last_payment_error"]
+    cancellation_reason: Optional[PaymentFlowCancellationReason]
+    canceled_at: Optional[datetime]
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount", "currency", "amount_capturable", "amount_received", "client_secret", "customer_id", "description", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "capture_method", "last_payment_error", "cancellation_reason", "canceled_at", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -156,6 +159,16 @@ class PaymentFlowResponse(BaseModel):
         if self.last_payment_error is None and "last_payment_error" in self.model_fields_set:
             _dict['last_payment_error'] = None
 
+        # set to None if cancellation_reason (nullable) is None
+        # and model_fields_set contains the field
+        if self.cancellation_reason is None and "cancellation_reason" in self.model_fields_set:
+            _dict['cancellation_reason'] = None
+
+        # set to None if canceled_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.canceled_at is None and "canceled_at" in self.model_fields_set:
+            _dict['canceled_at'] = None
+
         return _dict
 
     @classmethod
@@ -168,10 +181,8 @@ class PaymentFlowResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'payment_flow',
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
             "amount": obj.get("amount"),
             "currency": obj.get("currency"),
@@ -180,12 +191,6 @@ class PaymentFlowResponse(BaseModel):
             "client_secret": obj.get("client_secret"),
             "customer_id": obj.get("customer_id"),
             "description": obj.get("description"),
-            "metadata": dict(
-                (_k, MetadataValue.from_dict(_v))
-                for _k, _v in obj["metadata"].items()
-            )
-            if obj.get("metadata") is not None
-            else None,
             "payment_method_id": obj.get("payment_method_id"),
             "payment_method_options": obj.get("payment_method_options"),
             "payment_method_types": obj.get("payment_method_types"),
@@ -193,7 +198,17 @@ class PaymentFlowResponse(BaseModel):
             "next_action": obj.get("next_action"),
             "return_url": obj.get("return_url"),
             "capture_method": obj.get("capture_method"),
-            "last_payment_error": obj.get("last_payment_error")
+            "last_payment_error": obj.get("last_payment_error"),
+            "cancellation_reason": obj.get("cancellation_reason"),
+            "canceled_at": obj.get("canceled_at"),
+            "metadata": dict(
+                (_k, MetadataValue.from_dict(_v))
+                for _k, _v in obj["metadata"].items()
+            )
+            if obj.get("metadata") is not None
+            else None,
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

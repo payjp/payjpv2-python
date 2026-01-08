@@ -29,12 +29,12 @@ class CustomerCreateRequest(BaseModel):
     """
     CustomerCreateRequest
     """ # noqa: E501
+    id: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="顧客 ID。100桁までの一意な文字列を指定できます。使える文字は半角英数字、ハイフン(-)、アンダースコア(_)です。未指定時は `cus_` で始まる一意な文字列が自動生成されます。")
+    payment_method_id: Optional[StrictStr] = Field(default=None, description="顧客に紐づける支払い方法 ID。同時にデフォルトの支払い方法として登録されます。")
     email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客のメールアドレス。メールアドレスの形式が正しいかどうかは検証されます。")
-    description: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客オブジェクトに付加できる任意の文字列です。これは、ダッシュボードで顧客と一緒に表示されます。")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    id: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, description="顧客ID。100桁までの一意な文字列を指定できます。使える文字は半角英数字、ハイフン(-)、アンダースコア(_)です。未指定時は `cus_` で始まる32桁までの一意な文字列が自動生成されます。")
-    payment_method_id: Optional[StrictStr] = Field(default=None, description="顧客に紐づける支払い方法ID")
-    __properties: ClassVar[List[str]] = ["email", "description", "metadata", "id", "payment_method_id"]
+    description: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客オブジェクトに付加できる任意の文字列です。管理画面で顧客と一緒に表示されます。")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    __properties: ClassVar[List[str]] = ["id", "payment_method_id", "email", "description", "metadata"]
 
     @field_validator('id')
     def id_validate_regular_expression(cls, value):
@@ -103,6 +103,8 @@ class CustomerCreateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "payment_method_id": obj.get("payment_method_id"),
             "email": obj.get("email"),
             "description": obj.get("description"),
             "metadata": dict(
@@ -110,9 +112,7 @@ class CustomerCreateRequest(BaseModel):
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "id": obj.get("id"),
-            "payment_method_id": obj.get("payment_method_id")
+            else None
         })
         return _obj
 

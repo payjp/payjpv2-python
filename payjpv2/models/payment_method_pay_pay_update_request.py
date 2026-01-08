@@ -30,8 +30,8 @@ class PaymentMethodPayPayUpdateRequest(BaseModel):
     PaymentMethodPayPayUpdateRequest
     """ # noqa: E501
     billing_details: Optional[PaymentMethodBillingDetailsRequest] = Field(default=None, description="請求先情報")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    type: StrictStr = Field(description="PayPay決済の場合は `paypay` を指定します。")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    type: StrictStr = Field(description="PayPay 決済の場合は `paypay` を指定します。")
     __properties: ClassVar[List[str]] = ["billing_details", "metadata", "type"]
 
     @field_validator('type')

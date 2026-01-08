@@ -36,13 +36,13 @@ class TestCustomerCreateRequest(unittest.TestCase):
         model = CustomerCreateRequest()
         if include_optional:
             return CustomerCreateRequest(
+                id = 'z',
+                payment_method_id = '',
                 email = '',
                 description = '',
                 metadata = {
                     'key' : null
-                    },
-                id = 'z',
-                payment_method_id = ''
+                    }
             )
         else:
             return CustomerCreateRequest(

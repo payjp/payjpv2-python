@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | 商品ID | 
 **object** | **str** |  | [optional] [default to 'product']
-**deleted** | **bool** | 削除されたかどうか | [readonly] 
+**id** | **str** | 商品 ID | 
+**deleted** | **bool** | 削除されたかどうか | [optional] [default to True]
 
 ## Example
 

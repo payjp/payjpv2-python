@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | 
 **object** | **str** |  | [optional] [default to 'payment_method_configuration']
-**active** | **bool** | 設定が有効かどうか。 | 
+**id** | **str** | 支払い方法設定 ID | 
 **livemode** | **bool** | 本番環境かどうか | 
+**active** | **bool** | 設定が有効かどうか | 
 **name** | **str** |  | 
-**paypay** | [**PaymentMethodConfigurationSettingResponse**](PaymentMethodConfigurationSettingResponse.md) | PayPayの設定 | 
+**paypay** | [**PaymentMethodConfigurationSettingResponse**](PaymentMethodConfigurationSettingResponse.md) | PayPay の設定 | 
 **card** | [**PaymentMethodConfigurationSettingResponse**](PaymentMethodConfigurationSettingResponse.md) | カードの設定 | 
 
 ## Example

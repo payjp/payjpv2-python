@@ -31,7 +31,7 @@ class PaymentMethodCardDetailsResponse(BaseModel):
     brand: StrictStr = Field(description="カードのブランド")
     exp_month: StrictInt = Field(description="カードの有効期限（月）")
     exp_year: StrictInt = Field(description="カードの有効期限（年）")
-    fingerprint: StrictStr = Field(description="fingerprint")
+    fingerprint: StrictStr = Field(description="このクレジットカード番号に紐づく値。同一番号のカードからは同一の値が生成されることが保証されています。")
     country: Optional[StrictStr]
     __properties: ClassVar[List[str]] = ["last4", "brand", "exp_month", "exp_year", "fingerprint", "country"]
 

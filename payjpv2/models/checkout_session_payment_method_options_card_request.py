@@ -27,8 +27,8 @@ class CheckoutSessionPaymentMethodOptionsCardRequest(BaseModel):
     """
     CheckoutSessionPaymentMethodOptionsCardRequest
     """ # noqa: E501
-    request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求。  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 |")
-    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 | ")
+    request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 |")
+    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3D セキュア認証の要求方法  | 指定できる値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 |")
     __properties: ClassVar[List[str]] = ["request_extended_authorization", "request_three_d_secure"]
 
     @field_validator('request_extended_authorization')

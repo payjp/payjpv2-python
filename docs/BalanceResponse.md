@@ -6,17 +6,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **object** | **str** |  | [optional] [default to 'balance']
-**id** | **str** | 残高ID | 
+**id** | **str** | 残高 ID | 
 **livemode** | **bool** | 本番環境かどうか | 
-**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
-**updated_at** | **datetime** | 更新時の日時 (UTC, ISO 8601 形式) | 
-**state** | [**BalanceState**](BalanceState.md) | Balanceの状態  | 指定できる値 | |:---| | **collecting**: 集計中 | | **transfer**: 入金 | | **claim**: 請求 | | 
-**statements** | [**List[StatementResponse]**](StatementResponse.md) | 関連付けられているStatementオブジェクトのリスト | 
-**closed** | **bool** | このBalanceの清算が終了していればtrue  state&#x3D;transferであれば加盟店口座への入金作業完了、state&#x3D;claimであればPAY.JPで請求額の振込が確認できたことを表します。 | 
+**state** | [**BalanceState**](BalanceState.md) | Balance の状態  | 値 | |:---| | **collecting**: 集計中 | | **transfer**: 入金 | | **claim**: 請求 | | 
+**statements** | [**List[StatementResponse]**](StatementResponse.md) | 関連付けられている Statement オブジェクトのリスト | 
+**closed** | **bool** | この Balance の清算が終了していれば true  state&#x3D;transfer であれば加盟店口座への入金作業完了、state&#x3D;claim であれば PAY.JP で請求額の振込が確認できたことを表します。 | 
 **closed_date** | **datetime** |  | 
 **due_date** | **datetime** |  | 
-**net** | **int** | 関連付けられているStatementの総額 | 
+**net** | **int** | 関連付けられている Statement の総額 | 
 **bank_info** | [**BankInfoResponse**](BankInfoResponse.md) |  | 
+**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
+**updated_at** | **datetime** | 更新時の日時 (UTC, ISO 8601 形式) | 
 
 ## Example
 

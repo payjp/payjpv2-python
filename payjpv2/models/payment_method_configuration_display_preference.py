@@ -27,8 +27,8 @@ class PaymentMethodConfigurationDisplayPreference(BaseModel):
     """
     PaymentMethodConfigurationDisplayPreference
     """ # noqa: E501
-    preference: Optional[StrictStr] = Field(default=None, description="この支払い方法がアカウントで有効になっているかどうか。  | 指定できる値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
-    value: Optional[StrictStr] = Field(default=None, description="この支払い方法を決済画面に表示するかどうか。  | 指定できる値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない |")
+    preference: Optional[StrictStr] = Field(default=None, description="この支払い方法がアカウントで有効になっているかどうか  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
+    value: Optional[StrictStr] = Field(default=None, description="この支払い方法を決済画面に表示するかどうか。  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない |")
     __properties: ClassVar[List[str]] = ["preference", "value"]
 
     @field_validator('preference')

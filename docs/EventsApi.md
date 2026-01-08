@@ -53,9 +53,9 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
-    resource_id = 'resource_id_example' # str | 取得するeventに紐づくAPIリソースのID (e.g. customer.id) (optional)
-    object = 'object_example' # str | 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow) (optional)
-    type = 'type_example' # str | 取得するeventのtype (optional)
+    resource_id = 'resource_id_example' # str | 取得する event に紐づく API リソースの ID (optional)
+    object = 'object_example' # str | 取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow) (optional)
+    type = 'type_example' # str | 取得する event の type (optional)
 
     try:
         # Get All Events
@@ -76,9 +76,9 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
- **resource_id** | **str**| 取得するeventに紐づくAPIリソースのID (e.g. customer.id) | [optional] 
- **object** | **str**| 取得するeventに紐づくAPIリソースのobject。値はリソース名(e.g. customer, payment_flow) | [optional] 
- **type** | **str**| 取得するeventのtype | [optional] 
+ **resource_id** | **str**| 取得する event に紐づく API リソースの ID | [optional] 
+ **object** | **str**| 取得する event に紐づく API リソースの object。値はリソース名 (e.g. customer, payment_flow) | [optional] 
+ **type** | **str**| 取得する event の type | [optional] 
 
 ### Return type
 

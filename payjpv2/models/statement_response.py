@@ -32,17 +32,17 @@ class StatementResponse(BaseModel):
     StatementResponse
     """ # noqa: E501
     object: Optional[StrictStr] = 'statement'
-    id: StrictStr = Field(description="明細ID")
+    id: StrictStr = Field(description="明細 ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
     title: Optional[StrictStr]
-    type: StatementType = Field(description="取引明細の区分  | 名 | 区分 | 詳細 | |---| --- | --- | | **sales** | 売上 | 決済による売上、決済手数料等 | | **service_fee** | サービス利用料 | 有料プランの月額費用など、salesに含まれないサービス利用料 | | **forfeit** | 残高失効 | - | | **transfer_fee** | 振込手数料 | - | | **misc** | その他 | 調整金など |")
-    created_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
+    type: StatementType = Field(description="取引明細の区分  | 値 | 区分 | 詳細 | |---| --- | --- | | **sales** | 売上 | 決済による売上、決済手数料等 | | **service_fee** | サービス利用料 | 有料プランの月額費用など、sales に含まれないサービス利用料 | | **forfeit** | 残高失効 | - | | **transfer_fee** | 振込手数料 | - | | **misc** | その他 | 調整金など |")
     term: Optional[TermResponse]
     balance_id: Optional[StrictStr]
     items: List[StatementItemResponse] = Field(description="明細項目のリスト")
-    net: StrictInt = Field(description="含まれるstatement_itemの金額合計")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "title", "type", "created_at", "updated_at", "term", "balance_id", "items", "net"]
+    net: StrictInt = Field(description="含まれる statement_item の金額合計")
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "title", "type", "term", "balance_id", "items", "net", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -134,12 +134,12 @@ class StatementResponse(BaseModel):
             "livemode": obj.get("livemode"),
             "title": obj.get("title"),
             "type": obj.get("type"),
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
             "term": TermResponse.from_dict(obj["term"]) if obj.get("term") is not None else None,
             "balance_id": obj.get("balance_id"),
             "items": [StatementItemResponse.from_dict(_item) for _item in obj["items"]] if obj.get("items") is not None else None,
-            "net": obj.get("net")
+            "net": obj.get("net"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

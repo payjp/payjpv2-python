@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | 顧客ID | 
 **object** | **str** |  | [optional] [default to 'customer']
+**id** | **str** | 顧客 ID | 
 **livemode** | **bool** | 本番環境かどうか | 
 **email** | **str** |  | 
 **description** | **str** |  | 

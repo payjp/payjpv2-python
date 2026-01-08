@@ -38,15 +38,15 @@ class TestPaymentMethodCardResponse(unittest.TestCase):
             return PaymentMethodCardResponse(
                 object = 'payment_method',
                 id = '',
+                livemode = True,
                 type = 'card',
                 customer_id = '',
                 detached_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                livemode = True,
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 metadata = {
                     'key' : null
                     },
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 billing_details = payjpv2.models.payment_method_billing_details_response.PaymentMethodBillingDetailsResponse(
                     name = '', 
                     phone = '', 
@@ -69,15 +69,15 @@ class TestPaymentMethodCardResponse(unittest.TestCase):
         else:
             return PaymentMethodCardResponse(
                 id = '',
+                livemode = True,
                 type = 'card',
                 customer_id = '',
                 detached_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                livemode = True,
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 metadata = {
                     'key' : null
                     },
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 billing_details = payjpv2.models.payment_method_billing_details_response.PaymentMethodBillingDetailsResponse(
                     name = '', 
                     phone = '', 

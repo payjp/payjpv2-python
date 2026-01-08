@@ -30,9 +30,9 @@ class PaymentMethodCardCreateRequest(BaseModel):
     """
     PaymentMethodCardCreateRequest
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = Field(default=None, description="顧客ID")
+    customer_id: Optional[StrictStr] = Field(default=None, description="顧客 ID")
     billing_details: PaymentMethodCardBillingDetailsRequest = Field(description="請求先情報")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     type: StrictStr = Field(description="クレジットカード決済の場合は `card` を指定します。")
     card: PaymentMethodCreateCardDetailsRequest = Field(description="カード情報")
     __properties: ClassVar[List[str]] = ["customer_id", "billing_details", "metadata", "type", "card"]

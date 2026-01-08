@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**price_id** | **str** | 料金ID | 
+**price_id** | **str** | 料金 ID | 
 **quantity** | **int** | 購入する商品の数量 | 
-**tax_rates** | **List[str]** | 税率ID | [optional] [default to []]
+**tax_rates** | **List[str]** | 税率 ID | [optional] [default to []]
 
 ## Example
 

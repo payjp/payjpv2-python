@@ -38,10 +38,10 @@ class TestPaymentRefundCreateRequest(unittest.TestCase):
             return PaymentRefundCreateRequest(
                 payment_flow_id = '',
                 amount = 0.0,
+                reason = 'duplicate',
                 metadata = {
                     'key' : null
-                    },
-                reason = 'duplicate'
+                    }
             )
         else:
             return PaymentRefundCreateRequest(

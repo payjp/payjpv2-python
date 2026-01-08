@@ -41,14 +41,24 @@ class TestCheckoutSessionListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.checkout_session_details_response.CheckoutSessionDetailsResponse(
-                        id = '', 
                         object = 'checkout.session', 
+                        id = '', 
                         livemode = True, 
                         amount_subtotal = 56, 
                         amount_total = 56, 
-                        cancel_url = '', 
                         customer_id = '', 
                         customer_email = '', 
+                        customer_details = payjpv2.models.checkout_session_customer_details_response.CheckoutSessionCustomerDetailsResponse(
+                            name = '', 
+                            email = '', 
+                            phone = '', 
+                            address = payjpv2.models.checkout_session_customer_details_address_response.CheckoutSessionCustomerDetailsAddressResponse(
+                                country = '', 
+                                zip = '', 
+                                state = '', 
+                                city = '', 
+                                line1 = '', 
+                                line2 = '', ), ), 
                         expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         currency = 'jpy', 
                         locale = 'auto', 
@@ -61,14 +71,15 @@ class TestCheckoutSessionListResponse(unittest.TestCase):
                         submit_type = 'auto', 
                         mode = 'payment', 
                         ui_mode = 'hosted', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        status = 'open', 
+                        success_url = '', 
+                        cancel_url = '', 
+                        url = '', 
                         metadata = {
                             'key' : null
                             }, 
-                        status = 'open', 
-                        success_url = '', 
-                        url = '', )
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
@@ -77,14 +88,24 @@ class TestCheckoutSessionListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.checkout_session_details_response.CheckoutSessionDetailsResponse(
-                        id = '', 
                         object = 'checkout.session', 
+                        id = '', 
                         livemode = True, 
                         amount_subtotal = 56, 
                         amount_total = 56, 
-                        cancel_url = '', 
                         customer_id = '', 
                         customer_email = '', 
+                        customer_details = payjpv2.models.checkout_session_customer_details_response.CheckoutSessionCustomerDetailsResponse(
+                            name = '', 
+                            email = '', 
+                            phone = '', 
+                            address = payjpv2.models.checkout_session_customer_details_address_response.CheckoutSessionCustomerDetailsAddressResponse(
+                                country = '', 
+                                zip = '', 
+                                state = '', 
+                                city = '', 
+                                line1 = '', 
+                                line2 = '', ), ), 
                         expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         currency = 'jpy', 
                         locale = 'auto', 
@@ -97,14 +118,15 @@ class TestCheckoutSessionListResponse(unittest.TestCase):
                         submit_type = 'auto', 
                         mode = 'payment', 
                         ui_mode = 'hosted', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        status = 'open', 
+                        success_url = '', 
+                        cancel_url = '', 
+                        url = '', 
                         metadata = {
                             'key' : null
                             }, 
-                        status = 'open', 
-                        success_url = '', 
-                        url = '', )
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

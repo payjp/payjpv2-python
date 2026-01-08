@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.setup_flow_cancellation_reason import SetupFlowCancellationReason
 from payjpv2.models.setup_flow_status import SetupFlowStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,23 +32,24 @@ class SetupFlowResponse(BaseModel):
     """
     SetupFlowResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="ID")
     object: Optional[StrictStr] = 'setup_flow'
-    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    id: StrictStr = Field(description="ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
-    client_secret: StrictStr = Field(description="この SetupFlow のクライアントシークレットです。フロントエンドで公開鍵と合わせて使用し、SetupFlow の取得や支払い処理を行います。**この値はこの SetupFlow の支払いを行う顧客以外へ公開しないでください。")
+    client_secret: StrictStr = Field(description="この SetupFlow のクライアントシークレットです。フロントエンドで公開鍵と合わせて使用し、SetupFlow の取得や支払い方法の登録処理を行います。**この値はこの SetupFlow を利用する顧客以外へ公開しないでください。")
     customer_id: Optional[StrictStr]
     description: Optional[StrictStr]
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     payment_method_id: Optional[StrictStr]
     payment_method_options: Optional[Dict[str, Any]]
-    payment_method_types: List[PaymentMethodTypes] = Field(description="この SetupFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法が自動的に設定されます。")
-    status: SetupFlowStatus = Field(description="この SetupFlow のステータスです。<a href=\"https://docs.pay.jp/v2/setup_flows#status\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **succeeded**: 成功しました。 | | **canceled**: キャンセルされました。 |")
+    payment_method_types: List[PaymentMethodTypes] = Field(description="この SetupFlow で使用できる支払い方法の種類のリスト")
+    status: SetupFlowStatus = Field(description="この SetupFlow のステータスです。<a href=\"https://docs.pay.jp/v2/guide/payments/setupflow#setup-flow-%E3%81%AE%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **succeeded**: 成功しました。 | | **canceled**: キャンセルされました。 |")
     next_action: Optional[Dict[str, Any]]
     return_url: Optional[StrictStr]
     last_setup_error: Optional[Dict[str, Any]]
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "client_secret", "customer_id", "description", "metadata", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "last_setup_error"]
+    cancellation_reason: Optional[SetupFlowCancellationReason]
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "client_secret", "customer_id", "description", "metadata", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "last_setup_error", "cancellation_reason", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -139,6 +141,11 @@ class SetupFlowResponse(BaseModel):
         if self.last_setup_error is None and "last_setup_error" in self.model_fields_set:
             _dict['last_setup_error'] = None
 
+        # set to None if cancellation_reason (nullable) is None
+        # and model_fields_set contains the field
+        if self.cancellation_reason is None and "cancellation_reason" in self.model_fields_set:
+            _dict['cancellation_reason'] = None
+
         return _dict
 
     @classmethod
@@ -151,10 +158,8 @@ class SetupFlowResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'setup_flow',
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
             "client_secret": obj.get("client_secret"),
             "customer_id": obj.get("customer_id"),
@@ -171,7 +176,10 @@ class SetupFlowResponse(BaseModel):
             "status": obj.get("status"),
             "next_action": obj.get("next_action"),
             "return_url": obj.get("return_url"),
-            "last_setup_error": obj.get("last_setup_error")
+            "last_setup_error": obj.get("last_setup_error"),
+            "cancellation_reason": obj.get("cancellation_reason"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

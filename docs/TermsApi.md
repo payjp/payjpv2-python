@@ -53,8 +53,8 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
-    since_start_at = '2013-10-20T19:20:30+01:00' # datetime | start_atが指定した日付以降のデータを取得 (optional)
-    until_start_at = '2013-10-20T19:20:30+01:00' # datetime | start_atが指定した日付以前のデータを取得 (optional)
+    since_start_at = '2013-10-20T19:20:30+01:00' # datetime | start_at が指定した日付以降のデータを取得 (optional)
+    until_start_at = '2013-10-20T19:20:30+01:00' # datetime | start_at が指定した日付以前のデータを取得 (optional)
 
     try:
         # Get All Terms
@@ -75,8 +75,8 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
- **since_start_at** | **datetime**| start_atが指定した日付以降のデータを取得 | [optional] 
- **until_start_at** | **datetime**| start_atが指定した日付以前のデータを取得 | [optional] 
+ **since_start_at** | **datetime**| start_at が指定した日付以降のデータを取得 | [optional] 
+ **until_start_at** | **datetime**| start_at が指定した日付以前のデータを取得 | [optional] 
 
 ### Return type
 

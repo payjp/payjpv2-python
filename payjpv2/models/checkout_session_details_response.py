@@ -21,6 +21,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.checkout_session_customer_details_response import CheckoutSessionCustomerDetailsResponse
 from payjpv2.models.checkout_session_mode import CheckoutSessionMode
 from payjpv2.models.checkout_session_status import CheckoutSessionStatus
 from payjpv2.models.checkout_session_submit_type import CheckoutSessionSubmitType
@@ -36,14 +37,14 @@ class CheckoutSessionDetailsResponse(BaseModel):
     """
     CheckoutSessionDetailsResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="ID")
     object: Optional[StrictStr] = 'checkout.session'
+    id: StrictStr = Field(description="Checkout Session ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
     amount_subtotal: Optional[StrictInt]
     amount_total: Optional[StrictInt]
-    cancel_url: Optional[StrictStr]
     customer_id: Optional[StrictStr]
     customer_email: Optional[StrictStr]
+    customer_details: Optional[CheckoutSessionCustomerDetailsResponse] = None
     expires_at: Optional[datetime]
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
     locale: Optional[Locale]
@@ -52,15 +53,16 @@ class CheckoutSessionDetailsResponse(BaseModel):
     payment_method_options: Optional[Dict[str, Any]]
     setup_flow_id: Optional[StrictStr] = None
     submit_type: Optional[CheckoutSessionSubmitType]
-    mode: CheckoutSessionMode = Field(description="Checkout Session のモード  | 指定できる値 | |:---| | **payment**: 支払いモードでCheckout Sessionを作成します。 | | **setup**: セットアップモードでCheckout Sessionを作成します。 | ")
-    ui_mode: CheckoutSessionUIMode = Field(description="Checkout Session の UI モード。デフォルトは `hosted` です。<br>  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 | ")
-    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
+    mode: CheckoutSessionMode = Field(description="Checkout Session のモード  | 値 | |:---| | **payment**: 支払いモード | | **setup**: セットアップモード |")
+    ui_mode: CheckoutSessionUIMode = Field(description="Checkout Session の UI モード  | 値 | |:---| | **hosted**: PAY.JP でホスティングしている画面を使用します。 |")
     status: CheckoutSessionStatus = Field(description="チェックアウトセッションのステータス")
     success_url: Optional[StrictStr]
+    cancel_url: Optional[StrictStr]
     url: StrictStr = Field(description="URL")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "amount_subtotal", "amount_total", "cancel_url", "customer_id", "customer_email", "expires_at", "currency", "locale", "payment_flow_id", "payment_method_types", "payment_method_options", "setup_flow_id", "submit_type", "mode", "ui_mode", "created_at", "updated_at", "metadata", "status", "success_url", "url"]
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount_subtotal", "amount_total", "customer_id", "customer_email", "customer_details", "expires_at", "currency", "locale", "payment_flow_id", "payment_method_types", "payment_method_options", "setup_flow_id", "submit_type", "mode", "ui_mode", "status", "success_url", "cancel_url", "url", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -110,6 +112,9 @@ class CheckoutSessionDetailsResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of customer_details
+        if self.customer_details:
+            _dict['customer_details'] = self.customer_details.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -127,11 +132,6 @@ class CheckoutSessionDetailsResponse(BaseModel):
         if self.amount_total is None and "amount_total" in self.model_fields_set:
             _dict['amount_total'] = None
 
-        # set to None if cancel_url (nullable) is None
-        # and model_fields_set contains the field
-        if self.cancel_url is None and "cancel_url" in self.model_fields_set:
-            _dict['cancel_url'] = None
-
         # set to None if customer_id (nullable) is None
         # and model_fields_set contains the field
         if self.customer_id is None and "customer_id" in self.model_fields_set:
@@ -141,6 +141,11 @@ class CheckoutSessionDetailsResponse(BaseModel):
         # and model_fields_set contains the field
         if self.customer_email is None and "customer_email" in self.model_fields_set:
             _dict['customer_email'] = None
+
+        # set to None if customer_details (nullable) is None
+        # and model_fields_set contains the field
+        if self.customer_details is None and "customer_details" in self.model_fields_set:
+            _dict['customer_details'] = None
 
         # set to None if expires_at (nullable) is None
         # and model_fields_set contains the field
@@ -182,6 +187,11 @@ class CheckoutSessionDetailsResponse(BaseModel):
         if self.success_url is None and "success_url" in self.model_fields_set:
             _dict['success_url'] = None
 
+        # set to None if cancel_url (nullable) is None
+        # and model_fields_set contains the field
+        if self.cancel_url is None and "cancel_url" in self.model_fields_set:
+            _dict['cancel_url'] = None
+
         return _dict
 
     @classmethod
@@ -194,14 +204,14 @@ class CheckoutSessionDetailsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'checkout.session',
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
             "amount_subtotal": obj.get("amount_subtotal"),
             "amount_total": obj.get("amount_total"),
-            "cancel_url": obj.get("cancel_url"),
             "customer_id": obj.get("customer_id"),
             "customer_email": obj.get("customer_email"),
+            "customer_details": CheckoutSessionCustomerDetailsResponse.from_dict(obj["customer_details"]) if obj.get("customer_details") is not None else None,
             "expires_at": obj.get("expires_at"),
             "currency": obj.get("currency"),
             "locale": obj.get("locale"),
@@ -212,17 +222,18 @@ class CheckoutSessionDetailsResponse(BaseModel):
             "submit_type": obj.get("submit_type"),
             "mode": obj.get("mode"),
             "ui_mode": obj.get("ui_mode"),
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
+            "status": obj.get("status"),
+            "success_url": obj.get("success_url"),
+            "cancel_url": obj.get("cancel_url"),
+            "url": obj.get("url"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
             else None,
-            "status": obj.get("status"),
-            "success_url": obj.get("success_url"),
-            "url": obj.get("url")
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

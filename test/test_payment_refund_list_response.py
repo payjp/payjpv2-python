@@ -41,18 +41,18 @@ class TestPaymentRefundListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.payment_refund_response.PaymentRefundResponse(
-                        id = '', 
                         object = 'payment_refund', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
+                        payment_flow_id = '', 
                         amount = 56, 
                         status = 'succeeded', 
-                        payment_flow_id = '', 
                         reason = 'duplicate', 
                         metadata = {
                             'key' : null
-                            }, )
+                            }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
@@ -61,18 +61,18 @@ class TestPaymentRefundListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.payment_refund_response.PaymentRefundResponse(
-                        id = '', 
                         object = 'payment_refund', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
+                        payment_flow_id = '', 
                         amount = 56, 
                         status = 'succeeded', 
-                        payment_flow_id = '', 
                         reason = 'duplicate', 
                         metadata = {
                             'key' : null
-                            }, )
+                            }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

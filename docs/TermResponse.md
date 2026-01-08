@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | 
 **object** | **str** |  | [optional] [default to 'term']
+**id** | **str** | 集計区間 ID | 
 **livemode** | **bool** | 本番環境かどうか | 
 **start_at** | **datetime** | 区間開始時刻 | 
-**end_at** | **datetime** | 区間終了時刻  Termが表す区間はstart_at 以上 end_at 未満 の範囲となります。 翌サイクルのTermの場合nullを返します。  | 
-**closed** | **bool** | 締め処理が完了済みならTrue | 
+**end_at** | **datetime** | 区間終了時刻  Term が表す区間は start_at 以上 end_at 未満の範囲となります。 翌サイクルの Term の場合 null を返します。 | 
+**closed** | **bool** | 締め処理が完了済みなら true | 
 
 ## Example
 

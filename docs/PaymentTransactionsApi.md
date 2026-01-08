@@ -53,7 +53,7 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
-    term_id = 'term_id_example' # str | term ID (optional)
+    term_id = 'term_id_example' # str | 集計区間 ID (optional)
     type = 'type_example' # str | 取引タイプ (optional)
     payment_method_type = 'payment_method_type_example' # str | 支払い方法タイプ (optional)
 
@@ -76,7 +76,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
- **term_id** | **str**| term ID | [optional] 
+ **term_id** | **str**| 集計区間 ID | [optional] 
  **type** | **str**| 取引タイプ | [optional] 
  **payment_method_type** | **str**| 支払い方法タイプ | [optional] 
 

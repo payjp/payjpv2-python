@@ -1322,6 +1322,7 @@ class CheckoutSessionsApi:
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
             '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1397,6 +1398,7 @@ class CheckoutSessionsApi:
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
             '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1472,6 +1474,7 @@ class CheckoutSessionsApi:
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
             '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

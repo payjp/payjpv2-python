@@ -5,19 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | 
 **object** | **str** |  | [optional] [default to 'payment_transaction']
-**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
-**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
+**id** | **str** | 決済トランザクション ID | 
 **livemode** | **bool** | 本番環境かどうか | 
-**resource_id** | **str** | PaymentTransaction生成の元になったリソースのID | 
+**resource_id** | **str** | PaymentTransaction 生成の元になったリソースの ID | 
 **amount** | **int** | 金額 | 
 **currency** | [**Currency**](Currency.md) | 通貨 | 
 **fee_rate** | **str** | 手数料率 | 
 **fee** | **int** | 手数料 | 
-**type** | [**PaymentTransactionType**](PaymentTransactionType.md) | PaymentTransactionの種類 | 
+**type** | [**PaymentTransactionType**](PaymentTransactionType.md) | PaymentTransaction の種類  | 値 | |:---| | **payment**: 支払い | | **refund**: 返金 | | **chargeback**: チャージバック | | **chargeback_cancel**: チャージバックのキャンセル |  | 
 **payment_method_type** | [**PaymentMethodTypes**](PaymentMethodTypes.md) | 支払い方法の種類 | 
-**term_id** | **str** | 期間ID | 
+**term_id** | **str** | 集計区間 ID | 
+**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
+**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 
 ## Example
 

@@ -36,8 +36,8 @@ class TestCustomerResponse(unittest.TestCase):
         model = CustomerResponse()
         if include_optional:
             return CustomerResponse(
-                id = '',
                 object = 'customer',
+                id = '',
                 livemode = True,
                 email = '',
                 description = '',

@@ -28,13 +28,13 @@ class TermResponse(BaseModel):
     """
     TermResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="ID")
     object: Optional[StrictStr] = 'term'
+    id: StrictStr = Field(description="集計区間 ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
     start_at: datetime = Field(description="区間開始時刻")
-    end_at: datetime = Field(description="区間終了時刻  Termが表す区間はstart_at 以上 end_at 未満 の範囲となります。 翌サイクルのTermの場合nullを返します。 ")
-    closed: StrictBool = Field(description="締め処理が完了済みならTrue")
-    __properties: ClassVar[List[str]] = ["id", "object", "livemode", "start_at", "end_at", "closed"]
+    end_at: datetime = Field(description="区間終了時刻  Term が表す区間は start_at 以上 end_at 未満の範囲となります。 翌サイクルの Term の場合 null を返します。")
+    closed: StrictBool = Field(description="締め処理が完了済みなら true")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "start_at", "end_at", "closed"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -96,8 +96,8 @@ class TermResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'term',
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
             "start_at": obj.get("start_at"),
             "end_at": obj.get("end_at"),

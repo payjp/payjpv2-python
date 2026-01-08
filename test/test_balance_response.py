@@ -39,28 +39,6 @@ class TestBalanceResponse(unittest.TestCase):
                 object = 'balance',
                 id = '',
                 livemode = True,
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                state = 'collecting',
-                statements = ERROR_TO_EXAMPLE_VALUE,
-                closed = True,
-                closed_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                net = 56,
-                bank_info = payjpv2.models.bank_info_response.BankInfoResponse(
-                    bank_code = '', 
-                    bank_branch_code = '', 
-                    bank_account_type = '', 
-                    bank_account_number = '', 
-                    bank_account_holder_name = '', 
-                    bank_account_status = '', )
-            )
-        else:
-            return BalanceResponse(
-                id = '',
-                livemode = True,
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 state = 'collecting',
                 statements = ERROR_TO_EXAMPLE_VALUE,
                 closed = True,
@@ -74,6 +52,28 @@ class TestBalanceResponse(unittest.TestCase):
                     bank_account_number = '', 
                     bank_account_holder_name = '', 
                     bank_account_status = '', ),
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+            )
+        else:
+            return BalanceResponse(
+                id = '',
+                livemode = True,
+                state = 'collecting',
+                statements = ERROR_TO_EXAMPLE_VALUE,
+                closed = True,
+                closed_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                due_date = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                net = 56,
+                bank_info = payjpv2.models.bank_info_response.BankInfoResponse(
+                    bank_code = '', 
+                    bank_branch_code = '', 
+                    bank_account_type = '', 
+                    bank_account_number = '', 
+                    bank_account_holder_name = '', 
+                    bank_account_status = '', ),
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

@@ -36,32 +36,32 @@ class TestPaymentRefundResponse(unittest.TestCase):
         model = PaymentRefundResponse()
         if include_optional:
             return PaymentRefundResponse(
-                id = '',
                 object = 'payment_refund',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                livemode = True,
-                amount = 56,
-                status = 'succeeded',
-                payment_flow_id = '',
-                reason = 'duplicate',
-                metadata = {
-                    'key' : null
-                    }
-            )
-        else:
-            return PaymentRefundResponse(
                 id = '',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
+                payment_flow_id = '',
                 amount = 56,
                 status = 'succeeded',
-                payment_flow_id = '',
                 reason = 'duplicate',
                 metadata = {
                     'key' : null
                     },
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+            )
+        else:
+            return PaymentRefundResponse(
+                id = '',
+                livemode = True,
+                payment_flow_id = '',
+                amount = 56,
+                status = 'succeeded',
+                reason = 'duplicate',
+                metadata = {
+                    'key' : null
+                    },
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

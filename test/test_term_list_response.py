@@ -41,8 +41,8 @@ class TestTermListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.term_response.TermResponse(
-                        id = '', 
                         object = 'term', 
+                        id = '', 
                         livemode = True, 
                         start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -55,8 +55,8 @@ class TestTermListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.term_response.TermResponse(
-                        id = '', 
                         object = 'term', 
+                        id = '', 
                         livemode = True, 
                         start_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         end_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 

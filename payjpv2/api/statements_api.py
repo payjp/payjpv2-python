@@ -331,7 +331,7 @@ class StatementsApi:
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         type: Annotated[Optional[StatementType], Field(description="明細タイプでフィルタ")] = None,
-        term_id: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID でフィルタ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -361,7 +361,7 @@ class StatementsApi:
         :type ending_before: str
         :param type: 明細タイプでフィルタ
         :type type: StatementType
-        :param term_id: 期間IDでフィルタ
+        :param term_id: 集計区間 ID でフィルタ
         :type term_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -426,7 +426,7 @@ class StatementsApi:
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         type: Annotated[Optional[StatementType], Field(description="明細タイプでフィルタ")] = None,
-        term_id: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID でフィルタ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -456,7 +456,7 @@ class StatementsApi:
         :type ending_before: str
         :param type: 明細タイプでフィルタ
         :type type: StatementType
-        :param term_id: 期間IDでフィルタ
+        :param term_id: 集計区間 ID でフィルタ
         :type term_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -521,7 +521,7 @@ class StatementsApi:
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         type: Annotated[Optional[StatementType], Field(description="明細タイプでフィルタ")] = None,
-        term_id: Annotated[Optional[StrictStr], Field(description="期間IDでフィルタ")] = None,
+        term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID でフィルタ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -551,7 +551,7 @@ class StatementsApi:
         :type ending_before: str
         :param type: 明細タイプでフィルタ
         :type type: StatementType
-        :param term_id: 期間IDでフィルタ
+        :param term_id: 集計区間 ID でフィルタ
         :type term_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

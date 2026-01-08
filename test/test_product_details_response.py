@@ -36,8 +36,8 @@ class TestProductDetailsResponse(unittest.TestCase):
         model = ProductDetailsResponse()
         if include_optional:
             return ProductDetailsResponse(
-                id = '',
                 object = 'product',
+                id = '',
                 name = '',
                 active = True,
                 default_price_id = '',

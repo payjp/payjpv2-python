@@ -41,10 +41,10 @@ class TestPaymentMethodConfigurationListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.payment_method_configuration_details_response.PaymentMethodConfigurationDetailsResponse(
-                        id = '', 
                         object = 'payment_method_configuration', 
-                        active = True, 
+                        id = '', 
                         livemode = True, 
+                        active = True, 
                         name = '', 
                         paypay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                             available = True, 
@@ -61,10 +61,10 @@ class TestPaymentMethodConfigurationListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.payment_method_configuration_details_response.PaymentMethodConfigurationDetailsResponse(
-                        id = '', 
                         object = 'payment_method_configuration', 
-                        active = True, 
+                        id = '', 
                         livemode = True, 
+                        active = True, 
                         name = '', 
                         paypay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                             available = True, 

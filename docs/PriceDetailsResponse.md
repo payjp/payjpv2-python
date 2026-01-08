@@ -5,19 +5,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | 料金ID | 
 **object** | **str** |  | [optional] [default to 'price']
+**id** | **str** | 料金 ID | 
 **livemode** | **bool** | 本番環境かどうか | 
-**active** | **bool** | 価格が有効かどうか。デフォルトは &#x60;true&#x60;。 | 
-**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
-**nickname** | **str** |  | 
-**type** | [**PriceType**](PriceType.md) | 価格が一度限りの購入か、継続的な（サブスクリプション）購入かに応じて、&#x60;one_time&#x60; または &#x60;recurring&#x60; のいずれかとなります。  | 指定できる値 | |:---| | **one_time**: 1回限りの価格。 | | **recurring**: 継続的な価格。 | | 
-**lookup_key** | **str** |  | 
+**product_id** | **str** | この価格が紐付く商品の ID | 
+**unit_amount** | **int** | 価格の単価 | 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
-**product_id** | **str** | この価格が紐付く商品のID。 | 
-**unit_amount** | **int** | 価格の単価。0以上の整数となります。 | 
-**created_at** | **datetime** | 支払い方法作成時の日時 (UTC, ISO 8601 形式) | 
-**updated_at** | **datetime** | 支払い方法更新時の日時 (UTC, ISO 8601 形式) | 
+**active** | **bool** | 価格が有効かどうか | 
+**nickname** | **str** |  | 
+**type** | [**PriceType**](PriceType.md) | 一度限りの購入を表す &#x60;one_time&#x60; が入ります。 | 
+**lookup_key** | **str** |  | 
+**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
+**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
+**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 
 ## Example
 

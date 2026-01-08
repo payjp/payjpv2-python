@@ -36,32 +36,8 @@ class TestSetupFlowResponse(unittest.TestCase):
         model = SetupFlowResponse()
         if include_optional:
             return SetupFlowResponse(
-                id = '',
                 object = 'setup_flow',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                livemode = True,
-                client_secret = '',
-                customer_id = '',
-                description = '',
-                metadata = {
-                    'key' : null
-                    },
-                payment_method_id = '',
-                payment_method_options = { },
-                payment_method_types = [
-                    'card'
-                    ],
-                status = 'canceled',
-                next_action = { },
-                return_url = '',
-                last_setup_error = { }
-            )
-        else:
-            return SetupFlowResponse(
                 id = '',
-                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
-                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 livemode = True,
                 client_secret = '',
                 customer_id = '',
@@ -78,6 +54,32 @@ class TestSetupFlowResponse(unittest.TestCase):
                 next_action = { },
                 return_url = '',
                 last_setup_error = { },
+                cancellation_reason = 'abandoned',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+            )
+        else:
+            return SetupFlowResponse(
+                id = '',
+                livemode = True,
+                client_secret = '',
+                customer_id = '',
+                description = '',
+                metadata = {
+                    'key' : null
+                    },
+                payment_method_id = '',
+                payment_method_options = { },
+                payment_method_types = [
+                    'card'
+                    ],
+                status = 'canceled',
+                next_action = { },
+                return_url = '',
+                last_setup_error = { },
+                cancellation_reason = 'abandoned',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

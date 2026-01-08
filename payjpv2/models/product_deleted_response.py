@@ -27,10 +27,10 @@ class ProductDeletedResponse(BaseModel):
     """
     ProductDeletedResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="商品ID")
     object: Optional[StrictStr] = 'product'
-    deleted: StrictBool = Field(description="削除されたかどうか")
-    __properties: ClassVar[List[str]] = ["id", "object", "deleted"]
+    id: StrictStr = Field(description="商品 ID")
+    deleted: Optional[StrictBool] = Field(default=True, description="削除されたかどうか")
+    __properties: ClassVar[List[str]] = ["object", "id", "deleted"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -71,10 +71,8 @@ class ProductDeletedResponse(BaseModel):
         * `None` is only added to the output dict for nullable fields that
           were set at model initialization. Other fields with value `None`
           are ignored.
-        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set([
-            "deleted",
         ])
 
         _dict = self.model_dump(
@@ -94,9 +92,9 @@ class ProductDeletedResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'product',
-            "deleted": obj.get("deleted")
+            "id": obj.get("id"),
+            "deleted": obj.get("deleted") if obj.get("deleted") is not None else True
         })
         return _obj
 

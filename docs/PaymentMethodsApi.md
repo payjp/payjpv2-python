@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
-**400** | Payment Method Already Attached&lt;br&gt;Unsupported Payment Method Type |  -  |
+**400** | Payment Method Already Attached&lt;br&gt;Payment Method Customer Mismatch&lt;br&gt;Unsupported Payment Method Type |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -617,6 +617,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
+**400** | Metadata Limit Exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

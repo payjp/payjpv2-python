@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_extended_authorization** | **str** | オーソリ期間の延長要求  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 | | [optional] 
-**request_three_d_secure** | **str** | 3Dセキュア認証の要求方法。  | 指定できる値 | |:---| | **any**: 3Dセキュア認証を要求します。 | | **automatic**: 必要な場合にのみ3Dセキュア認証を要求します。 |  | [optional] 
+**request_extended_authorization** | **str** | オーソリ期間の延長要求  | 値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 | | [optional] 
+**request_three_d_secure** | **str** | 3D セキュア認証の要求方法。  | 値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 |  | [optional] 
 
 ## Example
 

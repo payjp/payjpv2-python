@@ -27,7 +27,7 @@ class PaymentMethodAttachRequest(BaseModel):
     """
     PaymentMethodAttachRequest
     """ # noqa: E501
-    customer_id: StrictStr = Field(description="顧客ID")
+    customer_id: StrictStr = Field(description="顧客 ID")
     __properties: ClassVar[List[str]] = ["customer_id"]
 
     model_config = ConfigDict(

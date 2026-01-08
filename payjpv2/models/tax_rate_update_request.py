@@ -31,9 +31,9 @@ class TaxRateUpdateRequest(BaseModel):
     """ # noqa: E501
     active: Optional[StrictBool] = Field(default=None, description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")
     country: Optional[Country] = Field(default=None, description="有効な2文字の <a href=\"https://ja.wikipedia.org/wiki/ISO_3166-1\" target=\"_blank\">ISO 国コード</a>")
-    description: Optional[StrictStr] = Field(default=None, description="説明。ダッシュボード内のみで表示され、顧客には表示されません。")
+    description: Optional[StrictStr] = Field(default=None, description="説明。管理画面内のみで表示され、顧客には表示されません。")
     display_name: Optional[StrictStr] = Field(default=None, description="表示名。顧客に表示されます。")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     __properties: ClassVar[List[str]] = ["active", "country", "description", "display_name", "metadata"]
 
     model_config = ConfigDict(

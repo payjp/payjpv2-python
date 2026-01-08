@@ -330,8 +330,8 @@ class BalancesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        state: Annotated[Optional[BalanceState], Field(description="stateが指定した値であるオブジェクトに限定")] = None,
-        closed: Annotated[Optional[StrictBool], Field(description="closedが指定した値であるオブジェクトに限定")] = None,
+        state: Annotated[Optional[BalanceState], Field(description="state が指定した値であるオブジェクトに限定")] = None,
+        closed: Annotated[Optional[StrictBool], Field(description="closed が指定した値であるオブジェクトに限定")] = None,
         since_due_date: Annotated[Optional[datetime], Field(description="入金予定日/振込期限日が指定した日時以降のデータのみ取得")] = None,
         until_due_date: Annotated[Optional[datetime], Field(description="入金予定日/振込期限日が指定した日時以前のデータのみ取得")] = None,
         *,
@@ -361,9 +361,9 @@ class BalancesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param state: stateが指定した値であるオブジェクトに限定
+        :param state: state が指定した値であるオブジェクトに限定
         :type state: BalanceState
-        :param closed: closedが指定した値であるオブジェクトに限定
+        :param closed: closed が指定した値であるオブジェクトに限定
         :type closed: bool
         :param since_due_date: 入金予定日/振込期限日が指定した日時以降のデータのみ取得
         :type since_due_date: datetime
@@ -433,8 +433,8 @@ class BalancesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        state: Annotated[Optional[BalanceState], Field(description="stateが指定した値であるオブジェクトに限定")] = None,
-        closed: Annotated[Optional[StrictBool], Field(description="closedが指定した値であるオブジェクトに限定")] = None,
+        state: Annotated[Optional[BalanceState], Field(description="state が指定した値であるオブジェクトに限定")] = None,
+        closed: Annotated[Optional[StrictBool], Field(description="closed が指定した値であるオブジェクトに限定")] = None,
         since_due_date: Annotated[Optional[datetime], Field(description="入金予定日/振込期限日が指定した日時以降のデータのみ取得")] = None,
         until_due_date: Annotated[Optional[datetime], Field(description="入金予定日/振込期限日が指定した日時以前のデータのみ取得")] = None,
         *,
@@ -464,9 +464,9 @@ class BalancesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param state: stateが指定した値であるオブジェクトに限定
+        :param state: state が指定した値であるオブジェクトに限定
         :type state: BalanceState
-        :param closed: closedが指定した値であるオブジェクトに限定
+        :param closed: closed が指定した値であるオブジェクトに限定
         :type closed: bool
         :param since_due_date: 入金予定日/振込期限日が指定した日時以降のデータのみ取得
         :type since_due_date: datetime
@@ -536,8 +536,8 @@ class BalancesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        state: Annotated[Optional[BalanceState], Field(description="stateが指定した値であるオブジェクトに限定")] = None,
-        closed: Annotated[Optional[StrictBool], Field(description="closedが指定した値であるオブジェクトに限定")] = None,
+        state: Annotated[Optional[BalanceState], Field(description="state が指定した値であるオブジェクトに限定")] = None,
+        closed: Annotated[Optional[StrictBool], Field(description="closed が指定した値であるオブジェクトに限定")] = None,
         since_due_date: Annotated[Optional[datetime], Field(description="入金予定日/振込期限日が指定した日時以降のデータのみ取得")] = None,
         until_due_date: Annotated[Optional[datetime], Field(description="入金予定日/振込期限日が指定した日時以前のデータのみ取得")] = None,
         *,
@@ -567,9 +567,9 @@ class BalancesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param state: stateが指定した値であるオブジェクトに限定
+        :param state: state が指定した値であるオブジェクトに限定
         :type state: BalanceState
-        :param closed: closedが指定した値であるオブジェクトに限定
+        :param closed: closed が指定した値であるオブジェクトに限定
         :type closed: bool
         :param since_due_date: 入金予定日/振込期限日が指定した日時以降のデータのみ取得
         :type since_due_date: datetime

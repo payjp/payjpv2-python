@@ -36,22 +36,22 @@ class TestPriceCreateRequest(unittest.TestCase):
         model = PriceCreateRequest()
         if include_optional:
             return PriceCreateRequest(
+                product_id = '',
+                unit_amount = 0.0,
+                currency = 'jpy',
+                id = '',
+                active = True,
                 nickname = '',
                 lookup_key = '',
                 metadata = {
                     'key' : null
-                    },
-                id = '',
-                currency = 'jpy',
-                active = True,
-                product_id = '',
-                unit_amount = 0.0
+                    }
             )
         else:
             return PriceCreateRequest(
-                currency = 'jpy',
                 product_id = '',
                 unit_amount = 0.0,
+                currency = 'jpy',
         )
         """
 

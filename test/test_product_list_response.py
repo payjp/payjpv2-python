@@ -41,8 +41,8 @@ class TestProductListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.product_details_response.ProductDetailsResponse(
-                        id = '', 
                         object = 'product', 
+                        id = '', 
                         name = '', 
                         active = True, 
                         default_price_id = '', 
@@ -57,8 +57,8 @@ class TestProductListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.product_details_response.ProductDetailsResponse(
-                        id = '', 
                         object = 'product', 
+                        id = '', 
                         name = '', 
                         active = True, 
                         default_price_id = '', 

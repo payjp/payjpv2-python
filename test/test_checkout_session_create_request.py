@@ -36,6 +36,7 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
         model = CheckoutSessionCreateRequest()
         if include_optional:
             return CheckoutSessionCreateRequest(
+                mode = 'payment',
                 client_reference_id = '',
                 customer_id = '',
                 customer_email = '',
@@ -48,7 +49,6 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
                             ''
                             ], )
                     ],
-                mode = 'payment',
                 metadata = {
                     'key' : null
                     },
@@ -57,23 +57,23 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
                 currency = 'jpy',
                 expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 locale = 'auto',
+                payment_method_types = [
+                    'card'
+                    ],
+                payment_method_options = payjpv2.models.checkout_session_payment_method_options_request.CheckoutSessionPaymentMethodOptionsRequest(
+                    card = payjpv2.models.checkout_session_payment_method_options_card_request.CheckoutSessionPaymentMethodOptionsCardRequest(
+                        request_extended_authorization = 'if_available', 
+                        request_three_d_secure = 'any', ), ),
                 payment_flow_data = payjpv2.models.payment_flow_data_request.PaymentFlowDataRequest(
                     capture_method = 'automatic', 
                     metadata = {
                         'key' : null
                         }, ),
-                payment_method_options = payjpv2.models.checkout_session_payment_method_options_request.CheckoutSessionPaymentMethodOptionsRequest(
-                    card = payjpv2.models.checkout_session_payment_method_options_card_request.CheckoutSessionPaymentMethodOptionsCardRequest(
-                        request_extended_authorization = 'if_available', 
-                        request_three_d_secure = 'any', ), ),
-                payment_method_types = [
-                    'card'
-                    ],
+                submit_type = 'auto',
                 setup_flow_data = payjpv2.models.setup_flow_data_request.SetupFlowDataRequest(
                     metadata = {
                         'key' : null
                         }, ),
-                submit_type = 'auto',
                 ui_mode = 'hosted'
             )
         else:

@@ -101,6 +101,7 @@ class PricesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PriceDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -171,6 +172,7 @@ class PricesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PriceDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -241,6 +243,7 @@ class PricesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PriceDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -337,7 +340,7 @@ class PricesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        lookup_keys: Annotated[Optional[List[StrictStr]], Field(description="価格を動的に取得するために使用される検索キー。")] = None,
+        lookup_keys: Annotated[Optional[List[StrictStr]], Field(description="価格を動的に取得するために使用される検索キー")] = None,
         *,
         request_timeout: Union[
             None,
@@ -361,7 +364,7 @@ class PricesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param lookup_keys: 価格を動的に取得するために使用される検索キー。
+        :param lookup_keys: 価格を動的に取得するために使用される検索キー
         :type lookup_keys: List[str]
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -420,7 +423,7 @@ class PricesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        lookup_keys: Annotated[Optional[List[StrictStr]], Field(description="価格を動的に取得するために使用される検索キー。")] = None,
+        lookup_keys: Annotated[Optional[List[StrictStr]], Field(description="価格を動的に取得するために使用される検索キー")] = None,
         *,
         request_timeout: Union[
             None,
@@ -444,7 +447,7 @@ class PricesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param lookup_keys: 価格を動的に取得するために使用される検索キー。
+        :param lookup_keys: 価格を動的に取得するために使用される検索キー
         :type lookup_keys: List[str]
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -503,7 +506,7 @@ class PricesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        lookup_keys: Annotated[Optional[List[StrictStr]], Field(description="価格を動的に取得するために使用される検索キー。")] = None,
+        lookup_keys: Annotated[Optional[List[StrictStr]], Field(description="価格を動的に取得するために使用される検索キー")] = None,
         *,
         request_timeout: Union[
             None,
@@ -527,7 +530,7 @@ class PricesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param lookup_keys: 価格を動的に取得するために使用される検索キー。
+        :param lookup_keys: 価格を動的に取得するために使用される検索キー
         :type lookup_keys: List[str]
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -1000,6 +1003,8 @@ class PricesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PriceDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1074,6 +1079,8 @@ class PricesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PriceDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1148,6 +1155,8 @@ class PricesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PriceDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

@@ -27,7 +27,7 @@ class DisplayPreferenceRequest(BaseModel):
     """
     DisplayPreferenceRequest
     """ # noqa: E501
-    preference: StrictStr = Field(description="この支払い方法がアカウントで有効になっているかどうか。  | 指定できる値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
+    preference: StrictStr = Field(description="この支払い方法がアカウントで有効になっているかどうか  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
     __properties: ClassVar[List[str]] = ["preference"]
 
     @field_validator('preference')

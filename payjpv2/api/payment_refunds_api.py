@@ -992,6 +992,7 @@ class PaymentRefundsApi:
             '200': "PaymentRefundResponse",
             '422': "ErrorResponse",
             '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1067,6 +1068,7 @@ class PaymentRefundsApi:
             '200': "PaymentRefundResponse",
             '422': "ErrorResponse",
             '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -1142,6 +1144,7 @@ class PaymentRefundsApi:
             '200': "PaymentRefundResponse",
             '422': "ErrorResponse",
             '404': "ErrorResponse",
+            '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

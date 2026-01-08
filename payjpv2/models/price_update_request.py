@@ -28,11 +28,11 @@ class PriceUpdateRequest(BaseModel):
     """
     PriceUpdateRequest
     """ # noqa: E501
-    nickname: Optional[StrictStr] = Field(default=None, description="価格の名称。PAY.JP のダッシュボードで識別するためのもので、顧客には表示されません。")
-    lookup_key: Optional[StrictStr] = Field(default=None, description="この価格を検索するためのキー。")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    active: Optional[StrictBool] = Field(default=None, description="価格が有効かどうか。デフォルトは `true`。")
-    __properties: ClassVar[List[str]] = ["nickname", "lookup_key", "metadata", "active"]
+    active: Optional[StrictBool] = Field(default=None, description="価格が有効かどうか")
+    nickname: Optional[StrictStr] = Field(default=None, description="価格の名称。PAY.JP の管理画面で識別するためのもので、顧客には表示されません。")
+    lookup_key: Optional[StrictStr] = Field(default=None, description="この価格を検索するためのキー")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    __properties: ClassVar[List[str]] = ["active", "nickname", "lookup_key", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -91,6 +91,7 @@ class PriceUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "active": obj.get("active"),
             "nickname": obj.get("nickname"),
             "lookup_key": obj.get("lookup_key"),
             "metadata": dict(
@@ -98,8 +99,7 @@ class PriceUpdateRequest(BaseModel):
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "active": obj.get("active")
+            else None
         })
         return _obj
 

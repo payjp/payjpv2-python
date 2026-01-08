@@ -27,9 +27,9 @@ class LineItemRequest(BaseModel):
     """
     LineItemRequest
     """ # noqa: E501
-    price_id: StrictStr = Field(description="料金ID")
+    price_id: StrictStr = Field(description="料金 ID")
     quantity: StrictInt = Field(description="購入する商品の数量")
-    tax_rates: Optional[List[StrictStr]] = Field(default=None, description="税率ID")
+    tax_rates: Optional[List[StrictStr]] = Field(default=None, description="税率 ID")
     __properties: ClassVar[List[str]] = ["price_id", "quantity", "tax_rates"]
 
     model_config = ConfigDict(

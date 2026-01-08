@@ -31,17 +31,17 @@ class PaymentRefundResponse(BaseModel):
     """
     PaymentRefundResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
     object: Optional[StrictStr] = 'payment_refund'
-    created_at: datetime = Field(description="作成時の日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新時の日時 (UTC, ISO 8601 形式)")
+    id: StrictStr = Field(description="返金 ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
-    amount: StrictInt = Field(description="返金金額")
-    status: PaymentRefundStatus = Field(description="返金ステータス  <a href=\"https://docs.pay.jp/v2/payment_refunds#refund_status\" target=\"_blank\">返金ステータスの詳細についてはこちらを参照してください。</a>  | 指定できる値 | |:---| | **succeeded**: 成功 | | **failed**: 失敗 | | **pending**: 保留中 | | **canceled**: キャンセル |")
     payment_flow_id: StrictStr = Field(description="返金対象となる PaymentFlow の ID")
+    amount: StrictInt = Field(description="返金金額")
+    status: PaymentRefundStatus = Field(description="返金ステータス  <a href=\"https://docs.pay.jp/v2/guide/status-management/refund#%E8%BF%94%E9%87%91%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9%E3%81%AE%E7%9B%A3%E8%A6%96\" target=\"_blank\">返金ステータスの詳細についてはこちらを参照してください。</a>  | 値 | |:---| | **succeeded**: 返金が成功しました | | **failed**: 返金が失敗しました | | **pending**: 返金処理中です | | **canceled**: 返金がキャンセルされました | | **requires_action**: 追加のアクションが必要です |")
     reason: Optional[PaymentRefundReason]
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "amount", "status", "payment_flow_id", "reason", "metadata"]
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "payment_flow_id", "amount", "status", "reason", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -115,21 +115,21 @@ class PaymentRefundResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'payment_refund',
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
+            "payment_flow_id": obj.get("payment_flow_id"),
             "amount": obj.get("amount"),
             "status": obj.get("status"),
-            "payment_flow_id": obj.get("payment_flow_id"),
             "reason": obj.get("reason"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None
+            else None,
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

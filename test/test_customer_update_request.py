@@ -36,12 +36,12 @@ class TestCustomerUpdateRequest(unittest.TestCase):
         model = CustomerUpdateRequest()
         if include_optional:
             return CustomerUpdateRequest(
+                default_payment_method_id = '',
                 email = '',
                 description = '',
                 metadata = {
                     'key' : null
-                    },
-                default_payment_method_id = ''
+                    }
             )
         else:
             return CustomerUpdateRequest(

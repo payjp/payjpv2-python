@@ -28,7 +28,7 @@ class SetupFlowCancelRequest(BaseModel):
     """
     SetupFlowCancelRequest
     """ # noqa: E501
-    cancellation_reason: Optional[SetupFlowCancellationReason] = Field(default=None, description="この SetupFlow のキャンセル理由。  | 指定できる値 | |:---| | **abandoned**: 顧客が支払いを完了しなかった場合。 | | **requested_by_customer**: 顧客がキャンセルを要求した場合。 | | **duplicate**: 支払い方法が重複している場合。 |")
+    cancellation_reason: Optional[SetupFlowCancellationReason] = Field(default=None, description="この SetupFlow のキャンセル理由。  | 値 | |:---| | **abandoned**: 顧客が SetupFlow を完了しなかった場合。 | | **requested_by_customer**: 顧客がキャンセルを要求した場合。 | | **duplicate**: 支払い方法が重複している場合。 |")
     __properties: ClassVar[List[str]] = ["cancellation_reason"]
 
     model_config = ConfigDict(

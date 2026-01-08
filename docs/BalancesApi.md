@@ -142,8 +142,8 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
-    state = payjpv2.BalanceState() # BalanceState | stateが指定した値であるオブジェクトに限定 (optional)
-    closed = True # bool | closedが指定した値であるオブジェクトに限定 (optional)
+    state = payjpv2.BalanceState() # BalanceState | state が指定した値であるオブジェクトに限定 (optional)
+    closed = True # bool | closed が指定した値であるオブジェクトに限定 (optional)
     since_due_date = '2013-10-20T19:20:30+01:00' # datetime | 入金予定日/振込期限日が指定した日時以降のデータのみ取得 (optional)
     until_due_date = '2013-10-20T19:20:30+01:00' # datetime | 入金予定日/振込期限日が指定した日時以前のデータのみ取得 (optional)
 
@@ -168,8 +168,8 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
- **state** | [**BalanceState**](.md)| stateが指定した値であるオブジェクトに限定 | [optional] 
- **closed** | **bool**| closedが指定した値であるオブジェクトに限定 | [optional] 
+ **state** | [**BalanceState**](.md)| state が指定した値であるオブジェクトに限定 | [optional] 
+ **closed** | **bool**| closed が指定した値であるオブジェクトに限定 | [optional] 
  **since_due_date** | **datetime**| 入金予定日/振込期限日が指定した日時以降のデータのみ取得 | [optional] 
  **until_due_date** | **datetime**| 入金予定日/振込期限日が指定した日時以前のデータのみ取得 | [optional] 
 

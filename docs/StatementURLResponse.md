@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **object** | **str** |  | [optional] [default to 'statement_url']
-**url** | **str** | 取引明細書ダウンロードURL | 
-**expires** | **datetime** | 有効期限の日付。  有効期限は発行から1時間です。 | 
+**url** | **str** | 取引明細書ダウンロード URL | 
+**expires** | **datetime** | 有効期限の日付  有効期限は発行から1時間です。 | 
 
 ## Example
 

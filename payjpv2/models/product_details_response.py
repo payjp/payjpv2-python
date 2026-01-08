@@ -27,15 +27,15 @@ class ProductDetailsResponse(BaseModel):
     """
     ProductDetailsResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="商品ID")
     object: Optional[StrictStr] = 'product'
-    name: StrictStr = Field(description="Checkoutなどで顧客に表示される商品名。")
-    active: StrictBool = Field(description="商品が購入可能かどうか。デフォルトは `true`。")
+    id: StrictStr = Field(description="商品 ID")
+    name: StrictStr = Field(description="Checkout などで顧客に表示される商品名")
+    active: StrictBool = Field(description="商品が購入可能かどうか")
     default_price_id: Optional[StrictStr]
     description: Optional[StrictStr]
     unit_label: Optional[StrictStr]
     url: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["id", "object", "name", "active", "default_price_id", "description", "unit_label", "url"]
+    __properties: ClassVar[List[str]] = ["object", "id", "name", "active", "default_price_id", "description", "unit_label", "url"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -117,8 +117,8 @@ class ProductDetailsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'product',
+            "id": obj.get("id"),
             "name": obj.get("name"),
             "active": obj.get("active"),
             "default_price_id": obj.get("default_price_id"),

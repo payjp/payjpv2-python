@@ -29,11 +29,11 @@ class SetupFlowUpdateRequest(BaseModel):
     """
     SetupFlowUpdateRequest
     """ # noqa: E501
-    customer_id: Optional[StrictStr] = Field(default=None, description="この SetupFlow が属する顧客の ID。SetupFlow に PaymentMethod が設定されている場合、SetupFlow の設定が成功するとその PaymentMethod は顧客に紐付きます。別の顧客に紐付いている PaymentMethod をこの SetupFlow で使用することはできません。")
-    payment_method_options: Optional[SetupFlowPaymentMethodOptionsRequest] = Field(default=None, description="この SetupFlow の支払い方法の個別設定。")
-    payment_method_types: Optional[List[StrictStr]] = Field(default=None, description="この SetupFlow で使用できる支払い方法の種類（カードなど）のリストです。 指定しない場合、ダッシュボードで利用可能な状態にしている支払い方法が自動的に設定されます。")
+    customer_id: Optional[StrictStr] = Field(default=None, description="この SetupFlow に関連付ける顧客の ID。SetupFlow により作られた PaymentMethod はこの顧客に紐付きます。")
+    payment_method_options: Optional[SetupFlowPaymentMethodOptionsRequest] = Field(default=None, description="この SetupFlow 固有の支払い方法の設定")
+    payment_method_types: Optional[List[StrictStr]] = Field(default=None, description="この SetupFlow で使用できる支払い方法の種類のリスト。 指定しない場合は、PAY.JP は支払い方法の設定から利用可能な支払い方法を動的に表示します。")
     description: Optional[StrictStr] = Field(default=None, description="説明。顧客に表示されます。")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     __properties: ClassVar[List[str]] = ["customer_id", "payment_method_options", "payment_method_types", "description", "metadata"]
 
     @field_validator('payment_method_types')

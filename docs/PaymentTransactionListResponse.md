@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **object** | **str** |  | [optional] [default to 'list']
 **url** | **str** | リスト取得URL | 
 **has_more** | **bool** | 次のページがあるかどうか | 
-**data** | [**List[PaymentTransactionResponse]**](PaymentTransactionResponse.md) | PaymentTransaction一覧 | 
+**data** | [**List[PaymentTransactionResponse]**](PaymentTransactionResponse.md) | PaymentTransaction 一覧 | 
 
 ## Example
 

@@ -29,8 +29,8 @@ class BalanceURLResponse(BaseModel):
     BalanceURLResponse
     """ # noqa: E501
     object: Optional[StrictStr] = 'balance_url'
-    url: StrictStr = Field(description="残高明細書ダウンロードURL")
-    expires: datetime = Field(description="有効期限の日付。  有効期限は発行から1時間です。")
+    url: StrictStr = Field(description="残高明細書ダウンロード URL")
+    expires: datetime = Field(description="有効期限の日付  有効期限は発行から1時間です。")
     __properties: ClassVar[List[str]] = ["object", "url", "expires"]
 
     @field_validator('object')

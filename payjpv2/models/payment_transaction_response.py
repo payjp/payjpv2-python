@@ -32,20 +32,20 @@ class PaymentTransactionResponse(BaseModel):
     """
     PaymentTransactionResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="ID")
     object: Optional[StrictStr] = 'payment_transaction'
-    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
-    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    id: StrictStr = Field(description="決済トランザクション ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
-    resource_id: StrictStr = Field(description="PaymentTransaction生成の元になったリソースのID")
+    resource_id: StrictStr = Field(description="PaymentTransaction 生成の元になったリソースの ID")
     amount: StrictInt = Field(description="金額")
     currency: Currency = Field(description="通貨")
     fee_rate: Annotated[str, Field(strict=True)] = Field(description="手数料率")
     fee: StrictInt = Field(description="手数料")
-    type: PaymentTransactionType = Field(description="PaymentTransactionの種類")
+    type: PaymentTransactionType = Field(description="PaymentTransaction の種類  | 値 | |:---| | **payment**: 支払い | | **refund**: 返金 | | **chargeback**: チャージバック | | **chargeback_cancel**: チャージバックのキャンセル | ")
     payment_method_type: PaymentMethodTypes = Field(description="支払い方法の種類")
-    term_id: StrictStr = Field(description="期間ID")
-    __properties: ClassVar[List[str]] = ["id", "object", "created_at", "updated_at", "livemode", "resource_id", "amount", "currency", "fee_rate", "fee", "type", "payment_method_type", "term_id"]
+    term_id: StrictStr = Field(description="集計区間 ID")
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "resource_id", "amount", "currency", "fee_rate", "fee", "type", "payment_method_type", "term_id", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -114,10 +114,8 @@ class PaymentTransactionResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'payment_transaction',
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
             "resource_id": obj.get("resource_id"),
             "amount": obj.get("amount"),
@@ -126,7 +124,9 @@ class PaymentTransactionResponse(BaseModel):
             "fee": obj.get("fee"),
             "type": obj.get("type"),
             "payment_method_type": obj.get("payment_method_type"),
-            "term_id": obj.get("term_id")
+            "term_id": obj.get("term_id"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

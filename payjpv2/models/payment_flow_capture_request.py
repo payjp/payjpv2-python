@@ -28,7 +28,7 @@ class PaymentFlowCaptureRequest(BaseModel):
     """
     PaymentFlowCaptureRequest
     """ # noqa: E501
-    amount_to_capture: Optional[Annotated[int, Field(le=9999999, strict=True, ge=50)]] = Field(default=None, description="PaymentFlowから確定させる金額は、元の金額以下で指定します。指定されていない場合は、全額（`amount_capturable`）がデフォルトになります。")
+    amount_to_capture: Optional[Annotated[int, Field(le=9999999, strict=True, ge=50)]] = Field(default=None, description="PaymentFlow から確定させる金額は、元の金額以下で指定します。指定されていない場合は、全額（`amount_capturable`）がデフォルトになります。")
     __properties: ClassVar[List[str]] = ["amount_to_capture"]
 
     model_config = ConfigDict(

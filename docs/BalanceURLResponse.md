@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **object** | **str** |  | [optional] [default to 'balance_url']
-**url** | **str** | 残高明細書ダウンロードURL | 
-**expires** | **datetime** | 有効期限の日付。  有効期限は発行から1時間です。 | 
+**url** | **str** | 残高明細書ダウンロード URL | 
+**expires** | **datetime** | 有効期限の日付  有効期限は発行から1時間です。 | 
 
 ## Example
 

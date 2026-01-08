@@ -33,16 +33,16 @@ class PaymentMethodCardResponse(BaseModel):
     """ # noqa: E501
     object: Optional[StrictStr] = 'payment_method'
     id: StrictStr = Field(description="ID")
+    livemode: StrictBool = Field(description="本番環境かどうか")
     type: StrictStr
     customer_id: Optional[StrictStr]
     detached_at: Optional[datetime]
-    livemode: StrictBool = Field(description="本番環境かどうか")
+    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     billing_details: PaymentMethodBillingDetailsResponse = Field(description="請求先情報")
     card: PaymentMethodCardDetailsResponse = Field(description="カード情報")
-    __properties: ClassVar[List[str]] = ["object", "id", "type", "customer_id", "detached_at", "livemode", "created_at", "updated_at", "metadata", "billing_details", "card"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "type", "customer_id", "detached_at", "metadata", "created_at", "updated_at", "billing_details", "card"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -136,18 +136,18 @@ class PaymentMethodCardResponse(BaseModel):
         _obj = cls.model_validate({
             "object": obj.get("object") if obj.get("object") is not None else 'payment_method',
             "id": obj.get("id"),
+            "livemode": obj.get("livemode"),
             "type": obj.get("type"),
             "customer_id": obj.get("customer_id"),
             "detached_at": obj.get("detached_at"),
-            "livemode": obj.get("livemode"),
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
             else None,
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at"),
             "billing_details": PaymentMethodBillingDetailsResponse.from_dict(obj["billing_details"]) if obj.get("billing_details") is not None else None,
             "card": PaymentMethodCardDetailsResponse.from_dict(obj["card"]) if obj.get("card") is not None else None
         })

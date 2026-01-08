@@ -92,6 +92,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -140,7 +141,7 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
-    lookup_keys = ['lookup_keys_example'] # List[str] | 価格を動的に取得するために使用される検索キー。 (optional)
+    lookup_keys = ['lookup_keys_example'] # List[str] | 価格を動的に取得するために使用される検索キー (optional)
 
     try:
         # Get All Prices
@@ -161,7 +162,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
- **lookup_keys** | [**List[str]**](str.md)| 価格を動的に取得するために使用される検索キー。 | [optional] 
+ **lookup_keys** | [**List[str]**](str.md)| 価格を動的に取得するために使用される検索キー | [optional] 
 
 ### Return type
 
@@ -354,6 +355,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**404** | Not Found |  -  |
+**400** | Metadata Limit Exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

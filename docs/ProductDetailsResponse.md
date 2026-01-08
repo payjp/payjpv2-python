@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | 商品ID | 
 **object** | **str** |  | [optional] [default to 'product']
-**name** | **str** | Checkoutなどで顧客に表示される商品名。 | 
-**active** | **bool** | 商品が購入可能かどうか。デフォルトは &#x60;true&#x60;。 | 
+**id** | **str** | 商品 ID | 
+**name** | **str** | Checkout などで顧客に表示される商品名 | 
+**active** | **bool** | 商品が購入可能かどうか | 
 **default_price_id** | **str** |  | 
 **description** | **str** |  | 
 **unit_label** | **str** |  | 

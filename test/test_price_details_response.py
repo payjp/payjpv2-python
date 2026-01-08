@@ -36,19 +36,19 @@ class TestPriceDetailsResponse(unittest.TestCase):
         model = PriceDetailsResponse()
         if include_optional:
             return PriceDetailsResponse(
-                id = '',
                 object = 'price',
+                id = '',
                 livemode = True,
+                product_id = '',
+                unit_amount = 56,
+                currency = 'jpy',
                 active = True,
-                metadata = {
-                    'key' : null
-                    },
                 nickname = '',
                 type = 'one_time',
                 lookup_key = '',
-                currency = 'jpy',
-                product_id = '',
-                unit_amount = 56,
+                metadata = {
+                    'key' : null
+                    },
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
@@ -56,16 +56,16 @@ class TestPriceDetailsResponse(unittest.TestCase):
             return PriceDetailsResponse(
                 id = '',
                 livemode = True,
+                product_id = '',
+                unit_amount = 56,
+                currency = 'jpy',
                 active = True,
-                metadata = {
-                    'key' : null
-                    },
                 nickname = '',
                 type = 'one_time',
                 lookup_key = '',
-                currency = 'jpy',
-                product_id = '',
-                unit_amount = 56,
+                metadata = {
+                    'key' : null
+                    },
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )

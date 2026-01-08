@@ -29,11 +29,11 @@ class CustomerUpdateRequest(BaseModel):
     """
     CustomerUpdateRequest
     """ # noqa: E501
-    email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客のメールアドレス。メールアドレスの形式が正しいかどうかは検証されます。")
-    description: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客オブジェクトに付加できる任意の文字列です。これは、ダッシュボードで顧客と一緒に表示されます。")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。<a href=\"https://docs.pay.jp/v2/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     default_payment_method_id: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["email", "description", "metadata", "default_payment_method_id"]
+    email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客のメールアドレス。メールアドレスの形式が正しいかどうかは検証されます。")
+    description: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客オブジェクトに付加できる任意の文字列です。管理画面で顧客と一緒に表示されます。")
+    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
+    __properties: ClassVar[List[str]] = ["default_payment_method_id", "email", "description", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -97,6 +97,7 @@ class CustomerUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
+            "default_payment_method_id": obj.get("default_payment_method_id"),
             "email": obj.get("email"),
             "description": obj.get("description"),
             "metadata": dict(
@@ -104,8 +105,7 @@ class CustomerUpdateRequest(BaseModel):
                 for _k, _v in obj["metadata"].items()
             )
             if obj.get("metadata") is not None
-            else None,
-            "default_payment_method_id": obj.get("default_payment_method_id")
+            else None
         })
         return _obj
 

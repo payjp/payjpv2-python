@@ -48,8 +48,8 @@ class TermsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        since_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以降のデータを取得")] = None,
-        until_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以前のデータを取得")] = None,
+        since_start_at: Annotated[Optional[datetime], Field(description="start_at が指定した日付以降のデータを取得")] = None,
+        until_start_at: Annotated[Optional[datetime], Field(description="start_at が指定した日付以前のデータを取得")] = None,
         *,
         request_timeout: Union[
             None,
@@ -73,9 +73,9 @@ class TermsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param since_start_at: start_atが指定した日付以降のデータを取得
+        :param since_start_at: start_at が指定した日付以降のデータを取得
         :type since_start_at: datetime
-        :param until_start_at: start_atが指定した日付以前のデータを取得
+        :param until_start_at: start_at が指定した日付以前のデータを取得
         :type until_start_at: datetime
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -135,8 +135,8 @@ class TermsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        since_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以降のデータを取得")] = None,
-        until_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以前のデータを取得")] = None,
+        since_start_at: Annotated[Optional[datetime], Field(description="start_at が指定した日付以降のデータを取得")] = None,
+        until_start_at: Annotated[Optional[datetime], Field(description="start_at が指定した日付以前のデータを取得")] = None,
         *,
         request_timeout: Union[
             None,
@@ -160,9 +160,9 @@ class TermsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param since_start_at: start_atが指定した日付以降のデータを取得
+        :param since_start_at: start_at が指定した日付以降のデータを取得
         :type since_start_at: datetime
-        :param until_start_at: start_atが指定した日付以前のデータを取得
+        :param until_start_at: start_at が指定した日付以前のデータを取得
         :type until_start_at: datetime
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -222,8 +222,8 @@ class TermsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
-        since_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以降のデータを取得")] = None,
-        until_start_at: Annotated[Optional[datetime], Field(description="start_atが指定した日付以前のデータを取得")] = None,
+        since_start_at: Annotated[Optional[datetime], Field(description="start_at が指定した日付以降のデータを取得")] = None,
+        until_start_at: Annotated[Optional[datetime], Field(description="start_at が指定した日付以前のデータを取得")] = None,
         *,
         request_timeout: Union[
             None,
@@ -247,9 +247,9 @@ class TermsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
-        :param since_start_at: start_atが指定した日付以降のデータを取得
+        :param since_start_at: start_at が指定した日付以降のデータを取得
         :type since_start_at: datetime
-        :param until_start_at: start_atが指定した日付以前のデータを取得
+        :param until_start_at: start_at が指定した日付以前のデータを取得
         :type until_start_at: datetime
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request

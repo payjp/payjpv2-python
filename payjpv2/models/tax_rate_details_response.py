@@ -30,11 +30,11 @@ class TaxRateDetailsResponse(BaseModel):
     TaxRateDetailsResponse
     """ # noqa: E501
     object: Optional[StrictStr] = 'tax_rate'
-    id: StrictStr = Field(description="ID")
+    id: StrictStr = Field(description="税率 ID")
     display_name: StrictStr = Field(description="表示名。顧客に表示されます。")
     inclusive: StrictBool = Field(description="税込みかどうか。税込 = `true` 税抜 = `false`")
-    percentage: Union[StrictFloat, StrictInt] = Field(description="税率を % 単位で指定します（例： 10%の場合は「10」と入力）")
-    active: StrictBool = Field(description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")
+    percentage: Union[StrictFloat, StrictInt] = Field(description="税率 (% 単位)")
+    active: StrictBool = Field(description="この税率が有効であるかどうか")
     country: Optional[Country]
     description: Optional[StrictStr]
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")

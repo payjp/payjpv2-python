@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** | ID | 
 **object** | **str** |  | [optional] [default to 'checkout.session']
+**id** | **str** | Checkout Session ID | 
 **livemode** | **bool** | 本番環境かどうか | 
 **amount_subtotal** | **int** |  | 
 **amount_total** | **int** |  | 
-**cancel_url** | **str** |  | 
 **customer_id** | **str** |  | 
 **customer_email** | **str** |  | 
+**customer_details** | [**CheckoutSessionCustomerDetailsResponse**](CheckoutSessionCustomerDetailsResponse.md) |  | [optional] 
 **expires_at** | **datetime** |  | 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
 **locale** | [**Locale**](Locale.md) |  | 
@@ -21,14 +21,15 @@ Name | Type | Description | Notes
 **payment_method_options** | **Dict[str, object]** |  | 
 **setup_flow_id** | **str** |  | [optional] 
 **submit_type** | [**CheckoutSessionSubmitType**](CheckoutSessionSubmitType.md) |  | 
-**mode** | [**CheckoutSessionMode**](CheckoutSessionMode.md) | Checkout Session のモード  | 指定できる値 | |:---| | **payment**: 支払いモードでCheckout Sessionを作成します。 | | **setup**: セットアップモードでCheckout Sessionを作成します。 |  | 
-**ui_mode** | [**CheckoutSessionUIMode**](CheckoutSessionUIMode.md) | Checkout Session の UI モード。デフォルトは &#x60;hosted&#x60; です。&lt;br&gt;  | 指定できる値 | |:---| | **hosted**: PAY.JPでホスティングしている画面を使用します。 |  | 
-**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
-**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
-**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
+**mode** | [**CheckoutSessionMode**](CheckoutSessionMode.md) | Checkout Session のモード  | 値 | |:---| | **payment**: 支払いモード | | **setup**: セットアップモード | | 
+**ui_mode** | [**CheckoutSessionUIMode**](CheckoutSessionUIMode.md) | Checkout Session の UI モード  | 値 | |:---| | **hosted**: PAY.JP でホスティングしている画面を使用します。 | | 
 **status** | [**CheckoutSessionStatus**](CheckoutSessionStatus.md) | チェックアウトセッションのステータス | 
 **success_url** | **str** |  | 
+**cancel_url** | **str** |  | 
 **url** | **str** | URL | 
+**metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
+**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
+**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 
 ## Example
 

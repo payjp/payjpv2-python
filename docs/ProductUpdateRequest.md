@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**default_price_id** | **str** | この商品のデフォルト価格である価格オブジェクトのID。 | [optional] 
-**description** | **str** | Checkoutなどで顧客に表示される商品説明。 | [optional] 
-**unit_label** | **str** | この製品の単位を表すラベル。設定すると、Checkoutや請求書などに表示されます。（例：「個」、「ライセンス」、「時間」、「回」など） | [optional] 
-**url** | **str** | この製品の公開されているウェブページのURL。 | [optional] 
-**name** | **str** | Checkoutなどで顧客に表示される商品名。 | [optional] 
-**active** | **bool** | 商品が購入可能かどうか。デフォルトは &#x60;true&#x60;。 | [optional] 
+**name** | **str** | Checkout などで顧客に表示される商品名 | [optional] 
+**active** | **bool** | 商品が購入可能かどうか | [optional] 
+**default_price_id** | **str** | この商品のデフォルト価格である価格オブジェクトの ID | [optional] 
+**description** | **str** | Checkout などで顧客に表示される商品説明 | [optional] 
+**unit_label** | **str** | この製品の単位を表すラベル。設定すると、Checkout などに表示されます。（例：「個」、「ライセンス」、「時間」、「回」など） | [optional] 
+**url** | **str** | この製品の公開されているウェブページの URL | [optional] 
 
 ## Example
 

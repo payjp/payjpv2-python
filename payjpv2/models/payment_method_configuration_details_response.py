@@ -28,14 +28,14 @@ class PaymentMethodConfigurationDetailsResponse(BaseModel):
     """
     PaymentMethodConfigurationDetailsResponse
     """ # noqa: E501
-    id: StrictStr = Field(description="ID")
     object: Optional[StrictStr] = 'payment_method_configuration'
-    active: StrictBool = Field(description="設定が有効かどうか。")
+    id: StrictStr = Field(description="支払い方法設定 ID")
     livemode: StrictBool = Field(description="本番環境かどうか")
+    active: StrictBool = Field(description="設定が有効かどうか")
     name: Optional[StrictStr]
-    paypay: PaymentMethodConfigurationSettingResponse = Field(description="PayPayの設定")
+    paypay: PaymentMethodConfigurationSettingResponse = Field(description="PayPay の設定")
     card: PaymentMethodConfigurationSettingResponse = Field(description="カードの設定")
-    __properties: ClassVar[List[str]] = ["id", "object", "active", "livemode", "name", "paypay", "card"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "active", "name", "paypay", "card"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -108,10 +108,10 @@ class PaymentMethodConfigurationDetailsResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "id": obj.get("id"),
             "object": obj.get("object") if obj.get("object") is not None else 'payment_method_configuration',
-            "active": obj.get("active"),
+            "id": obj.get("id"),
             "livemode": obj.get("livemode"),
+            "active": obj.get("active"),
             "name": obj.get("name"),
             "paypay": PaymentMethodConfigurationSettingResponse.from_dict(obj["paypay"]) if obj.get("paypay") is not None else None,
             "card": PaymentMethodConfigurationSettingResponse.from_dict(obj["card"]) if obj.get("card") is not None else None

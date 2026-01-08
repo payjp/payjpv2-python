@@ -41,10 +41,8 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.payment_flow_response.PaymentFlowResponse(
-                        id = '', 
                         object = 'payment_flow', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
                         amount = 56, 
                         currency = 'jpy', 
@@ -53,9 +51,6 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         client_secret = '', 
                         customer_id = '', 
                         description = '', 
-                        metadata = {
-                            'key' : null
-                            }, 
                         payment_method_id = '', 
                         payment_method_options = { }, 
                         payment_method_types = [
@@ -65,7 +60,14 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         next_action = { }, 
                         return_url = '', 
                         capture_method = 'automatic', 
-                        last_payment_error = { }, )
+                        last_payment_error = { }, 
+                        cancellation_reason = 'abandoned', 
+                        canceled_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        metadata = {
+                            'key' : null
+                            }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
@@ -74,10 +76,8 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.payment_flow_response.PaymentFlowResponse(
-                        id = '', 
                         object = 'payment_flow', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
                         amount = 56, 
                         currency = 'jpy', 
@@ -86,9 +86,6 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         client_secret = '', 
                         customer_id = '', 
                         description = '', 
-                        metadata = {
-                            'key' : null
-                            }, 
                         payment_method_id = '', 
                         payment_method_options = { }, 
                         payment_method_types = [
@@ -98,7 +95,14 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         next_action = { }, 
                         return_url = '', 
                         capture_method = 'automatic', 
-                        last_payment_error = { }, )
+                        last_payment_error = { }, 
+                        cancellation_reason = 'abandoned', 
+                        canceled_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        metadata = {
+                            'key' : null
+                            }, 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

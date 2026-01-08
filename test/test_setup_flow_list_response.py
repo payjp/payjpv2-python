@@ -41,10 +41,8 @@ class TestSetupFlowListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.setup_flow_response.SetupFlowResponse(
-                        id = '', 
                         object = 'setup_flow', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
                         client_secret = '', 
                         customer_id = '', 
@@ -60,7 +58,10 @@ class TestSetupFlowListResponse(unittest.TestCase):
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
-                        last_setup_error = { }, )
+                        last_setup_error = { }, 
+                        cancellation_reason = 'abandoned', 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
@@ -69,10 +70,8 @@ class TestSetupFlowListResponse(unittest.TestCase):
                 has_more = True,
                 data = [
                     payjpv2.models.setup_flow_response.SetupFlowResponse(
-                        id = '', 
                         object = 'setup_flow', 
-                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
-                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        id = '', 
                         livemode = True, 
                         client_secret = '', 
                         customer_id = '', 
@@ -88,7 +87,10 @@ class TestSetupFlowListResponse(unittest.TestCase):
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
-                        last_setup_error = { }, )
+                        last_setup_error = { }, 
+                        cancellation_reason = 'abandoned', 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

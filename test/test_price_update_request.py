@@ -36,12 +36,12 @@ class TestPriceUpdateRequest(unittest.TestCase):
         model = PriceUpdateRequest()
         if include_optional:
             return PriceUpdateRequest(
+                active = True,
                 nickname = '',
                 lookup_key = '',
                 metadata = {
                     'key' : null
-                    },
-                active = True
+                    }
             )
         else:
             return PriceUpdateRequest(

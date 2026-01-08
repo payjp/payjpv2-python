@@ -31,7 +31,7 @@ class PaymentTransactionListResponse(BaseModel):
     object: Optional[StrictStr] = 'list'
     url: StrictStr = Field(description="リスト取得URL")
     has_more: StrictBool = Field(description="次のページがあるかどうか")
-    data: List[PaymentTransactionResponse] = Field(description="PaymentTransaction一覧")
+    data: List[PaymentTransactionResponse] = Field(description="PaymentTransaction 一覧")
     __properties: ClassVar[List[str]] = ["object", "url", "has_more", "data"]
 
     @field_validator('object')

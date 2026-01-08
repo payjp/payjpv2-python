@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.1"
+__version__ = "1.0.4"
 
 # import apis into sdk package
 from payjpv2.api.balances_api import BalancesApi

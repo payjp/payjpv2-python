@@ -43,8 +43,8 @@ class SetupFlowUpdateRequest(BaseModel):
             return value
 
         for i in value:
-            if i not in set(['card', 'apple_pay']):
-                raise ValueError("each list item must be one of ('card', 'apple_pay')")
+            if i not in set(['card']):
+                raise ValueError("each list item must be one of ('card')")
         return value
 
     model_config = ConfigDict(

@@ -38,7 +38,7 @@ class TestTaxRateCreateRequest(unittest.TestCase):
             return TaxRateCreateRequest(
                 display_name = '',
                 inclusive = True,
-                percentage = 1.337,
+                percentage = 0.0,
                 active = True,
                 country = 'JP',
                 description = '',
@@ -50,7 +50,7 @@ class TestTaxRateCreateRequest(unittest.TestCase):
             return TaxRateCreateRequest(
                 display_name = '',
                 inclusive = True,
-                percentage = 1.337,
+                percentage = 0.0,
         )
         """
 

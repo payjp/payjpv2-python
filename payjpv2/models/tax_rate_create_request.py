@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing_extensions import Annotated
 from payjpv2.models.country import Country
 from payjpv2.models.metadata_value import MetadataValue
 from typing import Optional, Set
@@ -31,7 +32,7 @@ class TaxRateCreateRequest(BaseModel):
     """ # noqa: E501
     display_name: StrictStr = Field(description="表示名。顧客に表示されます。")
     inclusive: StrictBool = Field(description="税込みかどうか。税込 = `true` 税抜 = `false`")
-    percentage: Union[StrictFloat, StrictInt] = Field(description="税率を % 単位で指定します（例: 10%の場合は「10」と入力）")
+    percentage: Union[Annotated[float, Field(le=100.0, strict=True, ge=0.0)], Annotated[int, Field(le=100, strict=True, ge=0)]] = Field(description="税率を % 単位で指定します（例: 10%の場合は「10」と入力）")
     active: Optional[StrictBool] = Field(default=True, description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")
     country: Optional[Country] = Field(default=None, description="有効な2文字の <a href=\"https://ja.wikipedia.org/wiki/ISO_3166-1\" target=\"_blank\">ISO 国コード</a>")
     description: Optional[StrictStr] = Field(default=None, description="説明。管理画面内のみで表示され、顧客には表示されません。")

@@ -15,13 +15,14 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.4"
+__version__ = "1.0.5"
 
 # import apis into sdk package
 from payjpv2.api.balances_api import BalancesApi
 from payjpv2.api.checkout_sessions_api import CheckoutSessionsApi
 from payjpv2.api.customers_api import CustomersApi
 from payjpv2.api.events_api import EventsApi
+from payjpv2.api.payment_disputes_api import PaymentDisputesApi
 from payjpv2.api.payment_refunds_api import PaymentRefundsApi
 from payjpv2.api.payment_flows_api import PaymentFlowsApi
 from payjpv2.api.payment_method_configurations_api import PaymentMethodConfigurationsApi
@@ -82,6 +83,10 @@ from payjpv2.models.line_item_request import LineItemRequest
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.pay_pay_config_request import PayPayConfigRequest
+from payjpv2.models.payment_dispute_list_response import PaymentDisputeListResponse
+from payjpv2.models.payment_dispute_reason import PaymentDisputeReason
+from payjpv2.models.payment_dispute_response import PaymentDisputeResponse
+from payjpv2.models.payment_dispute_status import PaymentDisputeStatus
 from payjpv2.models.payment_flow_cancel_request import PaymentFlowCancelRequest
 from payjpv2.models.payment_flow_cancellation_reason import PaymentFlowCancellationReason
 from payjpv2.models.payment_flow_capture_request import PaymentFlowCaptureRequest

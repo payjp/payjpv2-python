@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **amount_tax** | **int** | 税額 | 
 **amount_total** | **int** | 割引と税金が適用された後のすべての商品の合計金額 | 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | 
-**description** | **str** | 説明 | 
+**description** | **str** |  | 
 **price** | [**PriceDetailsResponse**](PriceDetailsResponse.md) | 料金情報 | 
 **quantity** | **int** | 数量 | 
 

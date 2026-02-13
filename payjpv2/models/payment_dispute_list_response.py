@@ -18,20 +18,31 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.capture_method import CaptureMethod
-from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.payment_dispute_response import PaymentDisputeResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
-class PaymentFlowDataRequest(BaseModel):
+class PaymentDisputeListResponse(BaseModel):
     """
-    PaymentFlowDataRequest
+    PaymentDisputeListResponse
     """ # noqa: E501
-    capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 指定できる値 | |:---| | **automatic**: 顧客が支払いを承認すると自動的に確定します。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Payment Flow の Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["capture_method", "metadata"]
+    object: Optional[StrictStr] = 'list'
+    url: StrictStr = Field(description="リスト取得URL")
+    has_more: StrictBool = Field(description="次のページがあるかどうか")
+    data: List[PaymentDisputeResponse] = Field(description="PaymentDispute リスト")
+    __properties: ClassVar[List[str]] = ["object", "url", "has_more", "data"]
+
+    @field_validator('object')
+    def object_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['list']):
+            raise ValueError("must be one of enum values ('list')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -50,7 +61,7 @@ class PaymentFlowDataRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of PaymentFlowDataRequest from a JSON string"""
+        """Create an instance of PaymentDisputeListResponse from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -71,18 +82,18 @@ class PaymentFlowDataRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
-        _field_dict = {}
-        if self.metadata:
-            for _key_metadata in self.metadata:
-                if self.metadata[_key_metadata]:
-                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
-            _dict['metadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of each item in data (list)
+        _items = []
+        if self.data:
+            for _item_data in self.data:
+                if _item_data:
+                    _items.append(_item_data.to_dict())
+            _dict['data'] = _items
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of PaymentFlowDataRequest from a dict"""
+        """Create an instance of PaymentDisputeListResponse from a dict"""
         if obj is None:
             return None
 
@@ -90,13 +101,10 @@ class PaymentFlowDataRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "capture_method": obj.get("capture_method"),
-            "metadata": dict(
-                (_k, MetadataValue.from_dict(_v))
-                for _k, _v in obj["metadata"].items()
-            )
-            if obj.get("metadata") is not None
-            else None
+            "object": obj.get("object") if obj.get("object") is not None else 'list',
+            "url": obj.get("url"),
+            "has_more": obj.get("has_more"),
+            "data": [PaymentDisputeResponse.from_dict(_item) for _item in obj["data"]] if obj.get("data") is not None else None
         })
         return _obj
 

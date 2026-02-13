@@ -33,7 +33,7 @@ class PaymentFlowConfirmRequest(BaseModel):
     payment_method_id: Optional[StrictStr] = Field(default=None, description="支払い方法 ID。customer_id の指定が必須です。Customer が所持する PaymentMethod のみ指定できます。payment_method_id を指定せず、Customer に default_payment_method_id が設定されている場合はそちらが自動でセットされます。")
     payment_method_options: Optional[PaymentFlowPaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow 固有の支払い方法の設定")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="この PaymentFlow で使用できる支払い方法の種類のリスト。指定しない場合は、PAY.JP は支払い方法の設定から利用可能な支払い方法を動的に表示します。")
-    capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
+    capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Payment Flow の Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
     return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされる URL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。")
     description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。ユーザーには表示されません。")
     __properties: ClassVar[List[str]] = ["payment_method_id", "payment_method_options", "payment_method_types", "capture_method", "return_url", "description"]

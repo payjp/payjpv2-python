@@ -35,7 +35,7 @@ class CheckoutSessionLineItemDataResponse(BaseModel):
     amount_tax: StrictInt = Field(description="税額")
     amount_total: StrictInt = Field(description="割引と税金が適用された後のすべての商品の合計金額")
     currency: Currency = Field(description="価格の通貨。現在は `jpy` のみサポートしています。")
-    description: StrictStr = Field(description="説明")
+    description: Optional[StrictStr]
     price: PriceDetailsResponse = Field(description="料金情報")
     quantity: StrictInt = Field(description="数量")
     __properties: ClassVar[List[str]] = ["object", "id", "amount_subtotal", "amount_tax", "amount_total", "currency", "description", "price", "quantity"]
@@ -91,6 +91,11 @@ class CheckoutSessionLineItemDataResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of price
         if self.price:
             _dict['price'] = self.price.to_dict()
+        # set to None if description (nullable) is None
+        # and model_fields_set contains the field
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
+
         return _dict
 
     @classmethod

@@ -5,6 +5,7 @@ from payjpv2.api.balances_api import BalancesApi
 from payjpv2.api.checkout_sessions_api import CheckoutSessionsApi
 from payjpv2.api.customers_api import CustomersApi
 from payjpv2.api.events_api import EventsApi
+from payjpv2.api.payment_disputes_api import PaymentDisputesApi
 from payjpv2.api.payment_refunds_api import PaymentRefundsApi
 from payjpv2.api.payment_flows_api import PaymentFlowsApi
 from payjpv2.api.payment_method_configurations_api import PaymentMethodConfigurationsApi

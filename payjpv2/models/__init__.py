@@ -51,6 +51,10 @@ from payjpv2.models.line_item_request import LineItemRequest
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.pay_pay_config_request import PayPayConfigRequest
+from payjpv2.models.payment_dispute_list_response import PaymentDisputeListResponse
+from payjpv2.models.payment_dispute_reason import PaymentDisputeReason
+from payjpv2.models.payment_dispute_response import PaymentDisputeResponse
+from payjpv2.models.payment_dispute_status import PaymentDisputeStatus
 from payjpv2.models.payment_flow_cancel_request import PaymentFlowCancelRequest
 from payjpv2.models.payment_flow_cancellation_reason import PaymentFlowCancellationReason
 from payjpv2.models.payment_flow_capture_request import PaymentFlowCaptureRequest

@@ -37,6 +37,7 @@ class TestPaymentFlowDataRequest(unittest.TestCase):
         if include_optional:
             return PaymentFlowDataRequest(
                 capture_method = 'automatic',
+                description = '',
                 metadata = {
                     'key' : null
                     }

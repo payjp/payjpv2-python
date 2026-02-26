@@ -43,6 +43,9 @@ class TestPaymentMethodConfigurationUpdateRequest(unittest.TestCase):
                         preference = 'none', ), ),
                 paypay = payjpv2.models.pay_pay_config_request.PayPayConfigRequest(
                     display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
+                        preference = 'none', ), ),
+                apple_pay = payjpv2.models.apple_pay_config_request.ApplePayConfigRequest(
+                    display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
                         preference = 'none', ), )
             )
         else:

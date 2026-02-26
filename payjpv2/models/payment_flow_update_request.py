@@ -37,7 +37,7 @@ class PaymentFlowUpdateRequest(BaseModel):
     payment_method_options: Optional[PaymentFlowPaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow 固有の支払い方法の設定")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="この PaymentFlow で使用できる支払い方法の種類のリスト。指定しない場合は、PAY.JP は支払い方法の設定から利用可能な支払い方法を動的に表示します。")
     return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされる URL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。")
-    description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。ユーザーには表示されません。")
+    description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     __properties: ClassVar[List[str]] = ["amount", "customer_id", "payment_method_id", "payment_method_options", "payment_method_types", "return_url", "description", "metadata"]
 

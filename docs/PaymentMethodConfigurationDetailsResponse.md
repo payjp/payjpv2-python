@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | 
 **paypay** | [**PaymentMethodConfigurationSettingResponse**](PaymentMethodConfigurationSettingResponse.md) | PayPay の設定 | 
 **card** | [**PaymentMethodConfigurationSettingResponse**](PaymentMethodConfigurationSettingResponse.md) | カードの設定 | 
+**apple_pay** | [**PaymentMethodConfigurationSettingResponse**](PaymentMethodConfigurationSettingResponse.md) | Apple Pay の設定 | 
 
 ## Example
 

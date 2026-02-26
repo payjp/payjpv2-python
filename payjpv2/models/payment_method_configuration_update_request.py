@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.apple_pay_config_request import ApplePayConfigRequest
 from payjpv2.models.card_config_request import CardConfigRequest
 from payjpv2.models.pay_pay_config_request import PayPayConfigRequest
 from typing import Optional, Set
@@ -33,7 +34,8 @@ class PaymentMethodConfigurationUpdateRequest(BaseModel):
     name: Optional[StrictStr] = None
     card: Optional[CardConfigRequest] = None
     paypay: Optional[PayPayConfigRequest] = None
-    __properties: ClassVar[List[str]] = ["active", "name", "card", "paypay"]
+    apple_pay: Optional[ApplePayConfigRequest] = None
+    __properties: ClassVar[List[str]] = ["active", "name", "card", "paypay", "apple_pay"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -79,6 +81,9 @@ class PaymentMethodConfigurationUpdateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of paypay
         if self.paypay:
             _dict['paypay'] = self.paypay.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of apple_pay
+        if self.apple_pay:
+            _dict['apple_pay'] = self.apple_pay.to_dict()
         # set to None if active (nullable) is None
         # and model_fields_set contains the field
         if self.active is None and "active" in self.model_fields_set:
@@ -99,6 +104,11 @@ class PaymentMethodConfigurationUpdateRequest(BaseModel):
         if self.paypay is None and "paypay" in self.model_fields_set:
             _dict['paypay'] = None
 
+        # set to None if apple_pay (nullable) is None
+        # and model_fields_set contains the field
+        if self.apple_pay is None and "apple_pay" in self.model_fields_set:
+            _dict['apple_pay'] = None
+
         return _dict
 
     @classmethod
@@ -114,7 +124,8 @@ class PaymentMethodConfigurationUpdateRequest(BaseModel):
             "active": obj.get("active"),
             "name": obj.get("name"),
             "card": CardConfigRequest.from_dict(obj["card"]) if obj.get("card") is not None else None,
-            "paypay": PayPayConfigRequest.from_dict(obj["paypay"]) if obj.get("paypay") is not None else None
+            "paypay": PayPayConfigRequest.from_dict(obj["paypay"]) if obj.get("paypay") is not None else None,
+            "apple_pay": ApplePayConfigRequest.from_dict(obj["apple_pay"]) if obj.get("apple_pay") is not None else None
         })
         return _obj
 

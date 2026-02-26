@@ -189,6 +189,7 @@ Name | Type | Description  | Notes
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status |  -  |
+**402** | Payment Failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -278,6 +279,7 @@ Name | Type | Description  | Notes
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status&lt;br&gt;Missing Payment Method&lt;br&gt;Detached Payment Method Not Usable&lt;br&gt;Payment Method Not Owned By Customer&lt;br&gt;Customer Required For Payment Method&lt;br&gt;Payment Method Type Not Allowed |  -  |
+**402** | Payment Failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -365,6 +367,7 @@ Name | Type | Description  | Notes
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
 **400** | Detached Payment Method Not Usable&lt;br&gt;Payment Method Not Owned By Customer&lt;br&gt;Payment Method Type Not Allowed |  -  |
+**402** | Payment Failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

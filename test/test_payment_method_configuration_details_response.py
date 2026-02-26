@@ -50,6 +50,11 @@ class TestPaymentMethodConfigurationDetailsResponse(unittest.TestCase):
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
                         preference = 'none', 
+                        value = 'off', ), ),
+                apple_pay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
+                    available = True, 
+                    display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
+                        preference = 'none', 
                         value = 'off', ), )
             )
         else:
@@ -64,6 +69,11 @@ class TestPaymentMethodConfigurationDetailsResponse(unittest.TestCase):
                         preference = 'none', 
                         value = 'off', ), ),
                 card = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
+                    available = True, 
+                    display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
+                        preference = 'none', 
+                        value = 'off', ), ),
+                apple_pay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
                         preference = 'none', 

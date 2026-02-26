@@ -35,7 +35,8 @@ class PaymentMethodConfigurationDetailsResponse(BaseModel):
     name: Optional[StrictStr]
     paypay: PaymentMethodConfigurationSettingResponse = Field(description="PayPay の設定")
     card: PaymentMethodConfigurationSettingResponse = Field(description="カードの設定")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "active", "name", "paypay", "card"]
+    apple_pay: PaymentMethodConfigurationSettingResponse = Field(description="Apple Pay の設定")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "active", "name", "paypay", "card", "apple_pay"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -91,6 +92,9 @@ class PaymentMethodConfigurationDetailsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of card
         if self.card:
             _dict['card'] = self.card.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of apple_pay
+        if self.apple_pay:
+            _dict['apple_pay'] = self.apple_pay.to_dict()
         # set to None if name (nullable) is None
         # and model_fields_set contains the field
         if self.name is None and "name" in self.model_fields_set:
@@ -114,7 +118,8 @@ class PaymentMethodConfigurationDetailsResponse(BaseModel):
             "active": obj.get("active"),
             "name": obj.get("name"),
             "paypay": PaymentMethodConfigurationSettingResponse.from_dict(obj["paypay"]) if obj.get("paypay") is not None else None,
-            "card": PaymentMethodConfigurationSettingResponse.from_dict(obj["card"]) if obj.get("card") is not None else None
+            "card": PaymentMethodConfigurationSettingResponse.from_dict(obj["card"]) if obj.get("card") is not None else None,
+            "apple_pay": PaymentMethodConfigurationSettingResponse.from_dict(obj["apple_pay"]) if obj.get("apple_pay") is not None else None
         })
         return _obj
 

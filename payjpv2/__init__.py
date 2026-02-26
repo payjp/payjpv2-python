@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.5"
+__version__ = "1.0.6"
 
 # import apis into sdk package
 from payjpv2.api.balances_api import BalancesApi
@@ -47,6 +47,7 @@ from payjpv2.exceptions import ApiAttributeError
 from payjpv2.exceptions import ApiException
 
 # import models into sdk package
+from payjpv2.models.apple_pay_config_request import ApplePayConfigRequest
 from payjpv2.models.balance_list_response import BalanceListResponse
 from payjpv2.models.balance_response import BalanceResponse
 from payjpv2.models.balance_state import BalanceState

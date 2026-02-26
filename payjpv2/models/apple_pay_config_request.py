@@ -18,19 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.display_preference_request import DisplayPreferenceRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class SetupFlowDataRequest(BaseModel):
+class ApplePayConfigRequest(BaseModel):
     """
-    SetupFlowDataRequest
+    ApplePayConfigRequest
     """ # noqa: E501
-    description: Optional[StrictStr] = None
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["description", "metadata"]
+    display_preference: Optional[DisplayPreferenceRequest] = None
+    __properties: ClassVar[List[str]] = ["display_preference"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -49,7 +48,7 @@ class SetupFlowDataRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of SetupFlowDataRequest from a JSON string"""
+        """Create an instance of ApplePayConfigRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,23 +69,19 @@ class SetupFlowDataRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
-        _field_dict = {}
-        if self.metadata:
-            for _key_metadata in self.metadata:
-                if self.metadata[_key_metadata]:
-                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
-            _dict['metadata'] = _field_dict
-        # set to None if description (nullable) is None
+        # override the default output from pydantic by calling `to_dict()` of display_preference
+        if self.display_preference:
+            _dict['display_preference'] = self.display_preference.to_dict()
+        # set to None if display_preference (nullable) is None
         # and model_fields_set contains the field
-        if self.description is None and "description" in self.model_fields_set:
-            _dict['description'] = None
+        if self.display_preference is None and "display_preference" in self.model_fields_set:
+            _dict['display_preference'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of SetupFlowDataRequest from a dict"""
+        """Create an instance of ApplePayConfigRequest from a dict"""
         if obj is None:
             return None
 
@@ -94,13 +89,7 @@ class SetupFlowDataRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "description": obj.get("description"),
-            "metadata": dict(
-                (_k, MetadataValue.from_dict(_v))
-                for _k, _v in obj["metadata"].items()
-            )
-            if obj.get("metadata") is not None
-            else None
+            "display_preference": DisplayPreferenceRequest.from_dict(obj["display_preference"]) if obj.get("display_preference") is not None else None
         })
         return _obj
 

@@ -15,10 +15,10 @@
 
 import unittest
 
-from payjpv2.models.setup_flow_data_request import SetupFlowDataRequest
+from payjpv2.models.apple_pay_config_request import ApplePayConfigRequest
 
-class TestSetupFlowDataRequest(unittest.TestCase):
-    """SetupFlowDataRequest unit test stubs"""
+class TestApplePayConfigRequest(unittest.TestCase):
+    """ApplePayConfigRequest unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,28 +26,26 @@ class TestSetupFlowDataRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> SetupFlowDataRequest:
-        """Test SetupFlowDataRequest
+    def make_instance(self, include_optional) -> ApplePayConfigRequest:
+        """Test ApplePayConfigRequest
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `SetupFlowDataRequest`
+        # uncomment below to create an instance of `ApplePayConfigRequest`
         """
-        model = SetupFlowDataRequest()
+        model = ApplePayConfigRequest()
         if include_optional:
-            return SetupFlowDataRequest(
-                description = '',
-                metadata = {
-                    'key' : null
-                    }
+            return ApplePayConfigRequest(
+                display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
+                    preference = 'none', )
             )
         else:
-            return SetupFlowDataRequest(
+            return ApplePayConfigRequest(
         )
         """
 
-    def testSetupFlowDataRequest(self):
-        """Test SetupFlowDataRequest"""
+    def testApplePayConfigRequest(self):
+        """Test ApplePayConfigRequest"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

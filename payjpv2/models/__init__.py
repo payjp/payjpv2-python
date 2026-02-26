@@ -15,6 +15,7 @@
 
 
 # import models into model package
+from payjpv2.models.apple_pay_config_request import ApplePayConfigRequest
 from payjpv2.models.balance_list_response import BalanceListResponse
 from payjpv2.models.balance_response import BalanceResponse
 from payjpv2.models.balance_state import BalanceState

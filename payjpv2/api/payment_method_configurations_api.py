@@ -414,6 +414,7 @@ class PaymentMethodConfigurationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentMethodConfigurationDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -484,6 +485,7 @@ class PaymentMethodConfigurationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentMethodConfigurationDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -554,6 +556,7 @@ class PaymentMethodConfigurationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentMethodConfigurationDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -693,6 +696,7 @@ class PaymentMethodConfigurationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentMethodConfigurationDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -767,6 +771,7 @@ class PaymentMethodConfigurationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentMethodConfigurationDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -841,6 +846,7 @@ class PaymentMethodConfigurationsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentMethodConfigurationDetailsResponse",
             '422': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

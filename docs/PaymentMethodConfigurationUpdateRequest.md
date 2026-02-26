@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **name** | **str** |  | [optional] 
 **card** | [**CardConfigRequest**](CardConfigRequest.md) |  | [optional] 
 **paypay** | [**PayPayConfigRequest**](PayPayConfigRequest.md) |  | [optional] 
+**apple_pay** | [**ApplePayConfigRequest**](ApplePayConfigRequest.md) |  | [optional] 
 
 ## Example
 

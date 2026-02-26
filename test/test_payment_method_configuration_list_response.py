@@ -52,7 +52,8 @@ class TestPaymentMethodConfigurationListResponse(unittest.TestCase):
                                 preference = 'none', 
                                 value = 'off', ), ), 
                         card = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
-                            available = True, ), )
+                            available = True, ), 
+                        apple_pay = , )
                     ]
             )
         else:
@@ -72,7 +73,8 @@ class TestPaymentMethodConfigurationListResponse(unittest.TestCase):
                                 preference = 'none', 
                                 value = 'off', ), ), 
                         card = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
-                            available = True, ), )
+                            available = True, ), 
+                        apple_pay = , )
                     ],
         )
         """

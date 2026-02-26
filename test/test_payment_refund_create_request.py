@@ -37,7 +37,7 @@ class TestPaymentRefundCreateRequest(unittest.TestCase):
         if include_optional:
             return PaymentRefundCreateRequest(
                 payment_flow_id = '',
-                amount = 0.0,
+                amount = 1.0,
                 reason = 'duplicate',
                 metadata = {
                     'key' : null

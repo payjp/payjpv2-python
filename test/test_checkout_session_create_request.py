@@ -66,11 +66,13 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
                         request_three_d_secure = 'any', ), ),
                 payment_flow_data = payjpv2.models.payment_flow_data_request.PaymentFlowDataRequest(
                     capture_method = 'automatic', 
+                    description = '', 
                     metadata = {
                         'key' : null
                         }, ),
                 submit_type = 'auto',
                 setup_flow_data = payjpv2.models.setup_flow_data_request.SetupFlowDataRequest(
+                    description = '', 
                     metadata = {
                         'key' : null
                         }, ),

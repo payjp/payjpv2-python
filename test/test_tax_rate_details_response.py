@@ -38,12 +38,15 @@ class TestTaxRateDetailsResponse(unittest.TestCase):
             return TaxRateDetailsResponse(
                 object = 'tax_rate',
                 id = '',
+                livemode = True,
                 display_name = '',
                 inclusive = True,
                 percentage = 1.337,
                 active = True,
                 country = 'JP',
                 description = '',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 metadata = {
                     'key' : null
                     }
@@ -51,12 +54,15 @@ class TestTaxRateDetailsResponse(unittest.TestCase):
         else:
             return TaxRateDetailsResponse(
                 id = '',
+                livemode = True,
                 display_name = '',
                 inclusive = True,
                 percentage = 1.337,
                 active = True,
                 country = 'JP',
                 description = '',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 metadata = {
                     'key' : null
                     },

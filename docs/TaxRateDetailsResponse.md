@@ -7,12 +7,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **object** | **str** |  | [optional] [default to 'tax_rate']
 **id** | **str** | 税率 ID | 
+**livemode** | **bool** | 本番環境かどうか | 
 **display_name** | **str** | 表示名。顧客に表示されます。 | 
 **inclusive** | **bool** | 税込みかどうか。税込 &#x3D; &#x60;true&#x60; 税抜 &#x3D; &#x60;false&#x60; | 
 **percentage** | **float** | 税率 (% 単位) | 
 **active** | **bool** | この税率が有効であるかどうか | 
 **country** | [**Country**](Country.md) |  | 
 **description** | **str** |  | 
+**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
+**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 
 ## Example

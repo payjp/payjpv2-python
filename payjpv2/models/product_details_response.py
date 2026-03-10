@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
@@ -29,13 +30,16 @@ class ProductDetailsResponse(BaseModel):
     """ # noqa: E501
     object: Optional[StrictStr] = 'product'
     id: StrictStr = Field(description="商品 ID")
+    livemode: StrictBool = Field(description="本番環境かどうか")
     name: StrictStr = Field(description="Checkout などで顧客に表示される商品名")
     active: StrictBool = Field(description="商品が購入可能かどうか")
     default_price_id: Optional[StrictStr]
     description: Optional[StrictStr]
     unit_label: Optional[StrictStr]
     url: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["object", "id", "name", "active", "default_price_id", "description", "unit_label", "url"]
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "name", "active", "default_price_id", "description", "unit_label", "url", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -119,12 +123,15 @@ class ProductDetailsResponse(BaseModel):
         _obj = cls.model_validate({
             "object": obj.get("object") if obj.get("object") is not None else 'product',
             "id": obj.get("id"),
+            "livemode": obj.get("livemode"),
             "name": obj.get("name"),
             "active": obj.get("active"),
             "default_price_id": obj.get("default_price_id"),
             "description": obj.get("description"),
             "unit_label": obj.get("unit_label"),
-            "url": obj.get("url")
+            "url": obj.get("url"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at")
         })
         return _obj
 

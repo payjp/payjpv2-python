@@ -17,7 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
+from pydantic import Field, StrictBool, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
 from payjpv2.models.tax_rate_create_request import TaxRateCreateRequest
@@ -337,6 +337,8 @@ class TaxRatesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
+        active: Annotated[Optional[StrictBool], Field(description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")] = None,
+        inclusive: Annotated[Optional[StrictBool], Field(description="税込みかどうか。税込 = `true` 税抜 = `false`")] = None,
         *,
         request_timeout: Union[
             None,
@@ -360,6 +362,10 @@ class TaxRatesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
+        :param active: この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。
+        :type active: bool
+        :param inclusive: 税込みかどうか。税込 = `true` 税抜 = `false`
+        :type inclusive: bool
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -387,6 +393,8 @@ class TaxRatesApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
+            active=active,
+            inclusive=inclusive,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -416,6 +424,8 @@ class TaxRatesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
+        active: Annotated[Optional[StrictBool], Field(description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")] = None,
+        inclusive: Annotated[Optional[StrictBool], Field(description="税込みかどうか。税込 = `true` 税抜 = `false`")] = None,
         *,
         request_timeout: Union[
             None,
@@ -439,6 +449,10 @@ class TaxRatesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
+        :param active: この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。
+        :type active: bool
+        :param inclusive: 税込みかどうか。税込 = `true` 税抜 = `false`
+        :type inclusive: bool
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -466,6 +480,8 @@ class TaxRatesApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
+            active=active,
+            inclusive=inclusive,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -495,6 +511,8 @@ class TaxRatesApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
+        active: Annotated[Optional[StrictBool], Field(description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")] = None,
+        inclusive: Annotated[Optional[StrictBool], Field(description="税込みかどうか。税込 = `true` 税抜 = `false`")] = None,
         *,
         request_timeout: Union[
             None,
@@ -518,6 +536,10 @@ class TaxRatesApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
+        :param active: この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。
+        :type active: bool
+        :param inclusive: 税込みかどうか。税込 = `true` 税抜 = `false`
+        :type inclusive: bool
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -545,6 +567,8 @@ class TaxRatesApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
+            active=active,
+            inclusive=inclusive,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -569,6 +593,8 @@ class TaxRatesApi:
         limit,
         starting_after,
         ending_before,
+        active,
+        inclusive,
         _request_auth,
         _content_type,
         _headers,
@@ -605,6 +631,14 @@ class TaxRatesApi:
         if ending_before is not None:
             
             _query_params.append(('ending_before', ending_before))
+            
+        if active is not None:
+            
+            _query_params.append(('active', active))
+            
+        if inclusive is not None:
+            
+            _query_params.append(('inclusive', inclusive))
             
         # process the header parameters
         # process the form parameters

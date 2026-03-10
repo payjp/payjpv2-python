@@ -7,12 +7,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **object** | **str** |  | [optional] [default to 'product']
 **id** | **str** | 商品 ID | 
+**livemode** | **bool** | 本番環境かどうか | 
 **name** | **str** | Checkout などで顧客に表示される商品名 | 
 **active** | **bool** | 商品が購入可能かどうか | 
 **default_price_id** | **str** |  | 
 **description** | **str** |  | 
 **unit_label** | **str** |  | 
 **url** | **str** |  | 
+**created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
+**updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 
 ## Example
 

@@ -107,6 +107,8 @@ Name | Type | Description  | Notes
 
 Create Payment Method
 
+**このエンドポイントはテストモードでのみ使用できます。**
+
 ### Example
 
 * Basic Authentication (HTTPBasic):

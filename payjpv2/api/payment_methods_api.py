@@ -373,6 +373,7 @@ class PaymentMethodsApi:
     ) -> PaymentMethodResponse:
         """Create Payment Method
 
+        **このエンドポイントはテストモードでのみ使用できます。**
 
         :param payment_method_create_request: (required)
         :type payment_method_create_request: PaymentMethodCreateRequest
@@ -444,6 +445,7 @@ class PaymentMethodsApi:
     ) -> ApiResponse[PaymentMethodResponse]:
         """Create Payment Method
 
+        **このエンドポイントはテストモードでのみ使用できます。**
 
         :param payment_method_create_request: (required)
         :type payment_method_create_request: PaymentMethodCreateRequest
@@ -515,6 +517,7 @@ class PaymentMethodsApi:
     ) -> RESTResponseType:
         """Create Payment Method
 
+        **このエンドポイントはテストモードでのみ使用できます。**
 
         :param payment_method_create_request: (required)
         :type payment_method_create_request: PaymentMethodCreateRequest

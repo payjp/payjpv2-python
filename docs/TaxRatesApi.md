@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_tax_rates**
-> TaxRateListResponse get_all_tax_rates(limit=limit, starting_after=starting_after, ending_before=ending_before)
+> TaxRateListResponse get_all_tax_rates(limit=limit, starting_after=starting_after, ending_before=ending_before, active=active, inclusive=inclusive)
 
 Get All Tax Rates
 
@@ -140,10 +140,12 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
+    active = True # bool | この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。 (optional)
+    inclusive = True # bool | 税込みかどうか。税込 = `true` 税抜 = `false` (optional)
 
     try:
         # Get All Tax Rates
-        api_response = api_instance.get_all_tax_rates(limit=limit, starting_after=starting_after, ending_before=ending_before)
+        api_response = api_instance.get_all_tax_rates(limit=limit, starting_after=starting_after, ending_before=ending_before, active=active, inclusive=inclusive)
         print("The response of TaxRatesApi->get_all_tax_rates:\n")
         pprint(api_response)
     except Exception as e:
@@ -160,6 +162,8 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
+ **active** | **bool**| この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。 | [optional] 
+ **inclusive** | **bool**| 税込みかどうか。税込 &#x3D; &#x60;true&#x60; 税抜 &#x3D; &#x60;false&#x60; | [optional] 
 
 ### Return type
 

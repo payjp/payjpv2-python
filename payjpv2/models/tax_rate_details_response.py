@@ -18,6 +18,7 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, StrictInt, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from payjpv2.models.country import Country
@@ -31,14 +32,17 @@ class TaxRateDetailsResponse(BaseModel):
     """ # noqa: E501
     object: Optional[StrictStr] = 'tax_rate'
     id: StrictStr = Field(description="税率 ID")
+    livemode: StrictBool = Field(description="本番環境かどうか")
     display_name: StrictStr = Field(description="表示名。顧客に表示されます。")
     inclusive: StrictBool = Field(description="税込みかどうか。税込 = `true` 税抜 = `false`")
     percentage: Union[StrictFloat, StrictInt] = Field(description="税率 (% 単位)")
     active: StrictBool = Field(description="この税率が有効であるかどうか")
     country: Optional[Country]
     description: Optional[StrictStr]
+    created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
+    updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
-    __properties: ClassVar[List[str]] = ["object", "id", "display_name", "inclusive", "percentage", "active", "country", "description", "metadata"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "display_name", "inclusive", "percentage", "active", "country", "description", "created_at", "updated_at", "metadata"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -119,12 +123,15 @@ class TaxRateDetailsResponse(BaseModel):
         _obj = cls.model_validate({
             "object": obj.get("object") if obj.get("object") is not None else 'tax_rate',
             "id": obj.get("id"),
+            "livemode": obj.get("livemode"),
             "display_name": obj.get("display_name"),
             "inclusive": obj.get("inclusive"),
             "percentage": obj.get("percentage"),
             "active": obj.get("active"),
             "country": obj.get("country"),
             "description": obj.get("description"),
+            "created_at": obj.get("created_at"),
+            "updated_at": obj.get("updated_at"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()

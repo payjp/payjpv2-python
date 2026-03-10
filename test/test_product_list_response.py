@@ -43,12 +43,15 @@ class TestProductListResponse(unittest.TestCase):
                     payjpv2.models.product_details_response.ProductDetailsResponse(
                         object = 'product', 
                         id = '', 
+                        livemode = True, 
                         name = '', 
                         active = True, 
                         default_price_id = '', 
                         description = '', 
                         unit_label = '', 
-                        url = '', )
+                        url = '', 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ]
             )
         else:
@@ -59,12 +62,15 @@ class TestProductListResponse(unittest.TestCase):
                     payjpv2.models.product_details_response.ProductDetailsResponse(
                         object = 'product', 
                         id = '', 
+                        livemode = True, 
                         name = '', 
                         active = True, 
                         default_price_id = '', 
                         description = '', 
                         unit_label = '', 
-                        url = '', )
+                        url = '', 
+                        created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), )
                     ],
         )
         """

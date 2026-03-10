@@ -38,22 +38,28 @@ class TestProductDetailsResponse(unittest.TestCase):
             return ProductDetailsResponse(
                 object = 'product',
                 id = '',
-                name = '',
-                active = True,
-                default_price_id = '',
-                description = '',
-                unit_label = '',
-                url = ''
-            )
-        else:
-            return ProductDetailsResponse(
-                id = '',
+                livemode = True,
                 name = '',
                 active = True,
                 default_price_id = '',
                 description = '',
                 unit_label = '',
                 url = '',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
+            )
+        else:
+            return ProductDetailsResponse(
+                id = '',
+                livemode = True,
+                name = '',
+                active = True,
+                default_price_id = '',
+                description = '',
+                unit_label = '',
+                url = '',
+                created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
+                updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )
         """
 

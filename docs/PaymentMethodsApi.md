@@ -187,6 +187,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
+**400** | Invalid Apple Pay Token&lt;br&gt;Unacceptable Brand On Apple Pay |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

@@ -120,6 +120,7 @@ class PaymentTransactionsApi:
             '200': "PaymentTransactionListResponse",
             '422': "ErrorResponse",
             '400': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -211,6 +212,7 @@ class PaymentTransactionsApi:
             '200': "PaymentTransactionListResponse",
             '422': "ErrorResponse",
             '400': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,
@@ -302,6 +304,7 @@ class PaymentTransactionsApi:
             '200': "PaymentTransactionListResponse",
             '422': "ErrorResponse",
             '400': "ErrorResponse",
+            '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
             *_param,

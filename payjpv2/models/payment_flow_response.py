@@ -47,7 +47,7 @@ class PaymentFlowResponse(BaseModel):
     payment_method_id: Optional[StrictStr]
     payment_method_options: Optional[Dict[str, Any]]
     payment_method_types: List[PaymentMethodTypes] = Field(description="この PaymentFlow で使用できる支払い方法の種類のリスト")
-    status: PaymentFlowStatus = Field(description="この PaymentFlow のステータス。<a href=\"https://docs.pay.jp/v2/payment_flows#status\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 |")
+    status: PaymentFlowStatus = Field(description="この PaymentFlow のステータス。  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 |")
     next_action: Optional[Dict[str, Any]]
     return_url: Optional[StrictStr]
     capture_method: CaptureMethod = Field(description="支払いの確定方法  | 値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")

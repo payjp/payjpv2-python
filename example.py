@@ -27,6 +27,11 @@ with payjpv2.ApiClient(configuration) as api_client:
         create_request = payjpv2.CustomerCreateRequest(
             email="test@example.com",
             description="Test customer from Python SDK",
+            metadata={
+                "key1": payjpv2.MetadataValue("value1"),
+                "key2": payjpv2.MetadataValue(123),
+                "key3": payjpv2.MetadataValue(True),
+            },
         )
 
         idempotency_key = str(uuid.uuid4())
@@ -38,26 +43,33 @@ with payjpv2.ApiClient(configuration) as api_client:
         )
         customer_id = customer.id
         print(f"Created customer: {customer_id}")
-        print(f"Email: {customer.email}\n")
+        print(f"Email: {customer.email}")
+        print(f"Metadata: {customer.metadata}\n")
 
         # 2. Get Customer
         print("=== 2. Get Customer ===")
         retrieved = customers_api.get_customer(customer_id)
         print(f"Retrieved customer: {retrieved.id}")
         print(f"Email: {retrieved.email}")
-        print(f"Description: {retrieved.description or '(none)'}\n")
+        print(f"Description: {retrieved.description or '(none)'}")
+        print(f"Metadata: {retrieved.metadata}\n")
 
         # 3. Update Customer
         print("=== 3. Update Customer ===")
         update_request = payjpv2.CustomerUpdateRequest(
             description="Updated description from Python SDK",
             email="updated@example.com",
+            metadata={
+                "key1": payjpv2.MetadataValue("updated_value"),
+                "key4": payjpv2.MetadataValue(456),
+            },
         )
 
         updated = customers_api.update_customer(customer_id, update_request)
         print(f"Updated customer: {updated.id}")
         print(f"New email: {updated.email}")
-        print(f"New description: {updated.description or '(none)'}\n")
+        print(f"New description: {updated.description or '(none)'}")
+        print(f"Metadata: {updated.metadata}\n")
 
         # 4. List Customers
         print("=== 4. List Customers ===")

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **payment_method_id** | **str** |  | 
 **payment_method_options** | **Dict[str, object]** |  | 
 **payment_method_types** | [**List[PaymentMethodTypes]**](PaymentMethodTypes.md) | この PaymentFlow で使用できる支払い方法の種類のリスト | 
-**status** | [**PaymentFlowStatus**](PaymentFlowStatus.md) | この PaymentFlow のステータス。&lt;a href&#x3D;\&quot;https://docs.pay.jp/v2/payment_flows#status\&quot; target&#x3D;\&quot;_blank\&quot;&gt;ステータスの詳細についてはこちらをご覧ください。&lt;/a&gt;  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 | | 
+**status** | [**PaymentFlowStatus**](PaymentFlowStatus.md) | この PaymentFlow のステータス。  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 | | 
 **next_action** | **Dict[str, object]** |  | 
 **return_url** | **str** |  | 
 **capture_method** | [**CaptureMethod**](CaptureMethod.md) | 支払いの確定方法  | 値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 | | 

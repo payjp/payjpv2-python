@@ -93,7 +93,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
-**404** | Not Found |  -  |
+**404** | Not Found&lt;br&gt;Price Not Found Or Inactive&lt;br&gt;Tax Rate Not Found Or Inactive |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

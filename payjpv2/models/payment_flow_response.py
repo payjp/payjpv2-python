@@ -54,10 +54,11 @@ class PaymentFlowResponse(BaseModel):
     last_payment_error: Optional[Dict[str, Any]]
     cancellation_reason: Optional[PaymentFlowCancellationReason]
     canceled_at: Optional[datetime]
+    expired_at: Optional[datetime] = None
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount", "currency", "amount_capturable", "amount_received", "client_secret", "customer_id", "description", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "capture_method", "last_payment_error", "cancellation_reason", "canceled_at", "metadata", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount", "currency", "amount_capturable", "amount_received", "client_secret", "customer_id", "description", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "capture_method", "last_payment_error", "cancellation_reason", "canceled_at", "expired_at", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -169,6 +170,11 @@ class PaymentFlowResponse(BaseModel):
         if self.canceled_at is None and "canceled_at" in self.model_fields_set:
             _dict['canceled_at'] = None
 
+        # set to None if expired_at (nullable) is None
+        # and model_fields_set contains the field
+        if self.expired_at is None and "expired_at" in self.model_fields_set:
+            _dict['expired_at'] = None
+
         return _dict
 
     @classmethod
@@ -201,6 +207,7 @@ class PaymentFlowResponse(BaseModel):
             "last_payment_error": obj.get("last_payment_error"),
             "cancellation_reason": obj.get("cancellation_reason"),
             "canceled_at": obj.get("canceled_at"),
+            "expired_at": obj.get("expired_at"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()

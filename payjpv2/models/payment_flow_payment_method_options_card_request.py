@@ -27,7 +27,7 @@ class PaymentFlowPaymentMethodOptionsCardRequest(BaseModel):
     """
     PaymentFlowPaymentMethodOptionsCardRequest
     """ # noqa: E501
-    request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求  | 値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **never**: オーソリ期間の延長要求を行いません。 |")
+    request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求  | 値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **must_extend**: オーソリ期間の延長を必須とします。延長できない場合はエラーを返します。 | | **never**: オーソリ期間の延長要求を行いません。 |")
     request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3D セキュア認証の要求方法。  | 値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 | ")
     __properties: ClassVar[List[str]] = ["request_extended_authorization", "request_three_d_secure"]
 
@@ -37,8 +37,8 @@ class PaymentFlowPaymentMethodOptionsCardRequest(BaseModel):
         if value is None:
             return value
 
-        if value not in set(['if_available', 'never']):
-            raise ValueError("must be one of enum values ('if_available', 'never')")
+        if value not in set(['if_available', 'must_extend', 'never']):
+            raise ValueError("must be one of enum values ('if_available', 'must_extend', 'never')")
         return value
 
     @field_validator('request_three_d_secure')

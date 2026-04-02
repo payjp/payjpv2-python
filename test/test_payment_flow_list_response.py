@@ -63,6 +63,7 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         last_payment_error = { }, 
                         cancellation_reason = 'abandoned', 
                         canceled_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        expired_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         metadata = {
                             'key' : null
                             }, 
@@ -98,6 +99,7 @@ class TestPaymentFlowListResponse(unittest.TestCase):
                         last_payment_error = { }, 
                         cancellation_reason = 'abandoned', 
                         canceled_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
+                        expired_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
                         metadata = {
                             'key' : null
                             }, 

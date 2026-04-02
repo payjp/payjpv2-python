@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **last_payment_error** | **Dict[str, object]** |  | 
 **cancellation_reason** | [**PaymentFlowCancellationReason**](PaymentFlowCancellationReason.md) |  | 
 **canceled_at** | **datetime** |  | 
+**expired_at** | **datetime** |  | [optional] 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 

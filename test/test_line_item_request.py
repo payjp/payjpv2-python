@@ -37,6 +37,13 @@ class TestLineItemRequest(unittest.TestCase):
         if include_optional:
             return LineItemRequest(
                 price_id = '',
+                price_data = payjpv2.models.price_data_request.PriceDataRequest(
+                    currency = 'jpy', 
+                    unit_amount = 0.0, 
+                    product_id = '', 
+                    product_data = payjpv2.models.product_data_request.ProductDataRequest(
+                        name = '', 
+                        description = '', ), ),
                 quantity = 56,
                 tax_rates = [
                     ''
@@ -44,7 +51,6 @@ class TestLineItemRequest(unittest.TestCase):
             )
         else:
             return LineItemRequest(
-                price_id = '',
                 quantity = 56,
         )
         """

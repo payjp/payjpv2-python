@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**price_id** | **str** | 料金 ID | 
+**price_id** | **str** |  | [optional] 
+**price_data** | [**PriceDataRequest**](PriceDataRequest.md) |  | [optional] 
 **quantity** | **int** | 購入する商品の数量 | 
 **tax_rates** | **List[str]** | 税率 ID | [optional] [default to []]
 

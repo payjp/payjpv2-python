@@ -357,7 +357,7 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
-**400** | Metadata Limit Exceeded |  -  |
+**400** | Metadata Limit Exceeded&lt;br&gt;Inline Price Update Not Allowed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

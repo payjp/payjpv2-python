@@ -44,6 +44,13 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
                 line_items = [
                     payjpv2.models.line_item_request.LineItemRequest(
                         price_id = '', 
+                        price_data = payjpv2.models.price_data_request.PriceDataRequest(
+                            currency = 'jpy', 
+                            unit_amount = 0.0, 
+                            product_id = '', 
+                            product_data = payjpv2.models.product_data_request.ProductDataRequest(
+                                name = '', 
+                                description = '', ), ), 
                         quantity = 56, 
                         tax_rates = [
                             ''

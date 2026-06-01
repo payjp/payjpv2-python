@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.0.10"
+__version__ = "1.1.0"
 
 # import apis into sdk package
 from payjpv2.api.balances_api import BalancesApi
@@ -136,11 +136,13 @@ from payjpv2.models.payment_transaction_list_response import PaymentTransactionL
 from payjpv2.models.payment_transaction_response import PaymentTransactionResponse
 from payjpv2.models.payment_transaction_type import PaymentTransactionType
 from payjpv2.models.price_create_request import PriceCreateRequest
+from payjpv2.models.price_data_request import PriceDataRequest
 from payjpv2.models.price_details_response import PriceDetailsResponse
 from payjpv2.models.price_list_response import PriceListResponse
 from payjpv2.models.price_type import PriceType
 from payjpv2.models.price_update_request import PriceUpdateRequest
 from payjpv2.models.product_create_request import ProductCreateRequest
+from payjpv2.models.product_data_request import ProductDataRequest
 from payjpv2.models.product_deleted_response import ProductDeletedResponse
 from payjpv2.models.product_details_response import ProductDetailsResponse
 from payjpv2.models.product_list_response import ProductListResponse

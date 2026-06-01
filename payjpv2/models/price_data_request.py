@@ -21,19 +21,20 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from typing_extensions import Annotated
-from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.currency import Currency
+from payjpv2.models.product_data_request import ProductDataRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class CustomerUpdateRequest(BaseModel):
+class PriceDataRequest(BaseModel):
     """
-    CustomerUpdateRequest
+    PriceDataRequest
     """ # noqa: E501
-    default_payment_method_id: Optional[StrictStr] = Field(default=None, description="支払いにデフォルトで使用される支払い方法 ID")
-    email: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客のメールアドレス。メールアドレスの形式が正しいかどうかは検証されます。")
-    description: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="顧客オブジェクトに付加できる任意の文字列です。管理画面で顧客と一緒に表示されます。")
-    metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["default_payment_method_id", "email", "description", "metadata"]
+    currency: Currency = Field(description="通貨。現在は `jpy` のみサポートしています。")
+    unit_amount: Annotated[int, Field(strict=True, ge=0)] = Field(description="単価（0以上の整数）")
+    product_id: Optional[StrictStr] = None
+    product_data: Optional[ProductDataRequest] = None
+    __properties: ClassVar[List[str]] = ["currency", "unit_amount", "product_id", "product_data"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -52,7 +53,7 @@ class CustomerUpdateRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of CustomerUpdateRequest from a JSON string"""
+        """Create an instance of PriceDataRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -73,18 +74,24 @@ class CustomerUpdateRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
-        _field_dict = {}
-        if self.metadata:
-            for _key_metadata in self.metadata:
-                if self.metadata[_key_metadata]:
-                    _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
-            _dict['metadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of product_data
+        if self.product_data:
+            _dict['product_data'] = self.product_data.to_dict()
+        # set to None if product_id (nullable) is None
+        # and model_fields_set contains the field
+        if self.product_id is None and "product_id" in self.model_fields_set:
+            _dict['product_id'] = None
+
+        # set to None if product_data (nullable) is None
+        # and model_fields_set contains the field
+        if self.product_data is None and "product_data" in self.model_fields_set:
+            _dict['product_data'] = None
+
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of CustomerUpdateRequest from a dict"""
+        """Create an instance of PriceDataRequest from a dict"""
         if obj is None:
             return None
 
@@ -92,15 +99,10 @@ class CustomerUpdateRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "default_payment_method_id": obj.get("default_payment_method_id"),
-            "email": obj.get("email"),
-            "description": obj.get("description"),
-            "metadata": dict(
-                (_k, MetadataValue.from_dict(_v))
-                for _k, _v in obj["metadata"].items()
-            )
-            if obj.get("metadata") is not None
-            else None
+            "currency": obj.get("currency"),
+            "unit_amount": obj.get("unit_amount"),
+            "product_id": obj.get("product_id"),
+            "product_data": ProductDataRequest.from_dict(obj["product_data"]) if obj.get("product_data") is not None else None
         })
         return _obj
 

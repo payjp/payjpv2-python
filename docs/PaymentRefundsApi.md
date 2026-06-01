@@ -94,6 +94,7 @@ Name | Type | Description  | Notes
 **422** | Validation Error |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status&lt;br&gt;Already Refunded&lt;br&gt;Refund Exceeds Payment |  -  |
+**402** | Payment Failed |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

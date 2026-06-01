@@ -18,21 +18,18 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.price_data_request import PriceDataRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
-class LineItemRequest(BaseModel):
+class ProductDataRequest(BaseModel):
     """
-    LineItemRequest
+    ProductDataRequest
     """ # noqa: E501
-    price_id: Optional[StrictStr] = None
-    price_data: Optional[PriceDataRequest] = None
-    quantity: StrictInt = Field(description="購入する商品の数量")
-    tax_rates: Optional[List[StrictStr]] = Field(default=None, description="税率 ID")
-    __properties: ClassVar[List[str]] = ["price_id", "price_data", "quantity", "tax_rates"]
+    name: StrictStr = Field(description="Checkout などで顧客に表示される商品名")
+    description: Optional[StrictStr] = None
+    __properties: ClassVar[List[str]] = ["name", "description"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -51,7 +48,7 @@ class LineItemRequest(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Optional[Self]:
-        """Create an instance of LineItemRequest from a JSON string"""
+        """Create an instance of ProductDataRequest from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -72,24 +69,16 @@ class LineItemRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of price_data
-        if self.price_data:
-            _dict['price_data'] = self.price_data.to_dict()
-        # set to None if price_id (nullable) is None
+        # set to None if description (nullable) is None
         # and model_fields_set contains the field
-        if self.price_id is None and "price_id" in self.model_fields_set:
-            _dict['price_id'] = None
-
-        # set to None if price_data (nullable) is None
-        # and model_fields_set contains the field
-        if self.price_data is None and "price_data" in self.model_fields_set:
-            _dict['price_data'] = None
+        if self.description is None and "description" in self.model_fields_set:
+            _dict['description'] = None
 
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Optional[Dict[str, Any]]) -> Optional[Self]:
-        """Create an instance of LineItemRequest from a dict"""
+        """Create an instance of ProductDataRequest from a dict"""
         if obj is None:
             return None
 
@@ -97,10 +86,8 @@ class LineItemRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "price_id": obj.get("price_id"),
-            "price_data": PriceDataRequest.from_dict(obj["price_data"]) if obj.get("price_data") is not None else None,
-            "quantity": obj.get("quantity"),
-            "tax_rates": obj.get("tax_rates")
+            "name": obj.get("name"),
+            "description": obj.get("description")
         })
         return _obj
 

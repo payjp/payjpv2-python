@@ -5,6 +5,7 @@ All URIs are relative to *https://api.pay.jp*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**create_checkout_session**](CheckoutSessionsApi.md#create_checkout_session) | **POST** /v2/checkout/sessions | Create Checkout Session
+[**expire_checkout_session**](CheckoutSessionsApi.md#expire_checkout_session) | **POST** /v2/checkout/sessions/{checkout_session_id}/expire | Expire Checkout Session
 [**get_all_checkout_session_line_items**](CheckoutSessionsApi.md#get_all_checkout_session_line_items) | **GET** /v2/checkout/sessions/{checkout_session_id}/line_items | Get All Checkout Session Line Items
 [**get_all_checkout_sessions**](CheckoutSessionsApi.md#get_all_checkout_sessions) | **GET** /v2/checkout/sessions | Get All Checkout Sessions
 [**get_checkout_session**](CheckoutSessionsApi.md#get_checkout_session) | **GET** /v2/checkout/sessions/{checkout_session_id} | Get Checkout Session
@@ -94,6 +95,92 @@ Name | Type | Description  | Notes
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
 **404** | Not Found&lt;br&gt;Price Not Found Or Inactive&lt;br&gt;Tax Rate Not Found Or Inactive |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **expire_checkout_session**
+> CheckoutSessionDetailsResponse expire_checkout_session(checkout_session_id)
+
+Expire Checkout Session
+
+### Example
+
+* Basic Authentication (HTTPBasic):
+* Bearer Authentication (HTTPBearer):
+
+```python
+import payjpv2
+from payjpv2.models.checkout_session_details_response import CheckoutSessionDetailsResponse
+from payjpv2.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.pay.jp
+# See configuration.py for a list of all supported configuration parameters.
+configuration = payjpv2.Configuration(
+    host = "https://api.pay.jp"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure HTTP basic authorization: HTTPBasic
+configuration = payjpv2.Configuration(
+    username = os.environ["USERNAME"],
+    password = os.environ["PASSWORD"]
+)
+
+# Configure Bearer authorization: HTTPBearer
+configuration = payjpv2.Configuration(
+    access_token = os.environ["BEARER_TOKEN"]
+)
+
+# Enter a context with an instance of the API client
+with payjpv2.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = payjpv2.CheckoutSessionsApi(api_client)
+    checkout_session_id = 'checkout_session_id_example' # str | 
+
+    try:
+        # Expire Checkout Session
+        api_response = api_instance.expire_checkout_session(checkout_session_id)
+        print("The response of CheckoutSessionsApi->expire_checkout_session:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling CheckoutSessionsApi->expire_checkout_session: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **checkout_session_id** | **str**|  | 
+
+### Return type
+
+[**CheckoutSessionDetailsResponse**](CheckoutSessionDetailsResponse.md)
+
+### Authorization
+
+[HTTPBasic](../README.md#HTTPBasic), [HTTPBearer](../README.md#HTTPBearer)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json, application/problem+json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Successful Response |  -  |
+**422** | Validation Error |  -  |
+**404** | Not Found |  -  |
+**400** | Checkout Session Not Expirable |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

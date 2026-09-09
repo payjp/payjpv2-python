@@ -18,9 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
-from payjpv2.models.setup_flow_cancellation_reason import SetupFlowCancellationReason
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,8 +27,18 @@ class SetupFlowCancelRequest(BaseModel):
     """
     SetupFlowCancelRequest
     """ # noqa: E501
-    cancellation_reason: Optional[SetupFlowCancellationReason] = Field(default=None, description="この SetupFlow のキャンセル理由。  | 値 | |:---| | **abandoned**: 顧客が SetupFlow を完了しなかった場合。 | | **requested_by_customer**: 顧客がキャンセルを要求した場合。 | | **duplicate**: 支払い方法が重複している場合。 |")
+    cancellation_reason: Optional[StrictStr] = Field(default=None, description="この SetupFlow のキャンセル理由。  | 値 | |:---| | **abandoned**: 顧客が SetupFlow を完了しなかった場合。 | | **requested_by_customer**: 顧客がキャンセルを要求した場合。 | | **duplicate**: 支払い方法が重複している場合。 |")
     __properties: ClassVar[List[str]] = ["cancellation_reason"]
+
+    @field_validator('cancellation_reason')
+    def cancellation_reason_validate_enum(cls, value):
+        """Validates the enum"""
+        if value is None:
+            return value
+
+        if value not in set(['abandoned', 'duplicate', 'requested_by_customer']):
+            raise ValueError("must be one of enum values ('abandoned', 'duplicate', 'requested_by_customer')")
+        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

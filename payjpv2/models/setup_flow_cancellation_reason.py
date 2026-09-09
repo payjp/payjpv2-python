@@ -29,6 +29,7 @@ class SetupFlowCancellationReason(str, Enum):
     """
     ABANDONED = 'abandoned'
     DUPLICATE = 'duplicate'
+    EXPIRED = 'expired'
     REQUESTED_BY_CUSTOMER = 'requested_by_customer'
 
     @classmethod

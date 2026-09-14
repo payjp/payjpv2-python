@@ -34,6 +34,13 @@ class TestCheckoutSessionsApi(unittest.TestCase):
         """
         pass
 
+    def test_expire_checkout_session(self) -> None:
+        """Test case for expire_checkout_session
+
+        Expire Checkout Session
+        """
+        pass
+
     def test_get_all_checkout_session_line_items(self) -> None:
         """Test case for get_all_checkout_session_line_items
 

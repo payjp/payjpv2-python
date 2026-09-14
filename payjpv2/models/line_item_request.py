@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from payjpv2.models.price_data_request import PriceDataRequest
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +32,7 @@ class LineItemRequest(BaseModel):
     price_id: Optional[StrictStr] = None
     price_data: Optional[PriceDataRequest] = None
     quantity: StrictInt = Field(description="購入する商品の数量")
-    tax_rates: Optional[List[StrictStr]] = Field(default=None, description="税率 ID")
+    tax_rates: Optional[Annotated[List[StrictStr], Field(max_length=1)]] = Field(default=None, description="税率 ID")
     __properties: ClassVar[List[str]] = ["price_id", "price_data", "quantity", "tax_rates"]
 
     model_config = ConfigDict(

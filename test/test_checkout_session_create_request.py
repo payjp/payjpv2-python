@@ -61,6 +61,8 @@ class TestCheckoutSessionCreateRequest(unittest.TestCase):
                     },
                 success_url = '',
                 cancel_url = '',
+                redirect_options = payjpv2.models.redirect_options_request.RedirectOptionsRequest(
+                    include_client_secret = True, ),
                 currency = 'jpy',
                 expires_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 locale = 'auto',

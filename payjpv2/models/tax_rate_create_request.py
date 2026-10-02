@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from typing_extensions import Annotated
 from payjpv2.models.country import Country
 from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.tax_type import TaxType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -36,8 +37,9 @@ class TaxRateCreateRequest(BaseModel):
     active: Optional[StrictBool] = Field(default=True, description="この税率が有効であるかどうか。無効にした場合でも、すでに設定されている定期課金などでは使用可能です。")
     country: Optional[Country] = Field(default=None, description="有効な2文字の <a href=\"https://ja.wikipedia.org/wiki/ISO_3166-1\" target=\"_blank\">ISO 国コード</a>")
     description: Optional[StrictStr] = Field(default=None, description="説明。管理画面内のみで表示され、顧客には表示されません。")
+    tax_type: Optional[TaxType] = None
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["display_name", "inclusive", "percentage", "active", "country", "description", "metadata"]
+    __properties: ClassVar[List[str]] = ["display_name", "inclusive", "percentage", "active", "country", "description", "tax_type", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -84,6 +86,11 @@ class TaxRateCreateRequest(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
+        # set to None if tax_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.tax_type is None and "tax_type" in self.model_fields_set:
+            _dict['tax_type'] = None
+
         return _dict
 
     @classmethod
@@ -102,6 +109,7 @@ class TaxRateCreateRequest(BaseModel):
             "active": obj.get("active") if obj.get("active") is not None else True,
             "country": obj.get("country"),
             "description": obj.get("description"),
+            "tax_type": obj.get("tax_type"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))
                 for _k, _v in obj["metadata"].items()

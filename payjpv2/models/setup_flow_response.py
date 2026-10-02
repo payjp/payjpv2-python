@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.redirect_options_response import RedirectOptionsResponse
 from payjpv2.models.setup_flow_cancellation_reason import SetupFlowCancellationReason
 from payjpv2.models.setup_flow_status import SetupFlowStatus
 from typing import Optional, Set
@@ -45,11 +46,12 @@ class SetupFlowResponse(BaseModel):
     status: SetupFlowStatus = Field(description="この SetupFlow のステータスです。<a href=\"https://docs.pay.jp/v2/guide/payments/setupflow#setup-flow-%E3%81%AE%E3%82%B9%E3%83%86%E3%83%BC%E3%82%BF%E3%82%B9\" target=\"_blank\">ステータスの詳細についてはこちらをご覧ください。</a>  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **succeeded**: 成功しました。 | | **canceled**: キャンセルされました。 |")
     next_action: Optional[Dict[str, Any]]
     return_url: Optional[StrictStr]
+    redirect_options: RedirectOptionsResponse = Field(description="return_url へリダイレクトする際のオプション")
     last_setup_error: Optional[Dict[str, Any]]
     cancellation_reason: Optional[SetupFlowCancellationReason]
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "client_secret", "customer_id", "description", "metadata", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "last_setup_error", "cancellation_reason", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "client_secret", "customer_id", "description", "metadata", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "redirect_options", "last_setup_error", "cancellation_reason", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -106,6 +108,9 @@ class SetupFlowResponse(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of redirect_options
+        if self.redirect_options:
+            _dict['redirect_options'] = self.redirect_options.to_dict()
         # set to None if customer_id (nullable) is None
         # and model_fields_set contains the field
         if self.customer_id is None and "customer_id" in self.model_fields_set:
@@ -176,6 +181,7 @@ class SetupFlowResponse(BaseModel):
             "status": obj.get("status"),
             "next_action": obj.get("next_action"),
             "return_url": obj.get("return_url"),
+            "redirect_options": RedirectOptionsResponse.from_dict(obj["redirect_options"]) if obj.get("redirect_options") is not None else None,
             "last_setup_error": obj.get("last_setup_error"),
             "cancellation_reason": obj.get("cancellation_reason"),
             "created_at": obj.get("created_at"),

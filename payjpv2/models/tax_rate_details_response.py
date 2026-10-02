@@ -23,6 +23,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictFloat, Stri
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from payjpv2.models.country import Country
 from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.tax_type import TaxType
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -39,10 +40,11 @@ class TaxRateDetailsResponse(BaseModel):
     active: StrictBool = Field(description="この税率が有効であるかどうか")
     country: Optional[Country]
     description: Optional[StrictStr]
+    tax_type: Optional[TaxType]
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "display_name", "inclusive", "percentage", "active", "country", "description", "created_at", "updated_at", "metadata"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "display_name", "inclusive", "percentage", "active", "country", "description", "tax_type", "created_at", "updated_at", "metadata"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -109,6 +111,11 @@ class TaxRateDetailsResponse(BaseModel):
         if self.description is None and "description" in self.model_fields_set:
             _dict['description'] = None
 
+        # set to None if tax_type (nullable) is None
+        # and model_fields_set contains the field
+        if self.tax_type is None and "tax_type" in self.model_fields_set:
+            _dict['tax_type'] = None
+
         return _dict
 
     @classmethod
@@ -130,6 +137,7 @@ class TaxRateDetailsResponse(BaseModel):
             "active": obj.get("active"),
             "country": obj.get("country"),
             "description": obj.get("description"),
+            "tax_type": obj.get("tax_type"),
             "created_at": obj.get("created_at"),
             "updated_at": obj.get("updated_at"),
             "metadata": dict(

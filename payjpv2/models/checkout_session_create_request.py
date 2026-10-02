@@ -33,6 +33,7 @@ from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_flow_data_request import PaymentFlowDataRequest
 from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.redirect_options_request import RedirectOptionsRequest
 from payjpv2.models.setup_flow_data_request import SetupFlowDataRequest
 from typing import Optional, Set
 from typing_extensions import Self
@@ -50,6 +51,7 @@ class CheckoutSessionCreateRequest(BaseModel):
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     success_url: Optional[StrictStr] = Field(default=None, description="支払いや設定が完了した際に、PAY.JP が顧客をリダイレクトする URL。成功した Checkout Session からの情報をページで使用したい場合は、成功ページのカスタマイズに関するガイドをお読みください。")
     cancel_url: Optional[StrictStr] = Field(default=None, description="キャンセル時のリダイレクト URL")
+    redirect_options: Optional[RedirectOptionsRequest] = Field(default=None, description="Checkout から success_url へリダイレクトする際のオプション。Checkout が作成する PaymentFlow / SetupFlow に引き継がれます。")
     currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
     expires_at: Optional[datetime] = Field(default=None, description="Checkout Session の有効期限が失効する日時")
     locale: Optional[Locale] = Field(default=None, description="Checkout 画面の表示言語を指定します。  | 指定できる値 | |:---| | **ja**: 日本語で表示します。 |")
@@ -59,7 +61,7 @@ class CheckoutSessionCreateRequest(BaseModel):
     submit_type: Optional[CheckoutSessionSubmitType] = Field(default=None, description="Checkout の画面上に表示される送信ボタンなど、ページ上の関連テキストをカスタマイズするために使用されます。<br> `submit_type` は、`payment` モードの Checkout Session でのみ指定できます。未指定時、あるいは `auto` の場合、`pay` が使用されます。  | 指定できる値 | |:---| | **auto**: `pay` が使用されます。 | | **pay**: 「支払う」（デフォルト） | | **book**: 「予約する」 | | **donate**: 「寄付する」 |")
     setup_flow_data: Optional[SetupFlowDataRequest] = Field(default=None, description="`setup` モードの Checkout Session を作成する際、SetupFlow の作成に渡されるパラメーター")
     ui_mode: Optional[CheckoutSessionUIMode] = Field(default=None, description="Checkout Session の UI モード。デフォルトは `hosted` です。  | 指定できる値 | |:---| | **hosted**: PAY.JP でホスティングしている画面を使用します。 |")
-    __properties: ClassVar[List[str]] = ["mode", "client_reference_id", "customer_id", "customer_email", "customer_creation", "line_items", "metadata", "success_url", "cancel_url", "currency", "expires_at", "locale", "payment_method_types", "payment_method_options", "payment_flow_data", "submit_type", "setup_flow_data", "ui_mode"]
+    __properties: ClassVar[List[str]] = ["mode", "client_reference_id", "customer_id", "customer_email", "customer_creation", "line_items", "metadata", "success_url", "cancel_url", "redirect_options", "currency", "expires_at", "locale", "payment_method_types", "payment_method_options", "payment_flow_data", "submit_type", "setup_flow_data", "ui_mode"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -113,6 +115,9 @@ class CheckoutSessionCreateRequest(BaseModel):
                 if self.metadata[_key_metadata]:
                     _field_dict[_key_metadata] = self.metadata[_key_metadata].to_dict()
             _dict['metadata'] = _field_dict
+        # override the default output from pydantic by calling `to_dict()` of redirect_options
+        if self.redirect_options:
+            _dict['redirect_options'] = self.redirect_options.to_dict()
         # override the default output from pydantic by calling `to_dict()` of payment_method_options
         if self.payment_method_options:
             _dict['payment_method_options'] = self.payment_method_options.to_dict()
@@ -148,6 +153,7 @@ class CheckoutSessionCreateRequest(BaseModel):
             else None,
             "success_url": obj.get("success_url"),
             "cancel_url": obj.get("cancel_url"),
+            "redirect_options": RedirectOptionsRequest.from_dict(obj["redirect_options"]) if obj.get("redirect_options") is not None else None,
             "currency": obj.get("currency"),
             "expires_at": obj.get("expires_at"),
             "locale": obj.get("locale"),

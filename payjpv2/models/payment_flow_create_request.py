@@ -26,6 +26,7 @@ from payjpv2.models.currency import Currency
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_flow_payment_method_options_request import PaymentFlowPaymentMethodOptionsRequest
 from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.redirect_options_request import RedirectOptionsRequest
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -42,9 +43,10 @@ class PaymentFlowCreateRequest(BaseModel):
     capture_method: Optional[CaptureMethod] = Field(default=None, description="支払いの確定方法を指定します。  | 値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Payment Flow の Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
     confirm: Optional[StrictBool] = Field(default=False, description="「true」に設定すると、この PaymentFlow を直ちに確定しようと試みます。")
     return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされる URL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。confirm=true の場合のみ指定できます。")
+    redirect_options: Optional[RedirectOptionsRequest] = Field(default=None, description="return_url へリダイレクトする際のオプション")
     description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["amount", "customer_id", "payment_method_id", "payment_method_options", "payment_method_types", "currency", "capture_method", "confirm", "return_url", "description", "metadata"]
+    __properties: ClassVar[List[str]] = ["amount", "customer_id", "payment_method_id", "payment_method_options", "payment_method_types", "currency", "capture_method", "confirm", "return_url", "redirect_options", "description", "metadata"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -87,6 +89,9 @@ class PaymentFlowCreateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of payment_method_options
         if self.payment_method_options:
             _dict['payment_method_options'] = self.payment_method_options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of redirect_options
+        if self.redirect_options:
+            _dict['redirect_options'] = self.redirect_options.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -115,6 +120,7 @@ class PaymentFlowCreateRequest(BaseModel):
             "capture_method": obj.get("capture_method"),
             "confirm": obj.get("confirm") if obj.get("confirm") is not None else False,
             "return_url": obj.get("return_url"),
+            "redirect_options": RedirectOptionsRequest.from_dict(obj["redirect_options"]) if obj.get("redirect_options") is not None else None,
             "description": obj.get("description"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))

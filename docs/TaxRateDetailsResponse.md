@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **active** | **bool** | この税率が有効であるかどうか | 
 **country** | [**Country**](Country.md) |  | 
 **description** | **str** |  | 
+**tax_type** | [**TaxType**](TaxType.md) |  | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 
 **updated_at** | **datetime** | 更新日時 (UTC, ISO 8601 形式) | 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 

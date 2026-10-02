@@ -115,6 +115,8 @@ from payjpv2.models.product_deleted_response import ProductDeletedResponse
 from payjpv2.models.product_details_response import ProductDetailsResponse
 from payjpv2.models.product_list_response import ProductListResponse
 from payjpv2.models.product_update_request import ProductUpdateRequest
+from payjpv2.models.redirect_options_request import RedirectOptionsRequest
+from payjpv2.models.redirect_options_response import RedirectOptionsResponse
 from payjpv2.models.setup_flow_cancel_request import SetupFlowCancelRequest
 from payjpv2.models.setup_flow_cancellation_reason import SetupFlowCancellationReason
 from payjpv2.models.setup_flow_create_request import SetupFlowCreateRequest
@@ -135,6 +137,7 @@ from payjpv2.models.tax_rate_create_request import TaxRateCreateRequest
 from payjpv2.models.tax_rate_details_response import TaxRateDetailsResponse
 from payjpv2.models.tax_rate_list_response import TaxRateListResponse
 from payjpv2.models.tax_rate_update_request import TaxRateUpdateRequest
+from payjpv2.models.tax_type import TaxType
 from payjpv2.models.term_list_response import TermListResponse
 from payjpv2.models.term_response import TermResponse
 from payjpv2.models.usage import Usage

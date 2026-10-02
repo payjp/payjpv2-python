@@ -47,6 +47,8 @@ class TestPaymentFlowUpdateRequest(unittest.TestCase):
                     'card'
                     ],
                 return_url = '',
+                redirect_options = payjpv2.models.redirect_options_request.RedirectOptionsRequest(
+                    include_client_secret = True, ),
                 description = '',
                 metadata = {
                     'key' : null

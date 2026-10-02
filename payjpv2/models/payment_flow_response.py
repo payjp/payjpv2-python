@@ -27,6 +27,7 @@ from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_flow_cancellation_reason import PaymentFlowCancellationReason
 from payjpv2.models.payment_flow_status import PaymentFlowStatus
 from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.redirect_options_response import RedirectOptionsResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -50,6 +51,7 @@ class PaymentFlowResponse(BaseModel):
     status: PaymentFlowStatus = Field(description="この PaymentFlow のステータス。  | 値 | |:---| | **requires_payment_method**: 支払い方法が必要です。 | | **requires_confirmation**: 確認が必要です。 | | **requires_action**: 顧客のアクションが必要です。 | | **processing**: 処理中です。 | | **requires_capture**: 確定が必要です。 | | **canceled**: キャンセルされました。 | | **succeeded**: 成功しました。 |")
     next_action: Optional[Dict[str, Any]]
     return_url: Optional[StrictStr]
+    redirect_options: RedirectOptionsResponse = Field(description="return_url へリダイレクトする際のオプション")
     capture_method: CaptureMethod = Field(description="支払いの確定方法  | 値 | |:---| | **automatic**: (デフォルト) 顧客が支払いを承認すると、自動的に確定させます。 | | **manual**: 顧客が支払いを承認すると一旦確定を保留し、後で Capture API を使用して確定します。（すべての支払い方法がこれをサポートしているわけではありません）。 |")
     last_payment_error: Optional[Dict[str, Any]]
     cancellation_reason: Optional[PaymentFlowCancellationReason]
@@ -58,7 +60,7 @@ class PaymentFlowResponse(BaseModel):
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount", "currency", "amount_capturable", "amount_received", "client_secret", "customer_id", "description", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "capture_method", "last_payment_error", "cancellation_reason", "canceled_at", "expired_at", "metadata", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount", "currency", "amount_capturable", "amount_received", "client_secret", "customer_id", "description", "payment_method_id", "payment_method_options", "payment_method_types", "status", "next_action", "return_url", "redirect_options", "capture_method", "last_payment_error", "cancellation_reason", "canceled_at", "expired_at", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -108,6 +110,9 @@ class PaymentFlowResponse(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
+        # override the default output from pydantic by calling `to_dict()` of redirect_options
+        if self.redirect_options:
+            _dict['redirect_options'] = self.redirect_options.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -203,6 +208,7 @@ class PaymentFlowResponse(BaseModel):
             "status": obj.get("status"),
             "next_action": obj.get("next_action"),
             "return_url": obj.get("return_url"),
+            "redirect_options": RedirectOptionsResponse.from_dict(obj["redirect_options"]) if obj.get("redirect_options") is not None else None,
             "capture_method": obj.get("capture_method"),
             "last_payment_error": obj.get("last_payment_error"),
             "cancellation_reason": obj.get("cancellation_reason"),

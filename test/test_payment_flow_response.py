@@ -54,6 +54,8 @@ class TestPaymentFlowResponse(unittest.TestCase):
                 status = 'canceled',
                 next_action = { },
                 return_url = '',
+                redirect_options = payjpv2.models.redirect_options_response.RedirectOptionsResponse(
+                    include_client_secret = True, ),
                 capture_method = 'automatic',
                 last_payment_error = { },
                 cancellation_reason = 'abandoned',
@@ -84,6 +86,8 @@ class TestPaymentFlowResponse(unittest.TestCase):
                 status = 'canceled',
                 next_action = { },
                 return_url = '',
+                redirect_options = payjpv2.models.redirect_options_response.RedirectOptionsResponse(
+                    include_client_secret = True, ),
                 capture_method = 'automatic',
                 last_payment_error = { },
                 cancellation_reason = 'abandoned',

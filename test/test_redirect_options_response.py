@@ -15,10 +15,10 @@
 
 import unittest
 
-from payjpv2.models.tax_rate_update_request import TaxRateUpdateRequest
+from payjpv2.models.redirect_options_response import RedirectOptionsResponse
 
-class TestTaxRateUpdateRequest(unittest.TestCase):
-    """TaxRateUpdateRequest unit test stubs"""
+class TestRedirectOptionsResponse(unittest.TestCase):
+    """RedirectOptionsResponse unit test stubs"""
 
     def setUp(self):
         pass
@@ -26,32 +26,25 @@ class TestTaxRateUpdateRequest(unittest.TestCase):
     def tearDown(self):
         pass
 
-    def make_instance(self, include_optional) -> TaxRateUpdateRequest:
-        """Test TaxRateUpdateRequest
+    def make_instance(self, include_optional) -> RedirectOptionsResponse:
+        """Test RedirectOptionsResponse
             include_optional is a boolean, when False only required
             params are included, when True both required and
             optional params are included """
-        # uncomment below to create an instance of `TaxRateUpdateRequest`
+        # uncomment below to create an instance of `RedirectOptionsResponse`
         """
-        model = TaxRateUpdateRequest()
+        model = RedirectOptionsResponse()
         if include_optional:
-            return TaxRateUpdateRequest(
-                active = True,
-                country = 'JP',
-                description = '',
-                display_name = '',
-                tax_type = 'jct',
-                metadata = {
-                    'key' : null
-                    }
+            return RedirectOptionsResponse(
+                include_client_secret = True
             )
         else:
-            return TaxRateUpdateRequest(
+            return RedirectOptionsResponse(
         )
         """
 
-    def testTaxRateUpdateRequest(self):
-        """Test TaxRateUpdateRequest"""
+    def testRedirectOptionsResponse(self):
+        """Test RedirectOptionsResponse"""
         # inst_req_only = self.make_instance(include_optional=False)
         # inst_req_and_optional = self.make_instance(include_optional=True)
 

@@ -42,6 +42,7 @@ class TestTaxRateCreateRequest(unittest.TestCase):
                 active = True,
                 country = 'JP',
                 description = '',
+                tax_type = 'jct',
                 metadata = {
                     'key' : null
                     }

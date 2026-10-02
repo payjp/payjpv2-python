@@ -74,6 +74,8 @@ class TestCheckoutSessionListResponse(unittest.TestCase):
                         status = 'open', 
                         success_url = '', 
                         cancel_url = '', 
+                        redirect_options = payjpv2.models.redirect_options_response.RedirectOptionsResponse(
+                            include_client_secret = True, ), 
                         url = '', 
                         metadata = {
                             'key' : null
@@ -121,6 +123,8 @@ class TestCheckoutSessionListResponse(unittest.TestCase):
                         status = 'open', 
                         success_url = '', 
                         cancel_url = '', 
+                        redirect_options = payjpv2.models.redirect_options_response.RedirectOptionsResponse(
+                            include_client_secret = True, ), 
                         url = '', 
                         metadata = {
                             'key' : null

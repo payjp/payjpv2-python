@@ -44,6 +44,8 @@ class TestSetupFlowCreateRequest(unittest.TestCase):
                     'card'
                     ],
                 usage = 'on_session',
+                redirect_options = payjpv2.models.redirect_options_request.RedirectOptionsRequest(
+                    include_client_secret = True, ),
                 description = '',
                 metadata = {
                     'key' : null

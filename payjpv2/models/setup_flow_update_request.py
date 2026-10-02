@@ -21,6 +21,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
 from typing import Any, ClassVar, Dict, List, Optional
 from payjpv2.models.metadata_value import MetadataValue
+from payjpv2.models.redirect_options_request import RedirectOptionsRequest
 from payjpv2.models.setup_flow_payment_method_options_request import SetupFlowPaymentMethodOptionsRequest
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,9 +33,10 @@ class SetupFlowUpdateRequest(BaseModel):
     customer_id: Optional[StrictStr] = Field(default=None, description="この SetupFlow に関連付ける顧客の ID。SetupFlow により作られた PaymentMethod はこの顧客に紐付きます。")
     payment_method_options: Optional[SetupFlowPaymentMethodOptionsRequest] = Field(default=None, description="この SetupFlow 固有の支払い方法の設定")
     payment_method_types: Optional[List[StrictStr]] = Field(default=None, description="この SetupFlow で使用できる支払い方法の種類のリスト。 指定しない場合は、PAY.JP は支払い方法の設定から利用可能な支払い方法を動的に表示します。")
+    redirect_options: Optional[RedirectOptionsRequest] = Field(default=None, description="return_url へリダイレクトする際のオプション")
     description: Optional[StrictStr] = Field(default=None, description="説明。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
-    __properties: ClassVar[List[str]] = ["customer_id", "payment_method_options", "payment_method_types", "description", "metadata"]
+    __properties: ClassVar[List[str]] = ["customer_id", "payment_method_options", "payment_method_types", "redirect_options", "description", "metadata"]
 
     @field_validator('payment_method_types')
     def payment_method_types_validate_enum(cls, value):
@@ -88,6 +90,9 @@ class SetupFlowUpdateRequest(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of payment_method_options
         if self.payment_method_options:
             _dict['payment_method_options'] = self.payment_method_options.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of redirect_options
+        if self.redirect_options:
+            _dict['redirect_options'] = self.redirect_options.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -110,6 +115,7 @@ class SetupFlowUpdateRequest(BaseModel):
             "customer_id": obj.get("customer_id"),
             "payment_method_options": SetupFlowPaymentMethodOptionsRequest.from_dict(obj["payment_method_options"]) if obj.get("payment_method_options") is not None else None,
             "payment_method_types": obj.get("payment_method_types"),
+            "redirect_options": RedirectOptionsRequest.from_dict(obj["redirect_options"]) if obj.get("redirect_options") is not None else None,
             "description": obj.get("description"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))

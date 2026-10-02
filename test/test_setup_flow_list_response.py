@@ -58,6 +58,8 @@ class TestSetupFlowListResponse(unittest.TestCase):
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
+                        redirect_options = payjpv2.models.redirect_options_response.RedirectOptionsResponse(
+                            include_client_secret = True, ), 
                         last_setup_error = { }, 
                         cancellation_reason = 'abandoned', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 
@@ -87,6 +89,8 @@ class TestSetupFlowListResponse(unittest.TestCase):
                         status = 'canceled', 
                         next_action = { }, 
                         return_url = '', 
+                        redirect_options = payjpv2.models.redirect_options_response.RedirectOptionsResponse(
+                            include_client_secret = True, ), 
                         last_setup_error = { }, 
                         cancellation_reason = 'abandoned', 
                         created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'), 

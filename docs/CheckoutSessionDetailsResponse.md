@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **status** | [**CheckoutSessionStatus**](CheckoutSessionStatus.md) | チェックアウトセッションのステータス | 
 **success_url** | **str** |  | 
 **cancel_url** | **str** |  | 
+**redirect_options** | [**RedirectOptionsResponse**](RedirectOptionsResponse.md) | success_url へリダイレクトする際のオプション | 
 **url** | **str** | URL | 
 **metadata** | [**Dict[str, MetadataValue]**](MetadataValue.md) | メタデータ | 
 **created_at** | **datetime** | 作成日時 (UTC, ISO 8601 形式) | 

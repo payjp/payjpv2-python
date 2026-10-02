@@ -30,6 +30,7 @@ from payjpv2.models.currency import Currency
 from payjpv2.models.locale import Locale
 from payjpv2.models.metadata_value import MetadataValue
 from payjpv2.models.payment_method_types import PaymentMethodTypes
+from payjpv2.models.redirect_options_response import RedirectOptionsResponse
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -58,11 +59,12 @@ class CheckoutSessionDetailsResponse(BaseModel):
     status: CheckoutSessionStatus = Field(description="チェックアウトセッションのステータス")
     success_url: Optional[StrictStr]
     cancel_url: Optional[StrictStr]
+    redirect_options: RedirectOptionsResponse = Field(description="success_url へリダイレクトする際のオプション")
     url: StrictStr = Field(description="URL")
     metadata: Dict[str, MetadataValue] = Field(description="メタデータ")
     created_at: datetime = Field(description="作成日時 (UTC, ISO 8601 形式)")
     updated_at: datetime = Field(description="更新日時 (UTC, ISO 8601 形式)")
-    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount_subtotal", "amount_total", "customer_id", "customer_email", "customer_details", "expires_at", "currency", "locale", "payment_flow_id", "payment_method_types", "payment_method_options", "setup_flow_id", "submit_type", "mode", "ui_mode", "status", "success_url", "cancel_url", "url", "metadata", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = ["object", "id", "livemode", "amount_subtotal", "amount_total", "customer_id", "customer_email", "customer_details", "expires_at", "currency", "locale", "payment_flow_id", "payment_method_types", "payment_method_options", "setup_flow_id", "submit_type", "mode", "ui_mode", "status", "success_url", "cancel_url", "redirect_options", "url", "metadata", "created_at", "updated_at"]
 
     @field_validator('object')
     def object_validate_enum(cls, value):
@@ -115,6 +117,9 @@ class CheckoutSessionDetailsResponse(BaseModel):
         # override the default output from pydantic by calling `to_dict()` of customer_details
         if self.customer_details:
             _dict['customer_details'] = self.customer_details.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of redirect_options
+        if self.redirect_options:
+            _dict['redirect_options'] = self.redirect_options.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each value in metadata (dict)
         _field_dict = {}
         if self.metadata:
@@ -225,6 +230,7 @@ class CheckoutSessionDetailsResponse(BaseModel):
             "status": obj.get("status"),
             "success_url": obj.get("success_url"),
             "cancel_url": obj.get("cancel_url"),
+            "redirect_options": RedirectOptionsResponse.from_dict(obj["redirect_options"]) if obj.get("redirect_options") is not None else None,
             "url": obj.get("url"),
             "metadata": dict(
                 (_k, MetadataValue.from_dict(_v))

@@ -7,10 +7,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **bank_code** | **str** | 銀行コード | 
 **bank_branch_code** | **str** | 支店番号 | 
-**bank_account_type** | **str** | 口座種別 | 
+**bank_account_type** | **str** | 口座種別。&#x60;普通&#x60; または &#x60;当座&#x60; | 
 **bank_account_number** | **str** | 口座番号 | 
 **bank_account_holder_name** | **str** | 口座名義 | 
-**bank_account_status** | **str** | 最新振込結果  | 値 | |:---| | **success**: 成功 | | **failed**: 失敗 | | **pending**: 初回振込み前 | | 
+**bank_account_status** | [**BankAccountStatus**](BankAccountStatus.md) | 最新振込結果  | 値 | |:---| | **success**: 成功 | | **failed**: 失敗 | | **pending**: 初回振込み前 | | 
 
 ## Example
 

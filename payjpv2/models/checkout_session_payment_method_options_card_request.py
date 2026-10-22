@@ -18,8 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.request_extended_authorization import RequestExtendedAuthorization
+from payjpv2.models.request_three_d_secure import RequestThreeDSecure
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,29 +29,9 @@ class CheckoutSessionPaymentMethodOptionsCardRequest(BaseModel):
     """
     CheckoutSessionPaymentMethodOptionsCardRequest
     """ # noqa: E501
-    request_extended_authorization: Optional[StrictStr] = Field(default=None, description="オーソリ期間の延長要求  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **must_extend**: オーソリ期間の延長を必須とします。延長できない場合はエラーを返します。 | | **never**: オーソリ期間の延長要求を行いません。 |")
-    request_three_d_secure: Optional[StrictStr] = Field(default=None, description="3D セキュア認証の要求方法  | 指定できる値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 |")
+    request_extended_authorization: Optional[RequestExtendedAuthorization] = Field(default=None, description="オーソリ期間の延長要求  | 指定できる値 | |:---| | **if_available**: オーソリ期間の延長が可能な場合に延長要求を行います。 | | **must_extend**: オーソリ期間の延長を必須とします。延長できない場合はエラーを返します。 | | **never**: オーソリ期間の延長要求を行いません。 |")
+    request_three_d_secure: Optional[RequestThreeDSecure] = Field(default=None, description="3D セキュア認証の要求方法  | 指定できる値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 |")
     __properties: ClassVar[List[str]] = ["request_extended_authorization", "request_three_d_secure"]
-
-    @field_validator('request_extended_authorization')
-    def request_extended_authorization_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['if_available', 'must_extend', 'never']):
-            raise ValueError("must be one of enum values ('if_available', 'must_extend', 'never')")
-        return value
-
-    @field_validator('request_three_d_secure')
-    def request_three_d_secure_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['any', 'automatic']):
-            raise ValueError("must be one of enum values ('any', 'automatic')")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

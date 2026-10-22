@@ -4,6 +4,7 @@ Tests for PAY.JP SDK model validation and serialization.
 import pytest
 from payjpv2.models.customer_create_request import CustomerCreateRequest
 from payjpv2.models.payment_flow_create_request import PaymentFlowCreateRequest
+from payjpv2.models.payment_method_card_details_response import PaymentMethodCardDetailsResponse
 
 
 class TestCustomerModels:
@@ -118,6 +119,20 @@ class TestModelSerialization:
 
         json_str = request.to_json()
         assert '"amount": 1000' in json_str
+
+    def test_unknown_enum_value_in_response(self):
+        """API 側で enum に追加された未知の値もそのまま読めること"""
+        details = PaymentMethodCardDetailsResponse.from_dict({
+            "last4": "4242",
+            "brand": "UnionPay",
+            "exp_month": 12,
+            "exp_year": 2030,
+            "fingerprint": "fp_test",
+            "country": "JP",
+            "funding": "credit",
+        })
+        assert details.brand == "UnionPay"
+        assert details.funding == "credit"
 
     def test_model_dict_conversion(self):
         """Test model to dict conversion."""

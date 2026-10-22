@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **str** | Checkout などで顧客に表示される商品名 | 
-**id** | **str** | 商品 ID | [optional] 
+**id** | **str** | 商品 ID（255文字以内） | [optional] 
 **active** | **bool** | 商品が購入可能かどうか | [optional] [default to True]
 **description** | **str** | Checkout などで顧客に表示される商品説明 | [optional] 
 **unit_label** | **str** | この製品の単位を表すラベル。設定すると、Checkout などに表示されます。（例：「個」、「ライセンス」、「時間」、「回」など） | [optional] 

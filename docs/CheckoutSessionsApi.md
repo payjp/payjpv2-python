@@ -94,6 +94,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found&lt;br&gt;Price Not Found Or Inactive&lt;br&gt;Tax Rate Not Found Or Inactive |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -179,6 +180,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Checkout Session Not Expirable |  -  |
 
@@ -271,6 +273,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **400** | Resource Missing |  -  |
 **404** | Not Found |  -  |
 
@@ -361,6 +364,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **400** | Resource Missing |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -446,6 +450,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -534,6 +539,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Metadata Limit Exceeded |  -  |
 

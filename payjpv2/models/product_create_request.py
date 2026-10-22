@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +29,7 @@ class ProductCreateRequest(BaseModel):
     ProductCreateRequest
     """ # noqa: E501
     name: StrictStr = Field(description="Checkout などで顧客に表示される商品名")
-    id: Optional[StrictStr] = Field(default=None, description="商品 ID")
+    id: Optional[Annotated[str, Field(strict=True, max_length=255)]] = Field(default=None, description="商品 ID（255文字以内）")
     active: Optional[StrictBool] = Field(default=True, description="商品が購入可能かどうか")
     description: Optional[StrictStr] = Field(default=None, description="Checkout などで顧客に表示される商品説明")
     unit_label: Optional[StrictStr] = Field(default=None, description="この製品の単位を表すラベル。設定すると、Checkout などに表示されます。（例：「個」、「ライセンス」、「時間」、「回」など）")

@@ -97,6 +97,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Payment Method Already Attached&lt;br&gt;Payment Method Customer Mismatch&lt;br&gt;Unsupported Payment Method Type |  -  |
 
@@ -186,6 +187,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Apple Pay Token&lt;br&gt;Unacceptable Brand On Apple Pay |  -  |
 
@@ -272,6 +274,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Payment Method Unattached&lt;br&gt;Payment Method Already Detached |  -  |
 
@@ -362,6 +365,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **400** | Resource Missing |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -447,6 +451,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -532,6 +537,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -620,6 +626,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Metadata Limit Exceeded |  -  |
 

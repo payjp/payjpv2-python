@@ -36,7 +36,7 @@ class TestPaymentFlowCancelRequest(unittest.TestCase):
         model = PaymentFlowCancelRequest()
         if include_optional:
             return PaymentFlowCancelRequest(
-                cancellation_reason = 'duplicate'
+                cancellation_reason = 'abandoned'
             )
         else:
             return PaymentFlowCancelRequest(

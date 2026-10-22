@@ -53,7 +53,7 @@ class CheckoutSessionCreateRequest(BaseModel):
     cancel_url: Optional[StrictStr] = Field(default=None, description="キャンセル時のリダイレクト URL")
     redirect_options: Optional[RedirectOptionsRequest] = Field(default=None, description="Checkout から success_url へリダイレクトする際のオプション。Checkout が作成する PaymentFlow / SetupFlow に引き継がれます。")
     currency: Optional[Currency] = Field(default=None, description="価格の通貨。現在は `jpy` のみサポートしています。")
-    expires_at: Optional[datetime] = Field(default=None, description="Checkout Session の有効期限が失効する日時")
+    expires_at: Optional[datetime] = Field(default=None, description="Checkout Session の有効期限が失効する日時<br> 24時間以内の日時を指定できます。未指定の場合は作成時点から24時間後になります。")
     locale: Optional[Locale] = Field(default=None, description="Checkout 画面の表示言語を指定します。  | 指定できる値 | |:---| | **ja**: 日本語で表示します。 |")
     payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="この PaymentFlow で使用できる支払い方法の種類（カードなど）のリストです。指定しない場合、管理画面で利用可能な状態にしている支払い方法を自動的に表示します。")
     payment_method_options: Optional[CheckoutSessionPaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow の支払い方法の個別設定")

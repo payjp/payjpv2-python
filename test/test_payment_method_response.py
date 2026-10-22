@@ -60,11 +60,12 @@ class TestPaymentMethodResponse(unittest.TestCase):
                         line2 = '', ), ),
                 card = payjpv2.models.payment_method_card_details_response.PaymentMethodCardDetailsResponse(
                     last4 = '', 
-                    brand = '', 
+                    brand = 'Visa', 
                     exp_month = 56, 
                     exp_year = 56, 
                     fingerprint = '', 
-                    country = '', )
+                    country = '', 
+                    funding = 'debit', )
             )
         else:
             return PaymentMethodResponse(
@@ -91,11 +92,12 @@ class TestPaymentMethodResponse(unittest.TestCase):
                         line2 = '', ), ),
                 card = payjpv2.models.payment_method_card_details_response.PaymentMethodCardDetailsResponse(
                     last4 = '', 
-                    brand = '', 
+                    brand = 'Visa', 
                     exp_month = 56, 
                     exp_year = 56, 
                     fingerprint = '', 
-                    country = '', ),
+                    country = '', 
+                    funding = 'debit', ),
         )
         """
 

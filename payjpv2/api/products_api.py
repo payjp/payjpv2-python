@@ -102,6 +102,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -173,6 +174,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -244,6 +246,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -393,6 +396,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDeletedResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -465,6 +469,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDeletedResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -537,6 +542,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDeletedResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -682,6 +688,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -761,6 +768,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -840,6 +848,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -988,6 +997,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1059,6 +1069,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1130,6 +1141,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1270,6 +1282,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -1346,6 +1359,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -1422,6 +1436,7 @@ class ProductsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ProductDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }

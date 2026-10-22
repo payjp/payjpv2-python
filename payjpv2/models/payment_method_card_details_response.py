@@ -20,6 +20,8 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.card_brand import CardBrand
+from payjpv2.models.card_funding import CardFunding
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,12 +30,13 @@ class PaymentMethodCardDetailsResponse(BaseModel):
     PaymentMethodCardDetailsResponse
     """ # noqa: E501
     last4: StrictStr = Field(description="カードの下4桁")
-    brand: StrictStr = Field(description="カードのブランド")
+    brand: CardBrand
     exp_month: StrictInt = Field(description="カードの有効期限（月）")
     exp_year: StrictInt = Field(description="カードの有効期限（年）")
     fingerprint: StrictStr = Field(description="このクレジットカード番号に紐づく値。同一番号のカードからは同一の値が生成されることが保証されています。")
     country: Optional[StrictStr]
-    __properties: ClassVar[List[str]] = ["last4", "brand", "exp_month", "exp_year", "fingerprint", "country"]
+    funding: Optional[CardFunding]
+    __properties: ClassVar[List[str]] = ["last4", "brand", "exp_month", "exp_year", "fingerprint", "country", "funding"]
 
     model_config = ConfigDict(
         populate_by_name=True,
@@ -78,6 +81,11 @@ class PaymentMethodCardDetailsResponse(BaseModel):
         if self.country is None and "country" in self.model_fields_set:
             _dict['country'] = None
 
+        # set to None if funding (nullable) is None
+        # and model_fields_set contains the field
+        if self.funding is None and "funding" in self.model_fields_set:
+            _dict['funding'] = None
+
         return _dict
 
     @classmethod
@@ -95,7 +103,8 @@ class PaymentMethodCardDetailsResponse(BaseModel):
             "exp_month": obj.get("exp_month"),
             "exp_year": obj.get("exp_year"),
             "fingerprint": obj.get("fingerprint"),
-            "country": obj.get("country")
+            "country": obj.get("country"),
+            "funding": obj.get("funding")
         })
         return _obj
 

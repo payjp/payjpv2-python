@@ -18,8 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List, Optional
+from payjpv2.models.payment_method_configuration_preference import PaymentMethodConfigurationPreference
+from payjpv2.models.payment_method_configuration_value import PaymentMethodConfigurationValue
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,29 +29,9 @@ class PaymentMethodConfigurationDisplayPreference(BaseModel):
     """
     PaymentMethodConfigurationDisplayPreference
     """ # noqa: E501
-    preference: Optional[StrictStr] = Field(default=None, description="この支払い方法がアカウントで有効になっているかどうか  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
-    value: Optional[StrictStr] = Field(default=None, description="この支払い方法を決済画面に表示するかどうか。  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない |")
+    preference: Optional[PaymentMethodConfigurationPreference] = Field(default=None, description="この支払い方法がアカウントで有効になっているかどうか  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
+    value: Optional[PaymentMethodConfigurationValue] = Field(default=None, description="この支払い方法を決済画面に表示するかどうか。  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない |")
     __properties: ClassVar[List[str]] = ["preference", "value"]
-
-    @field_validator('preference')
-    def preference_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['none', 'off', 'on']):
-            raise ValueError("must be one of enum values ('none', 'off', 'on')")
-        return value
-
-    @field_validator('value')
-    def value_validate_enum(cls, value):
-        """Validates the enum"""
-        if value is None:
-            return value
-
-        if value not in set(['off', 'on']):
-            raise ValueError("must be one of enum values ('off', 'on')")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

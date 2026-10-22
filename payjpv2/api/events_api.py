@@ -119,6 +119,7 @@ class EventsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -210,6 +211,7 @@ class EventsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -301,6 +303,7 @@ class EventsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -464,6 +467,7 @@ class EventsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -535,6 +539,7 @@ class EventsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -606,6 +611,7 @@ class EventsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "EventResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(

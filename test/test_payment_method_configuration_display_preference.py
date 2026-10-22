@@ -36,8 +36,8 @@ class TestPaymentMethodConfigurationDisplayPreference(unittest.TestCase):
         model = PaymentMethodConfigurationDisplayPreference()
         if include_optional:
             return PaymentMethodConfigurationDisplayPreference(
-                preference = 'none',
-                value = 'off'
+                preference = 'on',
+                value = 'on'
             )
         else:
             return PaymentMethodConfigurationDisplayPreference(

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_three_d_secure** | **str** | 3D セキュア認証の要求方法。  | 値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 |  | [optional] 
+**request_three_d_secure** | [**RequestThreeDSecure**](RequestThreeDSecure.md) | 3D セキュア認証の要求方法。  | 値 | |:---| | **any**: 3D セキュア認証を要求します。 | | **automatic**: 必要な場合にのみ 3D セキュア認証を要求します。 |  | [optional] 
 
 ## Example
 

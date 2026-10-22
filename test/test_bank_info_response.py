@@ -41,7 +41,7 @@ class TestBankInfoResponse(unittest.TestCase):
                 bank_account_type = '',
                 bank_account_number = '',
                 bank_account_holder_name = '',
-                bank_account_status = ''
+                bank_account_status = 'success'
             )
         else:
             return BankInfoResponse(
@@ -50,7 +50,7 @@ class TestBankInfoResponse(unittest.TestCase):
                 bank_account_type = '',
                 bank_account_number = '',
                 bank_account_holder_name = '',
-                bank_account_status = '',
+                bank_account_status = 'success',
         )
         """
 

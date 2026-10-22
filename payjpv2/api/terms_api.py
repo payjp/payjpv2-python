@@ -116,6 +116,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -203,6 +204,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -290,6 +292,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -466,6 +469,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -537,6 +541,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -608,6 +613,7 @@ class TermsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "TermResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(

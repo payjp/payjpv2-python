@@ -20,6 +20,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List
+from payjpv2.models.bank_account_status import BankAccountStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -29,10 +30,10 @@ class BankInfoResponse(BaseModel):
     """ # noqa: E501
     bank_code: StrictStr = Field(description="銀行コード")
     bank_branch_code: StrictStr = Field(description="支店番号")
-    bank_account_type: StrictStr = Field(description="口座種別")
+    bank_account_type: StrictStr = Field(description="口座種別。`普通` または `当座`")
     bank_account_number: StrictStr = Field(description="口座番号")
     bank_account_holder_name: StrictStr = Field(description="口座名義")
-    bank_account_status: StrictStr = Field(description="最新振込結果  | 値 | |:---| | **success**: 成功 | | **failed**: 失敗 | | **pending**: 初回振込み前 |")
+    bank_account_status: BankAccountStatus = Field(description="最新振込結果  | 値 | |:---| | **success**: 成功 | | **failed**: 失敗 | | **pending**: 初回振込み前 |")
     __properties: ClassVar[List[str]] = ["bank_code", "bank_branch_code", "bank_account_type", "bank_account_number", "bank_account_holder_name", "bank_account_status"]
 
     model_config = ConfigDict(

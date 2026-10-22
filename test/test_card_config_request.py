@@ -37,7 +37,7 @@ class TestCardConfigRequest(unittest.TestCase):
         if include_optional:
             return CardConfigRequest(
                 display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
-                    preference = 'none', )
+                    preference = 'on', )
             )
         else:
             return CardConfigRequest(

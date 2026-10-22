@@ -20,7 +20,9 @@ Get All Payment Transactions
 
 ```python
 import payjpv2
+from payjpv2.models.payment_method_types import PaymentMethodTypes
 from payjpv2.models.payment_transaction_list_response import PaymentTransactionListResponse
+from payjpv2.models.payment_transaction_type import PaymentTransactionType
 from payjpv2.rest import ApiException
 from pprint import pprint
 
@@ -54,8 +56,8 @@ with payjpv2.ApiClient(configuration) as api_client:
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
     term_id = 'term_id_example' # str | 集計区間 ID (optional)
-    type = 'type_example' # str | 取引タイプ (optional)
-    payment_method_type = 'payment_method_type_example' # str | 支払い方法タイプ (optional)
+    type = payjpv2.PaymentTransactionType() # PaymentTransactionType | 取引タイプ (optional)
+    payment_method_type = payjpv2.PaymentMethodTypes() # PaymentMethodTypes | 支払い方法タイプ (optional)
 
     try:
         # Get All Payment Transactions
@@ -77,8 +79,8 @@ Name | Type | Description  | Notes
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
  **term_id** | **str**| 集計区間 ID | [optional] 
- **type** | **str**| 取引タイプ | [optional] 
- **payment_method_type** | **str**| 支払い方法タイプ | [optional] 
+ **type** | [**PaymentTransactionType**](.md)| 取引タイプ | [optional] 
+ **payment_method_type** | [**PaymentMethodTypes**](.md)| 支払い方法タイプ | [optional] 
 
 ### Return type
 
@@ -99,6 +101,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **400** | Resource Missing |  -  |
 **404** | Not Found |  -  |
 
@@ -185,6 +188,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

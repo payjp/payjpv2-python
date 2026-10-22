@@ -36,7 +36,7 @@ class TestSetupFlowPaymentMethodOptionsCardRequest(unittest.TestCase):
         model = SetupFlowPaymentMethodOptionsCardRequest()
         if include_optional:
             return SetupFlowPaymentMethodOptionsCardRequest(
-                request_three_d_secure = 'automatic'
+                request_three_d_secure = 'any'
             )
         else:
             return SetupFlowPaymentMethodOptionsCardRequest(

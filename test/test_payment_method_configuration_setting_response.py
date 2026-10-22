@@ -38,8 +38,8 @@ class TestPaymentMethodConfigurationSettingResponse(unittest.TestCase):
             return PaymentMethodConfigurationSettingResponse(
                 available = True,
                 display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
-                    preference = 'none', 
-                    value = 'off', )
+                    preference = 'on', 
+                    value = 'on', )
             )
         else:
             return PaymentMethodConfigurationSettingResponse(

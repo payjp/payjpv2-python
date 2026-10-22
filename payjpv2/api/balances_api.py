@@ -102,6 +102,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceURLResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -173,6 +174,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceURLResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -244,6 +246,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceURLResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -412,6 +415,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -515,6 +519,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -618,6 +623,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -832,6 +838,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -903,6 +910,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -974,6 +982,7 @@ class BalancesApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "BalanceResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(

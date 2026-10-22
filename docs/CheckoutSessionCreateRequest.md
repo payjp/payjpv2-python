@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 **cancel_url** | **str** | キャンセル時のリダイレクト URL | [optional] 
 **redirect_options** | [**RedirectOptionsRequest**](RedirectOptionsRequest.md) | Checkout から success_url へリダイレクトする際のオプション。Checkout が作成する PaymentFlow / SetupFlow に引き継がれます。 | [optional] 
 **currency** | [**Currency**](Currency.md) | 価格の通貨。現在は &#x60;jpy&#x60; のみサポートしています。 | [optional] 
-**expires_at** | **datetime** | Checkout Session の有効期限が失効する日時 | [optional] 
+**expires_at** | **datetime** | Checkout Session の有効期限が失効する日時&lt;br&gt; 24時間以内の日時を指定できます。未指定の場合は作成時点から24時間後になります。 | [optional] 
 **locale** | [**Locale**](Locale.md) | Checkout 画面の表示言語を指定します。  | 指定できる値 | |:---| | **ja**: 日本語で表示します。 | | [optional] 
 **payment_method_types** | [**List[PaymentMethodTypes]**](PaymentMethodTypes.md) | この PaymentFlow で使用できる支払い方法の種類（カードなど）のリストです。指定しない場合、管理画面で利用可能な状態にしている支払い方法を自動的に表示します。 | [optional] 
 **payment_method_options** | [**CheckoutSessionPaymentMethodOptionsRequest**](CheckoutSessionPaymentMethodOptionsRequest.md) | この PaymentFlow の支払い方法の個別設定 | [optional] 

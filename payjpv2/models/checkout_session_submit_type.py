@@ -37,4 +37,15 @@ class CheckoutSessionSubmitType(str, Enum):
         """Create an instance of CheckoutSessionSubmitType from a JSON string"""
         return cls(json.loads(json_str))
 
+    @classmethod
+    def _missing_(cls, value):
+        """Keep unknown values so that enum values added on the API side do not break older clients"""
+        if not isinstance(value, str):
+            return None
+        member = str.__new__(cls, value)
+        # Use the raw value as the name so it does not look like an existing member
+        member._name_ = str(value)
+        member._value_ = value
+        return member
+
 

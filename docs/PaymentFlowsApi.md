@@ -98,6 +98,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status |  -  |
 
@@ -187,6 +188,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status&lt;br&gt;Payment Flow Expired |  -  |
 **402** | Payment Failed |  -  |
@@ -277,6 +279,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status&lt;br&gt;Checkout Session Expired&lt;br&gt;Missing Payment Method&lt;br&gt;Detached Payment Method Not Usable&lt;br&gt;Payment Method Not Owned By Customer&lt;br&gt;Customer Required For Payment Method&lt;br&gt;Payment Method Type Not Allowed&lt;br&gt;Extended Authorization Not Available&lt;br&gt;Apple Pay Disabled In Livemode&lt;br&gt;Invalid Apple Pay Token&lt;br&gt;Unacceptable Brand On Apple Pay |  -  |
 **402** | Payment Failed |  -  |
@@ -365,6 +368,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Missing Payment Method&lt;br&gt;Detached Payment Method Not Usable&lt;br&gt;Payment Method Not Owned By Customer&lt;br&gt;Payment Method Type Not Allowed&lt;br&gt;Extended Authorization Not Available&lt;br&gt;Apple Pay Disabled In Livemode&lt;br&gt;Invalid Apple Pay Token&lt;br&gt;Unacceptable Brand On Apple Pay |  -  |
 **402** | Payment Failed |  -  |
@@ -458,6 +462,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **400** | Resource Missing |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -543,6 +548,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -636,6 +642,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Resource Missing |  -  |
 
@@ -725,6 +732,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful Response |  -  |
 **422** | Validation Error |  -  |
+**429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
 **400** | Invalid Status&lt;br&gt;Detached Payment Method Not Usable&lt;br&gt;Payment Method Not Owned By Customer&lt;br&gt;Payment Method Type Not Allowed&lt;br&gt;Metadata Limit Exceeded |  -  |
 

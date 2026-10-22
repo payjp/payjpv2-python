@@ -44,18 +44,18 @@ class TestPaymentMethodConfigurationDetailsResponse(unittest.TestCase):
                 paypay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
-                        preference = 'none', 
-                        value = 'off', ), ),
+                        preference = 'on', 
+                        value = 'on', ), ),
                 card = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
-                        preference = 'none', 
-                        value = 'off', ), ),
+                        preference = 'on', 
+                        value = 'on', ), ),
                 apple_pay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
-                        preference = 'none', 
-                        value = 'off', ), )
+                        preference = 'on', 
+                        value = 'on', ), )
             )
         else:
             return PaymentMethodConfigurationDetailsResponse(
@@ -66,18 +66,18 @@ class TestPaymentMethodConfigurationDetailsResponse(unittest.TestCase):
                 paypay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
-                        preference = 'none', 
-                        value = 'off', ), ),
+                        preference = 'on', 
+                        value = 'on', ), ),
                 card = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
-                        preference = 'none', 
-                        value = 'off', ), ),
+                        preference = 'on', 
+                        value = 'on', ), ),
                 apple_pay = payjpv2.models.payment_method_configuration_setting_response.PaymentMethodConfigurationSettingResponse(
                     available = True, 
                     display_preference = payjpv2.models.payment_method_configuration_display_preference.PaymentMethodConfigurationDisplayPreference(
-                        preference = 'none', 
-                        value = 'off', ), ),
+                        preference = 'on', 
+                        value = 'on', ), ),
         )
         """
 

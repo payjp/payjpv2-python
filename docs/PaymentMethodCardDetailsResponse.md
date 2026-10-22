@@ -6,11 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **last4** | **str** | カードの下4桁 | 
-**brand** | **str** | カードのブランド | 
+**brand** | [**CardBrand**](CardBrand.md) |  | 
 **exp_month** | **int** | カードの有効期限（月） | 
 **exp_year** | **int** | カードの有効期限（年） | 
 **fingerprint** | **str** | このクレジットカード番号に紐づく値。同一番号のカードからは同一の値が生成されることが保証されています。 | 
 **country** | **str** |  | 
+**funding** | [**CardFunding**](CardFunding.md) |  | 
 
 ## Example
 

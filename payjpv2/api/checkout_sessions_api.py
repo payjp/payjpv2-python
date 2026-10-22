@@ -102,6 +102,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -173,6 +174,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -244,6 +246,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -393,6 +396,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -465,6 +469,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -537,6 +542,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -686,6 +692,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionLineItemListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
             '404': "ErrorResponse",
         }
@@ -770,6 +777,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionLineItemListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
             '404': "ErrorResponse",
         }
@@ -854,6 +862,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionLineItemListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
             '404': "ErrorResponse",
         }
@@ -1014,6 +1023,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1093,6 +1103,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1172,6 +1183,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1320,6 +1332,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1391,6 +1404,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1462,6 +1476,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -1602,6 +1617,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -1678,6 +1694,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }
@@ -1754,6 +1771,7 @@ class CheckoutSessionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "CheckoutSessionDetailsResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
             '400': "ErrorResponse",
         }

@@ -20,8 +20,10 @@ from typing_extensions import Annotated
 from pydantic import Field, StrictStr
 from typing import Optional
 from typing_extensions import Annotated
+from payjpv2.models.payment_method_types import PaymentMethodTypes
 from payjpv2.models.payment_transaction_list_response import PaymentTransactionListResponse
 from payjpv2.models.payment_transaction_response import PaymentTransactionResponse
+from payjpv2.models.payment_transaction_type import PaymentTransactionType
 
 from payjpv2.api_client import ApiClient, RequestSerialized
 from payjpv2.api_response import ApiResponse
@@ -48,8 +50,8 @@ class PaymentTransactionsApi:
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="取引タイプ")] = None,
-        payment_method_type: Annotated[Optional[StrictStr], Field(description="支払い方法タイプ")] = None,
+        type: Annotated[Optional[PaymentTransactionType], Field(description="取引タイプ")] = None,
+        payment_method_type: Annotated[Optional[PaymentMethodTypes], Field(description="支払い方法タイプ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -76,9 +78,9 @@ class PaymentTransactionsApi:
         :param term_id: 集計区間 ID
         :type term_id: str
         :param type: 取引タイプ
-        :type type: str
+        :type type: PaymentTransactionType
         :param payment_method_type: 支払い方法タイプ
-        :type payment_method_type: str
+        :type payment_method_type: PaymentMethodTypes
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -119,6 +121,7 @@ class PaymentTransactionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentTransactionListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
             '404': "ErrorResponse",
         }
@@ -140,8 +143,8 @@ class PaymentTransactionsApi:
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="取引タイプ")] = None,
-        payment_method_type: Annotated[Optional[StrictStr], Field(description="支払い方法タイプ")] = None,
+        type: Annotated[Optional[PaymentTransactionType], Field(description="取引タイプ")] = None,
+        payment_method_type: Annotated[Optional[PaymentMethodTypes], Field(description="支払い方法タイプ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -168,9 +171,9 @@ class PaymentTransactionsApi:
         :param term_id: 集計区間 ID
         :type term_id: str
         :param type: 取引タイプ
-        :type type: str
+        :type type: PaymentTransactionType
         :param payment_method_type: 支払い方法タイプ
-        :type payment_method_type: str
+        :type payment_method_type: PaymentMethodTypes
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -211,6 +214,7 @@ class PaymentTransactionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentTransactionListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
             '404': "ErrorResponse",
         }
@@ -232,8 +236,8 @@ class PaymentTransactionsApi:
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
         term_id: Annotated[Optional[StrictStr], Field(description="集計区間 ID")] = None,
-        type: Annotated[Optional[StrictStr], Field(description="取引タイプ")] = None,
-        payment_method_type: Annotated[Optional[StrictStr], Field(description="支払い方法タイプ")] = None,
+        type: Annotated[Optional[PaymentTransactionType], Field(description="取引タイプ")] = None,
+        payment_method_type: Annotated[Optional[PaymentMethodTypes], Field(description="支払い方法タイプ")] = None,
         *,
         request_timeout: Union[
             None,
@@ -260,9 +264,9 @@ class PaymentTransactionsApi:
         :param term_id: 集計区間 ID
         :type term_id: str
         :param type: 取引タイプ
-        :type type: str
+        :type type: PaymentTransactionType
         :param payment_method_type: 支払い方法タイプ
-        :type payment_method_type: str
+        :type payment_method_type: PaymentMethodTypes
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -303,6 +307,7 @@ class PaymentTransactionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentTransactionListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
             '404': "ErrorResponse",
         }
@@ -364,11 +369,11 @@ class PaymentTransactionsApi:
             
         if type is not None:
             
-            _query_params.append(('type', type))
+            _query_params.append(('type', type.value))
             
         if payment_method_type is not None:
             
-            _query_params.append(('payment_method_type', payment_method_type))
+            _query_params.append(('payment_method_type', payment_method_type.value))
             
         # process the header parameters
         # process the form parameters
@@ -467,6 +472,7 @@ class PaymentTransactionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentTransactionResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -538,6 +544,7 @@ class PaymentTransactionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentTransactionResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -609,6 +616,7 @@ class PaymentTransactionsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "PaymentTransactionResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(

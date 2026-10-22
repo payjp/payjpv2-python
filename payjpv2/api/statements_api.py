@@ -102,6 +102,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementURLResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -173,6 +174,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementURLResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -244,6 +246,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementURLResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -404,6 +407,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -499,6 +503,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -594,6 +599,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementListResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '400': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -780,6 +786,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -851,6 +858,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(
@@ -922,6 +930,7 @@ class StatementsApi:
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "StatementResponse",
             '422': "ErrorResponse",
+            '429': "ErrorResponse",
             '404': "ErrorResponse",
         }
         response_data = self.api_client.call_api(

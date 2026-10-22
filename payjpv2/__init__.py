@@ -15,7 +15,7 @@
 """  # noqa: E501
 
 
-__version__ = "1.2.0"
+__version__ = "1.3.0"
 
 # import apis into sdk package
 from payjpv2.api.balances_api import BalancesApi
@@ -52,9 +52,12 @@ from payjpv2.models.balance_list_response import BalanceListResponse
 from payjpv2.models.balance_response import BalanceResponse
 from payjpv2.models.balance_state import BalanceState
 from payjpv2.models.balance_url_response import BalanceURLResponse
+from payjpv2.models.bank_account_status import BankAccountStatus
 from payjpv2.models.bank_info_response import BankInfoResponse
 from payjpv2.models.capture_method import CaptureMethod
+from payjpv2.models.card_brand import CardBrand
 from payjpv2.models.card_config_request import CardConfigRequest
+from payjpv2.models.card_funding import CardFunding
 from payjpv2.models.checkout_session_create_request import CheckoutSessionCreateRequest
 from payjpv2.models.checkout_session_customer_details_address_response import CheckoutSessionCustomerDetailsAddressResponse
 from payjpv2.models.checkout_session_customer_details_response import CheckoutSessionCustomerDetailsResponse
@@ -115,8 +118,10 @@ from payjpv2.models.payment_method_card_update_request import PaymentMethodCardU
 from payjpv2.models.payment_method_configuration_details_response import PaymentMethodConfigurationDetailsResponse
 from payjpv2.models.payment_method_configuration_display_preference import PaymentMethodConfigurationDisplayPreference
 from payjpv2.models.payment_method_configuration_list_response import PaymentMethodConfigurationListResponse
+from payjpv2.models.payment_method_configuration_preference import PaymentMethodConfigurationPreference
 from payjpv2.models.payment_method_configuration_setting_response import PaymentMethodConfigurationSettingResponse
 from payjpv2.models.payment_method_configuration_update_request import PaymentMethodConfigurationUpdateRequest
+from payjpv2.models.payment_method_configuration_value import PaymentMethodConfigurationValue
 from payjpv2.models.payment_method_create_card_details_request import PaymentMethodCreateCardDetailsRequest
 from payjpv2.models.payment_method_create_request import PaymentMethodCreateRequest
 from payjpv2.models.payment_method_list_response import PaymentMethodListResponse
@@ -149,6 +154,8 @@ from payjpv2.models.product_list_response import ProductListResponse
 from payjpv2.models.product_update_request import ProductUpdateRequest
 from payjpv2.models.redirect_options_request import RedirectOptionsRequest
 from payjpv2.models.redirect_options_response import RedirectOptionsResponse
+from payjpv2.models.request_extended_authorization import RequestExtendedAuthorization
+from payjpv2.models.request_three_d_secure import RequestThreeDSecure
 from payjpv2.models.setup_flow_cancel_request import SetupFlowCancelRequest
 from payjpv2.models.setup_flow_cancellation_reason import SetupFlowCancellationReason
 from payjpv2.models.setup_flow_create_request import SetupFlowCreateRequest

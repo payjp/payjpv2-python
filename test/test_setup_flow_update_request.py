@@ -39,7 +39,7 @@ class TestSetupFlowUpdateRequest(unittest.TestCase):
                 customer_id = '',
                 payment_method_options = payjpv2.models.setup_flow_payment_method_options_request.SetupFlowPaymentMethodOptionsRequest(
                     card = payjpv2.models.setup_flow_payment_method_options_card_request.SetupFlowPaymentMethodOptionsCardRequest(
-                        request_three_d_secure = 'automatic', ), ),
+                        request_three_d_secure = 'any', ), ),
                 payment_method_types = [
                     'card'
                     ],

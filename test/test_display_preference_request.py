@@ -36,11 +36,11 @@ class TestDisplayPreferenceRequest(unittest.TestCase):
         model = DisplayPreferenceRequest()
         if include_optional:
             return DisplayPreferenceRequest(
-                preference = 'none'
+                preference = 'on'
             )
         else:
             return DisplayPreferenceRequest(
-                preference = 'none',
+                preference = 'on',
         )
         """
 

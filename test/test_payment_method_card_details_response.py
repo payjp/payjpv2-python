@@ -37,20 +37,22 @@ class TestPaymentMethodCardDetailsResponse(unittest.TestCase):
         if include_optional:
             return PaymentMethodCardDetailsResponse(
                 last4 = '',
-                brand = '',
-                exp_month = 56,
-                exp_year = 56,
-                fingerprint = '',
-                country = ''
-            )
-        else:
-            return PaymentMethodCardDetailsResponse(
-                last4 = '',
-                brand = '',
+                brand = 'Visa',
                 exp_month = 56,
                 exp_year = 56,
                 fingerprint = '',
                 country = '',
+                funding = 'debit'
+            )
+        else:
+            return PaymentMethodCardDetailsResponse(
+                last4 = '',
+                brand = 'Visa',
+                exp_month = 56,
+                exp_year = 56,
+                fingerprint = '',
+                country = '',
+                funding = 'debit',
         )
         """
 

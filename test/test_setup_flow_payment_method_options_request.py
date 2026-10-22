@@ -37,7 +37,7 @@ class TestSetupFlowPaymentMethodOptionsRequest(unittest.TestCase):
         if include_optional:
             return SetupFlowPaymentMethodOptionsRequest(
                 card = payjpv2.models.setup_flow_payment_method_options_card_request.SetupFlowPaymentMethodOptionsCardRequest(
-                    request_three_d_secure = 'automatic', )
+                    request_three_d_secure = 'any', )
             )
         else:
             return SetupFlowPaymentMethodOptionsRequest(

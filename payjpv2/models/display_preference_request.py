@@ -18,8 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from pydantic import BaseModel, ConfigDict, Field
 from typing import Any, ClassVar, Dict, List
+from payjpv2.models.payment_method_configuration_preference import PaymentMethodConfigurationPreference
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,15 +28,8 @@ class DisplayPreferenceRequest(BaseModel):
     """
     DisplayPreferenceRequest
     """ # noqa: E501
-    preference: StrictStr = Field(description="この支払い方法がアカウントで有効になっているかどうか  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
+    preference: PaymentMethodConfigurationPreference = Field(description="この支払い方法がアカウントで有効になっているかどうか  | 値 | |:---| | **on**: この決済手段を決済画面に表示する | | **off**: この決済手段を決済画面に表示しない | | **none**: デフォルト設定を使用 |")
     __properties: ClassVar[List[str]] = ["preference"]
-
-    @field_validator('preference')
-    def preference_validate_enum(cls, value):
-        """Validates the enum"""
-        if value not in set(['none', 'off', 'on']):
-            raise ValueError("must be one of enum values ('none', 'off', 'on')")
-        return value
 
     model_config = ConfigDict(
         populate_by_name=True,

@@ -51,7 +51,7 @@ class TestBalanceResponse(unittest.TestCase):
                     bank_account_type = '', 
                     bank_account_number = '', 
                     bank_account_holder_name = '', 
-                    bank_account_status = '', ),
+                    bank_account_status = 'success', ),
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f')
             )
@@ -71,7 +71,7 @@ class TestBalanceResponse(unittest.TestCase):
                     bank_account_type = '', 
                     bank_account_number = '', 
                     bank_account_holder_name = '', 
-                    bank_account_status = '', ),
+                    bank_account_status = 'success', ),
                 created_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
                 updated_at = datetime.datetime.strptime('2013-10-20 19:20:30.00', '%Y-%m-%d %H:%M:%S.%f'),
         )

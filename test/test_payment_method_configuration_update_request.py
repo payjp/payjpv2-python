@@ -40,13 +40,13 @@ class TestPaymentMethodConfigurationUpdateRequest(unittest.TestCase):
                 name = '',
                 card = payjpv2.models.card_config_request.CardConfigRequest(
                     display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
-                        preference = 'none', ), ),
+                        preference = 'on', ), ),
                 paypay = payjpv2.models.pay_pay_config_request.PayPayConfigRequest(
                     display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
-                        preference = 'none', ), ),
+                        preference = 'on', ), ),
                 apple_pay = payjpv2.models.apple_pay_config_request.ApplePayConfigRequest(
                     display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
-                        preference = 'none', ), )
+                        preference = 'on', ), )
             )
         else:
             return PaymentMethodConfigurationUpdateRequest(

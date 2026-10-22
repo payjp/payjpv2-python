@@ -37,7 +37,7 @@ class TestPayPayConfigRequest(unittest.TestCase):
         if include_optional:
             return PayPayConfigRequest(
                 display_preference = payjpv2.models.display_preference_request.DisplayPreferenceRequest(
-                    preference = 'none', )
+                    preference = 'on', )
             )
         else:
             return PayPayConfigRequest(

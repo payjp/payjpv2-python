@@ -32,13 +32,13 @@ class PaymentFlowUpdateRequest(BaseModel):
     """
     PaymentFlowUpdateRequest
     """ # noqa: E501
-    amount: Optional[Annotated[int, Field(le=9999999, strict=True, ge=50)]] = Field(default=None, description="支払い予定の金額。50円以上9,999,999円以下である必要があります。")
-    customer_id: Optional[StrictStr] = Field(default=None, description="この PaymentFlow に関連付ける顧客の ID")
-    payment_method_id: Optional[StrictStr] = Field(default=None, description="支払い方法 ID。customer_id の指定が必須です。Customer が所持する PaymentMethod のみ指定できます。payment_method_id を指定せず、Customer に default_payment_method_id が設定されている場合はそちらが自動でセットされます。")
-    payment_method_options: Optional[PaymentFlowPaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow 固有の支払い方法の設定")
-    payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="この PaymentFlow で使用できる支払い方法の種類のリスト。指定しない場合は、PAY.JP は支払い方法の設定から利用可能な支払い方法を動的に表示します。")
-    return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされる URL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。")
-    redirect_options: Optional[RedirectOptionsRequest] = Field(default=None, description="return_url へリダイレクトする際のオプション")
+    amount: Optional[Annotated[int, Field(le=9999999, strict=True, ge=50)]] = Field(default=None, description="支払い予定の金額。50円以上9,999,999円以下である必要があります。status が requires_payment_method または requires_confirmation のときのみ指定できます。")
+    customer_id: Optional[StrictStr] = Field(default=None, description="この PaymentFlow に関連付ける顧客の ID。status が requires_payment_method または requires_confirmation のときのみ指定できます。")
+    payment_method_id: Optional[StrictStr] = Field(default=None, description="支払い方法 ID。customer_id の指定が必須です。Customer が所持する PaymentMethod のみ指定できます。payment_method_id を指定せず、Customer に default_payment_method_id が設定されている場合はそちらが自動でセットされます。status が requires_payment_method または requires_confirmation のときのみ指定できます。")
+    payment_method_options: Optional[PaymentFlowPaymentMethodOptionsRequest] = Field(default=None, description="この PaymentFlow 固有の支払い方法の設定。status が requires_payment_method または requires_confirmation のときのみ指定できます。")
+    payment_method_types: Optional[List[PaymentMethodTypes]] = Field(default=None, description="この PaymentFlow で使用できる支払い方法の種類のリスト。指定しない場合は、PAY.JP は支払い方法の設定から利用可能な支払い方法を動的に表示します。status が requires_payment_method または requires_confirmation のときのみ指定できます。")
+    return_url: Optional[StrictStr] = Field(default=None, description="顧客が支払いを完了後かキャンセルした後にリダイレクトされる URL。アプリにリダイレクトしたい場合は URI Scheme を指定できます。status が requires_payment_method または requires_confirmation のときのみ指定できます。")
+    redirect_options: Optional[RedirectOptionsRequest] = Field(default=None, description="return_url へリダイレクトする際のオプション。status が requires_payment_method または requires_confirmation のときのみ指定できます。")
     description: Optional[StrictStr] = Field(default=None, description="オブジェクトにセットする任意の文字列。")
     metadata: Optional[Dict[str, MetadataValue]] = Field(default=None, description="キーバリューの任意のデータを格納できます。20件まで登録可能で、空文字列を指定するとそのキーを削除できます。<a href=\"https://docs.pay.jp/v2/guide/developers/metadata\">詳細はメタデータのドキュメントを参照してください。</a>")
     __properties: ClassVar[List[str]] = ["amount", "customer_id", "payment_method_id", "payment_method_options", "payment_method_types", "return_url", "redirect_options", "description", "metadata"]

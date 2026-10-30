@@ -659,6 +659,7 @@ class SetupFlowsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
+        customer_id: Annotated[Optional[StrictStr], Field(description="指定した顧客のデータのみを取得")] = None,
         *,
         request_timeout: Union[
             None,
@@ -682,6 +683,8 @@ class SetupFlowsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
+        :param customer_id: 指定した顧客のデータのみを取得
+        :type customer_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -709,6 +712,7 @@ class SetupFlowsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
+            customer_id=customer_id,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -739,6 +743,7 @@ class SetupFlowsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
+        customer_id: Annotated[Optional[StrictStr], Field(description="指定した顧客のデータのみを取得")] = None,
         *,
         request_timeout: Union[
             None,
@@ -762,6 +767,8 @@ class SetupFlowsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
+        :param customer_id: 指定した顧客のデータのみを取得
+        :type customer_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -789,6 +796,7 @@ class SetupFlowsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
+            customer_id=customer_id,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -819,6 +827,7 @@ class SetupFlowsApi:
         limit: Annotated[Optional[Annotated[int, Field(le=100, strict=True, ge=1)]], Field(description="取得するデータの最大件数")] = None,
         starting_after: Annotated[Optional[StrictStr], Field(description="このIDより後のデータを取得")] = None,
         ending_before: Annotated[Optional[StrictStr], Field(description="このIDより前のデータを取得")] = None,
+        customer_id: Annotated[Optional[StrictStr], Field(description="指定した顧客のデータのみを取得")] = None,
         *,
         request_timeout: Union[
             None,
@@ -842,6 +851,8 @@ class SetupFlowsApi:
         :type starting_after: str
         :param ending_before: このIDより前のデータを取得
         :type ending_before: str
+        :param customer_id: 指定した顧客のデータのみを取得
+        :type customer_id: str
         :param request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -869,6 +880,7 @@ class SetupFlowsApi:
             limit=limit,
             starting_after=starting_after,
             ending_before=ending_before,
+            customer_id=customer_id,
             _request_auth=request_auth,
             _content_type='application/json',
             _headers=headers,
@@ -894,6 +906,7 @@ class SetupFlowsApi:
         limit,
         starting_after,
         ending_before,
+        customer_id,
         _request_auth,
         _content_type,
         _headers,
@@ -930,6 +943,10 @@ class SetupFlowsApi:
         if ending_before is not None:
             
             _query_params.append(('ending_before', ending_before))
+            
+        if customer_id is not None:
+            
+            _query_params.append(('customer_id', customer_id))
             
         # process the header parameters
         # process the form parameters

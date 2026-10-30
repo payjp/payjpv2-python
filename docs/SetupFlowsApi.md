@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_all_setup_flows**
-> SetupFlowListResponse get_all_setup_flows(limit=limit, starting_after=starting_after, ending_before=ending_before)
+> SetupFlowListResponse get_all_setup_flows(limit=limit, starting_after=starting_after, ending_before=ending_before, customer_id=customer_id)
 
 Get All Setup Flows
 
@@ -234,10 +234,11 @@ with payjpv2.ApiClient(configuration) as api_client:
     limit = 10 # int | 取得するデータの最大件数 (optional) (default to 10)
     starting_after = 'starting_after_example' # str | このIDより後のデータを取得 (optional)
     ending_before = 'ending_before_example' # str | このIDより前のデータを取得 (optional)
+    customer_id = 'customer_id_example' # str | 指定した顧客のデータのみを取得 (optional)
 
     try:
         # Get All Setup Flows
-        api_response = api_instance.get_all_setup_flows(limit=limit, starting_after=starting_after, ending_before=ending_before)
+        api_response = api_instance.get_all_setup_flows(limit=limit, starting_after=starting_after, ending_before=ending_before, customer_id=customer_id)
         print("The response of SetupFlowsApi->get_all_setup_flows:\n")
         pprint(api_response)
     except Exception as e:
@@ -254,6 +255,7 @@ Name | Type | Description  | Notes
  **limit** | **int**| 取得するデータの最大件数 | [optional] [default to 10]
  **starting_after** | **str**| このIDより後のデータを取得 | [optional] 
  **ending_before** | **str**| このIDより前のデータを取得 | [optional] 
+ **customer_id** | **str**| 指定した顧客のデータのみを取得 | [optional] 
 
 ### Return type
 
@@ -451,7 +453,7 @@ Name | Type | Description  | Notes
 **422** | Validation Error |  -  |
 **429** | Too Many Requests |  -  |
 **404** | Not Found |  -  |
-**400** | Invalid Status&lt;br&gt;Detached Payment Method Not Usable&lt;br&gt;Metadata Limit Exceeded |  -  |
+**400** | Fields Not Updatable In Current Status&lt;br&gt;Detached Payment Method Not Usable&lt;br&gt;Metadata Limit Exceeded |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
